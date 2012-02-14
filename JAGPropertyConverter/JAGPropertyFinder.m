@@ -52,7 +52,6 @@
         [propertyArray addObjectsFromArray: [self propertiesForSubclass: aClass]];
         aClass = [aClass superclass];
     }
-    //    NSLog(@"Total property list for %@: %@", NSStringFromClass([self class]), propertyArray);
     return propertyArray; 
 }
 

@@ -106,10 +106,9 @@
             || self.outputType == kJAGPropertyListOutput ) {
             return object;
         } else if (self.convertFromDate) {
-            //            NSLog(@"Converting date %@ for JSON.", object);
             return self.convertFromDate(object);
         } else {
-            NSLog(@"Object %@ is not safe for JSON.  Removing.", [object class]);
+            //Object is not safe for JSON.  Removing.
             return nil;
         }
         
@@ -119,7 +118,7 @@
             || self.outputType == kJAGPropertyListOutput ) {
             return object;
         } else {
-            NSLog(@"Object %@ is not safe for JSON.  Removing.", [object class]);
+            //Object is not safe for JSON.  Removing.
             return nil;
         }
     } else if ( [object isKindOfClass: [NSValue class]] ) {
@@ -127,7 +126,7 @@
         if ( self.outputType == kJAGFullOutput ) {
             return object;
         } else {
-            NSLog(@"Object %@ is not safe for JSON or PropertyLists.  Removing.", [object class]);
+            //Object is not safe for JSON or PropertyLists.  Removing.
             return nil;
         }
     } else if ( [object isKindOfClass: [NSURL class]] ) {
@@ -203,7 +202,7 @@
         propertyName = [property name];
         SEL getter = [property getter];
         if (![model respondsToSelector:getter]) {
-            NSLog(@"Found property %@ without a valid getter. Skipping.", propertyName);
+            //Found property without a valid getter. Skipping.
             continue;
         }
         //TODO: Should use the getter for this?  Harder to handle non-objects.
@@ -311,9 +310,7 @@
     NSArray *propertyNames = [JAGPropertyFinder propertyNamesForClass: [object class]];
     JAGProperty *property;
     for (NSString *key in dictionary) {
-        //        NSLog(@"Checking if %@ is in propertyNames.", key);
         if ([propertyNames containsObject:key]) {
-            //            NSLog(@"%@ is in property names, setting to %@", key, [values valueForKey:key]);
             property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
             if ([property isReadOnly]) continue;
             id value = [dictionary valueForKey:key];

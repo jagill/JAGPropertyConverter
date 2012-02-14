@@ -178,7 +178,6 @@
 
 
 - (Class) propertyClass {
-//    NSLog(@"Finding object class for return type %@", [self typeEncoding]);
     if (! [self isObject]) return nil;
     //typeEncoding looks like '@"AModel"'.  This is with the @ and "s.
     NSString *typeEncoding = [self typeEncoding];
@@ -188,7 +187,6 @@
     }
     NSString *className = [[[self typeEncoding] componentsSeparatedByString:@"\""] objectAtIndex:1];
     Class class = NSClassFromString(className);
-//    NSLog(@"Found class %@", class);
     return class;
 }
 
