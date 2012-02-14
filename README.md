@@ -31,9 +31,9 @@ It will convert recursively, so a model's dictionary of models with array proper
 
 There are three "outputTypes" that the converter supports when converting from a model to an NSDictionary: Full, PropertyList, and JSON.
 
-    * Full output "converts" any unrecognized NSObject subclass to itself.  Thus the NSDictionary would have a value of that object.
-    * PropertyList output drops any unrecognized NSObject subclass, so that the resultant NSDictionary is PropertyList-compliant. (But see the section on NSURL below)
-    * JSON output drops any unrecognized NSObject subclass, so that the resultant NSDictionary is JSON-compliant.  (But see the sections on NSURL and NSDate below).
+* Full output "converts" any unrecognized NSObject subclass to itself.  Thus the NSDictionary would have a value of that object.
+* PropertyList output drops any unrecognized NSObject subclass, so that the resultant NSDictionary is PropertyList-compliant. (But see the section on NSURL below)
+* JSON output drops any unrecognized NSObject subclass, so that the resultant NSDictionary is JSON-compliant.  (But see the sections on NSURL and NSDate below).
 
 ### Models
 
@@ -71,7 +71,7 @@ JAGPropertyConverter converts arrays to sets and vice-versa, as needed.
     NSDictionary *jsonDictionary = [converter convertToDictionary:model];
 
     //Deserialization
-    NSDictionary *jsonDictionary = [NSDictionary arrayWithContentsOfFile:@"/path/to/model.json"];
+    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/path/to/model.json"];
     JAGPropertyConverter *converter = [[JAGPropertyConverter alloc] init];
     converter.identifyDict = ^(NSDictionary *dict) {
         if ([dict valueForKey:@"userID"]) {
