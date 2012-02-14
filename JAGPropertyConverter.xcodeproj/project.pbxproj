@@ -14,7 +14,15 @@
 		11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
 		11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */; };
 		11275B6914E9D56200C4707C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11275B6714E9D56200C4707C /* InfoPlist.strings */; };
-		11275B6C14E9D56200C4707C /* JAGPropertyConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B6B14E9D56200C4707C /* JAGPropertyConverterTests.m */; };
+		11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 11275B7714E9D89500C4707C /* JAGProperty.h */; };
+		11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B7814E9D89500C4707C /* JAGProperty.m */; };
+		11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 11275B7914E9D89500C4707C /* JAGPropertyFinder.h */; };
+		11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */; };
+		11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */; };
+		11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */; };
+		11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */; };
+		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
+		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,16 +38,28 @@
 /* Begin PBXFileReference section */
 		11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJAGPropertyConverter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		11275B4E14E9D56200C4707C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */ = {isa = PBXFileReference; path = "JAGPropertyConverter-Prefix.pch"; sourceTree = "<group>"; };
-		11275B5314E9D56200C4707C /* JAGPropertyConverter.h */ = {isa = PBXFileReference; path = JAGPropertyConverter.h; sourceTree = "<group>"; };
+		11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter-Prefix.pch"; sourceTree = "<group>"; };
+		11275B5314E9D56200C4707C /* JAGPropertyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverter.h; sourceTree = "<group>"; };
 		11275B5414E9D56200C4707C /* JAGPropertyConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverter.m; sourceTree = "<group>"; };
 		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11275B5C14E9D56200C4707C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		11275B5E14E9D56200C4707C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */ = {isa = PBXFileReference; path = "JAGPropertyConverterTests-Info.plist"; sourceTree = "<group>"; };
+		11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JAGPropertyConverterTests-Info.plist"; sourceTree = "<group>"; };
 		11275B6814E9D56200C4707C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		11275B6A14E9D56200C4707C /* JAGPropertyConverterTests.h */ = {isa = PBXFileReference; path = JAGPropertyConverterTests.h; sourceTree = "<group>"; };
-		11275B6B14E9D56200C4707C /* JAGPropertyConverterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverterTests.m; sourceTree = "<group>"; };
+		11275B7714E9D89500C4707C /* JAGProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGProperty.h; sourceTree = "<group>"; };
+		11275B7814E9D89500C4707C /* JAGProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGProperty.m; sourceTree = "<group>"; };
+		11275B7914E9D89500C4707C /* JAGPropertyFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyFinder.h; sourceTree = "<group>"; };
+		11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyFinder.m; sourceTree = "<group>"; };
+		11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverterTest.h; sourceTree = "<group>"; };
+		11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverterTest.m; sourceTree = "<group>"; };
+		11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyFinderTest.h; sourceTree = "<group>"; };
+		11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyFinderTest.m; sourceTree = "<group>"; };
+		11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyTest.h; sourceTree = "<group>"; };
+		11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyTest.m; sourceTree = "<group>"; };
+		11275B8714E9D8BD00C4707C /* PropertyModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyModelTests.h; sourceTree = "<group>"; };
+		11275B8814E9D8BD00C4707C /* PropertyModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyModelTests.m; sourceTree = "<group>"; };
+		11275B8914E9D8BD00C4707C /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +117,10 @@
 		11275B5014E9D56200C4707C /* JAGPropertyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				11275B7714E9D89500C4707C /* JAGProperty.h */,
+				11275B7814E9D89500C4707C /* JAGProperty.m */,
+				11275B7914E9D89500C4707C /* JAGPropertyFinder.h */,
+				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
 				11275B5314E9D56200C4707C /* JAGPropertyConverter.h */,
 				11275B5414E9D56200C4707C /* JAGPropertyConverter.m */,
 				11275B5114E9D56200C4707C /* Supporting Files */,
@@ -115,8 +139,16 @@
 		11275B6414E9D56200C4707C /* JAGPropertyConverterTests */ = {
 			isa = PBXGroup;
 			children = (
-				11275B6A14E9D56200C4707C /* JAGPropertyConverterTests.h */,
-				11275B6B14E9D56200C4707C /* JAGPropertyConverterTests.m */,
+				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
+				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
+				11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */,
+				11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */,
+				11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */,
+				11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */,
+				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
+				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
+				11275B8914E9D8BD00C4707C /* TestModel.h */,
+				11275B8A14E9D8BD00C4707C /* TestModel.m */,
 				11275B6514E9D56200C4707C /* Supporting Files */,
 			);
 			path = JAGPropertyConverterTests;
@@ -138,6 +170,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
+				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +273,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
+				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
+				11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11275B6C14E9D56200C4707C /* JAGPropertyConverterTests.m in Sources */,
+				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
+				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
+				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
+				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
+				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
