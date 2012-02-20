@@ -168,4 +168,19 @@
     STAssertEqualObjects(model2.urlProperty, model.urlProperty, @"urlProperties should be equal.");
 }
 
+- (void) testWeakProperty {
+    model.weakProperty = [TestModel testModel];
+    converter.outputType = kJAGFullOutput;
+    NSDictionary *dict = [converter convertObjectToProperties:model];
+    STAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
+}
+
+- (void) testWeakProperty2 {
+    model.weakProperty = [TestModel testModel];
+    converter.outputType = kJAGFullOutput;
+    converter.shouldConvertWeakProperties = YES;
+    NSDictionary *dict = [converter convertObjectToProperties:model];
+    STAssertNotNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
+}
+
 @end

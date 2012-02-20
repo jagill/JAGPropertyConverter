@@ -161,4 +161,10 @@
     STAssertFalse([modelProp isCollection], @"Model property should not be a collection.");
 }
 
+- (void) testWeakProperty {
+    JAGProperty *weakProperty = [JAGPropertyFinder propertyForName:@"weakProperty" inClass:[TestModel class]];
+    NSLog(@"weakProperty attributeEncodings: %@", [weakProperty attributeEncodings]);
+    STAssertTrue([weakProperty isWeak], @"Weak property should have isWeake true.");
+}
+
 @end

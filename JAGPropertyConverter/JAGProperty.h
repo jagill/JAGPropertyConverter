@@ -115,6 +115,14 @@ JAGPropertySetterSemantics;
 ///@return true if property has W attribute.
 - (BOOL)isWeakReference;
 
+/**
+ * The "W" attribute works for garbage-collected environments, but it does not
+ * detect ARC weak references.  These are detected by an assign-pointer to an object.
+ *
+ * @return true if property has W attribute, or is an Object and has setter semantics JAGPropertySetterSemanticsAssign
+ */
+- (BOOL)isWeak;
+
 ///@return true if property has P attribute.
 - (BOOL)isEligibleForGarbageCollection;
 

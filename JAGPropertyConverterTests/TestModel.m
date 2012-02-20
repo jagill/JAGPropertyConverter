@@ -46,6 +46,7 @@
 @synthesize urlProperty = _urlProperty;
 @synthesize readOnlyProperty = _readOnlyProperty;
 @synthesize active = _active;
+@synthesize weakProperty = _weakProperty;
 
 + (JAGPropertyConverter *) testConverter {
     JAGPropertyConverter *converter = [JAGPropertyConverter converterWithOutputType:kJAGPropertyListOutput];

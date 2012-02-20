@@ -57,6 +57,7 @@
 @synthesize shouldConvertClass = _shouldConvertClass;
 @synthesize convertToDate = _convertToDate;
 @synthesize convertFromDate = _convertFromDate;
+@synthesize shouldConvertWeakProperties = _shouldConvertWeakProperties;
 
 #pragma mark - Lifecycle
 
@@ -73,6 +74,7 @@
         self.convertFromDate = nil;
         self.shouldConvert = ^(id obj) {return NO;};
         self.shouldConvertClass = ^(Class aClass) {return NO;};
+        self.shouldConvertWeakProperties = NO;
     }
     return self;
 }
@@ -200,6 +202,9 @@
     NSString* propertyName;
     for (JAGProperty *property in properties) {
         propertyName = [property name];
+        if (!self.shouldConvertWeakProperties && [property isWeak]) {
+            continue;
+        }
         SEL getter = [property getter];
         if (![model respondsToSelector:getter]) {
             //Found property without a valid getter. Skipping.
