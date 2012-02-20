@@ -41,6 +41,8 @@ Converterting from a Model to an NSDictionary is relatively straightforward, usi
 
 To determine which NSObject subclasses are considered "Models" (i.e., which it should convert), JAGPropertyConverter relies on its shouldConvert: and shouldConvertClass: block properties.  Unfortunately we currently need both properties -- hopefully in the future we can just use one block which can handle either classes or NSObjects.
 
+By default, weak/assign object pointers are not converted (but assign properties for scalars are).  This is because weak references often indicate a retain loop (eg, between an object and its delegate), which would lead to cycle in the object graph and thence an infinite loop in the conversion.  This property can be controlled by the "shouldConvertWeakProperties" in JAGPropertyConverter.
+ 
 ### NSURL
 
 NSURL properties are not technically valid for JSON or ProperyLists, so JAGPropertyConverter serializes/deserializes them using the string of the absolute path.
