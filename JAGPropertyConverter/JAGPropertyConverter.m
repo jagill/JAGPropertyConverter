@@ -195,6 +195,7 @@
 }
 
 - (NSDictionary*) convertToDictionary: (id) model {
+    if (!model) return nil;
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
     NSString* propertyName;
