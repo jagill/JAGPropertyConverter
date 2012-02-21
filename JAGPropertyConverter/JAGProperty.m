@@ -114,6 +114,10 @@
     return [self hasAttribute: @"W"];
 }
 
+- (BOOL)isWeak {
+    return [self isWeakReference] || ([self isObject] && [self setterSemantics] == JAGPropertySetterSemanticsAssign);
+}
+
 - (BOOL)isEligibleForGarbageCollection
 {
     return [self hasAttribute: @"P"];

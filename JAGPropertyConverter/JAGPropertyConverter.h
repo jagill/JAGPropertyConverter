@@ -110,6 +110,13 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  */
 @property (nonatomic, assign) ConvertBlock convertFromDate;
 
+/**
+ * Should the converter convert weak properties.
+ * Default is NO, since weak properties often denote
+ * circular pointers, which the converter doesn't handle well.
+ */
+@property (nonatomic, assign) BOOL shouldConvertWeakProperties;
+
 #pragma mark - Lifecycle
 
 + (JAGPropertyConverter *) converterWithOutputType: (JAGOutputType) outputType;
