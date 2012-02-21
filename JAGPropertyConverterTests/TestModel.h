@@ -43,7 +43,8 @@
 @property (strong)          NSURL           *urlProperty;
 @property (strong)        NSString        *readOnlyProperty;
 @property (assign, getter = isActive, setter = makeActive:) BOOL            active;
-@property (weak)            TestModel       *weakProperty;
+
+@property (unsafe_unretained)            TestModel       *weakProperty;
 
 + (TestModel*) testModel;
 
