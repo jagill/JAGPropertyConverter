@@ -153,8 +153,8 @@
         return array;
     } else if ([object isKindOfClass: [NSSet class]]) {
         id collection;
-        if (self.outputType == kJAGJSONOutput) {
-            //JSON only supports arrays.
+        if (self.outputType == kJAGJSONOutput || self.outputType == kJAGPropertyListOutput) {
+            //JSON and PropertyLists only support arrays.
             collection = [NSMutableArray array];
         } else {
             collection = [NSMutableSet set];
