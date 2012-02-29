@@ -13,7 +13,12 @@ JAGPropertyConverter allows you to convert a JSON dictionary such as
         "invitedBy" : { 
             "userID" : 9876,
             "name" : "Bob Willis"
-        }
+        },
+        "friends" : [
+            { "userID" : 8873, "name" : "Jodi Fischer" },
+            { "userID" : 9876, "name" : "Bob Willis" }
+        ]
+
     }
 
 to/from Objective-C "model" classes such as:
@@ -23,6 +28,7 @@ to/from Objective-C "model" classes such as:
         @property (copy)    NSString    *name;
         @property (strong)  NSArray     *likes;
         @property (strong)  User        *invitedBy;
+        @property (strong)  NSSet       *friends;
     @end
 
 It does this by using the objc runtime library to discover which properties are defined on an object, and then using Key-Value coding to set/retrieve the values.
