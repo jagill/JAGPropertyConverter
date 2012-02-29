@@ -153,8 +153,8 @@
         return array;
     } else if ([object isKindOfClass: [NSSet class]]) {
         id collection;
-        if (self.outputType == kJAGJSONOutput) {
-            //JSON only supports arrays.
+        if (self.outputType == kJAGJSONOutput || self.outputType == kJAGPropertyListOutput) {
+            //JSON and PropertyLists only support arrays.
             collection = [NSMutableArray array];
         } else {
             collection = [NSMutableSet set];
@@ -197,6 +197,7 @@
 }
 
 - (NSDictionary*) convertToDictionary: (id) model {
+    if (!model) return nil;
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
     NSString* propertyName;
