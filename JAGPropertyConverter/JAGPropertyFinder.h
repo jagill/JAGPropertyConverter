@@ -30,35 +30,47 @@
 @interface JAGPropertyFinder : NSObject
 
 /**
- * The properties defined in the subclass, but not
- * defined in its superclasses.
- * @param subclass Class to look for property in.
- * @return an NSArray of JAGProperties
+ * The properties defined explicitly in the subclass.
+ * 
+ * This does not return those properties defined in
+ * any superclasses.
+ * 
+ * @param subclass Class that defines the properties.
+ * @return NSArray of JAGProperty objects defined in this subclass.
  */
 + (NSArray *)propertiesForSubclass: (Class) subclass;
 
 /**
  * The properties defined for this class, including
- * those defined in its superclasses.  It skips
- * properties defined in NSObject.
- * @param aClass Class to look for the property in.
- * @return an NSArray of JAGProperties
+ * those defined in its superclasses.
+ * 
+ * It skips properties defined in NSObject.
+ * 
+ * @param aClass Class with the properties.
+ * @return NSArray of JAGProperty objects defined for this class.
  */
 + (NSArray *)propertiesForClass: (Class) aClass;
 
 /**
- * Find a property with the name in the defined
- * class.
- * @param name Name of property to return
- * @param subclass Class to look for property in.
- * @return named JAGProperty defined in this subclass, or nil if not found.
+ * The property for the class with the given name.
+ *
+ * This will also return properties defined in the
+ * superclasses, NSObject included.
+ * 
+ * @param name Name of property to return.
+ * @param subclass Class with the property.
+ * @return JAGProperty defined in this subclass with the given name, or nil if not found.
  */
-+ (JAGProperty *)propertyForName: (NSString *)name inClass: (Class) subclass;
++ (JAGProperty *)propertyForName: (NSString *)name inClass: (Class) aClass;
 
 /**
- * Return an NSArray of NSStrings with the names of the properties
- * defined for the class (including its superclasses).
+ * The names of the properties defined for this class.
+ * 
+ * This includes those defined for its superclasses,
+ * excluding NSObject.
+ *
  * @param aClass the class containing the properties.
+ * @return NSArray of NSString objects with the property names.
  */
 + (NSArray*) propertyNamesForClass: (Class) aClass;
 

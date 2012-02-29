@@ -55,9 +55,9 @@
     return propertyArray; 
 }
 
-+ (JAGProperty *)propertyForName: (NSString *)name inClass:(__unsafe_unretained Class)subclass
++ (JAGProperty *)propertyForName: (NSString *)name inClass:(__unsafe_unretained Class)aClass
 {
-    objc_property_t property = class_getProperty(subclass, [name UTF8String]);
+    objc_property_t property = class_getProperty(aClass, [name UTF8String]);
     if(!property) return nil;
     return [JAGProperty propertyWithObjCProperty: property];
 }
