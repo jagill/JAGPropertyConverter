@@ -27,6 +27,9 @@
 
 @class JAGProperty;
 
+/**
+ * TODO: Description and examples.
+ */
 @interface JAGPropertyFinder : NSObject
 
 /**
@@ -58,7 +61,7 @@
  * superclasses, NSObject included.
  * 
  * @param name Name of property to return.
- * @param subclass Class with the property.
+ * @param aClass Class with the property.
  * @return JAGProperty defined in this subclass with the given name, or nil if not found.
  */
 + (JAGProperty *)propertyForName: (NSString *)name inClass: (Class) aClass;
