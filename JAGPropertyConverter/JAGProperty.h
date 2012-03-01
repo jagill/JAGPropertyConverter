@@ -29,7 +29,10 @@
 #import <objc/runtime.h>
 
 
-/// The type of setter for a property.
+/**
+ * The type of setter for a property.
+ * @see setterSemantics for more explanation.
+ */
 typedef enum
 {
     JAGPropertySetterSemanticsAssign,
@@ -39,7 +42,53 @@ typedef enum
 JAGPropertySetterSemantics;
 
 /**
- * TODO: Description and examples.
+   JAGProperty is an Objective-C wrapper for a class's properties that
+   allows dynamic access to information about the property.
+   It is backed by an `objc_property_t` object, but provides more friendly
+   methods for accessing the information.
+  
+   Suppose you have properties
+  
+        @property (nonatomic, readonly, copy) NSString* title;
+        @property (assign, getter=getCount) int count;
+  
+   and synthesizers
+  
+        @synthesize title = _title;
+        @synthesize count;
+  
+   The JAGProperty object for the first property has a variety of useful methods:
+  
+        property.name == @"title";
+        property.isObject == YES;
+        property.propertyClass == [NSString class];
+        property.isNumber == NO;
+        property.isScalar == NO;
+        property.typeEncoding == @"@\"NSString\"";
+        property.isNonAtomic == YES;
+        property.isReadOnly == YES;
+        property.ivarName == @"_title";
+        property.customGetter == nil;
+        property.getter == @selector(title);
+        property.setterSemantics == JAGPropertySetterSemanticsCopy;
+  
+   The JAGProperty object for the second property also has a variety of useful methods:
+  
+        property.name == @"count";
+        property.isObject == YES;
+        property.propertyClass == nil;
+        property.isNumber == YES;
+        property.isScalar == YES;
+        property.typeEncoding == @"i";
+        property.isNonAtomic == NO;
+        property.isReadOnly == NO;
+        property.ivarName == @"count";
+        property.customGetter == @selector(getCount);
+        property.getter == @selector(getCount);
+        property.setterSemantics == JAGPropertySetterSemanticsAssign;
+  
+   You can construct a JAGProperty with the appropriate `objc_property_t` object, but
+   JAGPropertyFinder provides the suggested ways to find properties for a given class.
  */
 @interface JAGProperty : NSObject
 
@@ -56,8 +105,8 @@ JAGPropertySetterSemantics;
  * - `C`              The property is a copy of the value last assigned (copy).
  * - `&`              The property is a reference to the value last assigned (retain).
  * - `N`              The property is non-atomic (nonatomic).
- * - `G<name>`        The property defines a custom getter selector name. The name follows the G (for example, GcustomGetter,).
- * - `S<name>`        The property defines a custom setter selector name. The name follows the S (for example, ScustomSetter:,).
+ * - `G<myGetter>`    The property defines a custom getter selector myGetter. The name follows the G (for example, GmyGetter).
+ * - `S<mySetter:>`   The property defines a custom setter selector mySetter. The name follows the S (for example, SmySetter:).
  * - `D`              The property is dynamic (@dynamic).
  * - `W`              The property is a weak reference (__weak).
  * - `P`              The property is eligible for garbage collection.
@@ -105,78 +154,115 @@ JAGPropertySetterSemantics;
 
 - (NSString *)oldTypeEncoding;
 
-/// @return Name of backing ivar.
+/// @return Name of ivar backing the property.
 - (NSString *)ivarName;
 
-/// @return whether property is assign, retain, or copy.
+/**
+ * Whether property is assign, retain, or copy.
+ *
+ * Note that in ARC, `strong` is the same as `retain`, and
+ * `weak` is the same as `assign`.
+ *
+ * @return JAGPropertySetterSemantics for assign, retain, or copy.
+ */
 - (JAGPropertySetterSemantics)setterSemantics;
 
-/// @return name of property
+/// @return Name of property
 - (NSString *)name;
 
-/// @return true if property has R attribute.
+/**
+ * Whether the property is readonly.
+ *
+ * @return YES if property has R attribute.
+ */
 - (BOOL)isReadOnly;
 
-/// @return true if property has N attribute.
+/**
+ * Whether the property is nonatomic.
+ *
+ * @return YES if property has N attribute.
+ */
 - (BOOL)isNonAtomic;
 
-/// @return true if property has D attribute.
+/**
+ * Whether the property is dynamic.
+ *
+ * @return YES if property has D attribute.
+ */
 - (BOOL)isDynamic;
 
-/// @return true if property has W attribute.
+/**
+   Whether the property is a __weak reference, with respect to Garbage Collection.
+  
+   Note this has nothing to do with iOS ARC `weak` label.  An ARC property
+
+        @property (weak) id delegate;
+
+   will have isWeakReference == NO.  @see isWeak for how to handle that case.
+  
+   @return YES if property has W attribute.
+ */
 - (BOOL)isWeakReference;
 
 /**
+ * Whether the property is a weak pointer, in either OS X Garbage Collection or
+ * iOS ARC.
+ * 
  * The "W" attribute works for garbage-collected environments, but it does not
- * detect ARC weak references.  These are detected by an assign-pointer to an object.
+ * detect ARC `weak` references.  These are detected by an `assign`-pointer to an object.
+ * This also means that an iOS 4 object property with `assign` semantics will also return YES.
  *
- * @return true if property has W attribute, or is an Object and has setter semantics JAGPropertySetterSemanticsAssign
+ * @return YES if property has W attribute, or is an Object and has setter semantics JAGPropertySetterSemanticsAssign
  */
 - (BOOL)isWeak;
 
-/// @return true if property has P attribute.
+/**
+ * Whether the object is elegible for Garbage Collection in OS X.
+ *
+ * @return YES if property has P attribute.
+ */
 - (BOOL)isEligibleForGarbageCollection;
 
-/// @return true if the property is char (signed or unsigned) or char array
+/// @return YES if the property is char (signed or unsigned) or char array
 - (BOOL) isCharacterType;
 
-/// @return true if the property is any sort of integer, float, char, or BOOL
+/// @return YES if the property is any sort of integer, float, char, or BOOL
 - (BOOL) isNumber;
 
-/// @return true if the property is for a Number, Bool, or CharacterType
+/// @return YES if the property is for a Number, Bool, or CharacterType
 - (BOOL) isScalar;
 
-/// @return true if the property is for an NSObject subclass
+/// @return YES if the property is for an NSObject subclass or `id`.
 - (BOOL) isObject;
 
 /**
  * The class of the property, if it is a defined object.
  *
- * If it is an id or not an object, return nil.
- * @return the Class of the property, or nil if undefined.  
+ * If it is an `id` or not an object, return nil.
+ * @return The Class of the property, or nil if undefined.  
  */
 - (Class) propertyClass;
 
 /// @return true if the property is for an NSArray or NSSet subclass
 - (BOOL) isCollection;
 
-/// @return selector for custom getter.  Nil if no custom getter.
-- (SEL)customGetter;
+/// @return Selector for custom getter.  Nil if no custom getter.
+- (SEL) customGetter;
 
 /**
- * @return selector for getter.  
+ * @return Selector for getter.  
  * Defaults to @selector(propertyname) if no custom getter.
  */
-- (SEL)getter;
+- (SEL) getter;
 
-/// @return selector for custom setter.  Nil if no custom setter.
-- (SEL)customSetter;
+/// @return Selector for custom setter.  Nil if no custom setter.
+- (SEL) customSetter;
 
 /**
- * @return selector for setter.  
+ * @return Selector for setter.  
  * Defaults to @selector(setPropertyname:) if no custom getter.
  */
-- (SEL)setter;
+- (SEL) setter;
 
 
 @end
