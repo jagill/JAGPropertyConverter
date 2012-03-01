@@ -183,13 +183,13 @@
 
 - (Class) propertyClass {
     if (! [self isObject]) return nil;
-    //typeEncoding looks like '@"AModel"'.  This is with the @ and "s.
-    NSString *typeEncoding = [self typeEncoding];
-    if ([typeEncoding isEqualToString:@"@"]) {
-        //id looks like '@'.
+    NSArray *encodingComponents = [[self typeEncoding] componentsSeparatedByString:@"\""];
+    if ([encodingComponents count] < 2) {
+        //id looks like '@', blocks like '@?'
         return nil;
     }
-    NSString *className = [[[self typeEncoding] componentsSeparatedByString:@"\""] objectAtIndex:1];
+    //typeEncoding looks like '@"AModel"'.  This is with the @ and "s.
+    NSString *className = [encodingComponents objectAtIndex:1];
     Class class = NSClassFromString(className);
     return class;
 }
