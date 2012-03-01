@@ -138,7 +138,7 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  * If `identifyDict(dict)==nil`, dict will be "converted"
  * to an NSDictionary with each value converted.
  */
-@property (nonatomic, assign) IdentifyBlock identifyDict;
+@property (nonatomic, copy) IdentifyBlock identifyDict;
 
 /**
  * This block determines if an object should be converted
@@ -152,7 +152,7 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  *
  * TODO: Merge this with shouldConvertClass 
  */
-@property (nonatomic, assign) CriterionBlock shouldConvert;
+@property (nonatomic, copy) CriterionBlock shouldConvert;
 
 /**
  * This block determines if an object of the Class should be converted
@@ -167,7 +167,7 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  *
  * TODO: Merge this with shouldConvert
  */
-@property (nonatomic, assign) CriterionBlock shouldConvertClass;
+@property (nonatomic, copy) CriterionBlock shouldConvertClass;
 
 /**
  * A Block to convert a (JSON) property to an NSDate.
@@ -183,7 +183,7 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  *
  * TODO: Generalize converters to other classes?
  */
-@property (nonatomic, assign) ConvertBlock convertToDate;
+@property (nonatomic, copy) ConvertBlock convertToDate;
 
 /**
  * A Block to convert an NSDate property to JSON property.
@@ -199,7 +199,7 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
  *
  * TODO: Generalize converters to other classes?
  */
-@property (nonatomic, assign) ConvertBlock convertFromDate;
+@property (nonatomic, copy) ConvertBlock convertFromDate;
 
 /**
  * Whether an object's weak properties should be converted to dictionary values.
