@@ -28,7 +28,54 @@
 @class JAGProperty;
 
 /**
- * TODO: Description and examples.
+   JAGPropertyFinder examines classes and returns a JAGProperty for each property.
+ 
+   Given a class and subclass like:
+ 
+     @interface MyClass : NSObject
+ 
+     @property (strong) NSArray *things;
+     @property (strong) MyClass *anotherOne;
+     @property (assign) int count;
+     @property (copy) NSString *title;
+ 
+     @end
+ 
+     @interface MySubclass : MyClass
+ 
+     @property (copy) NSString *subtitle;
+     @property (assign) BOOL fun;
+
+     @end
+ 
+   JAGPropertyFinder can give you an NSArray of all these properties, the JAGProperty
+   for a single property, or those properties just contained within the class.
+ 
+   For example, you can do the following:
+ 
+     NSArray *myClassProps = [JAGPropertyFinder propertiesForClass: [MyClass class]];
+     // myClassProps is an NSArray of 4 JAGProperty objects, one for each of
+     // things, anotherOne, count, title
+ 
+     NSArray *mySubclassOnlyProps = [JAGPropertyFinder propertiesForSubclass: [MySubclass class]];
+     // mySubclassOnlyProps is an NSArray of 2 JAGProperty objects, one for each of
+     // subtitle, fun
+ 
+     NSArray *mySubclassProps = [JAGPropertyFinder propertiesForClass: [MySubclass class]];
+     // mySubclassProps is an NSArray of 6 JAGProperty objects, one for each of
+     // things, anotherOne, count, title, subtitle, fun
+ 
+     JAGProperty *thingsProperty = [JAGPropertyFinder propertyForName:@"things" inClass: [MyClass class]];
+     // You can find out information about this property.
+
+     JAGProperty *thingsSubproperty = [JAGPropertyFinder propertyForName:@"things" inClass: [MySubclass class]];
+     if ([thingsSubproperty isEqualTo:thingsProperty]) NSLog(@"They are the same!");
+     // Properties are accessible on subclasses as well.
+ 
+     NSArray *propertyNames = [JAGPropertyFinder propertyNamesForClass:[MySubclass class]];
+     // [ @"subtitle", @"fun", @"things", @"anotherOne", @"count", @"title" ]
+
+  
  */
 @interface JAGPropertyFinder : NSObject
 
