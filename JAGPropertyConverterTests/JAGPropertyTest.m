@@ -167,4 +167,11 @@
     STAssertTrue([weakProperty isWeak], @"Weak property should have isWeake true.");
 }
 
+- (void) testBlockProperty {
+    JAGProperty *blockProperty = [JAGPropertyFinder propertyForName:@"blockProperty" inClass:[TestModel class]];
+    NSLog(@"blockProperty attributeEncodings: %@", [blockProperty attributeEncodings]);
+    STAssertEqualObjects([blockProperty typeEncoding], @"@?", @"Block property should have type encoding @?");
+    STAssertTrue([blockProperty isBlock], @"Block property should have isBlock == true");    
+}
+
 @end

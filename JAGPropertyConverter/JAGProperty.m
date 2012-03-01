@@ -232,7 +232,11 @@
 
 - (BOOL) isObject
 {
-    return [[self typeEncoding] hasPrefix: @"@"];
+    return [[self typeEncoding] hasPrefix: @"@"] && ![self isBlock];
+}
+
+- (BOOL) isBlock {
+    return [[self typeEncoding] isEqualToString:@"@?"];
 }
 
 - (BOOL) isCollection {

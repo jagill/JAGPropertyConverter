@@ -41,10 +41,10 @@
 @property (assign)          BOOL            boolProperty;
 @property (assign)          CLLocationCoordinate2D cfProperty;
 @property (strong)          NSURL           *urlProperty;
-@property (strong)        NSString        *readOnlyProperty;
+@property (strong)          NSString        *readOnlyProperty;
 @property (assign, getter = isActive, setter = makeActive:) BOOL            active;
-
 @property (unsafe_unretained)            TestModel       *weakProperty;
+@property (copy)            void(^blockProperty)(id);
 
 + (TestModel*) testModel;
 

@@ -101,14 +101,14 @@ JAGPropertySetterSemantics;
  *
  * Possible attributes are:
  *
- * - `R`              The property is read-only (readonly).
- * - `C`              The property is a copy of the value last assigned (copy).
- * - `&`              The property is a reference to the value last assigned (retain).
- * - `N`              The property is non-atomic (nonatomic).
- * - `G<myGetter>`    The property defines a custom getter selector myGetter. The name follows the G (for example, GmyGetter).
- * - `S<mySetter:>`   The property defines a custom setter selector mySetter. The name follows the S (for example, SmySetter:).
- * - `D`              The property is dynamic (@dynamic).
- * - `W`              The property is a weak reference (__weak).
+ * - `R`              The property is read-only (`readonly`).
+ * - `C`              The property is a copy of the value last assigned (`copy`).
+ * - `&`              The property is a reference to the value last assigned (`retain`).
+ * - `N`              The property is non-atomic (`nonatomic`).
+ * - `G<myGetter>`    The property defines a custom getter selector myGetter. The name follows the `G` (for example, `GmyGetter`).
+ * - `S<mySetter:>`   The property defines a custom setter selector mySetter. The name follows the `S` (for example, `SmySetter:`).
+ * - `D`              The property is dynamic (`@dynamic`).
+ * - `W`              The property is a weak reference (`__weak`).
  * - `P`              The property is eligible for garbage collection.
  * - `t<encoding>`    Specifies the type using old-style encoding.
  *
@@ -119,9 +119,10 @@ JAGPropertySetterSemantics;
 /**
  * An NSString denoting the scalar/object type of the property.
  *
- * Note that for properties for objects with a defined class, the return is @"CLASS_NAME".
+ * Note that for properties for objects with a defined class, the return is the NSString `@"CLASS_NAME"`
+ * (including the `@""`, so it's equivalent to `@"@\"CLASS_NAME\""`).
  *
- * - `c`                  A char (including BOOL)
+ * - `c`                  A char (including `BOOL`)
  * - `i`                  An int
  * - `s`                  A short
  * - `l`                  A long
@@ -136,16 +137,17 @@ JAGPropertySetterSemantics;
  * - `d`                  A double
  * - `B`                  A C++ bool or a C99 _Bool
  * - `v`                  A void
- *                        A character string (char *)
+ *                        A character string (`char *`)
  * - `@`                  An object (whether statically typed or typed id).
- *                        For statically typed objects, it is of the form: @"NSString"
- * - `#`                  A class object (Class)
- * - `:`                  A method selector (SEL)
- * - `[array type]`       An array, eg [12^f]
- * - `{name=type...}`     A structure, eg {example=@*i}
+ *                        For statically typed objects, it is of the form: `@"NSString"`
+ *                        Blocks are encoded as '@?'
+ * - `#`                  A class object (`Class`)
+ * - `:`                  A method selector (`SEL`)
+ * - `[array type]`       An array, eg `[12^f]`
+ * - `{name=type...}`     A structure, eg `{example=@*i}`
  * - `(name=type...)`     A union
  * - `bNUM`               A bit field of num bits
- * - `^type`              A pointer to type, eg ^i
+ * - `^type`              A pointer to type, eg `^i`
  * - `?`                  An unknown type (among other things, this code is used for function pointers)
  *
  * @return An NSString of the type encoding.
@@ -234,6 +236,9 @@ JAGPropertySetterSemantics;
 
 /// @return YES if the property is for an NSObject subclass or `id`.
 - (BOOL) isObject;
+
+/// @return YES is the property is for a Block
+- (BOOL) isBlock;
 
 /**
  * The class of the property, if it is a defined object.
