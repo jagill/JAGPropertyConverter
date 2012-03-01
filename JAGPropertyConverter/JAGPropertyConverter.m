@@ -32,7 +32,7 @@
 
 - (id) convertCollection: (id) collection withTargetClass: (Class) targetClass;
 
-/**
+/*
  * This converts a property to a PropertyModel-friendly form.
  * Dictionaries that can be detected as a PropertyModel subclass
  * are converted to that subclass and returned.

@@ -97,7 +97,7 @@ The converter can also handle arrays and dictionaries as inputs as well.
 
 Since JAGPropertyConverter uses Key-Value coding to get/set values, it doesn't respect custom getters and setters with non-standard names.  JAGProperty has this ability, so we could in theory support this.  Two things have dissuaded us so far.  The first is that ARC produces warnings, since you are invoking an unknown (to it) selector to get/set properties, so it can't ensure memory management is handled correctly.  The second is that Key-Value coding handles scalars decently well, which would take a little more work to do when directly using the properties getters and setters.
 
-While Key-Value coding handles scalars decently well, we have not yet enabled JAGPropertyConverter to parse them into a JSON-value format.
+While Key-Value coding handles struct (and similar) scalars decently well, we have not yet enabled JAGPropertyConverter to parse them into a JSON-value format.
 
 ## Requirements
 

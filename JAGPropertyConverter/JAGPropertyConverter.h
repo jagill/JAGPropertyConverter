@@ -49,7 +49,51 @@ typedef BOOL (^CriterionBlock)(id obj);
 typedef BOOL (^ClassCriterionBlock)(Class aClass);
 
 /**
- * TODO: Description and examples
+   JAGPropertyConverter handles the decomposition of a Model object into an NSDictionary of basic types, and
+   the (re)composition of NSDictionaries into model objects.
+ 
+   We use the term _Model_ for a subclass of NSObject with defined @properties.  Although the definition
+   is broad, intuitively we mean objects with data that we would like to persist or serialize, corresponding to
+   Model in Model-View-Controller.  We use the term _basic type_ for the common objects of Objective-C, including
+   NSString, NSNumber, NSArray, etc.  The exact definition of basic depends on the outputType, a JSON-compliant
+   NSDictionary has a more restrictive set of allowed types than does a PropertyList dictionary.
+ 
+   JAGPropertyConverter converts a given Model into an NSDictionary, with
+   keys equal to the property names and values equal to the property values converted into a basic type.
+   A non-collection basic type, such as NSString, is unchanged.  For a basic collection, such as NSArray, NSSet,
+   or NSDictionary, the converter goes through each entry and converts it.  For a Model value, the converter
+   converties it to an NSDictionary.  If the converter does not know how to handle a value, it drops it.
+ 
+   At the end of the recursive decomposition process, a Model is converted into an NSDictionary whose values
+   are all basic types and contain only basic types.  Depending on the outputType, this NSDictionary is
+   JSON- or PropertyList- compliant.  The method convertObjectToProperties: can handle an NSArray,
+   NSSet, or NSDictionary of Models (or basic types, really).  The method convertToDictionary: is the primitive function
+   that converts a Model into a dictionary; convertObjectToProperties: calls that on for NSDictionaries that
+   it recognizes as candidates for conversion.
+ 
+   The converse of decomposition is composition, which takes an NSDictionary of basic types and converts it
+   to a Model.  For whichever properties the Model has which have corresponding keys in the NSDictionary,
+   their value is set to the corresponding value in the NSDictionary.  If a value of the NSDictionary is itself
+   an NSDictionary, the converter tries to convert it to an appropriate Model object.  Similarly, entries of
+   NSArray or NSSet objects are converted as necessary.  Thus composing an NSDictionary to a Model recursively
+   handles nested collections/etc.  The method convertPropertyToObject: will take an arbitrary object and compose
+   it into a Model (or collection thereof), while the method setPropertiesOf:fromDictionary: will set the properties
+   of the supplied Model from the supplied NSDictionary.
+ 
+   Different conversion needs are handled by the various properties of JAGPropertyConverter, which specify how
+   to handle non-obvious cases.  The most important of these are outputType, identifyDict, shouldConvert,
+   and shouldConvertClass.
+ 
+   - *outputType* specifies what basic types are acceptable, allowing PropertyList or JSON outputs to be targetted.
+   - *identifyDict* is how the converter knows what Model class (if any) an NSDictionary should be composed into.
+   - *shouldConvert* and *shouldConvertClass* tells the converter which model classes it should decompose.  In the
+      future we'll replace this with a more elegant solution.
+ 
+   TODO: In a near-future version we will make the names of the conversion methods more intuitive and clear.
+ 
+   @warning **NB:** JAGPropertyConverter can't currently handle properties whose types are `struct`s, `union`s, blocks,
+   function pointers, or `char*`.  As (or if) the need arises, we'll implement support for these.
+ 
  */
 @interface JAGPropertyConverter : NSObject
 
