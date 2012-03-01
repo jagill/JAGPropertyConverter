@@ -1,0 +1,1477 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>JAGProperty Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 775)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">JAGPropertyConverter </a></h1>
+				<a id="developerHome" href="../index.html">com.threedeadmonks</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">JAGProperty Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/attributeEncodings">&nbsp;&nbsp;&nbsp;&nbsp;- attributeEncodings</option>
+	
+	<option value="//api/name/customGetter">&nbsp;&nbsp;&nbsp;&nbsp;- customGetter</option>
+	
+	<option value="//api/name/customSetter">&nbsp;&nbsp;&nbsp;&nbsp;- customSetter</option>
+	
+	<option value="//api/name/getter">&nbsp;&nbsp;&nbsp;&nbsp;- getter</option>
+	
+	<option value="//api/name/isCharacterType">&nbsp;&nbsp;&nbsp;&nbsp;- isCharacterType</option>
+	
+	<option value="//api/name/isCollection">&nbsp;&nbsp;&nbsp;&nbsp;- isCollection</option>
+	
+	<option value="//api/name/isDynamic">&nbsp;&nbsp;&nbsp;&nbsp;- isDynamic</option>
+	
+	<option value="//api/name/isEligibleForGarbageCollection">&nbsp;&nbsp;&nbsp;&nbsp;- isEligibleForGarbageCollection</option>
+	
+	<option value="//api/name/isNonAtomic">&nbsp;&nbsp;&nbsp;&nbsp;- isNonAtomic</option>
+	
+	<option value="//api/name/isNumber">&nbsp;&nbsp;&nbsp;&nbsp;- isNumber</option>
+	
+	<option value="//api/name/isObject">&nbsp;&nbsp;&nbsp;&nbsp;- isObject</option>
+	
+	<option value="//api/name/isReadOnly">&nbsp;&nbsp;&nbsp;&nbsp;- isReadOnly</option>
+	
+	<option value="//api/name/isScalar">&nbsp;&nbsp;&nbsp;&nbsp;- isScalar</option>
+	
+	<option value="//api/name/isWeak">&nbsp;&nbsp;&nbsp;&nbsp;- isWeak</option>
+	
+	<option value="//api/name/isWeakReference">&nbsp;&nbsp;&nbsp;&nbsp;- isWeakReference</option>
+	
+	<option value="//api/name/ivarName">&nbsp;&nbsp;&nbsp;&nbsp;- ivarName</option>
+	
+	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
+	
+	<option value="//api/name/propertyClass">&nbsp;&nbsp;&nbsp;&nbsp;- propertyClass</option>
+	
+	<option value="//api/name/setter">&nbsp;&nbsp;&nbsp;&nbsp;- setter</option>
+	
+	<option value="//api/name/setterSemantics">&nbsp;&nbsp;&nbsp;&nbsp;- setterSemantics</option>
+	
+	<option value="//api/name/typeEncoding">&nbsp;&nbsp;&nbsp;&nbsp;- typeEncoding</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/attributeEncodings">attributeEncodings</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customGetter">customGetter</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customSetter">customSetter</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getter">getter</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isCharacterType">isCharacterType</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isCollection">isCollection</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isDynamic">isDynamic</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isEligibleForGarbageCollection">isEligibleForGarbageCollection</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isNonAtomic">isNonAtomic</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isNumber">isNumber</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isObject">isObject</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isReadOnly">isReadOnly</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isScalar">isScalar</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isWeak">isWeak</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isWeakReference">isWeakReference</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ivarName">ivarName</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/propertyClass">propertyClass</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setter">setter</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setterSemantics">setterSemantics</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/typeEncoding">typeEncoding</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="JAGProperty Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">JAGProperty Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">JAGProperty.h<br />JAGProperty.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>   JAGProperty is an Objective-C wrapper for a class&rsquo;s properties that
+   allows dynamic access to information about the property.
+   It is backed by an <code>objc_property_t</code> object, but provides more friendly
+   methods for accessing the information.</p>
+
+<p>   Suppose you have properties</p>
+
+<pre><code>    @property (nonatomic, readonly, copy) NSString* title;
+    @property (assign, getter=getCount) int count;
+</code></pre>
+
+<p>   and synthesizers</p>
+
+<pre><code>    @synthesize title = _title;
+    @synthesize count;
+</code></pre>
+
+<p>   The JAGProperty object for the first property has a variety of useful methods:</p>
+
+<pre><code>    property.name == @"title";
+    property.isObject == YES;
+    property.propertyClass == [NSString class];
+    property.isNumber == NO;
+    property.isScalar == NO;
+    property.typeEncoding == @"@\"NSString\"";
+    property.isNonAtomic == YES;
+    property.isReadOnly == YES;
+    property.ivarName == @"_title";
+    property.customGetter == nil;
+    property.getter == @selector(title);
+    property.setterSemantics == JAGPropertySetterSemanticsCopy;
+</code></pre>
+
+<p>   The JAGProperty object for the second property also has a variety of useful methods:</p>
+
+<pre><code>    property.name == @"count";
+    property.isObject == YES;
+    property.propertyClass == nil;
+    property.isNumber == YES;
+    property.isScalar == YES;
+    property.typeEncoding == @"i";
+    property.isNonAtomic == NO;
+    property.isReadOnly == NO;
+    property.ivarName == @"count";
+    property.customGetter == @selector(getCount);
+    property.getter == @selector(getCount);
+    property.setterSemantics == JAGPropertySetterSemanticsAssign;
+</code></pre>
+
+<p>   You can construct a JAGProperty with the appropriate <code>objc_property_t</code> object, but
+   <a href="../Classes/JAGPropertyFinder.html">JAGPropertyFinder</a> provides the suggested ways to find properties for a given class.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/attributeEncodings">&ndash;&nbsp;attributeEncodings</a></code>
+		<span class="tooltip"><p>A comma-separated list of attributes.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/typeEncoding">&ndash;&nbsp;typeEncoding</a></code>
+		<span class="tooltip"><p>An NSString denoting the scalar/object type of the property.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/ivarName">&ndash;&nbsp;ivarName</a></code>
+		<span class="tooltip"><p>Name of ivar backing the property.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setterSemantics">&ndash;&nbsp;setterSemantics</a></code>
+		<span class="tooltip"><p>Whether property is assign, retain, or copy.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
+		<span class="tooltip"><p>Name of property</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isReadOnly">&ndash;&nbsp;isReadOnly</a></code>
+		<span class="tooltip"><p>Whether the property is readonly.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isNonAtomic">&ndash;&nbsp;isNonAtomic</a></code>
+		<span class="tooltip"><p>Whether the property is nonatomic.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isDynamic">&ndash;&nbsp;isDynamic</a></code>
+		<span class="tooltip"><p>Whether the property is dynamic.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isWeakReference">&ndash;&nbsp;isWeakReference</a></code>
+		<span class="tooltip"><p>   Whether the property is a __weak reference, with respect to Garbage Collection.</p>
+
+<p>   Note this has nothing to do with iOS ARC <code>weak</code> label.  An ARC property</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isWeak">&ndash;&nbsp;isWeak</a></code>
+		<span class="tooltip"><p>Whether the property is a weak pointer, in either OS X Garbage Collection or
+iOS ARC.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isEligibleForGarbageCollection">&ndash;&nbsp;isEligibleForGarbageCollection</a></code>
+		<span class="tooltip"><p>Whether the object is elegible for Garbage Collection in OS X.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isCharacterType">&ndash;&nbsp;isCharacterType</a></code>
+		<span class="tooltip"><p>YES if the property is char (signed or unsigned) or char array</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isNumber">&ndash;&nbsp;isNumber</a></code>
+		<span class="tooltip"><p>YES if the property is any sort of integer, float, char, or BOOL</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isScalar">&ndash;&nbsp;isScalar</a></code>
+		<span class="tooltip"><p>YES if the property is for a Number, Bool, or CharacterType</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isObject">&ndash;&nbsp;isObject</a></code>
+		<span class="tooltip"><p>YES if the property is for an NSObject subclass or <code>id</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/propertyClass">&ndash;&nbsp;propertyClass</a></code>
+		<span class="tooltip"><p>The class of the property, if it is a defined object.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isCollection">&ndash;&nbsp;isCollection</a></code>
+		<span class="tooltip"><p>true if the property is for an NSArray or NSSet subclass</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/customGetter">&ndash;&nbsp;customGetter</a></code>
+		<span class="tooltip"><p>Selector for custom <a href="#//api/name/getter">getter</a>.  Nil if no custom <a href="#//api/name/getter">getter</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getter">&ndash;&nbsp;getter</a></code>
+		<span class="tooltip"><p>Selector for getter.
+Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom getter.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/customSetter">&ndash;&nbsp;customSetter</a></code>
+		<span class="tooltip"><p>Selector for custom <a href="#//api/name/setter">setter</a>.  Nil if no custom <a href="#//api/name/setter">setter</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setter">&ndash;&nbsp;setter</a></code>
+		<span class="tooltip"><p>Selector for setter.
+Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter">getter</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/attributeEncodings" title="attributeEncodings"></a>
+	<h3 class="subsubtitle method-title">attributeEncodings</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A comma-separated list of attributes.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)attributeEncodings</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An NSString of the comma-separated attributes.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A comma-separated list of attributes.</p>
+
+<p>Possible attributes are:</p>
+
+<ul>
+<li><code>R</code>              The property is read-only (readonly).</li>
+<li><code>C</code>              The property is a copy of the value last assigned (copy).</li>
+<li><code>&amp;</code>              The property is a reference to the value last assigned (retain).</li>
+<li><code>N</code>              The property is non-atomic (nonatomic).</li>
+<li><code>G&lt;myGetter&gt;</code>    The property defines a custom <a href="#//api/name/getter">getter</a> selector myGetter. The <a href="#//api/name/name">name</a> follows the G (for example, GmyGetter).</li>
+<li><code>S&lt;mySetter:&gt;</code>   The property defines a custom <a href="#//api/name/setter">setter</a> selector mySetter. The <a href="#//api/name/name">name</a> follows the S (for example, SmySetter:).</li>
+<li><code>D</code>              The property is dynamic (@dynamic).</li>
+<li><code>W</code>              The property is a weak reference (__weak).</li>
+<li><code>P</code>              The property is eligible for garbage collection.</li>
+<li><code>t&lt;encoding&gt;</code>    Specifies the type using old-style encoding.</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/customGetter" title="customGetter"></a>
+	<h3 class="subsubtitle method-title">customGetter</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Selector for custom <a href="#//api/name/getter">getter</a>.  Nil if no custom <a href="#//api/name/getter">getter</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (SEL)customGetter</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Selector for custom <a href="#//api/name/getter">getter</a>.  Nil if no custom <a href="#//api/name/getter">getter</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/customSetter" title="customSetter"></a>
+	<h3 class="subsubtitle method-title">customSetter</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Selector for custom <a href="#//api/name/setter">setter</a>.  Nil if no custom <a href="#//api/name/setter">setter</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (SEL)customSetter</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Selector for custom <a href="#//api/name/setter">setter</a>.  Nil if no custom <a href="#//api/name/setter">setter</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getter" title="getter"></a>
+	<h3 class="subsubtitle method-title">getter</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Selector for getter.
+Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom getter.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (SEL)getter</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Selector for getter.
+Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom getter.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isCharacterType" title="isCharacterType"></a>
+	<h3 class="subsubtitle method-title">isCharacterType</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the property is char (signed or unsigned) or char array</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isCharacterType</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property is char (signed or unsigned) or char array</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isCollection" title="isCollection"></a>
+	<h3 class="subsubtitle method-title">isCollection</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>true if the property is for an NSArray or NSSet subclass</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isCollection</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>true if the property is for an NSArray or NSSet subclass</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isDynamic" title="isDynamic"></a>
+	<h3 class="subsubtitle method-title">isDynamic</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the property is dynamic.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isDynamic</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has D attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the property is dynamic.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isEligibleForGarbageCollection" title="isEligibleForGarbageCollection"></a>
+	<h3 class="subsubtitle method-title">isEligibleForGarbageCollection</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the object is elegible for Garbage Collection in OS X.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isEligibleForGarbageCollection</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has P attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the object is elegible for Garbage Collection in OS X.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isNonAtomic" title="isNonAtomic"></a>
+	<h3 class="subsubtitle method-title">isNonAtomic</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the property is nonatomic.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isNonAtomic</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has N attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the property is nonatomic.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isNumber" title="isNumber"></a>
+	<h3 class="subsubtitle method-title">isNumber</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the property is any sort of integer, float, char, or BOOL</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isNumber</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property is any sort of integer, float, char, or BOOL</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isObject" title="isObject"></a>
+	<h3 class="subsubtitle method-title">isObject</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the property is for an NSObject subclass or <code>id</code>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isObject</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property is for an NSObject subclass or <code>id</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isReadOnly" title="isReadOnly"></a>
+	<h3 class="subsubtitle method-title">isReadOnly</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the property is readonly.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isReadOnly</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has R attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the property is readonly.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isScalar" title="isScalar"></a>
+	<h3 class="subsubtitle method-title">isScalar</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the property is for a Number, Bool, or CharacterType</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isScalar</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property is for a Number, Bool, or CharacterType</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isWeak" title="isWeak"></a>
+	<h3 class="subsubtitle method-title">isWeak</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the property is a weak pointer, in either OS X Garbage Collection or
+iOS ARC.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isWeak</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has W attribute, or is an Object and has <a href="#//api/name/setter">setter</a> semantics JAGPropertySetterSemanticsAssign</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the property is a weak pointer, in either OS X Garbage Collection or
+iOS ARC.</p>
+
+<p>The &ldquo;W&rdquo; attribute works for garbage-collected environments, but it does not
+detect ARC <code>weak</code> references.  These are detected by an <code>assign</code>-pointer to an object.
+This also means that an iOS 4 object property with <code>assign</code> semantics will also return YES.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isWeakReference" title="isWeakReference"></a>
+	<h3 class="subsubtitle method-title">isWeakReference</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>   Whether the property is a __weak reference, with respect to Garbage Collection.</p>
+
+<p>   Note this has nothing to do with iOS ARC <code>weak</code> label.  An ARC property</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isWeakReference</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if property has W attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>   Whether the property is a __weak reference, with respect to Garbage Collection.</p>
+
+<p>   Note this has nothing to do with iOS ARC <code>weak</code> label.  An ARC property</p>
+
+<pre><code>    @property (weak) id delegate;
+</code></pre>
+
+<p>   will have isWeakReference == NO.  @see <a href="#//api/name/isWeak">isWeak</a> for how to handle that case.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/ivarName" title="ivarName"></a>
+	<h3 class="subsubtitle method-title">ivarName</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Name of ivar backing the property.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)ivarName</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Name of ivar backing the property.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/name" title="name"></a>
+	<h3 class="subsubtitle method-title">name</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Name of property</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Name of property</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/propertyClass" title="propertyClass"></a>
+	<h3 class="subsubtitle method-title">propertyClass</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The class of the property, if it is a defined object.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (Class)propertyClass</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The Class of the property, or nil if undefined.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The class of the property, if it is a defined object.</p>
+
+<p>If it is an <code>id</code> or not an object, return nil.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setter" title="setter"></a>
+	<h3 class="subsubtitle method-title">setter</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Selector for setter.
+Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter">getter</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (SEL)setter</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Selector for setter.
+Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter">getter</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setterSemantics" title="setterSemantics"></a>
+	<h3 class="subsubtitle method-title">setterSemantics</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether property is assign, retain, or copy.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (JAGPropertySetterSemantics)setterSemantics</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>JAGPropertySetterSemantics for assign, retain, or copy.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether property is assign, retain, or copy.</p>
+
+<p>Note that in ARC, <code>strong</code> is the same as <code>retain</code>, and
+<code>weak</code> is the same as <code>assign</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/typeEncoding" title="typeEncoding"></a>
+	<h3 class="subsubtitle method-title">typeEncoding</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An NSString denoting the scalar/object type of the property.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)typeEncoding</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An NSString of the type encoding.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>An NSString denoting the scalar/object type of the property.</p>
+
+<p>Note that for properties for objects with a defined class, the return is @&ldquo;CLASS_NAME&rdquo;.</p>
+
+<ul>
+<li><code>c</code>                  A char (including BOOL)</li>
+<li><code>i</code>                  An int</li>
+<li><code>s</code>                  A short</li>
+<li><code>l</code>                  A long
+l is treated as a 32-bit quantity on 64-bit programs.</li>
+<li><code>q</code>                  A long long</li>
+<li><code>C</code>                  An unsigned char</li>
+<li><code>I</code>                  An unsigned int</li>
+<li><code>S</code>                  An unsigned short</li>
+<li><code>L</code>                  An unsigned long</li>
+<li><code>Q</code>                  An unsigned long long</li>
+<li><code>f</code>                  A float</li>
+<li><code>d</code>                  A double</li>
+<li><code>B</code>                  A C++ bool or a C99 _Bool</li>
+<li><code>v</code>                  A void
+A character string (char *)</li>
+<li><code>@</code>                  An object (whether statically typed or typed id).
+For statically typed objects, it is of the form: @&ldquo;NSString&rdquo;</li>
+<li><code>#</code>                  A class object (Class)</li>
+<li><code>:</code>                  A method selector (SEL)</li>
+<li><code>[array type]</code>       An array, eg [12<sup>f</sup>]</li>
+<li><code>{name=type...}</code>     A structure, eg {example=@*i}</li>
+<li><code>(name=type...)</code>     A union</li>
+<li><code>bNUM</code>               A bit field of num bits</li>
+<li><code>^type</code>              A pointer to type, eg ^i</li>
+<li><code>?</code>                  An unknown type (among other things, this code is used for function pointers)</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 com.threedeadmonks. All rights reserved. (Last updated: 2012-03-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>

@@ -1,0 +1,1056 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>JAGPropertyConverter Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 775)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">JAGPropertyConverter </a></h1>
+				<a id="developerHome" href="../index.html">com.threedeadmonks</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">JAGPropertyConverter Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/convertFromDate">&nbsp;&nbsp;&nbsp;&nbsp;convertFromDate</option>
+	
+	<option value="//api/name/convertToDate">&nbsp;&nbsp;&nbsp;&nbsp;convertToDate</option>
+	
+	<option value="//api/name/identifyDict">&nbsp;&nbsp;&nbsp;&nbsp;identifyDict</option>
+	
+	<option value="//api/name/outputType">&nbsp;&nbsp;&nbsp;&nbsp;outputType</option>
+	
+	<option value="//api/name/shouldConvert">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvert</option>
+	
+	<option value="//api/name/shouldConvertClass">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvertClass</option>
+	
+	<option value="//api/name/shouldConvertWeakProperties">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvertWeakProperties</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/convertObjectToProperties:">&nbsp;&nbsp;&nbsp;&nbsp;- convertObjectToProperties:</option>
+	
+	<option value="//api/name/convertPropertyToObject:">&nbsp;&nbsp;&nbsp;&nbsp;- convertPropertyToObject:</option>
+	
+	<option value="//api/name/convertToDictionary:">&nbsp;&nbsp;&nbsp;&nbsp;- convertToDictionary:</option>
+	
+	<option value="//api/name/setPropertiesOf:fromDictionary:">&nbsp;&nbsp;&nbsp;&nbsp;- setPropertiesOf:fromDictionary:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertFromDate">convertFromDate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertToDate">convertToDate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/identifyDict">identifyDict</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/outputType">outputType</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvert">shouldConvert</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvertClass">shouldConvertClass</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvertWeakProperties">shouldConvertWeakProperties</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertPropertyToObject:">convertPropertyToObject:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertToDictionary:">convertToDictionary:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="JAGPropertyConverter Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">JAGPropertyConverter Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">JAGPropertyConverter.h<br />JAGPropertyConverter.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>   JAGPropertyConverter handles the decomposition of a Model object into an NSDictionary of basic types, and
+   the (re)composition of NSDictionaries into model objects.</p>
+
+<p>   We use the term <em>Model</em> for a subclass of NSObject with defined @properties.  Although the definition
+   is broad, intuitively we mean objects with data that we would like to persist or serialize, corresponding to
+   Model in Model-View-Controller.  We use the term <em>basic type</em> for the common objects of Objective-C, including
+   NSString, NSNumber, NSArray, etc.  The exact definition of basic depends on the <a href="#//api/name/outputType">outputType</a>, a JSON-compliant
+   NSDictionary has a more restrictive set of allowed types than does a PropertyList dictionary.</p>
+
+<p>   JAGPropertyConverter converts a given Model into an NSDictionary, with
+   keys equal to the property names and values equal to the property values converted into a basic type.
+   A non-collection basic type, such as NSString, is unchanged.  For a basic collection, such as NSArray, NSSet,
+   or NSDictionary, the converter goes through each entry and converts it.  For a Model value, the converter
+   converties it to an NSDictionary.  If the converter does not know how to handle a value, it drops it.</p>
+
+<p>   At the end of the recursive decomposition process, a Model is converted into an NSDictionary whose values
+   are all basic types and contain only basic types.  Depending on the <a href="#//api/name/outputType">outputType</a>, this NSDictionary is
+   JSON- or PropertyList- compliant.  The method <a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a> can handle an NSArray,
+   NSSet, or NSDictionary of Models (or basic types, really).  The method <a href="#//api/name/convertToDictionary:">convertToDictionary:</a> is the primitive function
+   that converts a Model into a dictionary; <a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a> calls that on for NSDictionaries that
+   it recognizes as candidates for conversion.</p>
+
+<p>   The converse of decomposition is composition, which takes an NSDictionary of basic types and converts it
+   to a Model.  For whichever properties the Model has which have corresponding keys in the NSDictionary,
+   their value is set to the corresponding value in the NSDictionary.  If a value of the NSDictionary is itself
+   an NSDictionary, the converter tries to convert it to an appropriate Model object.  Similarly, entries of
+   NSArray or NSSet objects are converted as necessary.  Thus composing an NSDictionary to a Model recursively
+   handles nested collections/etc.  The method <a href="#//api/name/convertPropertyToObject:">convertPropertyToObject:</a> will take an arbitrary object and compose
+   it into a Model (or collection thereof), while the method <a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a> will set the properties
+   of the supplied Model from the supplied NSDictionary.</p>
+
+<p>   Different conversion needs are handled by the various properties of JAGPropertyConverter, which specify how
+   to handle non-obvious cases.  The most important of these are <a href="#//api/name/outputType">outputType</a>, <a href="#//api/name/identifyDict">identifyDict</a>, <a href="#//api/name/shouldConvert">shouldConvert</a>,
+   and <a href="#//api/name/shouldConvertClass">shouldConvertClass</a>.</p>
+
+<ul>
+<li> <em><a href="#//api/name/outputType">outputType</a></em> specifies what basic types are acceptable, allowing PropertyList or JSON outputs to be targetted.</li>
+<li> <em><a href="#//api/name/identifyDict">identifyDict</a></em> is how the converter knows what Model class (if any) an NSDictionary should be composed into.</li>
+<li> <em><a href="#//api/name/shouldConvert">shouldConvert</a></em> and <em><a href="#//api/name/shouldConvertClass">shouldConvertClass</a></em> tells the converter which model classes it should decompose.  In the
+  future we&rsquo;ll replace this with a more elegant solution.</li>
+</ul>
+
+
+<p>   TODO: In a near-future version we will make the names of the conversion methods more intuitive and clear.</p><div class="warning"><p><strong>NB:</strong> JAGPropertyConverter can&rsquo;t currently handle properties whose types are <code>struct</code>s, <code>union</code>s, blocks,
+   function pointers, or <code>char*</code>.  As (or if) the need arises, we&rsquo;ll implement support for these.</p></div>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/outputType">&nbsp;&nbsp;outputType</a></code>
+		<span class="tooltip"><p>The outputType property determines how an object is
+converted to an NSDictionary.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/identifyDict">&nbsp;&nbsp;identifyDict</a></code>
+		<span class="tooltip"><p>A block that determines whether and how to convert an NSDictionary
+into a model object.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shouldConvert">&nbsp;&nbsp;shouldConvert</a></code>
+		<span class="tooltip"><p>This block determines if an object should be converted
+to an NSDictionary.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shouldConvertClass">&nbsp;&nbsp;shouldConvertClass</a></code>
+		<span class="tooltip"><p>This block determines if an object of the Class should be converted
+to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
+should be forcibly converted to properties of the Class.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertToDate">&nbsp;&nbsp;convertToDate</a></code>
+		<span class="tooltip"><p>A Block to convert a (JSON) property to an NSDate.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertFromDate">&nbsp;&nbsp;convertFromDate</a></code>
+		<span class="tooltip"><p>A Block to convert an NSDate property to JSON property.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shouldConvertWeakProperties">&nbsp;&nbsp;shouldConvertWeakProperties</a></code>
+		<span class="tooltip"><p>Whether an object&rsquo;s weak properties should be converted to dictionary values.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertObjectToProperties:">&ndash;&nbsp;convertObjectToProperties:</a></code>
+		<span class="tooltip"><p>Convert an object (or collection of objects) into
+an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertToDictionary:">&ndash;&nbsp;convertToDictionary:</a></code>
+		<span class="tooltip"><p>Convert a single model object (subclass of NSObject with
+properties) into an NSDictionary with those properties as
+key:value pairs.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertPropertyToObject:">&ndash;&nbsp;convertPropertyToObject:</a></code>
+		<span class="tooltip"><p>Recursively converts a property (PropertyList object,
+NSArray, NSSet, or NSDictionary) to a model object
+(or collection thereof).</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setPropertiesOf:fromDictionary:">&ndash;&nbsp;setPropertiesOf:fromDictionary:</a></code>
+		<span class="tooltip"><p>Sets the properties of model (subclass of NSObject with properties)
+from the entries of the given dictionary.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/convertFromDate" title="convertFromDate"></a>
+	<h3 class="subsubtitle method-title">convertFromDate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Block to convert an NSDate property to JSON property.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) ConvertBlock convertFromDate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Block to convert an NSDate property to JSON property.</p>
+
+<p>Called when trying to convert an object&rsquo;s NSDate property
+to a JSON dictionary value.  If this block is nil, the
+value will not be set.</p>
+
+<p>The issue (see <a href="#//api/name/convertToDate">[JAGPropertyConverter convertToDate]</a>) is that there
+are many ways to convert an NSDate into a JSON-compatible format
+(seconds from epoch, UTC string, etc), and instead of guessing
+JAGPropertyConverter relies on this block to handle the conversion.</p>
+
+<p>TODO: Generalize converters to other classes?</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/convertToDate" title="convertToDate"></a>
+	<h3 class="subsubtitle method-title">convertToDate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Block to convert a (JSON) property to an NSDate.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) ConvertBlock convertToDate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Block to convert a (JSON) property to an NSDate.</p>
+
+<p>This block is called when trying to set an object&rsquo;s NSDate property
+with a dictionary&rsquo;s non-NSDate value.  If this block is nil,
+the NSDate property will be set to nil.</p>
+
+<p>The issue (see <a href="#//api/name/convertFromDate">[JAGPropertyConverter convertFromDate]</a>) is that there
+are many ways to convert an NSDate into a JSON-compatible format
+(seconds from epoch, UTC string, etc), and instead of guessing
+JAGPropertyConverter relies on this block to handle the conversion.</p>
+
+<p>TODO: Generalize converters to other classes?</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/identifyDict" title="identifyDict"></a>
+	<h3 class="subsubtitle method-title">identifyDict</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A block that determines whether and how to convert an NSDictionary
+into a model object.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) IdentifyBlock identifyDict</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A block that determines whether and how to convert an NSDictionary
+into a model object.</p>
+
+<p>When converting from a PropertyList/JSON dictionary/etc, it is not
+obvious whether an NSDictionary should be left alone or converted to
+a model object (and if so, to which one).  In the case of an NSDictionary
+contained within an NSArray or NSDictionary, there is not even defined
+property class to guide the conversion.</p>
+
+<p>This block is called if the converter needs to identify whether an
+NSDictionary should be converted to a model object.  If the block returns
+a Class, the NSDictionary is used to set a Class instance&rsquo;s properties.
+If the block returns nil, then the NSDictionary is &ldquo;converted&rdquo;
+by returning an NSDictionary with its values converted recursively.</p>
+
+<p>Example:  If the converter is trying to convert a dictionary
+<code>dict = {key1:value1, key2:value2}</code>, and
+<code>identifyDict(dict)==[MyClass class]</code>, dict will be converted to
+an instance myClass with <code>myClass.key1==value1</code>, <code>myClass.key2==value2</code>.
+If <code>identifyDict(dict)==nil</code>, dict will be &ldquo;converted&rdquo;
+to an NSDictionary with each value converted.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/outputType" title="outputType"></a>
+	<h3 class="subsubtitle method-title">outputType</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The outputType property determines how an object is
+converted to an NSDictionary.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) JAGOutputType outputType</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The outputType property determines how an object is
+converted to an NSDictionary.</p>
+
+<p>kJAGFullOutput means any object which can&rsquo;t be converted
+(@see <a href="#//api/name/shouldConvert">shouldConvert</a>) will be left as is.</p>
+
+<p>kJAGPropertyListOutput means that any object can&rsquo;t be
+converted and isn&rsquo;t a valid PropertyList value will
+be dropped.</p>
+
+<p>kJAGJSONOutput means that any object that can&rsquo;t be converted
+and isn&rsquo;t a valid JSON value will be dropped.  It also means
+that non-NSString dictionary keys will be dropped.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/shouldConvert" title="shouldConvert"></a>
+	<h3 class="subsubtitle method-title">shouldConvert</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This block determines if an object should be converted
+to an NSDictionary.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CriterionBlock shouldConvert</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This block determines if an object should be converted
+to an NSDictionary.</p>
+
+<p>Valid PropertyList values are automatically handled and
+NSDate objects for JSON are handled via <a href="#//api/name/convertToDate">convertToDate</a> and
+<a href="#//api/name/convertFromDate">convertFromDate</a>; this is for other objects.</p>
+
+<p>Defaults to false for everything.</p>
+
+<p>TODO: Merge this with <a href="#//api/name/shouldConvertClass">shouldConvertClass</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/shouldConvertClass" title="shouldConvertClass"></a>
+	<h3 class="subsubtitle method-title">shouldConvertClass</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This block determines if an object of the Class should be converted
+to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
+should be forcibly converted to properties of the Class.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CriterionBlock shouldConvertClass</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This block determines if an object of the Class should be converted
+to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
+should be forcibly converted to properties of the Class.</p>
+
+<p>Valid PropertyList values are automatically handled and
+NSDate objects for JSON are handled via <a href="#//api/name/convertToDate">convertToDate</a> and
+<a href="#//api/name/convertFromDate">convertFromDate</a>; this is for other objects.</p>
+
+<p>Defaults to false for everything.</p>
+
+<p>TODO: Merge this with <a href="#//api/name/shouldConvert">shouldConvert</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/shouldConvertWeakProperties" title="shouldConvertWeakProperties"></a>
+	<h3 class="subsubtitle method-title">shouldConvertWeakProperties</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether an object&rsquo;s weak properties should be converted to dictionary values.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL shouldConvertWeakProperties</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether an object&rsquo;s weak properties should be converted to dictionary values.</p>
+
+<p>Default is NO, since weak properties often denote
+retain cycles and thus cyclical object graphs, which the converter
+does not handle.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/convertObjectToProperties:" title="convertObjectToProperties:"></a>
+	<h3 class="subsubtitle method-title">convertObjectToProperties:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Convert an object (or collection of objects) into
+an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)convertObjectToProperties:(id)<em>object</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>object</em></dt>
+			<dd><p>The model object (or collection of model objects) to convert.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An NSDictionary (or collection thereof) of
+propertyName : propertyValue key-value pairs.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Convert an object (or collection of objects) into
+an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p>
+
+<ul>
+<li>Model objects (as designated by shouldConvert:)
+are converted to dictionaries</li>
+<li>Basic objects (eg NSString, NSNumber) are
+passed through unchanged, or dropped/converted
+if they are unsafe for the <a href="#//api/name/outputType">outputType</a>.</li>
+<li>NSDictionaries, NSArrays, and NSSets are converted
+recursively.</li>
+</ul>
+
+
+<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
+is JSON-compliant.  If the <a href="#//api/name/outputType">outputType</a> is kJAGPropertyListOutput,
+the returned value is PropertyList-compliant.  If necessary,
+objects are dropped in conversion to ensure compliance.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/convertPropertyToObject:" title="convertPropertyToObject:"></a>
+	<h3 class="subsubtitle method-title">convertPropertyToObject:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Recursively converts a property (PropertyList object,
+NSArray, NSSet, or NSDictionary) to a model object
+(or collection thereof).</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)convertPropertyToObject:(id)<em>property</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>property</em></dt>
+			<dd><p>An object (or collection thereof) to be converted.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A model object (or collection thereof) with properties</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Recursively converts a property (PropertyList object,
+NSArray, NSSet, or NSDictionary) to a model object
+(or collection thereof).</p>
+
+<p>If an NSDictionary is encountered and identified via identifyDict:,
+an object of the identified Class is instantiated and populated via
+<a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a>.  Unidentified NSDictionaries, NSArrays, and NSSets
+are recursively converted.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/convertToDictionary:" title="convertToDictionary:"></a>
+	<h3 class="subsubtitle method-title">convertToDictionary:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Convert a single model object (subclass of NSObject with
+properties) into an NSDictionary with those properties as
+key:value pairs.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSDictionary *)convertToDictionary:(id)<em>model</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>model</em></dt>
+			<dd><p>The model object to convert.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An NSDictionary of
+propertyName : propertyValue key-value pairs.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Convert a single model object (subclass of NSObject with
+properties) into an NSDictionary with those properties as
+key:value pairs.</p>
+
+<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
+is JSON-compliant.  If the <a href="#//api/name/outputType">outputType</a> is kJAGPropertyListOutput,
+the returned value is PropertyList-compliant.  If necessary,
+objects are dropped in conversion to ensure compliance.</p>
+
+<p>Note that this will convert any object with properties,
+regardless of the <a href="#//api/name/shouldConvert">shouldConvert</a> or <a href="#//api/name/shouldConvertClass">shouldConvertClass</a> blocks.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setPropertiesOf:fromDictionary:" title="setPropertiesOf:fromDictionary:"></a>
+	<h3 class="subsubtitle method-title">setPropertiesOf:fromDictionary:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets the properties of model (subclass of NSObject with properties)
+from the entries of the given dictionary.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setPropertiesOf:(id)<em>model</em> fromDictionary:(NSDictionary *)<em>dictionary</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>model</em></dt>
+			<dd><p>Model to set the properties of.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>dictionary</em></dt>
+			<dd><p>Dictionary of values for the model&rsquo;s properties.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets the properties of model (subclass of NSObject with properties)
+from the entries of the given dictionary.</p>
+
+<p>The keys are used as property names, which are set to the corresponding values.
+Properties whose names are not keys in the dictionary are unset and unaffected.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 com.threedeadmonks. All rights reserved. (Last updated: 2012-03-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
