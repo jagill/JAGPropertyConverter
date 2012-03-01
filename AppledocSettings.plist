@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>--company-id</key>
+	<string>com.threedeadmonks</string>
+	<key>--ignore</key>
+	<array>
+		<string>JAGPropertyConverterTests</string>
+	</array>
+	<key>--logformat</key>
+	<integer>1</integer>
+	<key>--print-settings</key>
+	<true/>
+	<key>--project-company</key>
+	<string>Three Dead Monks</string>
+	<key>--project-name</key>
+	<string>JAGPropertyConverter</string>
+	<key>--repeat-first-par</key>
+	<false/>
+	<key>--verbose</key>
+	<integer>3</integer>
+</dict>
+</plist>
