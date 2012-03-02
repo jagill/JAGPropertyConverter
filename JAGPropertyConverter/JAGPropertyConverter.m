@@ -46,6 +46,8 @@
  */
 - (id) convertPropertyToObject: (id) prop withTargetClass: (Class) targetClass;
 
+- (BOOL) shouldConvertClass: (Class) aClass;
+
 @end
 
 @implementation JAGPropertyConverter
@@ -53,8 +55,7 @@
 
 @synthesize outputType = _outputType;
 @synthesize identifyDict = _identifyDict;
-@synthesize shouldConvert = _shouldConvert;
-@synthesize shouldConvertClass = _shouldConvertClass;
+@synthesize classesToConvert = _classesToConvert;
 @synthesize convertToDate = _convertToDate;
 @synthesize convertFromDate = _convertFromDate;
 @synthesize shouldConvertWeakProperties = _shouldConvertWeakProperties;
@@ -72,8 +73,7 @@
         self.identifyDict = nil;
         self.convertToDate = nil;
         self.convertFromDate = nil;
-        self.shouldConvert = ^(id obj) {return NO;};
-        self.shouldConvertClass = ^(Class aClass) {return NO;};
+        self.classesToConvert = [NSMutableSet set];
         self.shouldConvertWeakProperties = NO;
     }
     return self;
@@ -84,6 +84,15 @@
 }
 
 #pragma mark - Convert To Dictionary
+
+- (BOOL) shouldConvertClass: (Class) aClass {
+    for (Class class in self.classesToConvert) {
+        if ([aClass isSubclassOfClass:class]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 - (id) convertObjectToProperties: (id) object {
     if (!object) {
@@ -183,7 +192,7 @@
             }
         }
         return dict;
-    } else if (self.shouldConvert(object)) {
+    } else if ([self shouldConvertClass:[object class]]) {
         return [self convertToDictionary:object];
     } else {
         if ( self.outputType == kJAGFullOutput ) {
@@ -267,7 +276,7 @@
             id model = [[modelClass alloc] init];
             [self setPropertiesOf:model fromDictionary:prop];
             return model;
-        } else if (targetClass && self.shouldConvertClass(targetClass)) {
+        } else if (targetClass && [self shouldConvertClass:targetClass]) {
             //Try to convert it to targetClass.
             id model = [[targetClass alloc] init];
             [self setPropertiesOf:model fromDictionary:prop];

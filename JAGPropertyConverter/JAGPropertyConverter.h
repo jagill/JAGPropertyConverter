@@ -42,12 +42,6 @@ typedef Class (^IdentifyBlock)(NSDictionary *dictionary);
 ///A Block to convert one object to another, for converting to/from JSON
 typedef id (^ConvertBlock)(id obj);
 
-///A Block to test a given object against some criterion.
-typedef BOOL (^CriterionBlock)(id obj);
-
-///A Block to test a given class against some criterion.
-typedef BOOL (^ClassCriterionBlock)(Class aClass);
-
 /**
    JAGPropertyConverter handles the decomposition of a Model object into an NSDictionary of basic types, and
    the (re)composition of NSDictionaries into model objects.
@@ -141,33 +135,14 @@ typedef BOOL (^ClassCriterionBlock)(Class aClass);
 @property (nonatomic, copy) IdentifyBlock identifyDict;
 
 /**
- * This block determines if an object should be converted
- * to an NSDictionary.
+ * A set of classes which should be converted.
  *
- * Valid PropertyList values are automatically handled and
- * NSDate objects for JSON are handled via convertToDate and
- * convertFromDate; this is for other objects.
- *
- * Defaults to false for everything.
- *
- * TODO: Merge this with shouldConvertClass 
+ * Subclasses of these classes are decomposed into NSDictionaries.
+ * Also when setting a Model's properties, if the property class is a subclass
+ * of these classes, the converter will coerce an unidentified NSDictionary
+ * into the property.
  */
-@property (nonatomic, copy) CriterionBlock shouldConvert;
-
-/**
- * This block determines if an object of the Class should be converted
- * to an NSDictionary, and if unidentified dictionaries (@see identifyDict)
- * should be forcibly converted to properties of the Class.
- * 
- * Valid PropertyList values are automatically handled and
- * NSDate objects for JSON are handled via convertToDate and
- * convertFromDate; this is for other objects.
- *
- * Defaults to false for everything.
- *
- * TODO: Merge this with shouldConvert
- */
-@property (nonatomic, copy) CriterionBlock shouldConvertClass;
+@property (nonatomic, strong) NSSet *classesToConvert;
 
 /**
  * A Block to convert a (JSON) property to an NSDate.

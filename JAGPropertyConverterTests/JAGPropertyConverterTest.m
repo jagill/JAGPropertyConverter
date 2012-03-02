@@ -42,12 +42,7 @@
     [model populate];
     
     converter = [[JAGPropertyConverter alloc] init];
-    converter.shouldConvertClass = ^(Class aClass) {
-        return [aClass isSubclassOfClass:[TestModel class]];
-    };
-    converter.shouldConvert = ^(id object) {
-        return [object isKindOfClass:[TestModel class]];
-    };
+    converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
     converter.identifyDict = ^(NSDictionary *dict) {
         if ([dict valueForKey:@"testModelID"]) {
             return [TestModel class];

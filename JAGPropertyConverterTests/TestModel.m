@@ -56,12 +56,7 @@
             return [TestModel class];
         return nil;
     };
-    converter.shouldConvertClass = ^(Class aClass) {
-        return [aClass isSubclassOfClass:[TestModel class]];
-    };
-    converter.shouldConvert = ^(id obj) {
-        return [obj isKindOfClass:[TestModel class]];
-    };
+    converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
 
     return converter;
 }
