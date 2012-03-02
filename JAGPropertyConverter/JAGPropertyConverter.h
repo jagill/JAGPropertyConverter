@@ -60,9 +60,9 @@ typedef id (^ConvertBlock)(id obj);
  
    At the end of the recursive decomposition process, a Model is converted into an NSDictionary whose values
    are all basic types and contain only basic types.  Depending on the outputType, this NSDictionary is
-   JSON- or PropertyList- compliant.  The method convertObjectToProperties: can handle an NSArray,
+   JSON- or PropertyList- compliant.  The method decomposeObject: can handle an NSArray,
    NSSet, or NSDictionary of Models (or basic types, really).  The method convertToDictionary: is the primitive function
-   that converts a Model into a dictionary; convertObjectToProperties: calls that on for NSDictionaries that
+   that converts a Model into a dictionary; decomposeObject: calls that Models that
    it recognizes as candidates for conversion.
  
    The converse of decomposition is composition, which takes an NSDictionary of basic types and converts it
@@ -70,7 +70,7 @@ typedef id (^ConvertBlock)(id obj);
    their value is set to the corresponding value in the NSDictionary.  If a value of the NSDictionary is itself
    an NSDictionary, the converter tries to convert it to an appropriate Model object.  Similarly, entries of
    NSArray or NSSet objects are converted as necessary.  Thus composing an NSDictionary to a Model recursively
-   handles nested collections/etc.  The method convertPropertyToObject: will take an arbitrary object and compose
+   handles nested collections/etc.  The method composeModelFromObject: will take an arbitrary object and compose
    it into a Model (or collection thereof), while the method setPropertiesOf:fromDictionary: will set the properties
    of the supplied Model from the supplied NSDictionary.
  
@@ -80,8 +80,6 @@ typedef id (^ConvertBlock)(id obj);
    - *outputType* specifies what basic types are acceptable, allowing PropertyList or JSON outputs to be targetted.
    - *identifyDict* is how the converter knows what Model class (if any) an NSDictionary should be composed into.
    - *classesToConvert* tells the converter which Model classes it should decompose.
- 
-   TODO: In a near-future version we will make the names of the conversion methods more intuitive and clear.
  
    @warning **NB:** JAGPropertyConverter can't currently handle properties whose types are `struct`s, `union`s, blocks,
    function pointers, or `char*`.  As (or if) the need arises, we'll implement support for these.
