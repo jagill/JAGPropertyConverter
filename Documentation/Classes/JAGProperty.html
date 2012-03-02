@@ -13,7 +13,7 @@
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
 				<h1><a id="libraryTitle" href="../index.html">JAGPropertyConverter </a></h1>
-				<a id="developerHome" href="../index.html">com.threedeadmonks</a>
+				<a id="developerHome" href="../index.html">Three Dead Monks</a>
 			</div>
 			
 			<div id="title" role="banner">
@@ -51,6 +51,8 @@
 	<option value="//api/name/customSetter">&nbsp;&nbsp;&nbsp;&nbsp;- customSetter</option>
 	
 	<option value="//api/name/getter">&nbsp;&nbsp;&nbsp;&nbsp;- getter</option>
+	
+	<option value="//api/name/isBlock">&nbsp;&nbsp;&nbsp;&nbsp;- isBlock</option>
 	
 	<option value="//api/name/isCharacterType">&nbsp;&nbsp;&nbsp;&nbsp;- isCharacterType</option>
 	
@@ -121,6 +123,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customSetter">customSetter</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getter">getter</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isBlock">isBlock</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isCharacterType">isCharacterType</a></span></li>
 	
@@ -369,6 +373,13 @@ iOS ARC.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/isBlock">&ndash;&nbsp;isBlock</a></code>
+		<span class="tooltip"><p>YES is the property is for a Block</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/propertyClass">&ndash;&nbsp;propertyClass</a></code>
 		<span class="tooltip"><p>The class of the property, if it is a defined object.</p></span>
 	</span>
@@ -455,19 +466,17 @@ Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A comma-separated list of attributes.</p>
-
-<p>Possible attributes are:</p>
+		<p>Possible attributes are:</p>
 
 <ul>
-<li><code>R</code>              The property is read-only (readonly).</li>
-<li><code>C</code>              The property is a copy of the value last assigned (copy).</li>
-<li><code>&amp;</code>              The property is a reference to the value last assigned (retain).</li>
-<li><code>N</code>              The property is non-atomic (nonatomic).</li>
-<li><code>G&lt;myGetter&gt;</code>    The property defines a custom <a href="#//api/name/getter">getter</a> selector myGetter. The <a href="#//api/name/name">name</a> follows the G (for example, GmyGetter).</li>
-<li><code>S&lt;mySetter:&gt;</code>   The property defines a custom <a href="#//api/name/setter">setter</a> selector mySetter. The <a href="#//api/name/name">name</a> follows the S (for example, SmySetter:).</li>
-<li><code>D</code>              The property is dynamic (@dynamic).</li>
-<li><code>W</code>              The property is a weak reference (__weak).</li>
+<li><code>R</code>              The property is read-only (<code>readonly</code>).</li>
+<li><code>C</code>              The property is a copy of the value last assigned (<code>copy</code>).</li>
+<li><code>&amp;</code>              The property is a reference to the value last assigned (<code>retain</code>).</li>
+<li><code>N</code>              The property is non-atomic (<code>nonatomic</code>).</li>
+<li><code>G&lt;myGetter&gt;</code>    The property defines a custom <a href="#//api/name/getter">getter</a> selector myGetter. The <a href="#//api/name/name">name</a> follows the <code>G</code> (for example, <code>GmyGetter</code>).</li>
+<li><code>S&lt;mySetter:&gt;</code>   The property defines a custom <a href="#//api/name/setter">setter</a> selector mySetter. The <a href="#//api/name/name">name</a> follows the <code>S</code> (for example, <code>SmySetter:</code>).</li>
+<li><code>D</code>              The property is dynamic (<code>@dynamic</code>).</li>
+<li><code>W</code>              The property is a weak reference (<code>__weak</code>).</li>
 <li><code>P</code>              The property is eligible for garbage collection.</li>
 <li><code>t&lt;encoding&gt;</code>    Specifies the type using old-style encoding.</li>
 </ul>
@@ -608,6 +617,45 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/isBlock" title="isBlock"></a>
+	<h3 class="subsubtitle method-title">isBlock</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES is the property is for a Block</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isBlock</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES is the property is for a Block</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/isCharacterType" title="isCharacterType"></a>
 	<h3 class="subsubtitle method-title">isCharacterType</h3>
 	
@@ -710,11 +758,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether the property is dynamic.</p>
-	</div>
-	
 	
 	
 	
@@ -754,11 +797,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether the object is elegible for Garbage Collection in OS X.</p>
-	</div>
-	
 	
 	
 	
@@ -797,11 +835,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether the property is nonatomic.</p>
-	</div>
 	
 	
 	
@@ -920,11 +953,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether the property is readonly.</p>
-	</div>
-	
 	
 	
 	
@@ -1006,10 +1034,7 @@ iOS ARC.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether the property is a weak pointer, in either OS X Garbage Collection or
-iOS ARC.</p>
-
-<p>The &ldquo;W&rdquo; attribute works for garbage-collected environments, but it does not
+		<p>The &ldquo;W&rdquo; attribute works for garbage-collected environments, but it does not
 detect ARC <code>weak</code> references.  These are detected by an <code>assign</code>-pointer to an object.
 This also means that an iOS 4 object property with <code>assign</code> semantics will also return YES.</p>
 	</div>
@@ -1057,11 +1082,7 @@ This also means that an iOS 4 object property with <code>assign</code> semantics
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>   Whether the property is a __weak reference, with respect to Garbage Collection.</p>
-
-<p>   Note this has nothing to do with iOS ARC <code>weak</code> label.  An ARC property</p>
-
-<pre><code>    @property (weak) id delegate;
+		<pre><code>    @property (weak) id delegate;
 </code></pre>
 
 <p>   will have isWeakReference == NO.  @see <a href="#//api/name/isWeak">isWeak</a> for how to handle that case.</p>
@@ -1186,9 +1207,7 @@ This also means that an iOS 4 object property with <code>assign</code> semantics
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The class of the property, if it is a defined object.</p>
-
-<p>If it is an <code>id</code> or not an object, return nil.</p>
+		<p>If it is an <code>id</code> or not an object, return nil.</p>
 	</div>
 	
 	
@@ -1273,9 +1292,7 @@ Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether property is assign, retain, or copy.</p>
-
-<p>Note that in ARC, <code>strong</code> is the same as <code>retain</code>, and
+		<p>Note that in ARC, <code>strong</code> is the same as <code>retain</code>, and
 <code>weak</code> is the same as <code>assign</code>.</p>
 	</div>
 	
@@ -1320,12 +1337,11 @@ Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>An NSString denoting the scalar/object type of the property.</p>
-
-<p>Note that for properties for objects with a defined class, the return is @&ldquo;CLASS_NAME&rdquo;.</p>
+		<p>Note that for properties for objects with a defined class, the return is the NSString <code>@"CLASS_NAME"</code>
+(including the <code>@""</code>, so it&rsquo;s equivalent to <code>@"@\"CLASS_NAME\""</code>).</p>
 
 <ul>
-<li><code>c</code>                  A char (including BOOL)</li>
+<li><code>c</code>                  A char (including <code>BOOL</code>)</li>
 <li><code>i</code>                  An int</li>
 <li><code>s</code>                  A short</li>
 <li><code>l</code>                  A long
@@ -1340,16 +1356,17 @@ l is treated as a 32-bit quantity on 64-bit programs.</li>
 <li><code>d</code>                  A double</li>
 <li><code>B</code>                  A C++ bool or a C99 _Bool</li>
 <li><code>v</code>                  A void
-A character string (char *)</li>
+A character string (<code>char *</code>)</li>
 <li><code>@</code>                  An object (whether statically typed or typed id).
-For statically typed objects, it is of the form: @&ldquo;NSString&rdquo;</li>
-<li><code>#</code>                  A class object (Class)</li>
-<li><code>:</code>                  A method selector (SEL)</li>
-<li><code>[array type]</code>       An array, eg [12<sup>f</sup>]</li>
-<li><code>{name=type...}</code>     A structure, eg {example=@*i}</li>
+For statically typed objects, it is of the form: <code>@"NSString"</code>
+Blocks are encoded as &lsquo;@?&rsquo;</li>
+<li><code>#</code>                  A class object (<code>Class</code>)</li>
+<li><code>:</code>                  A method selector (<code>SEL</code>)</li>
+<li><code>[array type]</code>       An array, eg <code>[12^f]</code></li>
+<li><code>{name=type...}</code>     A structure, eg <code>{example=@*i}</code></li>
 <li><code>(name=type...)</code>     A union</li>
 <li><code>bNUM</code>               A bit field of num bits</li>
-<li><code>^type</code>              A pointer to type, eg ^i</li>
+<li><code>^type</code>              A pointer to type, eg <code>^i</code></li>
 <li><code>?</code>                  An unknown type (among other things, this code is used for function pointers)</li>
 </ul>
 
@@ -1382,7 +1399,7 @@ For statically typed objects, it is of the form: @&ldquo;NSString&rdquo;</li>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 com.threedeadmonks. All rights reserved. (Last updated: 2012-03-01)</span><br />
+						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
 						

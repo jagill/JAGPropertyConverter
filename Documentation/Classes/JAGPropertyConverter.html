@@ -13,7 +13,7 @@
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
 				<h1><a id="libraryTitle" href="../index.html">JAGPropertyConverter </a></h1>
-				<a id="developerHome" href="../index.html">com.threedeadmonks</a>
+				<a id="developerHome" href="../index.html">Three Dead Monks</a>
 			</div>
 			
 			<div id="title" role="banner">
@@ -40,6 +40,8 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/classesToConvert">&nbsp;&nbsp;&nbsp;&nbsp;classesToConvert</option>
+	
 	<option value="//api/name/convertFromDate">&nbsp;&nbsp;&nbsp;&nbsp;convertFromDate</option>
 	
 	<option value="//api/name/convertToDate">&nbsp;&nbsp;&nbsp;&nbsp;convertToDate</option>
@@ -47,10 +49,6 @@
 	<option value="//api/name/identifyDict">&nbsp;&nbsp;&nbsp;&nbsp;identifyDict</option>
 	
 	<option value="//api/name/outputType">&nbsp;&nbsp;&nbsp;&nbsp;outputType</option>
-	
-	<option value="//api/name/shouldConvert">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvert</option>
-	
-	<option value="//api/name/shouldConvertClass">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvertClass</option>
 	
 	<option value="//api/name/shouldConvertWeakProperties">&nbsp;&nbsp;&nbsp;&nbsp;shouldConvertWeakProperties</option>
 	
@@ -93,6 +91,8 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/classesToConvert">classesToConvert</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertFromDate">convertFromDate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertToDate">convertToDate</a></span></li>
@@ -100,10 +100,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/identifyDict">identifyDict</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/outputType">outputType</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvert">shouldConvert</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvertClass">shouldConvertClass</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldConvertWeakProperties">shouldConvertWeakProperties</a></span></li>
 	
@@ -192,14 +188,12 @@
    of the supplied Model from the supplied NSDictionary.</p>
 
 <p>   Different conversion needs are handled by the various properties of JAGPropertyConverter, which specify how
-   to handle non-obvious cases.  The most important of these are <a href="#//api/name/outputType">outputType</a>, <a href="#//api/name/identifyDict">identifyDict</a>, <a href="#//api/name/shouldConvert">shouldConvert</a>,
-   and <a href="#//api/name/shouldConvertClass">shouldConvertClass</a>.</p>
+   to handle non-obvious cases.  The most important of these are <a href="#//api/name/outputType">outputType</a>, <a href="#//api/name/identifyDict">identifyDict</a>, and <a href="#//api/name/classesToConvert">classesToConvert</a>.</p>
 
 <ul>
 <li> <em><a href="#//api/name/outputType">outputType</a></em> specifies what basic types are acceptable, allowing PropertyList or JSON outputs to be targetted.</li>
 <li> <em><a href="#//api/name/identifyDict">identifyDict</a></em> is how the converter knows what Model class (if any) an NSDictionary should be composed into.</li>
-<li> <em><a href="#//api/name/shouldConvert">shouldConvert</a></em> and <em><a href="#//api/name/shouldConvertClass">shouldConvertClass</a></em> tells the converter which model classes it should decompose.  In the
-  future we&rsquo;ll replace this with a more elegant solution.</li>
+<li> <em><a href="#//api/name/classesToConvert">classesToConvert</a></em> tells the converter which Model classes it should decompose.</li>
 </ul>
 
 
@@ -238,18 +232,8 @@ into a model object.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/shouldConvert">&nbsp;&nbsp;shouldConvert</a></code>
-		<span class="tooltip"><p>This block determines if an object should be converted
-to an NSDictionary.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/shouldConvertClass">&nbsp;&nbsp;shouldConvertClass</a></code>
-		<span class="tooltip"><p>This block determines if an object of the Class should be converted
-to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
-should be forcibly converted to properties of the Class.</p></span>
+		<code><a href="#//api/name/classesToConvert">&nbsp;&nbsp;classesToConvert</a></code>
+		<span class="tooltip"><p>A set of classes which should be converted.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -322,17 +306,17 @@ from the entries of the given dictionary.</p></span>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/convertFromDate" title="convertFromDate"></a>
-	<h3 class="subsubtitle method-title">convertFromDate</h3>
+	<a name="//api/name/classesToConvert" title="classesToConvert"></a>
+	<h3 class="subsubtitle method-title">classesToConvert</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>A Block to convert an NSDate property to JSON property.</p>
+		<p>A set of classes which should be converted.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) ConvertBlock convertFromDate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSSet *classesToConvert</code></div>
 	
 	
 	
@@ -343,9 +327,49 @@ from the entries of the given dictionary.</p></span>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
+		<p>Subclasses of these classes are decomposed into NSDictionaries.
+Also when setting a Model&rsquo;s properties, if the property class is a subclass
+of these classes, the converter will coerce an unidentified NSDictionary
+into the property.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/convertFromDate" title="convertFromDate"></a>
+	<h3 class="subsubtitle method-title">convertFromDate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
 		<p>A Block to convert an NSDate property to JSON property.</p>
-
-<p>Called when trying to convert an object&rsquo;s NSDate property
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) ConvertBlock convertFromDate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Called when trying to convert an object&rsquo;s NSDate property
 to a JSON dictionary value.  If this block is nil, the
 value will not be set.</p>
 
@@ -382,7 +406,7 @@ JAGPropertyConverter relies on this block to handle the conversion.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) ConvertBlock convertToDate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) ConvertBlock convertToDate</code></div>
 	
 	
 	
@@ -393,9 +417,7 @@ JAGPropertyConverter relies on this block to handle the conversion.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A Block to convert a (JSON) property to an NSDate.</p>
-
-<p>This block is called when trying to set an object&rsquo;s NSDate property
+		<p>This block is called when trying to set an object&rsquo;s NSDate property
 with a dictionary&rsquo;s non-NSDate value.  If this block is nil,
 the NSDate property will be set to nil.</p>
 
@@ -433,7 +455,7 @@ into a model object.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) IdentifyBlock identifyDict</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) IdentifyBlock identifyDict</code></div>
 	
 	
 	
@@ -444,10 +466,7 @@ into a model object.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A block that determines whether and how to convert an NSDictionary
-into a model object.</p>
-
-<p>When converting from a PropertyList/JSON dictionary/etc, it is not
+		<p>When converting from a PropertyList/JSON dictionary/etc, it is not
 obvious whether an NSDictionary should be left alone or converted to
 a model object (and if so, to which one).  In the case of an NSDictionary
 contained within an NSArray or NSDictionary, there is not even defined
@@ -504,11 +523,8 @@ converted to an NSDictionary.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The outputType property determines how an object is
-converted to an NSDictionary.</p>
-
-<p>kJAGFullOutput means any object which can&rsquo;t be converted
-(@see <a href="#//api/name/shouldConvert">shouldConvert</a>) will be left as is.</p>
+		<p>kJAGFullOutput means any object which can&rsquo;t be converted
+(@see <a href="#//api/name/classesToConvert">classesToConvert</a>) will be left as is.</p>
 
 <p>kJAGPropertyListOutput means that any object can&rsquo;t be
 converted and isn&rsquo;t a valid PropertyList value will
@@ -517,106 +533,6 @@ be dropped.</p>
 <p>kJAGJSONOutput means that any object that can&rsquo;t be converted
 and isn&rsquo;t a valid JSON value will be dropped.  It also means
 that non-NSString dictionary keys will be dropped.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/shouldConvert" title="shouldConvert"></a>
-	<h3 class="subsubtitle method-title">shouldConvert</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>This block determines if an object should be converted
-to an NSDictionary.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CriterionBlock shouldConvert</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>This block determines if an object should be converted
-to an NSDictionary.</p>
-
-<p>Valid PropertyList values are automatically handled and
-NSDate objects for JSON are handled via <a href="#//api/name/convertToDate">convertToDate</a> and
-<a href="#//api/name/convertFromDate">convertFromDate</a>; this is for other objects.</p>
-
-<p>Defaults to false for everything.</p>
-
-<p>TODO: Merge this with <a href="#//api/name/shouldConvertClass">shouldConvertClass</a></p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/shouldConvertClass" title="shouldConvertClass"></a>
-	<h3 class="subsubtitle method-title">shouldConvertClass</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>This block determines if an object of the Class should be converted
-to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
-should be forcibly converted to properties of the Class.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CriterionBlock shouldConvertClass</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>This block determines if an object of the Class should be converted
-to an NSDictionary, and if unidentified dictionaries (@see <a href="#//api/name/identifyDict">identifyDict</a>)
-should be forcibly converted to properties of the Class.</p>
-
-<p>Valid PropertyList values are automatically handled and
-NSDate objects for JSON are handled via <a href="#//api/name/convertToDate">convertToDate</a> and
-<a href="#//api/name/convertFromDate">convertFromDate</a>; this is for other objects.</p>
-
-<p>Defaults to false for everything.</p>
-
-<p>TODO: Merge this with <a href="#//api/name/shouldConvert">shouldConvert</a></p>
 	</div>
 	
 	
@@ -655,9 +571,7 @@ NSDate objects for JSON are handled via <a href="#//api/name/convertToDate">conv
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Whether an object&rsquo;s weak properties should be converted to dictionary values.</p>
-
-<p>Default is NO, since weak properties often denote
+		<p>Default is NO, since weak properties often denote
 retain cycles and thus cyclical object graphs, which the converter
 does not handle.</p>
 	</div>
@@ -725,12 +639,9 @@ propertyName : propertyValue key-value pairs.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Convert an object (or collection of objects) into
-an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p>
-
-<ul>
-<li>Model objects (as designated by shouldConvert:)
-are converted to dictionaries</li>
+		<ul>
+<li>Model objects (as designated by <a href="#//api/name/classesToConvert">classesToConvert</a>)
+are converted to NSDictionaries</li>
 <li>Basic objects (eg NSString, NSNumber) are
 passed through unchanged, or dropped/converted
 if they are unsafe for the <a href="#//api/name/outputType">outputType</a>.</li>
@@ -798,11 +709,7 @@ NSArray, NSSet, or NSDictionary) to a model object
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Recursively converts a property (PropertyList object,
-NSArray, NSSet, or NSDictionary) to a model object
-(or collection thereof).</p>
-
-<p>If an NSDictionary is encountered and identified via identifyDict:,
+		<p>If an NSDictionary is encountered and identified via identifyDict:,
 an object of the identified Class is instantiated and populated via
 <a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a>.  Unidentified NSDictionaries, NSArrays, and NSSets
 are recursively converted.</p>
@@ -862,17 +769,13 @@ propertyName : propertyValue key-value pairs.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Convert a single model object (subclass of NSObject with
-properties) into an NSDictionary with those properties as
-key:value pairs.</p>
-
-<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
+		<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
 is JSON-compliant.  If the <a href="#//api/name/outputType">outputType</a> is kJAGPropertyListOutput,
 the returned value is PropertyList-compliant.  If necessary,
 objects are dropped in conversion to ensure compliance.</p>
 
 <p>Note that this will convert any object with properties,
-regardless of the <a href="#//api/name/shouldConvert">shouldConvert</a> or <a href="#//api/name/shouldConvertClass">shouldConvertClass</a> blocks.</p>
+regardless of the <a href="#//api/name/classesToConvert">classesToConvert</a> property.</p>
 	</div>
 	
 	
@@ -927,10 +830,7 @@ from the entries of the given dictionary.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Sets the properties of model (subclass of NSObject with properties)
-from the entries of the given dictionary.</p>
-
-<p>The keys are used as property names, which are set to the corresponding values.
+		<p>The keys are used as property names, which are set to the corresponding values.
 Properties whose names are not keys in the dictionary are unset and unaffected.</p>
 	</div>
 	
@@ -961,7 +861,7 @@ Properties whose names are not keys in the dictionary are unset and unaffected.<
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 com.threedeadmonks. All rights reserved. (Last updated: 2012-03-01)</span><br />
+						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
 						
