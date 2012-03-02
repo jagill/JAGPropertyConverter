@@ -86,7 +86,7 @@ JAGPropertyConverter converts arrays to sets and vice-versa, as needed.
     }
     MyModel *model = [converter composeModelFromObject:jsonDictionary];
     
-The converter can also handle arrays and dictionaries as inputs as well.
+The converter can also handle NSArray, NSSet, and NSDictionary inputs as well.
 
 ## Things to do
 
