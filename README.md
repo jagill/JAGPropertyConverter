@@ -45,7 +45,7 @@ There are three "outputTypes" that the converter supports when converting from a
 
 Converterting from a Model to an NSDictionary is relatively straightforward, using the property name as a key and the property value as a value.  Converting from an NSDictionary to a model requires an important first step of recognizing what Model class the NSDictionary represents.  JAGPropertyConverter has an "identifyDict" block property that checks any NSDictionary value, and if it returns a Class, the converter attempts to convert the NSDictionary into that class.  If identifyDict returns nil, the converter leaves the NSDictionary unchanged.
 
-To determine which NSObject subclasses are considered "Models" (i.e., which it should convert), JAGPropertyConverter relies on its shouldConvert: and shouldConvertClass: block properties.  Unfortunately we currently need both properties -- hopefully in the future we can just use one block which can handle either classes or NSObjects.
+To determine which NSObject subclasses are considered "Models" (i.e., which it should convert), JAGPropertyConverter relies on its classesToConvert property.  Objects which are subclasses of a Class in classesToConvert are converted.
 
 By default, weak/assign object pointers are not converted (but assign properties for scalars are).  This is because weak references often indicate a retain loop (eg, between an object and its delegate), which would lead to cycle in the object graph and thence an infinite loop in the conversion.  This property can be controlled by the "shouldConvertWeakProperties" in JAGPropertyConverter.
  
@@ -70,12 +70,7 @@ JAGPropertyConverter converts arrays to sets and vice-versa, as needed.
     //Serialization
     MyModel *model = [MyModel populatedModel];
     JAGPropertyConverter *converter = [[JAGPropertyConverter alloc] initWithOutputType:kJAGJSONOutput];
-    converter.shouldConvert = ^(id obj) {
-        return [obj isKindOfClass:[MyModel class]];
-    }
-    converter.shouldConvertClass = ^(Class aClass) {
-        return [aClass isSubclassOfClass:[MyModel class]];
-    }
+    converter.classesToConvert = [NSSet setWithObject:[MyModel class]];
     NSDictionary *jsonDictionary = [converter convertToDictionary:model];
 
     //Deserialization

@@ -75,13 +75,11 @@ typedef id (^ConvertBlock)(id obj);
    of the supplied Model from the supplied NSDictionary.
  
    Different conversion needs are handled by the various properties of JAGPropertyConverter, which specify how
-   to handle non-obvious cases.  The most important of these are outputType, identifyDict, shouldConvert,
-   and shouldConvertClass.
+   to handle non-obvious cases.  The most important of these are outputType, identifyDict, and classesToConvert.
  
    - *outputType* specifies what basic types are acceptable, allowing PropertyList or JSON outputs to be targetted.
    - *identifyDict* is how the converter knows what Model class (if any) an NSDictionary should be composed into.
-   - *shouldConvert* and *shouldConvertClass* tells the converter which model classes it should decompose.  In the
-      future we'll replace this with a more elegant solution.
+   - *classesToConvert* tells the converter which Model classes it should decompose.
  
    TODO: In a near-future version we will make the names of the conversion methods more intuitive and clear.
  
@@ -96,7 +94,7 @@ typedef id (^ConvertBlock)(id obj);
  * converted to an NSDictionary.  
  * 
  * kJAGFullOutput means any object which can't be converted
- * (@see shouldConvert) will be left as is.
+ * (@see classesToConvert) will be left as is.
  *
  * kJAGPropertyListOutput means that any object can't be
  * converted and isn't a valid PropertyList value will
@@ -197,8 +195,8 @@ typedef id (^ConvertBlock)(id obj);
  * Convert an object (or collection of objects) into
  * an NSDictionary (or collection thereof) based on the outputType.
  * 
- * - Model objects (as designated by shouldConvert:) 
- *      are converted to dictionaries
+ * - Model objects (as designated by classesToConvert) 
+ *      are converted to NSDictionaries
  * - Basic objects (eg NSString, NSNumber) are
  *      passed through unchanged, or dropped/converted
  *      if they are unsafe for the outputType.
@@ -227,7 +225,7 @@ typedef id (^ConvertBlock)(id obj);
  * objects are dropped in conversion to ensure compliance.
  *
  * Note that this will convert any object with properties,
- * regardless of the shouldConvert or shouldConvertClass blocks.
+ * regardless of the classesToConvert property.
  *
  * @param model The model object to convert.
  * @return An NSDictionary of 
