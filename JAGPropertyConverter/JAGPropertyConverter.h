@@ -189,7 +189,7 @@ typedef id (^ConvertBlock)(id obj);
 
 - (id) initWithOutputType: (JAGOutputType) outputType;
 
-#pragma mark - Convert To Dictionary
+#pragma mark - Decompose Model
 
 /**
  * Convert an object (or collection of objects) into
@@ -212,6 +212,9 @@ typedef id (^ConvertBlock)(id obj);
  * @return An NSDictionary (or collection thereof) of 
  * propertyName : propertyValue key-value pairs.
  */
+- (id) decomposeObject: (id) object;
+
+/// @deprecated @see decomposeObject:
 - (id) convertObjectToProperties: (id) object;
 
 /**
@@ -233,7 +236,7 @@ typedef id (^ConvertBlock)(id obj);
  */
 - (NSDictionary*) convertToDictionary: (id) model;
 
-#pragma mark - Convert From Dictionary
+#pragma mark - Compose Model
 
 /**
  * Recursively converts a property (PropertyList object,
@@ -248,6 +251,9 @@ typedef id (^ConvertBlock)(id obj);
  * @param property An object (or collection thereof) to be converted.
  * @return A model object (or collection thereof) with properties 
  */
+- (id) composeModelFromObject: (id) object;
+
+/// @deprecated @see composeModelFromObject:
 - (id) convertPropertyToObject: (id) property;
 
 /**

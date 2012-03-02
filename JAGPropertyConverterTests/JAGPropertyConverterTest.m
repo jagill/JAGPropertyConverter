@@ -125,13 +125,13 @@
                                    auxTestModelDict, @"modelProperty",
                                    nil];
     
-    TestModel *testModel = [converter convertPropertyToObject:testModelDict];
+    TestModel *testModel = [converter composeModelFromObject:testModelDict];
     [self assert:testModel isEqualTo:testModelDict];
 }
 
 - (void) testSetPropertyJSON {
     converter.outputType = kJAGJSONOutput;
-    NSDictionary *dict = [converter convertObjectToProperties:model];
+    NSDictionary *dict = [converter decomposeObject:model];
     id setValue = [dict valueForKey:@"setProperty"];
     STAssertNotNil(setValue, @"Converted setProperty should not be nil.");
     STAssertTrue([setValue isKindOfClass:[NSArray class]], 
@@ -144,7 +144,7 @@
 
 - (void) testURLPropertyJSON {
     converter.outputType = kJAGJSONOutput;
-    NSDictionary *dict = [converter convertObjectToProperties:model];
+    NSDictionary *dict = [converter decomposeObject:model];
     id urlValue = [dict valueForKey:@"urlProperty"];
     STAssertNotNil(urlValue, @"Converted urlProperty should not be nil.");
     STAssertTrue([urlValue isKindOfClass:[NSString class]], 
@@ -155,7 +155,7 @@
 
 - (void) testURLPropertyJSONDeserialize {
     converter.outputType = kJAGJSONOutput;
-    NSDictionary *dict = [converter convertObjectToProperties:model];
+    NSDictionary *dict = [converter decomposeObject:model];
     TestModel *model2 = [TestModel testModel];
     [model2 setPropertiesFromDictionary:dict];
     STAssertNotNil(model2.urlProperty, @"urlProperty should not be nil.");
@@ -166,7 +166,7 @@
 - (void) testWeakProperty {
     model.weakProperty = [TestModel testModel];
     converter.outputType = kJAGFullOutput;
-    NSDictionary *dict = [converter convertObjectToProperties:model];
+    NSDictionary *dict = [converter decomposeObject:model];
     STAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
@@ -174,7 +174,7 @@
     model.weakProperty = [TestModel testModel];
     converter.outputType = kJAGFullOutput;
     converter.shouldConvertWeakProperties = YES;
-    NSDictionary *dict = [converter convertObjectToProperties:model];
+    NSDictionary *dict = [converter decomposeObject:model];
     STAssertNotNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 

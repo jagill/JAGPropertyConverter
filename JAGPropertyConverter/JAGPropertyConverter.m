@@ -30,7 +30,7 @@
 
 @interface JAGPropertyConverter () 
 
-- (id) convertCollection: (id) collection withTargetClass: (Class) targetClass;
+- (id) composeCollection: (id) collection withTargetClass: (Class) targetClass;
 
 /*
  * This converts a property to a PropertyModel-friendly form.
@@ -44,7 +44,7 @@
  * returned either unmodified, or if there is a 'convertable'
  * targetClass, converted to that.
  */
-- (id) convertPropertyToObject: (id) prop withTargetClass: (Class) targetClass;
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass;
 
 - (BOOL) shouldConvertClass: (Class) aClass;
 
@@ -95,6 +95,10 @@
 }
 
 - (id) convertObjectToProperties: (id) object {
+    return [self decomposeObject:object];
+}
+
+- (id) decomposeObject: (id) object {
     if (!object) {
         return nil;
     } else if ([object isKindOfClass: [NSNull class]]
@@ -222,7 +226,7 @@
         }
         //TODO: Should use the getter for this?  Harder to handle non-objects.
         id object = [model valueForKey:propertyName];
-        [values setValue:[self convertObjectToProperties: object] forKey:propertyName];
+        [values setValue:[self decomposeObject: object] forKey:propertyName];
     }
     return values;
 }
@@ -230,7 +234,7 @@
 
 #pragma mark - Convert From Dictionary
 
-- (id) convertCollection: (id) collection withTargetClass: (Class) targetClass {
+- (id) composeCollection: (id) collection withTargetClass: (Class) targetClass {
     if (!targetClass) {
         targetClass = [collection class];
     }
@@ -257,66 +261,70 @@
 }
 
 - (id) convertPropertyToObject: (id) prop {
-    return [self convertPropertyToObject:prop withTargetClass: nil];
+    return [self composeModelFromObject:prop];
 }
 
-- (id) convertPropertyToObject: (id) prop withTargetClass: (Class) targetClass {
-    if (!prop) {
+- (id) composeModelFromObject: (id) object {
+    return [self composeModelFromObject:object withTargetClass: nil];
+}
+
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass {
+    if (!object) {
         return nil;
-    } else if ([prop isKindOfClass: [NSArray class]]
-               || [prop isKindOfClass: [NSSet class]]) {
-        return [self convertCollection:prop withTargetClass:targetClass];
-    } else if ([prop isKindOfClass: [NSDictionary class]]) {
+    } else if ([object isKindOfClass: [NSArray class]]
+               || [object isKindOfClass: [NSSet class]]) {
+        return [self composeCollection:object withTargetClass:targetClass];
+    } else if ([object isKindOfClass: [NSDictionary class]]) {
         //Is this a PropertyModel in disguise?
         Class modelClass = nil;
         if (self.identifyDict) {
-            modelClass = self.identifyDict(prop);
+            modelClass = self.identifyDict(object);
         }
         if (modelClass) {
             id model = [[modelClass alloc] init];
-            [self setPropertiesOf:model fromDictionary:prop];
+            [self setPropertiesOf:model fromDictionary:object];
             return model;
         } else if (targetClass && [self shouldConvertClass:targetClass]) {
             //Try to convert it to targetClass.
             id model = [[targetClass alloc] init];
-            [self setPropertiesOf:model fromDictionary:prop];
+            [self setPropertiesOf:model fromDictionary:object];
             return model;
         } else {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            for (id key in prop) {
-                [dict setValue: [self convertPropertyToObject: [prop valueForKey: key]]
+            for (id key in object) {
+                [dict setValue: [self convertPropertyToObject: [object valueForKey: key]]
                         forKey: key];
             }
             return dict;
         }
-    } else if (targetClass && [prop isKindOfClass: targetClass]) {
+    } else if (targetClass && [object isKindOfClass: targetClass]) {
         //If there are other collections that aren't subclases of NSSet, NSArray, or NSDictionary,
         //this won't convert their elements/values.
-        return prop;
+        return object;
     } else if (targetClass 
                && [targetClass isSubclassOfClass:[NSDate class]] 
                && self.convertToDate) {
         //        NSLog(@"Found prop %@ for NSDate targetClass.  Converting.", prop);
-        return self.convertToDate(prop);
+        return self.convertToDate(object);
     } else if ( targetClass 
                && [targetClass isSubclassOfClass:[NSURL class]]
-               && [prop isKindOfClass:[NSString class]]
+               && [object isKindOfClass:[NSString class]]
                )
     {        
-        return [NSURL URLWithString:prop];
-    } else if ([prop  isKindOfClass: [NSNull class]]
-               || [prop isKindOfClass: [NSString class]]
-               || [prop isKindOfClass: [NSNumber class]]
-               || [prop isKindOfClass: [NSDate class]]
-               || [prop isKindOfClass: [NSData class]]
-               || [prop isKindOfClass: [NSValue class]]
+        return [NSURL URLWithString:object];
+    } else if ([object  isKindOfClass: [NSNull class]]
+               || [object isKindOfClass: [NSString class]]
+               || [object isKindOfClass: [NSNumber class]]
+               || [object isKindOfClass: [NSDate class]]
+               || [object isKindOfClass: [NSData class]]
+               || [object isKindOfClass: [NSValue class]]
                ) {
-        return prop;
+        return object;
     }
     
     //TODO: Don't know what to do with this!  If we are using fullOutputType, we might be
     //getting other NSObject types, which we should be able to handle.
-    NSLog(@"Unable to convert value %@ to an object property, returning nil.", [prop class]);
+    NSLog(@"Unable to convert value %@ to an object property, returning nil.", [object class]);
     return nil;
     
 }
@@ -331,7 +339,7 @@
             id value = [dictionary valueForKey:key];
             if ([property isObject]) {
                 Class propertyClass = [property propertyClass];
-                value = [self convertPropertyToObject: value withTargetClass:propertyClass];
+                value = [self composeModelFromObject: value withTargetClass:propertyClass];
             }
             [object setValue:value forKey:key];
         }
