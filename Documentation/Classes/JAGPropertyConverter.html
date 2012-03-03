@@ -59,11 +59,11 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/convertObjectToProperties:">&nbsp;&nbsp;&nbsp;&nbsp;- convertObjectToProperties:</option>
-	
-	<option value="//api/name/convertPropertyToObject:">&nbsp;&nbsp;&nbsp;&nbsp;- convertPropertyToObject:</option>
+	<option value="//api/name/composeModelFromObject:">&nbsp;&nbsp;&nbsp;&nbsp;- composeModelFromObject:</option>
 	
 	<option value="//api/name/convertToDictionary:">&nbsp;&nbsp;&nbsp;&nbsp;- convertToDictionary:</option>
+	
+	<option value="//api/name/decomposeObject:">&nbsp;&nbsp;&nbsp;&nbsp;- decomposeObject:</option>
 	
 	<option value="//api/name/setPropertiesOf:fromDictionary:">&nbsp;&nbsp;&nbsp;&nbsp;- setPropertiesOf:fromDictionary:</option>
 	
@@ -111,11 +111,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertPropertyToObject:">convertPropertyToObject:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/composeModelFromObject:">composeModelFromObject:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertToDictionary:">convertToDictionary:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/decomposeObject:">decomposeObject:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a></span></li>
 	
@@ -173,9 +173,9 @@
 
 <p>   At the end of the recursive decomposition process, a Model is converted into an NSDictionary whose values
    are all basic types and contain only basic types.  Depending on the <a href="#//api/name/outputType">outputType</a>, this NSDictionary is
-   JSON- or PropertyList- compliant.  The method <a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a> can handle an NSArray,
+   JSON- or PropertyList- compliant.  The method <a href="#//api/name/decomposeObject:">decomposeObject:</a> can handle an NSArray,
    NSSet, or NSDictionary of Models (or basic types, really).  The method <a href="#//api/name/convertToDictionary:">convertToDictionary:</a> is the primitive function
-   that converts a Model into a dictionary; <a href="#//api/name/convertObjectToProperties:">convertObjectToProperties:</a> calls that on for NSDictionaries that
+   that converts a Model into a dictionary; <a href="#//api/name/decomposeObject:">decomposeObject:</a> calls that Models that
    it recognizes as candidates for conversion.</p>
 
 <p>   The converse of decomposition is composition, which takes an NSDictionary of basic types and converts it
@@ -183,7 +183,7 @@
    their value is set to the corresponding value in the NSDictionary.  If a value of the NSDictionary is itself
    an NSDictionary, the converter tries to convert it to an appropriate Model object.  Similarly, entries of
    NSArray or NSSet objects are converted as necessary.  Thus composing an NSDictionary to a Model recursively
-   handles nested collections/etc.  The method <a href="#//api/name/convertPropertyToObject:">convertPropertyToObject:</a> will take an arbitrary object and compose
+   handles nested collections/etc.  The method <a href="#//api/name/composeModelFromObject:">composeModelFromObject:</a> will take an arbitrary object and compose
    it into a Model (or collection thereof), while the method <a href="#//api/name/setPropertiesOf:fromDictionary:">setPropertiesOf:fromDictionary:</a> will set the properties
    of the supplied Model from the supplied NSDictionary.</p>
 
@@ -195,9 +195,7 @@
 <li> <em><a href="#//api/name/identifyDict">identifyDict</a></em> is how the converter knows what Model class (if any) an NSDictionary should be composed into.</li>
 <li> <em><a href="#//api/name/classesToConvert">classesToConvert</a></em> tells the converter which Model classes it should decompose.</li>
 </ul>
-
-
-<p>   TODO: In a near-future version we will make the names of the conversion methods more intuitive and clear.</p><div class="warning"><p><strong>NB:</strong> JAGPropertyConverter can&rsquo;t currently handle properties whose types are <code>struct</code>s, <code>union</code>s, blocks,
+<div class="warning"><p><strong>NB:</strong> JAGPropertyConverter can&rsquo;t currently handle properties whose types are <code>struct</code>s, <code>union</code>s, blocks,
    function pointers, or <code>char*</code>.  As (or if) the need arises, we&rsquo;ll implement support for these.</p></div>
 					</div>
 					
@@ -260,7 +258,7 @@ into a model object.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/convertObjectToProperties:">&ndash;&nbsp;convertObjectToProperties:</a></code>
+		<code><a href="#//api/name/decomposeObject:">&ndash;&nbsp;decomposeObject:</a></code>
 		<span class="tooltip"><p>Convert an object (or collection of objects) into
 an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p></span>
 	</span>
@@ -277,7 +275,7 @@ key:value pairs.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/convertPropertyToObject:">&ndash;&nbsp;convertPropertyToObject:</a></code>
+		<code><a href="#//api/name/composeModelFromObject:">&ndash;&nbsp;composeModelFromObject:</a></code>
 		<span class="tooltip"><p>Recursively converts a property (PropertyList object,
 NSArray, NSSet, or NSDictionary) to a model object
 (or collection thereof).</p></span>
@@ -601,78 +599,8 @@ does not handle.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/convertObjectToProperties:" title="convertObjectToProperties:"></a>
-	<h3 class="subsubtitle method-title">convertObjectToProperties:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Convert an object (or collection of objects) into
-an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (id)convertObjectToProperties:(id)<em>object</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>object</em></dt>
-			<dd><p>The model object (or collection of model objects) to convert.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An NSDictionary (or collection thereof) of
-propertyName : propertyValue key-value pairs.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<ul>
-<li>Model objects (as designated by <a href="#//api/name/classesToConvert">classesToConvert</a>)
-are converted to NSDictionaries</li>
-<li>Basic objects (eg NSString, NSNumber) are
-passed through unchanged, or dropped/converted
-if they are unsafe for the <a href="#//api/name/outputType">outputType</a>.</li>
-<li>NSDictionaries, NSArrays, and NSSets are converted
-recursively.</li>
-</ul>
-
-
-<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
-is JSON-compliant.  If the <a href="#//api/name/outputType">outputType</a> is kJAGPropertyListOutput,
-the returned value is PropertyList-compliant.  If necessary,
-objects are dropped in conversion to ensure compliance.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/convertPropertyToObject:" title="convertPropertyToObject:"></a>
-	<h3 class="subsubtitle method-title">convertPropertyToObject:</h3>
+	<a name="//api/name/composeModelFromObject:" title="composeModelFromObject:"></a>
+	<h3 class="subsubtitle method-title">composeModelFromObject:</h3>
 	
 	
 	
@@ -683,7 +611,7 @@ NSArray, NSSet, or NSDictionary) to a model object
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)convertPropertyToObject:(id)<em>property</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)composeModelFromObject:(id)<em>object</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -793,6 +721,76 @@ regardless of the <a href="#//api/name/classesToConvert">classesToConvert</a> pr
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/decomposeObject:" title="decomposeObject:"></a>
+	<h3 class="subsubtitle method-title">decomposeObject:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Convert an object (or collection of objects) into
+an NSDictionary (or collection thereof) based on the <a href="#//api/name/outputType">outputType</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)decomposeObject:(id)<em>object</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>object</em></dt>
+			<dd><p>The model object (or collection of model objects) to convert.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An NSDictionary (or collection thereof) of
+propertyName : propertyValue key-value pairs.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<ul>
+<li>Model objects (as designated by <a href="#//api/name/classesToConvert">classesToConvert</a>)
+are converted to NSDictionaries</li>
+<li>Basic objects (eg NSString, NSNumber) are
+passed through unchanged, or dropped/converted
+if they are unsafe for the <a href="#//api/name/outputType">outputType</a>.</li>
+<li>NSDictionaries, NSArrays, and NSSets are converted
+recursively.</li>
+</ul>
+
+
+<p>If the <a href="#//api/name/outputType">outputType</a> is kJAGJSONOutput, the returned value
+is JSON-compliant.  If the <a href="#//api/name/outputType">outputType</a> is kJAGPropertyListOutput,
+the returned value is PropertyList-compliant.  If necessary,
+objects are dropped in conversion to ensure compliance.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGPropertyConverter.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/setPropertiesOf:fromDictionary:" title="setPropertiesOf:fromDictionary:"></a>
 	<h3 class="subsubtitle method-title">setPropertiesOf:fromDictionary:</h3>
 	
@@ -861,7 +859,7 @@ Properties whose names are not keys in the dictionary are unset and unaffected.<
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-01)</span><br />
+						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
 						
