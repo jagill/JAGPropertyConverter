@@ -212,9 +212,6 @@ typedef id (^ConvertBlock)(id obj);
  */
 - (id) decomposeObject: (id) object;
 
-/// @deprecated @see decomposeObject:
-- (id) convertObjectToProperties: (id) object;
-
 /**
  * Convert a single model object (subclass of NSObject with
  * properties) into an NSDictionary with those properties as
@@ -250,9 +247,6 @@ typedef id (^ConvertBlock)(id obj);
  * @return A model object (or collection thereof) with properties 
  */
 - (id) composeModelFromObject: (id) object;
-
-/// @deprecated @see composeModelFromObject:
-- (id) convertPropertyToObject: (id) property;
 
 /**
  * Sets the properties of model (subclass of NSObject with properties)

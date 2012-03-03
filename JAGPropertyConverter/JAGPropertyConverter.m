@@ -94,10 +94,6 @@
     return NO;
 }
 
-- (id) convertObjectToProperties: (id) object {
-    return [self decomposeObject:object];
-}
-
 - (id) decomposeObject: (id) object {
     if (!object) {
         return nil;
@@ -156,7 +152,7 @@
     } else if ([object isKindOfClass: [NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (id obj in object) {
-            id value = [self convertObjectToProperties:obj];
+            id value = [self decomposeObject:obj];
             if (value) {
                 [array addObject: value];
             } else {
@@ -173,7 +169,7 @@
             collection = [NSMutableSet set];
         }
         for (id obj in object) {
-            id value = [self convertObjectToProperties:obj];
+            id value = [self decomposeObject:obj];
             if (value) {
                 [collection addObject: value];
             } else {
@@ -188,9 +184,9 @@
                 NSLog(@"JSON dictionaries must have string keys, skipping key %@", key);
                 continue;
             }
-            id value = [self convertObjectToProperties:[object objectForKey: key]];
+            id value = [self decomposeObject:[object objectForKey: key]];
             if (value) {
-                [dict setObject: [self convertObjectToProperties: value] forKey: key];
+                [dict setObject: [self decomposeObject: value] forKey: key];
             } else {
                 NSLog(@"Unable to convert %@ to properties.", [object objectForKey: key]);
             }
@@ -250,7 +246,7 @@
         return nil;
     }
     for (id elt in collection) {
-        id value = [self convertPropertyToObject:elt];
+        id value = [self composeModelFromObject:elt];
         if (value) {
             [mutableCollection addObject: value];
         } else {
@@ -259,11 +255,6 @@
     }
     return mutableCollection;
 }
-
-- (id) convertPropertyToObject: (id) prop {
-    return [self composeModelFromObject:prop];
-}
-
 - (id) composeModelFromObject: (id) object {
     return [self composeModelFromObject:object withTargetClass: nil];
 }
@@ -292,7 +283,7 @@
         } else {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             for (id key in object) {
-                [dict setValue: [self convertPropertyToObject: [object valueForKey: key]]
+                [dict setValue: [self composeModelFromObject: [object valueForKey: key]]
                         forKey: key];
             }
             return dict;
