@@ -239,6 +239,10 @@
     return [[self typeEncoding] isEqualToString:@"@?"];
 }
 
+- (BOOL) isId {
+    return [[self typeEncoding] isEqualToString:@"@"];
+}
+
 - (BOOL) isCollection {
     Class propClass = [self propertyClass];
     return (propClass && 
@@ -250,5 +254,18 @@
         
 }
 
+- (BOOL) canAcceptValue: (id) value {
+    if ([self isId]) {
+        return YES;
+    } else if ([self isObject]) {
+        return [value isKindOfClass:[self propertyClass]];
+    } else if ([self isNumber]) {
+        //Includes chars and BOOLs
+        return [value isKindOfClass:[NSNumber class]];
+    }
+    
+    //We don't handle structs, char*, etc yet.  KVC does, tho.
+    return YES;
+}
 
 @end

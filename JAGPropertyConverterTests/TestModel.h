@@ -45,6 +45,7 @@
 @property (assign, getter = isActive, setter = makeActive:) BOOL            active;
 @property (unsafe_unretained)            TestModel       *weakProperty;
 @property (copy)            void(^blockProperty)(id);
+@property (strong)          id              idProperty;
 
 + (TestModel*) testModel;
 

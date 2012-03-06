@@ -321,17 +321,16 @@
 }
 
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
-    NSArray *propertyNames = [JAGPropertyFinder propertyNamesForClass: [object class]];
     JAGProperty *property;
     for (NSString *key in dictionary) {
-        if ([propertyNames containsObject:key]) {
-            property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
-            if ([property isReadOnly]) continue;
-            id value = [dictionary valueForKey:key];
-            if ([property isObject]) {
-                Class propertyClass = [property propertyClass];
-                value = [self composeModelFromObject: value withTargetClass:propertyClass];
-            }
+        property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+        if (!property || [property isReadOnly]) continue;
+        id value = [dictionary valueForKey:key];
+        if ([property isObject]) {
+            Class propertyClass = [property propertyClass];
+            value = [self composeModelFromObject: value withTargetClass:propertyClass];
+        }
+        if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];
         }
     }

@@ -240,6 +240,9 @@ JAGPropertySetterSemantics;
 /// @return YES is the property is for a Block
 - (BOOL) isBlock;
 
+/// @return YES is the property is for an `id`
+- (BOOL) isId;
+
 /**
  * The class of the property, if it is a defined object.
  *
@@ -269,5 +272,16 @@ JAGPropertySetterSemantics;
  */
 - (SEL) setter;
 
+/**
+ * Test whether you can `[model setValue:value forKey:[property name]]`
+ * without receiving an `NSInvalidArgumentException`.
+ *
+ * @return YES is the property have be set with this value.
+ *
+ * @warning This method is still under development.  We are aiming for it
+ * to catch some cases that would lead to an exception, but we are erring
+ * on the side of letting bad things through rather than keeping good things out.
+ */
+- (BOOL) canAcceptValue: (id) value;
 
 @end

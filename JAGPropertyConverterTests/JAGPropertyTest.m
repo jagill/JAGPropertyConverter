@@ -33,6 +33,17 @@
     @private
     JAGPropertyConverter *converter;
     TestModel *model;
+    JAGProperty *intProp;
+    JAGProperty *modelProp;
+    JAGProperty *stringProp;
+    JAGProperty *arrayProp;
+    JAGProperty *setProp;
+    JAGProperty *dictProp;
+    JAGProperty *activeProp;
+    JAGProperty *weakProperty;
+    JAGProperty *blockProperty;
+    JAGProperty *idProperty;
+    
 }
 @end
 
@@ -41,10 +52,19 @@
 - (void) setUp {
     converter = [TestModel testConverter];
     model = [TestModel testModel];
+    intProp = [JAGPropertyFinder propertyForName:@"intProperty" inClass:[TestModel class]];
+    modelProp = [JAGPropertyFinder propertyForName:@"modelProperty" inClass:[TestModel class]];
+    stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
+    arrayProp = [JAGPropertyFinder propertyForName:@"arrayProperty" inClass:[TestModel class]];
+    setProp = [JAGPropertyFinder propertyForName:@"setProperty" inClass:[TestModel class]];
+    dictProp = [JAGPropertyFinder propertyForName:@"dictionaryProperty" inClass:[TestModel class]];
+    activeProp = [JAGPropertyFinder propertyForName:@"active" inClass:[TestModel class]];
+    weakProperty = [JAGPropertyFinder propertyForName:@"weakProperty" inClass:[TestModel class]];
+    blockProperty = [JAGPropertyFinder propertyForName:@"blockProperty" inClass:[TestModel class]];
+    idProperty = [JAGPropertyFinder propertyForName:@"idProperty" inClass:[TestModel class]];
 }
 
 - (void) testIntProperty {
-    JAGProperty *intProp = [JAGPropertyFinder propertyForName:@"intProperty" inClass:[TestModel class]];
     STAssertTrue([[intProp typeEncoding] isEqualToString:@"i"], @"Type encoding should be i, is %@", [intProp typeEncoding]);
     STAssertTrue([intProp isNumber], @"Property should be Number.");
     STAssertFalse([intProp isCharacterType], @"Property should not be CharacterType.");
@@ -58,7 +78,6 @@
 }
 
 - (void) testModelProperty {
-    JAGProperty *modelProp = [JAGPropertyFinder propertyForName:@"modelProperty" inClass:[TestModel class]];
     STAssertTrue([modelProp isObject], @"Property should be Object.");
     STAssertEquals([modelProp propertyClass], [TestModel class], 
                    @"Return object class is %@, should be %@", [modelProp propertyClass], [TestModel class]);
@@ -72,10 +91,10 @@
     STAssertEquals([modelProp setterSemantics], JAGPropertySetterSemanticsRetain, @"Setter semantics should be retain.");
     STAssertEqualObjects([modelProp name], @"modelProperty", @"Name should be correct.");
     STAssertFalse([modelProp isReadOnly], @"Property should not be read-only.");
+    STAssertFalse([modelProp isId], @"ModelProeprty should not be isId");
 }
 
 - (void) testStringProperty {
-    JAGProperty *stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
     STAssertTrue([stringProp isObject], @"Property should be Object.");
     STAssertEquals([stringProp propertyClass], [NSString class], 
                    @"Return object class is %@, should be %@", [stringProp propertyClass], [NSString class]);
@@ -83,7 +102,6 @@
 }
 
 - (void) testArrayProperty {
-    JAGProperty *arrayProp = [JAGPropertyFinder propertyForName:@"arrayProperty" inClass:[TestModel class]];
     STAssertTrue([arrayProp isObject], @"Property should be Object.");
     STAssertEquals([arrayProp propertyClass], [NSArray class], 
                    @"Return object class is %@, should be %@", [arrayProp propertyClass], [NSArray class]);
@@ -91,7 +109,6 @@
 }
 
 - (void) testSetProperty {
-    JAGProperty *setProp = [JAGPropertyFinder propertyForName:@"setProperty" inClass:[TestModel class]];
     STAssertTrue([setProp isObject], @"Property should be Object.");
     STAssertEquals([setProp propertyClass], [NSSet class], 
                    @"Return object class is %@, should be %@", [setProp propertyClass], [NSSet class]);
@@ -99,7 +116,6 @@
 }
 
 - (void) testDictionaryProperty {
-    JAGProperty *dictProp = [JAGPropertyFinder propertyForName:@"dictionaryProperty" inClass:[TestModel class]];
     STAssertTrue([dictProp isObject], @"Property should be Object.");
     STAssertEquals([dictProp propertyClass], [NSDictionary class], 
                    @"Return object class is %@, should be %@", [dictProp propertyClass], [NSDictionary class]);
@@ -107,7 +123,6 @@
 }
 
 - (void) testGetter {
-    JAGProperty *stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];    
     SEL getter = [stringProp getter];
     STAssertEqualObjects(NSStringFromSelector(getter), @"stringProperty", 
                          @"Property should have stringProperty getter, but has %@",
@@ -115,7 +130,6 @@
 }
 
 - (void) testSetter {
-    JAGProperty *stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];    
     SEL setter = [stringProp setter];
     STAssertEqualObjects(NSStringFromSelector(setter), @"setStringProperty:", 
                          @"Property should have setStringProperty: setter, but has %@",
@@ -123,7 +137,6 @@
 }
 
 - (void) testCustomGetter {
-    JAGProperty *activeProp = [JAGPropertyFinder propertyForName:@"active" inClass:[TestModel class]];
     SEL customGetter = [activeProp customGetter];
     STAssertEqualObjects(NSStringFromSelector(customGetter), @"isActive", 
                          @"Property should have isActive custom getter, but has %@",
@@ -135,7 +148,6 @@
 }
 
 - (void) testCustomSetter {
-    JAGProperty *activeProp = [JAGPropertyFinder propertyForName:@"active" inClass:[TestModel class]];
     SEL customSetter = [activeProp customSetter];
     STAssertEqualObjects(NSStringFromSelector(customSetter), @"makeActive:",
                          @"Property should have makeActive: custom setter, but has %@",
@@ -147,32 +159,32 @@
 }
 
 - (void) testIsCollection {
-    JAGProperty *stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
     STAssertFalse([stringProp isCollection], @"String property should not be a collection.");
-    JAGProperty *intProp = [JAGPropertyFinder propertyForName:@"intProperty" inClass:[TestModel class]];
     STAssertFalse([intProp isCollection], @"Int property should not be a collection.");
-    JAGProperty *setProp = [JAGPropertyFinder propertyForName:@"setProperty" inClass:[TestModel class]];
     STAssertTrue([setProp isCollection], @"Set property should be a collection.");
-    JAGProperty *arrayProp = [JAGPropertyFinder propertyForName:@"arrayProperty" inClass:[TestModel class]];
     STAssertTrue([arrayProp isCollection], @"Array property should be a collection.");
-    JAGProperty *dictProp = [JAGPropertyFinder propertyForName:@"dictionaryProperty" inClass:[TestModel class]];
     STAssertFalse([dictProp isCollection], @"Dict property should not be a collection.");
-    JAGProperty *modelProp = [JAGPropertyFinder propertyForName:@"modelProperty" inClass:[TestModel class]];
     STAssertFalse([modelProp isCollection], @"Model property should not be a collection.");
 }
 
 - (void) testWeakProperty {
-    JAGProperty *weakProperty = [JAGPropertyFinder propertyForName:@"weakProperty" inClass:[TestModel class]];
     NSLog(@"weakProperty attributeEncodings: %@", [weakProperty attributeEncodings]);
     STAssertTrue([weakProperty isWeak], @"Weak property should have isWeake true.");
 }
 
 - (void) testBlockProperty {
-    JAGProperty *blockProperty = [JAGPropertyFinder propertyForName:@"blockProperty" inClass:[TestModel class]];
     NSLog(@"blockProperty attributeEncodings: %@", [blockProperty attributeEncodings]);
     STAssertEqualObjects([blockProperty typeEncoding], @"@?", @"Block property should have type encoding @?");
     STAssertTrue([blockProperty isBlock], @"Block property should have isBlock == true");   
     STAssertNil([blockProperty propertyClass], @"Block properties should return nill properties.");
+}
+
+- (void) testIdPropertyIsObject {
+    STAssertTrue([idProperty isObject], @"idProperty should be object.");
+}
+
+- (void) testIdProperyIsId {
+    STAssertTrue([idProperty isId], @"idProperty should have isId == true.");
 }
 
 @end
