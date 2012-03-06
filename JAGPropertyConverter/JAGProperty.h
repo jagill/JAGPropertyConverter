@@ -137,10 +137,10 @@ JAGPropertySetterSemantics;
  * - `d`                  A double
  * - `B`                  A C++ bool or a C99 _Bool
  * - `v`                  A void
- *                        A character string (`char *`)
+ * - `*`                  A character string (`char *`)
  * - `@`                  An object (whether statically typed or typed id).
  *                        For statically typed objects, it is of the form: `@"NSString"`
- *                        Blocks are encoded as '@?'
+ *                        Blocks are encoded as `@?`
  * - `#`                  A class object (`Class`)
  * - `:`                  A method selector (`SEL`)
  * - `[array type]`       An array, eg `[12^f]`
@@ -237,10 +237,10 @@ JAGPropertySetterSemantics;
 /// @return YES if the property is for an NSObject subclass or `id`.
 - (BOOL) isObject;
 
-/// @return YES is the property is for a Block
+/// @return YES if the property is for a Block
 - (BOOL) isBlock;
 
-/// @return YES is the property is for an `id`
+/// @return YES if the property is for an `id`
 - (BOOL) isId;
 
 /**
@@ -251,7 +251,7 @@ JAGPropertySetterSemantics;
  */
 - (Class) propertyClass;
 
-/// @return true if the property is for an NSArray or NSSet subclass
+/// @return YES if the property is for an NSArray or NSSet subclass
 - (BOOL) isCollection;
 
 /// @return Selector for custom getter.  Nil if no custom getter.
@@ -276,7 +276,7 @@ JAGPropertySetterSemantics;
  * Test whether you can `[model setValue:value forKey:[property name]]`
  * without receiving an `NSInvalidArgumentException`.
  *
- * @return YES is the property have be set with this value.
+ * @return YES if the property can be set with this value.
  *
  * @warning This method is still under development.  We are aiming for it
  * to catch some cases that would lead to an exception, but we are erring

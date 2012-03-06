@@ -46,6 +46,8 @@
 	
 	<option value="//api/name/attributeEncodings">&nbsp;&nbsp;&nbsp;&nbsp;- attributeEncodings</option>
 	
+	<option value="//api/name/canAcceptValue:">&nbsp;&nbsp;&nbsp;&nbsp;- canAcceptValue:</option>
+	
 	<option value="//api/name/customGetter">&nbsp;&nbsp;&nbsp;&nbsp;- customGetter</option>
 	
 	<option value="//api/name/customSetter">&nbsp;&nbsp;&nbsp;&nbsp;- customSetter</option>
@@ -61,6 +63,8 @@
 	<option value="//api/name/isDynamic">&nbsp;&nbsp;&nbsp;&nbsp;- isDynamic</option>
 	
 	<option value="//api/name/isEligibleForGarbageCollection">&nbsp;&nbsp;&nbsp;&nbsp;- isEligibleForGarbageCollection</option>
+	
+	<option value="//api/name/isId">&nbsp;&nbsp;&nbsp;&nbsp;- isId</option>
 	
 	<option value="//api/name/isNonAtomic">&nbsp;&nbsp;&nbsp;&nbsp;- isNonAtomic</option>
 	
@@ -118,6 +122,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/attributeEncodings">attributeEncodings</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/canAcceptValue:">canAcceptValue:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customGetter">customGetter</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customSetter">customSetter</a></span></li>
@@ -133,6 +139,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isDynamic">isDynamic</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isEligibleForGarbageCollection">isEligibleForGarbageCollection</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isId">isId</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isNonAtomic">isNonAtomic</a></span></li>
 	
@@ -374,7 +382,14 @@ iOS ARC.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isBlock">&ndash;&nbsp;isBlock</a></code>
-		<span class="tooltip"><p>YES is the property is for a Block</p></span>
+		<span class="tooltip"><p>YES if the property is for a Block</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isId">&ndash;&nbsp;isId</a></code>
+		<span class="tooltip"><p>YES if the property is for an <code>id</code></p></span>
 	</span>
 	
 	
@@ -388,7 +403,7 @@ iOS ARC.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isCollection">&ndash;&nbsp;isCollection</a></code>
-		<span class="tooltip"><p>true if the property is for an NSArray or NSSet subclass</p></span>
+		<span class="tooltip"><p>YES if the property is for an NSArray or NSSet subclass</p></span>
 	</span>
 	
 	
@@ -419,6 +434,14 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 		<code><a href="#//api/name/setter">&ndash;&nbsp;setter</a></code>
 		<span class="tooltip"><p>Selector for setter.
 Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter">getter</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/canAcceptValue:">&ndash;&nbsp;canAcceptValue:</a></code>
+		<span class="tooltip"><p>Test whether you can <code>[model setValue:value forKey:[property name]]</code>
+without receiving an <code>NSInvalidArgumentException</code>.</p></span>
 	</span>
 	
 	
@@ -481,6 +504,53 @@ Defaults to @selector(setPropertyname:) if no custom <a href="#//api/name/getter
 <li><code>t&lt;encoding&gt;</code>    Specifies the type using old-style encoding.</li>
 </ul>
 
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/canAcceptValue:" title="canAcceptValue:"></a>
+	<h3 class="subsubtitle method-title">canAcceptValue:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Test whether you can <code>[model setValue:value forKey:[property name]]</code>
+without receiving an <code>NSInvalidArgumentException</code>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)canAcceptValue:(id)<em>value</em></code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property can be set with this value.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="warning"><p>This method is still under development.  We are aiming for it
+to catch some cases that would lead to an exception, but we are erring
+on the side of letting bad things through rather than keeping good things out.</p></div>
 	</div>
 	
 	
@@ -623,7 +693,7 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>YES is the property is for a Block</p>
+		<p>YES if the property is for a Block</p>
 	</div>		
 	
 	
@@ -634,7 +704,7 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES is the property is for a Block</p>
+		<p>YES if the property is for a Block</p>
 	</div>
 	
 	
@@ -701,7 +771,7 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>true if the property is for an NSArray or NSSet subclass</p>
+		<p>YES if the property is for an NSArray or NSSet subclass</p>
 	</div>		
 	
 	
@@ -712,7 +782,7 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>true if the property is for an NSArray or NSSet subclass</p>
+		<p>YES if the property is for an NSArray or NSSet subclass</p>
 	</div>
 	
 	
@@ -791,6 +861,45 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>YES if property has P attribute.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">JAGProperty.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isId" title="isId"></a>
+	<h3 class="subsubtitle method-title">isId</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the property is for an <code>id</code></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isId</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the property is for an <code>id</code></p>
 	</div>
 	
 	
@@ -1355,11 +1464,11 @@ l is treated as a 32-bit quantity on 64-bit programs.</li>
 <li><code>f</code>                  A float</li>
 <li><code>d</code>                  A double</li>
 <li><code>B</code>                  A C++ bool or a C99 _Bool</li>
-<li><code>v</code>                  A void
-A character string (<code>char *</code>)</li>
+<li><code>v</code>                  A void</li>
+<li><code>*</code>                  A character string (<code>char *</code>)</li>
 <li><code>@</code>                  An object (whether statically typed or typed id).
 For statically typed objects, it is of the form: <code>@"NSString"</code>
-Blocks are encoded as &lsquo;@?&rsquo;</li>
+Blocks are encoded as <code>@?</code></li>
 <li><code>#</code>                  A class object (<code>Class</code>)</li>
 <li><code>:</code>                  A method selector (<code>SEL</code>)</li>
 <li><code>[array type]</code>       An array, eg <code>[12^f]</code></li>
@@ -1399,7 +1508,7 @@ Blocks are encoded as &lsquo;@?&rsquo;</li>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-02)</span><br />
+						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
 						

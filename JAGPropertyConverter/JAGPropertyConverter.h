@@ -243,7 +243,7 @@ typedef id (^ConvertBlock)(id obj);
  * setPropertiesOf:fromDictionary:.  Unidentified NSDictionaries, NSArrays, and NSSets
  * are recursively converted.
  *
- * @param property An object (or collection thereof) to be converted.
+ * @param object An object (or collection thereof) to be converted.
  * @return A model object (or collection thereof) with properties 
  */
 - (id) composeModelFromObject: (id) object;
