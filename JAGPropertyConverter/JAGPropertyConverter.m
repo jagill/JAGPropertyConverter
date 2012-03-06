@@ -332,6 +332,9 @@
         }
         if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];
+        } else {
+            NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@", 
+                  [value class], [property name], [property typeEncoding]);
         }
     }
 }
