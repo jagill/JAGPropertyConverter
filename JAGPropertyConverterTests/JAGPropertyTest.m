@@ -43,6 +43,7 @@
     JAGProperty *weakProperty;
     JAGProperty *blockProperty;
     JAGProperty *idProperty;
+    JAGProperty *boolProperty;
     
 }
 @end
@@ -62,7 +63,10 @@
     weakProperty = [JAGPropertyFinder propertyForName:@"weakProperty" inClass:[TestModel class]];
     blockProperty = [JAGPropertyFinder propertyForName:@"blockProperty" inClass:[TestModel class]];
     idProperty = [JAGPropertyFinder propertyForName:@"idProperty" inClass:[TestModel class]];
+    boolProperty = [JAGPropertyFinder propertyForName:@"boolProperty" inClass:[TestModel class]];
 }
+
+#pragma mark - Broad tests
 
 - (void) testIntProperty {
     STAssertTrue([[intProp typeEncoding] isEqualToString:@"i"], @"Type encoding should be i, is %@", [intProp typeEncoding]);
@@ -94,6 +98,8 @@
     STAssertFalse([modelProp isId], @"ModelProeprty should not be isId");
 }
 
+#pragma mark - Tests for propertyClass
+
 - (void) testStringProperty {
     STAssertTrue([stringProp isObject], @"Property should be Object.");
     STAssertEquals([stringProp propertyClass], [NSString class], 
@@ -121,6 +127,8 @@
                    @"Return object class is %@, should be %@", [dictProp propertyClass], [NSDictionary class]);
     
 }
+
+#pragma mark - Selector tests
 
 - (void) testGetter {
     SEL getter = [stringProp getter];
@@ -158,6 +166,8 @@
                          NSStringFromSelector(setter));
 }
 
+#pragma mark - YES/NO methods
+
 - (void) testIsCollection {
     STAssertFalse([stringProp isCollection], @"String property should not be a collection.");
     STAssertFalse([intProp isCollection], @"Int property should not be a collection.");
@@ -185,6 +195,48 @@
 
 - (void) testIdProperyIsId {
     STAssertTrue([idProperty isId], @"idProperty should have isId == true.");
+}
+
+#pragma mark - Tests for canAcceptValue:
+
+- (void) testIntCanAcceptNSNumber {
+    NSNumber *num = [NSNumber numberWithInt:8];
+    STAssertTrue([intProp canAcceptValue:num], @"int properties should be able to accept NSNumber.");
+}
+
+- (void) testBoolCanAcceptNSNumber {
+    NSNumber *num = [NSNumber numberWithInt:1];
+    STAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber.");
+}
+
+- (void) testBoolCanAcceptNSNumberWithBool {
+    NSNumber *num = [NSNumber numberWithBool:YES];
+    STAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber numberWithBool:.");
+}
+
+- (void) testModelCanAcceptSubmodel {
+    STAssertTrue([modelProp canAcceptValue:[[TestModelSubclass alloc] init] ], @"TestModel properties should be able to accept TestModelSubclass.");
+}
+
+- (void) testStringCanAcceptString {
+    STAssertTrue([stringProp canAcceptValue:[[NSString alloc] init] ], @"NSString properties should be able to accept NSString.");    
+}
+
+- (void) testStringCannotAcceptNumber {
+    STAssertFalse([stringProp canAcceptValue:[NSNumber numberWithInt:8] ], @"NSString properties should not be able to accept NSNumber.");    
+}
+
+- (void) testIntCannotAcceptString {
+    STAssertFalse([intProp canAcceptValue:[[NSString alloc] init] ], @"int properties should not be able to accept NSString.");    
+}
+
+- (void) testIdCanAcceptModel {
+    STAssertTrue([idProperty canAcceptValue:[[TestModel alloc] init] ], @"id properties should be able to accept TestModels.");
+}
+
+- (void) testModelCanAcceptId {
+    id value = [[TestModel alloc] init];
+    STAssertTrue([modelProp canAcceptValue:value], @"model properties should be able to accept TestModel-valued ids.");
 }
 
 @end
