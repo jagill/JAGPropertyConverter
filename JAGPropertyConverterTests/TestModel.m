@@ -48,6 +48,7 @@
 @synthesize active = _active;
 @synthesize weakProperty = _weakProperty;
 @synthesize blockProperty = _blockProperty;
+@synthesize idProperty = _idProperty;
 
 + (JAGPropertyConverter *) testConverter {
     JAGPropertyConverter *converter = [JAGPropertyConverter converterWithOutputType:kJAGPropertyListOutput];
