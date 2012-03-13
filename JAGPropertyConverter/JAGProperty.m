@@ -324,10 +324,10 @@
         buffer = (void *)malloc(length);
         [value getValue:buffer];
         [inv setArgument:buffer atIndex:2];
+        free(buffer);
     }
     [inv invoke];
     
-    free(buffer);
 }
 
 - (NSString *)typeEncoding
