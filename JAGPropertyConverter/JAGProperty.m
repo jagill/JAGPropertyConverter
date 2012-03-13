@@ -27,12 +27,120 @@
 
 #import "JAGProperty.h"
 
-@implementation JAGProperty
+// Use this only for the experimental get/set methods.  This needs to be improved!
+@interface NSNumber (ConvertNSValue)
+
++ (NSNumber*) numberWithValue: (NSValue*) value;
+
+- (id) initWithValue: (NSValue*) value;
+
+@end
+
+@implementation NSNumber (ConvertNSValue)
+
++ (NSNumber*) numberWithValue: (NSValue*) value {
+    return [[NSNumber alloc] initWithValue:value];
+}
+
+//FIXME: Surely this isn't necessary, and I'm just missing something?
+- (id) initWithValue: (NSValue*) value {
+    const char *encType = [value objCType];
+    char encChar = encType[0];
+    switch (encChar)
+    {
+        case 'c': {
+            char x;
+            [value getValue:&x];
+            return [NSNumber numberWithChar:x];
+            break;
+        }
+        case 'C': {
+            unsigned char x;
+            [value getValue:&x];
+            return [NSNumber numberWithUnsignedChar:x];
+            break;
+        }
+        case 's': {
+            short x;
+            [value getValue:&x];
+            return [NSNumber numberWithShort:x];
+            break;
+        }
+        case 'S': {
+            unsigned short x;
+            [value getValue:&x];
+            return [NSNumber numberWithUnsignedShort:x];
+            break;
+        }
+        case 'i': {
+            int x;
+            [value getValue:&x];
+            return [NSNumber numberWithInt:x];
+            break;
+        }
+        case 'I': {
+            unsigned int x;
+            [value getValue:&x];
+            return [NSNumber numberWithUnsignedInt:x];
+            break;
+        }
+        case 'l': {
+            long x;
+            [value getValue:&x];
+            return [NSNumber numberWithLong:x];
+            break;
+        }
+        case 'L': {
+            unsigned long x;
+            [value getValue:&x];
+            return [NSNumber numberWithUnsignedLong:x];
+            break;
+        }
+        case 'q': {
+            long long x;
+            [value getValue:&x];
+            return [NSNumber numberWithLongLong:x];
+            break;
+        }
+        case 'Q': {
+            unsigned long long x;
+            [value getValue:&x];
+            return [NSNumber numberWithUnsignedLongLong:x];
+            break;
+        }
+        case 'f': {
+            float x;
+            [value getValue:&x];
+            return [NSNumber numberWithFloat:x];
+            break;
+        }
+        case 'd': {
+            double x;
+            [value getValue:&x];
+            return [NSNumber numberWithDouble:x];
+            break;
+        }
+        default:
+            return nil;
+    }
+}
+
+@end
+
+@interface JAGProperty () 
 {
 @private
     objc_property_t     _property;
     NSArray             *_attributes;
 }
+
+- (NSString*) getterName;
+
+- (NSString*) setterName;
+
+@end
+
+@implementation JAGProperty
 
 + (id)propertyWithObjCProperty: (objc_property_t)property
 {
@@ -135,13 +243,42 @@
     return NSSelectorFromString([self contentOfAttribute: @"G"]);
 }
 
+- (NSString*) getterName {
+    NSString *getterName = [self contentOfAttribute: @"G"];
+    if (!getterName) {
+        getterName = [self name];
+    }
+    return getterName;
+}
+
 - (SEL)getter
 {
-    SEL getter = [self customGetter];
-    if (!getter) {
-        getter = NSSelectorFromString([self name]);
-    }
-    return getter;
+    return NSSelectorFromString([self getterName]);
+}
+
+- (id) getFrom:(id) object {
+    NSMethodSignature *methodSig = [[object class] instanceMethodSignatureForSelector:[self getter]];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSig];
+    [inv setSelector:[self getter]];
+    [inv setTarget:object];
+    [inv invoke];
+    
+    if ([self isObject]) {
+        id returnValue;
+        [inv getReturnValue:&returnValue];
+        return returnValue;
+    } else {
+        void *buffer;
+        NSUInteger length = [methodSig methodReturnLength];
+        buffer = (void *)malloc(length);
+        [inv getReturnValue:buffer];
+        NSValue *value = [NSValue valueWithBytes:buffer objCType:[methodSig methodReturnType]];
+        if ([self isNumber]) {
+            return [NSNumber numberWithValue:value];
+        } else {
+            return value;
+        }
+    }    
 }
 
 - (SEL)customSetter
@@ -149,19 +286,42 @@
     return NSSelectorFromString([self contentOfAttribute: @"S"]);
 }
 
-- (SEL)setter
+- (NSString*) setterName
 {
-    SEL setter = [self customSetter];
-    if (!setter) {
+    NSString *setterName = [self contentOfAttribute: @"S"];
+    if (!setterName) {
         NSString *propName = [self name];
-        NSString *setterName = [NSString stringWithFormat:
-                               @"set%@%@:", 
+        setterName = [NSString stringWithFormat:
+                                @"set%@%@:", 
                                 [[propName substringToIndex:1] uppercaseString],
                                 [propName substringFromIndex:1]
                                 ];
-        setter = NSSelectorFromString(setterName);
     }
-    return setter;
+    return setterName;
+}
+
+- (SEL)setter
+{
+    return NSSelectorFromString([self setterName]);
+}
+
+- (void) set:(id) value on:(id) object {
+    NSMethodSignature *methodSig = [[object class] instanceMethodSignatureForSelector:[self setter]];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSig];
+    [inv setSelector:[self setter]];
+    [inv setTarget:object];
+    if ([self isObject]) {
+        [inv setArgument:&value atIndex:2];
+    } else if ([value isKindOfClass:[NSValue class]]) {
+        void * buffer;
+        NSMethodSignature *getterMethodSig = [[object class] instanceMethodSignatureForSelector:[self getter]];
+        NSUInteger length = [getterMethodSig methodReturnLength];
+        buffer = (void *)malloc(length);
+        [value getValue:buffer];
+        [inv setArgument:buffer atIndex:2];
+    }
+    [inv invoke];
+    
 }
 
 - (NSString *)typeEncoding

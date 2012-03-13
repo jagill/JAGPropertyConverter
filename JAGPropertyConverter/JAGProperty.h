@@ -273,6 +273,36 @@ JAGPropertySetterSemantics;
 - (SEL) setter;
 
 /**
+ * This method performs the property's getter (custom if existent, otherwise default)
+ * on the supplied object.
+ *
+ * No safety checking is performed, so if you pass an object that doesn't respond to
+ * the getter, you will get an exception.
+ *
+ * @param object Object to apply getter to.
+ * @return object's value for property.  If the property is a scalar, it will return an
+ * NSValue wrapping the scalar.
+ *
+ * @warning This method is experimental and not guaranteed to be safe for production.
+ */
+- (id) getFrom:(id) object;
+
+/**
+ * This method performs the property's setter (custom if existent, otherwise default)
+ * with the supplied value on the supplied object.
+ *
+ * No safety checking is performed, so if you pass an object that doesn't respond to
+ * the setter, you will get an exception.
+ *
+ * @param value Value to set.  If the property is a scalar, it should be an NSValue
+ * wrapping the scalar.
+ * @param object Object to apply setter to.
+ *
+ * @warning This method is experimental and not guaranteed to be safe for production.
+ */
+- (void) set:(id) value on:(id) object;
+
+/**
  * Test whether you can `[model setValue:value forKey:[property name]]`
  * without receiving an `NSInvalidArgumentException`.
  *
@@ -282,6 +312,6 @@ JAGPropertySetterSemantics;
  * to catch some cases that would lead to an exception, but we are erring
  * on the side of letting bad things through rather than keeping good things out.
  */
-- (BOOL) canAcceptValue: (id) value;
+- (BOOL) canAcceptValue:(id) value;
 
 @end
