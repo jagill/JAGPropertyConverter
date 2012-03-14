@@ -273,13 +273,11 @@
         buffer = (void *)malloc(length);
         [inv getReturnValue:buffer];
         NSValue *value = [NSValue valueWithBytes:buffer objCType:[methodSig methodReturnType]];
+        free(buffer);
         if ([self isNumber]) {
             NSNumber *num = [NSNumber numberWithValue:value];
-            free(buffer);
             return num;
         } else {
-            //FIXME: Memory leak for buffer!  But if we free it, [value getValue:] is a dangling pointer.
-            //Leave it to the caller (as specified in the API) to free it for now.
             return value;
         }
     }    
@@ -316,11 +314,12 @@
     NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSig];
     [inv setSelector:[self setter]];
     [inv setTarget:object];
+    
     if ([self isObject]) {
         [inv setArgument:&value atIndex:2];
     } else if ([value isKindOfClass:[NSValue class]]) {
-        NSMethodSignature *getterMethodSig = [[object class] instanceMethodSignatureForSelector:[self getter]];
-        NSUInteger length = [getterMethodSig methodReturnLength];
+        NSUInteger length;
+        NSGetSizeAndAlignment([methodSig getArgumentTypeAtIndex:2], &length, NULL);
         buffer = (void *)malloc(length);
         [value getValue:buffer];
         [inv setArgument:buffer atIndex:2];

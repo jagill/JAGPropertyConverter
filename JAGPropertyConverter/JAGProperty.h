@@ -284,9 +284,6 @@ JAGPropertySetterSemantics;
  * NSValue wrapping the scalar.
  *
  * @warning This method is experimental and not guaranteed to be safe for production.
- * In particular, if the object returned is an NSValue (but not NSNumber), the pointer
- * returned with getValue: **must** be manually free()'d.  The memory management for
- * the general NSObject and NSNumber cases are handled within the method.
  */
 - (id) getFrom:(id) object;
 
