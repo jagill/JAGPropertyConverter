@@ -27,6 +27,8 @@
 
 #import "JAGProperty.h"
 
+#pragma mark NSNumber category
+
 // Use this only for the experimental get/set methods.  This needs to be improved!
 @interface NSNumber (ConvertNSValue)
 
@@ -121,6 +123,8 @@
 
 
 @end
+
+#pragma mark - JAGProperty
 
 @interface JAGProperty () 
 {
