@@ -96,6 +96,9 @@ JAGPropertySetterSemantics;
 
 - (id)initWithObjCProperty: (objc_property_t)property;
 
+/// @return Name of property
+- (NSString *)name;
+
 /**
  * A comma-separated list of attributes.
  *
@@ -115,6 +118,8 @@ JAGPropertySetterSemantics;
  * @return An NSString of the comma-separated attributes.
  */
 - (NSString *)attributeEncodings;
+
+#pragma mark - Property attributes
 
 /**
  * An NSString denoting the scalar/object type of the property.
@@ -169,9 +174,6 @@ JAGPropertySetterSemantics;
  */
 - (JAGPropertySetterSemantics)setterSemantics;
 
-/// @return Name of property
-- (NSString *)name;
-
 /**
  * Whether the property is readonly.
  *
@@ -225,6 +227,16 @@ JAGPropertySetterSemantics;
  */
 - (BOOL)isEligibleForGarbageCollection;
 
+#pragma mark - Information on Property Class
+
+/**
+ * The class of the property, if it is a defined object.
+ *
+ * If it is an `id` or not an object, return nil.
+ * @return The Class of the property, or nil if undefined.  
+ */
+- (Class) propertyClass;
+
 /// @return YES if the property is char (signed or unsigned) or char array
 - (BOOL) isCharacterType;
 
@@ -243,16 +255,10 @@ JAGPropertySetterSemantics;
 /// @return YES if the property is for an `id`
 - (BOOL) isId;
 
-/**
- * The class of the property, if it is a defined object.
- *
- * If it is an `id` or not an object, return nil.
- * @return The Class of the property, or nil if undefined.  
- */
-- (Class) propertyClass;
-
 /// @return YES if the property is for an NSArray or NSSet subclass
 - (BOOL) isCollection;
+
+#pragma mark - Getting and Setting
 
 /// @return Selector for custom getter.  Nil if no custom getter.
 - (SEL) customGetter;
@@ -262,15 +268,6 @@ JAGPropertySetterSemantics;
  * Defaults to @selector(propertyname) if no custom getter.
  */
 - (SEL) getter;
-
-/// @return Selector for custom setter.  Nil if no custom setter.
-- (SEL) customSetter;
-
-/**
- * @return Selector for setter.  
- * Defaults to @selector(setPropertyname:) if no custom getter.
- */
-- (SEL) setter;
 
 /**
  * This method performs the property's getter (custom if existent, otherwise default)
@@ -286,6 +283,15 @@ JAGPropertySetterSemantics;
  * @warning This method is experimental and not guaranteed to be safe for production.
  */
 - (id) getFrom:(id) object;
+
+/// @return Selector for custom setter.  Nil if no custom setter.
+- (SEL) customSetter;
+
+/**
+ * @return Selector for setter.  
+ * Defaults to @selector(setPropertyname:) if no custom getter.
+ */
+- (SEL) setter;
 
 /**
  * This method performs the property's setter (custom if existent, otherwise default)

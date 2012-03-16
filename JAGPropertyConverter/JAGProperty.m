@@ -134,6 +134,8 @@
     NSArray             *_attributes;
 }
 
+- (NSString *)contentOfAttribute: (NSString *)code;
+
 - (NSString*) getterName;
 
 - (NSString*) setterName;
@@ -195,6 +197,30 @@
     return NO;
 }
 
+- (NSString *)contentOfAttribute: (NSString *)code
+{
+    for(NSString *encoded in _attributes)
+        if([encoded hasPrefix: code]) return [encoded substringFromIndex: 1];
+    return nil;
+}
+
+#pragma mark - Property attributes
+
+- (NSString *)typeEncoding
+{
+    return [self contentOfAttribute: @"T"];
+}
+
+- (NSString *)oldTypeEncoding
+{
+    return [self contentOfAttribute: @"t"];
+}
+
+- (NSString *)ivarName
+{
+    return [self contentOfAttribute: @"V"];
+}
+
 - (BOOL)isReadOnly
 {
     return [self hasAttribute: @"R"];
@@ -231,12 +257,82 @@
     return [self hasAttribute: @"P"];
 }
 
-- (NSString *)contentOfAttribute: (NSString *)code
-{
-    for(NSString *encoded in _attributes)
-        if([encoded hasPrefix: code]) return [encoded substringFromIndex: 1];
-    return nil;
+
+#pragma mark - Information on Property Class
+
+- (Class) propertyClass {
+    if (! [self isObject]) return nil;
+    NSArray *encodingComponents = [[self typeEncoding] componentsSeparatedByString:@"\""];
+    if ([encodingComponents count] < 2) {
+        //id looks like '@', blocks like '@?'
+        return nil;
+    }
+    //typeEncoding looks like '@"AModel"'.  This is with the @ and "s.
+    NSString *className = [encodingComponents objectAtIndex:1];
+    Class class = NSClassFromString(className);
+    return class;
 }
+
+- (BOOL) isCharacterType
+{
+    NSString *typeEncoding = [self typeEncoding];
+    return ([typeEncoding isEqualToString: @"c"]
+            || [typeEncoding isEqualToString: @"C"]
+            || [typeEncoding isEqualToString: @"*"]
+            );    
+}
+
+- (BOOL) isNumber
+{
+    NSString *typeEncoding = [self typeEncoding];
+    return ([typeEncoding isEqualToString: @"i"]
+            || [typeEncoding isEqualToString: @"I"]
+            || [typeEncoding isEqualToString: @"s"]
+            || [typeEncoding isEqualToString: @"S"]
+            || [typeEncoding isEqualToString: @"l"]
+            || [typeEncoding isEqualToString: @"L"]
+            || [typeEncoding isEqualToString: @"q"]
+            || [typeEncoding isEqualToString: @"Q"]
+            || [typeEncoding isEqualToString: @"f"]
+            || [typeEncoding isEqualToString: @"d"]
+            || [typeEncoding isEqualToString: @"B"]
+            || [typeEncoding isEqualToString: @"c"]
+            || [typeEncoding isEqualToString: @"C"]
+            );
+}
+
+- (BOOL) isScalar
+{
+    return ([self isCharacterType]
+            || [self isNumber] //isNumber includes Boolean
+            );
+}
+
+- (BOOL) isObject
+{
+    return [[self typeEncoding] hasPrefix: @"@"] && ![self isBlock];
+}
+
+- (BOOL) isBlock {
+    return [[self typeEncoding] isEqualToString:@"@?"];
+}
+
+- (BOOL) isId {
+    return [[self typeEncoding] isEqualToString:@"@"];
+}
+
+- (BOOL) isCollection {
+    Class propClass = [self propertyClass];
+    return (propClass && 
+        (
+         [propClass isSubclassOfClass:[NSArray class]]
+         || [propClass isSubclassOfClass:[NSSet class]]
+        )
+    );
+        
+}
+
+#pragma mark - Getting and Setting
 
 - (SEL)customGetter
 {
@@ -294,10 +390,10 @@
     if (!setterName) {
         NSString *propName = [self name];
         setterName = [NSString stringWithFormat:
-                                @"set%@%@:", 
-                                [[propName substringToIndex:1] uppercaseString],
-                                [propName substringFromIndex:1]
-                                ];
+                      @"set%@%@:", 
+                      [[propName substringToIndex:1] uppercaseString],
+                      [propName substringFromIndex:1]
+                      ];
     }
     return setterName;
 }
@@ -309,7 +405,7 @@
 
 - (void) set:(id) value on:(id) object {
     void * buffer;
-
+    
     NSMethodSignature *methodSig = [[object class] instanceMethodSignatureForSelector:[self setter]];
     NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSig];
     [inv setSelector:[self setter]];
@@ -329,96 +425,6 @@
     
 }
 
-- (NSString *)typeEncoding
-{
-    return [self contentOfAttribute: @"T"];
-}
-
-- (NSString *)oldTypeEncoding
-{
-    return [self contentOfAttribute: @"t"];
-}
-
-- (NSString *)ivarName
-{
-    return [self contentOfAttribute: @"V"];
-}
-
-
-
-- (Class) propertyClass {
-    if (! [self isObject]) return nil;
-    NSArray *encodingComponents = [[self typeEncoding] componentsSeparatedByString:@"\""];
-    if ([encodingComponents count] < 2) {
-        //id looks like '@', blocks like '@?'
-        return nil;
-    }
-    //typeEncoding looks like '@"AModel"'.  This is with the @ and "s.
-    NSString *className = [encodingComponents objectAtIndex:1];
-    Class class = NSClassFromString(className);
-    return class;
-}
-
-- (BOOL) isCharacterType
-{
-    NSString *typeEncoding = [self typeEncoding];
-    return ([typeEncoding isEqualToString: @"c"]
-            || [typeEncoding isEqualToString: @"C"]
-            || [typeEncoding isEqualToString: @"*"]
-            );    
-}
-
-//Temporarily including characters.
-- (BOOL) isNumber
-{
-    NSString *typeEncoding = [self typeEncoding];
-    return ([typeEncoding isEqualToString: @"i"]
-            || [typeEncoding isEqualToString: @"I"]
-            || [typeEncoding isEqualToString: @"s"]
-            || [typeEncoding isEqualToString: @"S"]
-            || [typeEncoding isEqualToString: @"l"]
-            || [typeEncoding isEqualToString: @"L"]
-            || [typeEncoding isEqualToString: @"q"]
-            || [typeEncoding isEqualToString: @"Q"]
-            || [typeEncoding isEqualToString: @"f"]
-            || [typeEncoding isEqualToString: @"d"]
-            || [typeEncoding isEqualToString: @"B"]
-            || [typeEncoding isEqualToString: @"c"]
-            || [typeEncoding isEqualToString: @"C"]
-            );
-}
-
-- (BOOL) isScalar
-{
-    return ([self isCharacterType]
-            || [self isNumber] //isNumber includes Boolean
-            );
-}
-
-- (BOOL) isObject
-{
-    return [[self typeEncoding] hasPrefix: @"@"] && ![self isBlock];
-}
-
-- (BOOL) isBlock {
-    return [[self typeEncoding] isEqualToString:@"@?"];
-}
-
-- (BOOL) isId {
-    return [[self typeEncoding] isEqualToString:@"@"];
-}
-
-- (BOOL) isCollection {
-    Class propClass = [self propertyClass];
-    return (propClass && 
-        (
-         [propClass isSubclassOfClass:[NSArray class]]
-         || [propClass isSubclassOfClass:[NSSet class]]
-        )
-    );
-        
-}
-
 - (BOOL) canAcceptValue: (id) value {
     if ([self isId]) {
         return YES;
@@ -432,5 +438,6 @@
     //We don't handle structs, char*, etc yet.  KVC does, tho.
     return YES;
 }
+
 
 @end
