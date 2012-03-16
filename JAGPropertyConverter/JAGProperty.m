@@ -32,18 +32,12 @@
 
 + (NSNumber*) numberWithValue: (NSValue*) value;
 
-- (id) initWithValue: (NSValue*) value;
-
 @end
 
 @implementation NSNumber (ConvertNSValue)
 
-+ (NSNumber*) numberWithValue: (NSValue*) value {
-    return [[NSNumber alloc] initWithValue:value];
-}
-
 //FIXME: Surely this isn't necessary, and I'm just missing something?
-- (id) initWithValue: (NSValue*) value {
++ (NSNumber*) numberWithValue: (NSValue*) value {
     const char *encType = [value objCType];
     char encChar = encType[0];
     switch (encChar)
@@ -124,6 +118,7 @@
             return nil;
     }
 }
+
 
 @end
 
