@@ -178,4 +178,27 @@
     STAssertNotNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
+- (void) testNSArrayWithNSNumberWithBoolFalse {
+    NSNumber *falseNum = [NSNumber numberWithBool:NO];
+    NSNumber *zeroNum = [NSNumber numberWithInt:0];
+    NSArray *array = [NSArray arrayWithObjects:falseNum, zeroNum, nil];
+    id decomposed = [converter decomposeObject:array];
+    STAssertTrue([decomposed count] == 2, @"Array should have two elements after decomposing.");
+    id composed = [converter composeModelFromObject:array];
+    STAssertTrue([composed count] == 2, @"Array should have two elements after composing.");
+}
+
+- (void) testNSDictWithNSNumberWithBoolFalse {
+    NSNumber *falseNum = [NSNumber numberWithBool:NO];
+    NSNumber *zeroNum = [NSNumber numberWithInt:0];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          falseNum, @"one", 
+                          zeroNum, @"two",
+                          nil];
+    id decomposed = [converter decomposeObject:dict];
+    STAssertTrue([decomposed count] == 2, @"Dict should have two elements after decomposing.");
+    id composed = [converter composeModelFromObject:dict];
+    STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
+}
+
 @end
