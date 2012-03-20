@@ -11,7 +11,6 @@
 #import "JAGProperty.h"
 #import "JAGPropertyConverter.h"
 #import "JAGPropertyFinder.h"
-#import "NSNumber+JAGProperty.h"
 
 @interface GetSetTests () {
 @private

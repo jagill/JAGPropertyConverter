@@ -12,85 +12,140 @@
 
 //FIXME: Surely this isn't necessary, and I'm just missing something?
 + (NSNumber*) numberWithValue: (NSValue*) value {
-    const char *encType = [value objCType];
+    return [[NSNumber alloc] initWithValue:value];
+}
+
+- (id) initWithValue: (NSValue*) value {
+    self = [super init];
+    if (self) {
+        const char *encType = [value objCType];
+        char encChar = encType[0];
+        switch (encChar)
+        {
+            case 'c': {
+                char x;
+                [value getValue:&x];
+                return [self initWithChar:x];
+            }
+            case 'C': {
+                unsigned char x;
+                [value getValue:&x];
+                return [self initWithUnsignedChar:x];
+            }
+            case 's': {
+                short x;
+                [value getValue:&x];
+                return [self initWithShort:x];
+            }
+            case 'S': {
+                unsigned short x;
+                [value getValue:&x];
+                return [self initWithUnsignedShort:x];
+            }
+            case 'i': {
+                int x;
+                [value getValue:&x];
+                return [self initWithInt:x];
+            }
+            case 'I': {
+                unsigned int x;
+                [value getValue:&x];
+                return [self initWithUnsignedInt:x];
+            }
+            case 'l': {
+                long x;
+                [value getValue:&x];
+                return [self initWithLong:x];
+            }
+            case 'L': {
+                unsigned long x;
+                [value getValue:&x];
+                return [self initWithUnsignedLong:x];
+            }
+            case 'q': {
+                long long x;
+                [value getValue:&x];
+                return [self initWithLongLong:x];
+            }
+            case 'Q': {
+                unsigned long long x;
+                [value getValue:&x];
+                return [self initWithUnsignedLongLong:x];
+            }
+            case 'f': {
+                float x;
+                [value getValue:&x];
+                return [self initWithFloat:x];
+            }
+            case 'd': {
+                double x;
+                [value getValue:&x];
+                return [self initWithDouble:x];
+            }
+            default:
+                return nil;
+        }
+    }
+
+    return self;
+}
+
+- (void) value:(void *)buffer forObjCType:(const char *)encType {
     char encChar = encType[0];
     switch (encChar)
     {
         case 'c': {
-            char x;
-            [value getValue:&x];
-            return [NSNumber numberWithChar:x];
+            *(char*)buffer = [self charValue];
             break;
         }
         case 'C': {
-            unsigned char x;
-            [value getValue:&x];
-            return [NSNumber numberWithUnsignedChar:x];
+            *(unsigned char *)buffer = [self unsignedCharValue];
             break;
         }
         case 's': {
-            short x;
-            [value getValue:&x];
-            return [NSNumber numberWithShort:x];
+            *(short *)buffer = [self shortValue];
             break;
         }
         case 'S': {
-            unsigned short x;
-            [value getValue:&x];
-            return [NSNumber numberWithUnsignedShort:x];
+            *(unsigned short *)buffer = [self unsignedShortValue];
             break;
         }
         case 'i': {
-            int x;
-            [value getValue:&x];
-            return [NSNumber numberWithInt:x];
+            *(int *)buffer = [self intValue];
             break;
         }
         case 'I': {
-            unsigned int x;
-            [value getValue:&x];
-            return [NSNumber numberWithUnsignedInt:x];
+            *(unsigned int *)buffer = [self unsignedIntValue];
             break;
         }
         case 'l': {
-            long x;
-            [value getValue:&x];
-            return [NSNumber numberWithLong:x];
+            *(long *)buffer = [self longValue];
             break;
         }
         case 'L': {
-            unsigned long x;
-            [value getValue:&x];
-            return [NSNumber numberWithUnsignedLong:x];
+            *(unsigned long *)buffer = [self unsignedLongValue];
             break;
         }
         case 'q': {
-            long long x;
-            [value getValue:&x];
-            return [NSNumber numberWithLongLong:x];
+            *(long long *)buffer = [self longLongValue];
             break;
         }
         case 'Q': {
-            unsigned long long x;
-            [value getValue:&x];
-            return [NSNumber numberWithUnsignedLongLong:x];
+            *(unsigned long long *)buffer = [self unsignedLongLongValue];
             break;
         }
         case 'f': {
-            float x;
-            [value getValue:&x];
-            return [NSNumber numberWithFloat:x];
+            *(float *)buffer = [self floatValue];
             break;
         }
         case 'd': {
-            double x;
-            [value getValue:&x];
-            return [NSNumber numberWithDouble:x];
+            *(double *)buffer = [self doubleValue];
             break;
         }
         default:
-            return nil;
+            buffer = 0;
     }
+
 }
 
 @end

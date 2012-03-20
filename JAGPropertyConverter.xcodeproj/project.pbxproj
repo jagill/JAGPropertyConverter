@@ -24,8 +24,6 @@
 		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
 		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
 		11E6A1B41518184B00C0D339 /* GetSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E6A1B31518184B00C0D339 /* GetSetTests.m */; };
-		11E6A1BF1518199C00C0D339 /* NSNumber+JAGProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E6A1BD1518199C00C0D339 /* NSNumber+JAGProperty.h */; };
-		11E6A1C01518199C00C0D339 /* NSNumber+JAGProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E6A1BE1518199C00C0D339 /* NSNumber+JAGProperty.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +63,6 @@
 		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 		11E6A1B21518184B00C0D339 /* GetSetTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSetTests.h; sourceTree = "<group>"; };
 		11E6A1B31518184B00C0D339 /* GetSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSetTests.m; sourceTree = "<group>"; };
-		11E6A1BD1518199C00C0D339 /* NSNumber+JAGProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+JAGProperty.h"; sourceTree = "<group>"; };
-		11E6A1BE1518199C00C0D339 /* NSNumber+JAGProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+JAGProperty.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +127,6 @@
 				11275B5314E9D56200C4707C /* JAGPropertyConverter.h */,
 				11275B5414E9D56200C4707C /* JAGPropertyConverter.m */,
 				11275B5114E9D56200C4707C /* Supporting Files */,
-				11E6A1BD1518199C00C0D339 /* NSNumber+JAGProperty.h */,
-				11E6A1BE1518199C00C0D339 /* NSNumber+JAGProperty.m */,
 			);
 			path = JAGPropertyConverter;
 			sourceTree = "<group>";
@@ -183,7 +177,6 @@
 			files = (
 				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
 				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
-				11E6A1BF1518199C00C0D339 /* NSNumber+JAGProperty.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +280,6 @@
 				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
 				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
 				11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */,
-				11E6A1C01518199C00C0D339 /* NSNumber+JAGProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
