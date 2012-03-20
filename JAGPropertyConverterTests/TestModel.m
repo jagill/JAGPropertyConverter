@@ -35,6 +35,7 @@
 
 @synthesize testModelID=_testModelID;
 @synthesize intProperty=_intProperty;
+@synthesize floatProperty = _floatProperty;
 @synthesize stringProperty=_stringProperty;
 @synthesize modelProperty=_modelProperty;
 @synthesize arrayProperty=_arrayProperty;
@@ -92,6 +93,7 @@
 {
     self.testModelID = @"XYZZ1";
     self.intProperty = 5;
+    self.floatProperty = 5.32;
     self.stringProperty = @"Hello Kitty!";
     self.modelProperty = [TestModel testModel];
     self.modelProperty.testModelID = @"KOPES56";

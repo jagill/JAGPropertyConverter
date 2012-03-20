@@ -23,6 +23,7 @@
 		11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */; };
 		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
 		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
+		11E6A1B41518184B00C0D339 /* GetSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E6A1B31518184B00C0D339 /* GetSetTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		11275B8814E9D8BD00C4707C /* PropertyModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyModelTests.m; sourceTree = "<group>"; };
 		11275B8914E9D8BD00C4707C /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
 		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		11E6A1B21518184B00C0D339 /* GetSetTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSetTests.h; sourceTree = "<group>"; };
+		11E6A1B31518184B00C0D339 /* GetSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSetTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 		11275B6414E9D56200C4707C /* JAGPropertyConverterTests */ = {
 			isa = PBXGroup;
 			children = (
+				11E6A1B21518184B00C0D339 /* GetSetTests.h */,
+				11E6A1B31518184B00C0D339 /* GetSetTests.m */,
 				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
 				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
 				11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */,
@@ -287,6 +292,7 @@
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
 				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
+				11E6A1B41518184B00C0D339 /* GetSetTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +433,7 @@
 				11275B7114E9D56200C4707C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		11275B7214E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverterTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +442,7 @@
 				11275B7414E9D56200C4707C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

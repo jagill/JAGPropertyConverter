@@ -239,31 +239,4 @@
     STAssertTrue([modelProp canAcceptValue:value], @"model properties should be able to accept TestModel-valued ids.");
 }
 
-- (void) testStringPropGet {
-    [model populate];
-    NSString *retrievedString = [stringProp getFrom:model];
-    STAssertNotNil(retrievedString, @"stringProp should be able to get from a model.");
-    STAssertEquals(retrievedString, model.stringProperty, @"Retrieved string should be same as on model.");
-}
-
-- (void) testStringPropSet {
-    NSString *str = @"Happy Days!";
-    [stringProp set:str on:model];
-    STAssertEquals(model.stringProperty, str, @"stringProp should be able to set on a model.");
-}
-
-- (void) testIntPropGet {
-    [model populate];
-    NSNumber *retrievedIntValue = [intProp getFrom:model];
-    STAssertNotNil(retrievedIntValue, @"intProp should be able to get from a model.");
-    STAssertTrue([retrievedIntValue intValue] == model.intProperty, @"Retrieved int should be same as on model.");
-}
-
-- (void) testIntPropSet {
-    int testInt = 7;
-    NSNumber *intValue = [NSNumber numberWithInt:testInt];
-    [intProp set:intValue on:model];
-    STAssertTrue(model.intProperty == testInt, @"intProp should be able to set on a model.");
-}
-
 @end

@@ -32,6 +32,7 @@
 
 @property (copy)            NSString        *testModelID;
 @property (assign)          int             intProperty;
+@property (assign)          float           floatProperty;
 @property (nonatomic, copy) NSString        *stringProperty;
 @property (strong)          TestModel       *modelProperty;
 @property (strong)          NSArray         *arrayProperty;
