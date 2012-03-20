@@ -221,6 +221,7 @@
             continue;
         }
         //TODO: Should use the getter for this?  Harder to handle non-objects.
+        //id object = [property getFrom:model];
         id object = [model valueForKey:propertyName];
         [values setValue:[self decomposeObject: object] forKey:propertyName];
     }
@@ -266,7 +267,7 @@
                || [object isKindOfClass: [NSSet class]]) {
         return [self composeCollection:object withTargetClass:targetClass];
     } else if ([object isKindOfClass: [NSDictionary class]]) {
-        //Is this a PropertyModel in disguise?
+        //Is this a Model in disguise?
         Class modelClass = nil;
         if (self.identifyDict) {
             modelClass = self.identifyDict(object);
@@ -332,6 +333,7 @@
         }
         if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];
+            //[property set:value on:object];
         } else {
             NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@", 
                   [value class], [property name], [property typeEncoding]);
