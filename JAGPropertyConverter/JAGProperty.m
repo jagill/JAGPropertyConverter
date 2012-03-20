@@ -27,6 +27,7 @@
 
 #import "JAGProperty.h"
 
+#pragma mark - NSNumber+JAGProperty
 // Use this only for the experimental get/set methods.  This needs to be improved!
 @interface NSNumber (JAGProperty)
 
@@ -53,11 +54,11 @@
 
 @implementation NSNumber (JAGProperty)
 
-//FIXME: Surely this isn't necessary, and I'm just missing something?
 + (NSNumber*) numberWithValue: (NSValue*) value {
     return [[NSNumber alloc] initWithValue:value];
 }
 
+//FIXME: Surely this isn't necessary, and I'm just missing something?
 - (id) initWithValue: (NSValue*) value {
     self = [super init];
     if (self) {
