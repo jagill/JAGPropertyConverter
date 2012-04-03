@@ -63,7 +63,6 @@ JAGPropertySetterSemantics;
         property.isObject == YES;
         property.propertyClass == [NSString class];
         property.isNumber == NO;
-        property.isScalar == NO;
         property.typeEncoding == @"@\"NSString\"";
         property.isNonAtomic == YES;
         property.isReadOnly == YES;
@@ -78,7 +77,6 @@ JAGPropertySetterSemantics;
         property.isObject == YES;
         property.propertyClass == nil;
         property.isNumber == YES;
-        property.isScalar == YES;
         property.typeEncoding == @"i";
         property.isNonAtomic == NO;
         property.isReadOnly == NO;
@@ -225,14 +223,8 @@ JAGPropertySetterSemantics;
  */
 - (BOOL)isEligibleForGarbageCollection;
 
-/// @return YES if the property is char (signed or unsigned) or char array
-- (BOOL) isCharacterType;
-
 /// @return YES if the property is any sort of integer, float, char, or BOOL
 - (BOOL) isNumber;
-
-/// @return YES if the property is for a Number, Bool, or CharacterType
-- (BOOL) isScalar;
 
 /// @return YES if the property is for an NSObject subclass or `id`.
 - (BOOL) isObject;

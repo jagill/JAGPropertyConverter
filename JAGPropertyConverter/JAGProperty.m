@@ -194,16 +194,6 @@
     return class;
 }
 
-- (BOOL) isCharacterType
-{
-    NSString *typeEncoding = [self typeEncoding];
-    return ([typeEncoding isEqualToString: @"c"]
-            || [typeEncoding isEqualToString: @"C"]
-            || [typeEncoding isEqualToString: @"*"]
-            );    
-}
-
-//Temporarily including characters.
 - (BOOL) isNumber
 {
     NSString *typeEncoding = [self typeEncoding];
@@ -220,13 +210,6 @@
             || [typeEncoding isEqualToString: @"B"]
             || [typeEncoding isEqualToString: @"c"]
             || [typeEncoding isEqualToString: @"C"]
-            );
-}
-
-- (BOOL) isScalar
-{
-    return ([self isCharacterType]
-            || [self isNumber] //isNumber includes Boolean
             );
 }
 

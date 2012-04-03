@@ -71,8 +71,6 @@
 - (void) testIntProperty {
     STAssertTrue([[intProp typeEncoding] isEqualToString:@"i"], @"Type encoding should be i, is %@", [intProp typeEncoding]);
     STAssertTrue([intProp isNumber], @"Property should be Number.");
-    STAssertFalse([intProp isCharacterType], @"Property should not be CharacterType.");
-    STAssertTrue([intProp isScalar], @"Property should be scalar.");
     STAssertFalse([intProp isObject], @"Property should not be object.");
     STAssertEqualObjects([intProp ivarName], @"_intProperty", @"ivarName should be correct.");
     STAssertEquals([intProp setterSemantics], JAGPropertySetterSemanticsAssign, @"Setter semantics should be assign.");
@@ -89,8 +87,6 @@
     STAssertTrue([[modelProp typeEncoding] isEqualToString:@"@\"TestModel\""], 
                  @"Type encoding should be @\"TestModel\", is %@", [modelProp typeEncoding]);
     STAssertFalse([modelProp isNumber], @"Property should not be Number.");
-    STAssertFalse([modelProp isCharacterType], @"Property should not be CharacterType.");
-    STAssertFalse([modelProp isScalar], @"Property should not be scalar.");
     STAssertEqualObjects([modelProp ivarName], @"_modelProperty", @"ivarName should be correct.");
     STAssertEquals([modelProp setterSemantics], JAGPropertySetterSemanticsRetain, @"Setter semantics should be retain.");
     STAssertEqualObjects([modelProp name], @"modelProperty", @"Name should be correct.");

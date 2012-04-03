@@ -27,11 +27,20 @@
 #import "TestModel.h"
 #import "JAGPropertyFinder.h"
 
+@interface PropertyModelTests() {
+@private
+    TestModel   *model;
+}
+
+@end
+
 @implementation PropertyModelTests
 
+- (void) setUp {
+    model = [TestModel testModel];
+}
 
 - (void) testMixedModelToDict {
-    TestModel *model = [TestModel testModel];
     int intProp = 5;
     model.intProperty = intProp;
     NSString *stringProp = @"Title!";
@@ -83,7 +92,6 @@
     
     [props setValue:otherModelProps forKey:@"modelProperty"];
     
-    TestModel *model = [TestModel testModel];
     [model setPropertiesFromDictionary:props];
     
     STAssertEquals(model.intProperty, intProp, 
@@ -106,35 +114,11 @@
 }
 
 - (void) testCoordinate {
-    TestModel *model = [TestModel testModel];
     NSArray *propertyNames = [JAGPropertyFinder propertyNamesForClass:[TestModel class]];
     NSLog(@"Found property names for TestModel: %@", propertyNames);
     TestModel *model2 = [TestModel testModel];
     //We should not have crashed on coordinate here.
     [model2 setPropertiesFromDictionary:[model propertiesAsDictionary]];
 }
-
-/*
-- (void) testGetIntProperty {}
-- (void) testSetIntProperty {}
-
-- (void) testGetModelProperty;
-- (void) testSetModelProperty;
-
-- (void) testGetArrayWithNumbersProperty;
-- (void) testSetArrayWithNumbersProperty;
-
-- (void) testGetArrayWithModelsProperty;
-- (void) testSetArrayWithModelsProperty;
-
-- (void) testGetSetWithNumbersProperty;
-- (void) testSetSetWithNumbersProperty;
-
-- (void) testGetSetWithModelsProperty;
-- (void) testSetSetWithModelsProperty;
-
-- (void) testGetDictionaryProperty;
-- (void) testSetDictionaryProperty;
-*/
 
 @end
