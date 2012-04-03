@@ -268,6 +268,7 @@ JAGPropertySetterSemantics;
  * Test whether you can `[model setValue:value forKey:[property name]]`
  * without receiving an `NSInvalidArgumentException`.
  *
+ * @param value Value to check for acceptance.
  * @return YES if the property can be set with this value.
  *
  * @warning This method is still under development.  We are aiming for it

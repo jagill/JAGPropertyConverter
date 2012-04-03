@@ -56,8 +56,6 @@
 	
 	<option value="//api/name/isBlock">&nbsp;&nbsp;&nbsp;&nbsp;- isBlock</option>
 	
-	<option value="//api/name/isCharacterType">&nbsp;&nbsp;&nbsp;&nbsp;- isCharacterType</option>
-	
 	<option value="//api/name/isCollection">&nbsp;&nbsp;&nbsp;&nbsp;- isCollection</option>
 	
 	<option value="//api/name/isDynamic">&nbsp;&nbsp;&nbsp;&nbsp;- isDynamic</option>
@@ -73,8 +71,6 @@
 	<option value="//api/name/isObject">&nbsp;&nbsp;&nbsp;&nbsp;- isObject</option>
 	
 	<option value="//api/name/isReadOnly">&nbsp;&nbsp;&nbsp;&nbsp;- isReadOnly</option>
-	
-	<option value="//api/name/isScalar">&nbsp;&nbsp;&nbsp;&nbsp;- isScalar</option>
 	
 	<option value="//api/name/isWeak">&nbsp;&nbsp;&nbsp;&nbsp;- isWeak</option>
 	
@@ -132,8 +128,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isBlock">isBlock</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isCharacterType">isCharacterType</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isCollection">isCollection</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isDynamic">isDynamic</a></span></li>
@@ -149,8 +143,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isObject">isObject</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isReadOnly">isReadOnly</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isScalar">isScalar</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isWeak">isWeak</a></span></li>
 	
@@ -228,7 +220,6 @@
     property.isObject == YES;
     property.propertyClass == [NSString class];
     property.isNumber == NO;
-    property.isScalar == NO;
     property.typeEncoding == @"@\"NSString\"";
     property.isNonAtomic == YES;
     property.isReadOnly == YES;
@@ -244,7 +235,6 @@
     property.isObject == YES;
     property.propertyClass == nil;
     property.isNumber == YES;
-    property.isScalar == YES;
     property.typeEncoding == @"i";
     property.isNonAtomic == NO;
     property.isReadOnly == NO;
@@ -353,22 +343,8 @@ iOS ARC.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/isCharacterType">&ndash;&nbsp;isCharacterType</a></code>
-		<span class="tooltip"><p>YES if the property is char (signed or unsigned) or char array</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/isNumber">&ndash;&nbsp;isNumber</a></code>
 		<span class="tooltip"><p>YES if the property is any sort of integer, float, char, or BOOL</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/isScalar">&ndash;&nbsp;isScalar</a></code>
-		<span class="tooltip"><p>YES if the property is for a Number, Bool, or CharacterType</p></span>
 	</span>
 	
 	
@@ -534,6 +510,16 @@ without receiving an <code>NSInvalidArgumentException</code>.</p>
 	
 	<div class="method-subsection method-declaration"><code>- (BOOL)canAcceptValue:(id)<em>value</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>Value to check for acceptance.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -705,45 +691,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>YES if the property is for a Block</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">JAGProperty.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/isCharacterType" title="isCharacterType"></a>
-	<h3 class="subsubtitle method-title">isCharacterType</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>YES if the property is char (signed or unsigned) or char array</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (BOOL)isCharacterType</code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES if the property is char (signed or unsigned) or char array</p>
 	</div>
 	
 	
@@ -1056,45 +1003,6 @@ Defaults to @selector(property<a href="#//api/name/name">name</a>) if no custom 
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>YES if property has R attribute.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">JAGProperty.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/isScalar" title="isScalar"></a>
-	<h3 class="subsubtitle method-title">isScalar</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>YES if the property is for a Number, Bool, or CharacterType</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (BOOL)isScalar</code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES if the property is for a Number, Bool, or CharacterType</p>
 	</div>
 	
 	
@@ -1508,7 +1416,7 @@ Blocks are encoded as <code>@?</code></li>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-03-06)</span><br />
+						<p><span class="copyright">&copy; 2012 Three Dead Monks. All rights reserved. (Last updated: 2012-04-03)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
 						
