@@ -47,7 +47,7 @@
         if ([dict valueForKey:@"testModelID"]) {
             return [TestModel class];
         }
-        return nil;
+        return [NSDictionary class];
 
     };
 }
