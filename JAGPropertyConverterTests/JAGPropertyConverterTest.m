@@ -201,4 +201,18 @@
     STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
 }
 
+
+- (void) testConvertNumberFromString {
+    NSString *number = @"123";
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          number, @"intProperty", 
+                          nil];
+    id decomposed = [converter decomposeObject:dict];
+    STAssertTrue([decomposed count] == 1, @"Dict should have two elements after decomposing.");
+    TestModel *model2 = [TestModel testModel];
+    [model2 setPropertiesFromDictionary:dict];
+    STAssertEquals(model2.intProperty, [[dict valueForKey:@"intProperty"] intValue], 
+                   @"Model and Dictionary should have same intProperty");        
+}
+
 @end
