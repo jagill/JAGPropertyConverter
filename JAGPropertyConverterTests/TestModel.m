@@ -55,7 +55,7 @@
     converter.identifyDict = ^ Class (NSDictionary *dict) {
         if ([dict valueForKey:@"testModelID"])
             return [TestModel class];
-        return nil;
+        return [NSDictionary class];
     };
     converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
 

@@ -244,7 +244,13 @@
         return [value isKindOfClass:[self propertyClass]];
     } else if ([self isNumber]) {
         //Includes chars and BOOLs
-        return [value isKindOfClass:[NSNumber class]];
+        static NSNumberFormatter *formatter = nil;
+        if (!formatter) {
+            formatter = [[NSNumberFormatter alloc] init];
+        }
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        BOOL canConvertToNumber = [value isKindOfClass:[NSString class]] && [formatter numberFromString:(NSString*)value];
+        return [value isKindOfClass:[NSNumber class]] || canConvertToNumber;
     }
     
     //We don't handle structs, char*, etc yet.  KVC does, tho.

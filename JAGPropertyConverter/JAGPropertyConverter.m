@@ -271,7 +271,7 @@
         if (self.identifyDict) {
             modelClass = self.identifyDict(object);
         }
-        if (modelClass) {
+        if (modelClass && ![[modelClass description] isEqualToString:@"NSDictionary"] && ![[modelClass description] isEqualToString:@"NSMutableDictionary"]){
             id model = [[modelClass alloc] init];
             [self setPropertiesOf:model fromDictionary:object];
             return model;
