@@ -276,7 +276,7 @@
             [self setPropertiesOf:model fromDictionary:object];
             return model;
         } else if (targetClass && [self shouldConvertClass:targetClass]) {
-            //Try to convert it to targetClass.
+            //Try to coerce it into targetClass.
             id model = [[targetClass alloc] init];
             [self setPropertiesOf:model fromDictionary:object];
             return model;
@@ -289,7 +289,7 @@
             return dict;
         }
     } else if (targetClass && [object isKindOfClass: targetClass]) {
-        //If there are other collections that aren't subclases of NSSet, NSArray, or NSDictionary,
+        //If there are other collections that aren't subclasses of NSSet, NSArray, or NSDictionary,
         //this won't convert their elements/values.
         return object;
     } else if (targetClass 
