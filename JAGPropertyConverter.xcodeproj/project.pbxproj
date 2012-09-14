@@ -220,7 +220,7 @@
 		11275B4214E9D56200C4707C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -427,6 +427,7 @@
 				11275B7114E9D56200C4707C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		11275B7214E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverterTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +436,7 @@
 				11275B7414E9D56200C4707C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
