@@ -290,7 +290,7 @@
             return dict;
         }
     } else if (targetClass && [object isKindOfClass: targetClass]) {
-        //If there are other collections that aren't subclasses of NSSet, NSArray, or NSDictionary,
+        //TODO: If there are other collections that aren't subclasses of NSSet, NSArray, or NSDictionary,
         //this won't convert their elements/values.
         return object;
     } else if (targetClass 
@@ -304,6 +304,12 @@
                )
     {        
         return [NSURL URLWithString:object];
+    } else if ( self.numberFormatter
+               && targetClass
+               && [targetClass isSubclassOfClass:[NSNumber class]]
+               && [object isKindOfClass:[NSString class]])
+    {
+        return [self.numberFormatter numberFromString:object];
     } else if ([object  isKindOfClass: [NSNull class]]
                || [object isKindOfClass: [NSString class]]
                || [object isKindOfClass: [NSNumber class]]
@@ -327,6 +333,12 @@
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
         if (!property || [property isReadOnly]) continue;
         id value = [dictionary valueForKey:key];
+        //See if we should convert an NSString to an NSNumber
+        if (self.numberFormatter && property.isNumber && [value isKindOfClass:[NSString class]])
+        {
+            //Handle NSNumber propertyClasses in the compose function
+            value = [self.numberFormatter numberFromString:value];
+        }
         if ([property isObject]) {
             Class propertyClass = [property propertyClass];
             value = [self composeModelFromObject: value withTargetClass:propertyClass];

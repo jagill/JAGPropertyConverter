@@ -172,7 +172,16 @@ typedef id (^ConvertBlock)(id obj);
  */
 @property (nonatomic, copy) ConvertBlock convertFromDate;
 
-
+/**
+ * A NumberFormatter to convert NSStrings to number of NSNumber properties.
+ *
+ * Called when composing an NSDictionary into an object, or
+ * setting the properties of a model.  If not null, when the converter
+ * encounters an NSString for a target property of
+ * either a primitive numeric type or NSNumber, it will use
+ * the [NSNumberFormatter numberFromString:] method to convert the
+ * NSString into the appropriate numeric type.
+ */
 @property (nonatomic, strong) NSNumberFormatter *numberFormatter;
 
 /**
