@@ -172,6 +172,9 @@ typedef id (^ConvertBlock)(id obj);
  */
 @property (nonatomic, copy) ConvertBlock convertFromDate;
 
+
+@property (nonatomic, strong) NSNumberFormatter *numberFormatter;
+
 /**
  * Whether an object's weak properties should be converted to dictionary values.
  *

@@ -58,6 +58,7 @@
 @synthesize classesToConvert = _classesToConvert;
 @synthesize convertToDate = _convertToDate;
 @synthesize convertFromDate = _convertFromDate;
+@synthesize numberFormatter = _numberFormatter;
 @synthesize shouldConvertWeakProperties = _shouldConvertWeakProperties;
 
 #pragma mark - Lifecycle

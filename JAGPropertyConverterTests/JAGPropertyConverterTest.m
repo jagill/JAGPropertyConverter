@@ -43,7 +43,7 @@
     
     converter = [[JAGPropertyConverter alloc] init];
     converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
-    converter.identifyDict = ^(NSDictionary *dict) {
+    converter.identifyDict = ^ Class (NSDictionary *dict)  {
         if ([dict valueForKey:@"testModelID"]) {
             return [TestModel class];
         }
