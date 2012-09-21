@@ -19,6 +19,8 @@
  * Some code examples in test form.
  *
  * We're intentionally violating DRY so that each test reads as naturally as possible.
+ * We are also using the literals introduced in Xcode 4.4 for clarity.  If your version
+ * of Xcode is <4.4, this test won't compile (although the library will still work).
  */
 @implementation ExampleTest
 
@@ -31,16 +33,13 @@ JAGPropertyConverter *converter;
 
 - (void) testToJSONDict {
     User *user = [[User alloc] init];
-    NSString *firstName = @"John";
-    NSString *lastName = @"Jacobs";
-    int age = 55;
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.age = age;
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
     
     NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs" };
     NSDictionary *userJsonDict = [converter decomposeObject:user];
-    STAssertEqualObjects(userJsonDict, targetDict, @"JSON Dictionary should decompose correctly.");
+    STAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
 }
 
 - (void) testFromJSONDict {
@@ -135,19 +134,180 @@ JAGPropertyConverter *converter;
 }
 
 - (void) testToJSONDictWithArray {
-    //TODO: Write test
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    NSArray *favorites = @[ @"cats", @"coffee", @"sorbet" ];
+    user.favorites = favorites;
+    
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"favorites" : favorites };
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"The converter decomposes objects with arrays.");
 }
 
 - (void) testFromJSONDictWithArray {
-    //TODO: Write test
+    NSArray *favorites = @[ @"cats", @"coffee", @"sorbet" ];
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"favorites" : favorites };
+
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        return nil;
+    };
+    User *user = [converter composeModelFromObject:sourceDict];
+    STAssertEqualObjects(user.favorites, favorites, @"The converter composes objects with arrays.");
+}
+
+- (void) testToJSONDictWithArrayRecursive {
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+
+    User *jack = [[User alloc] init];
+    jack.firstName = @"Jack";
+    jack.age = 12;
+    
+    NSArray *fruits = @[ @"raspberries", @"mangosteens" ];
+    NSArray *favorites = @[ @"cats", @"coffee", fruits, jack ];
+    user.favorites = favorites;
+    
+    NSDictionary *jackDict = @{ @"firstName" : @"Jack", @"age" : @12 };
+    NSArray *favoritesDecomposed = @[ @"cats", @"coffee", fruits, jackDict ];
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"favorites" : favoritesDecomposed };
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"The converter decomposes objects with arrays recursively.");
+}
+
+- (void) testFromJSONDictWithArrayRecursive {
+    NSDictionary *jackDict = @{ @"firstName" : @"Jack", @"age" : @12 };
+    NSArray *fruits = @[ @"raspberries", @"mangosteens" ];
+    NSArray *favorites = @[ @"cats", fruits, jackDict ];
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"favorites" : favorites };
+    
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        return nil;
+    };
+    User *user = [converter composeModelFromObject:sourceDict];
+    
+    //The converter has converted jackDict into a user (jack).
+    STAssertTrue([user.favorites count] == 3, @"The converter composes objects with arrays recursively.");
+    STAssertTrue([user.favorites containsObject:@"cats"], @"Not surprisingly, that includes strings.");
+    STAssertEqualObjects([user.favorites objectAtIndex:1], fruits, @"It also includes NSArrays.");
+    id jack = [user.favorites objectAtIndex:2];
+    STAssertTrue([jack isKindOfClass:[User class]], @"The converter composes models recursively too.");
+    STAssertEqualObjects([jack firstName], @"Jack", @"It gets the properties right as well.");
+    STAssertEquals([jack age], 12, @"Including numeric ones.");
 }
 
 - (void) testToJSONDictWithDict {
-    //TODO: Write test
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    NSDictionary *info = @{ @"cat" : @"mittens", @"coffe" : @"stumptown" };
+    user.information = info;
+    
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"information" : info };
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"The converter decomposes objects with dictionaries.");
 }
 
 - (void) testFromJSONDictWithDict {
-    //TODO: Write test
+    NSDictionary *info = @{ @"cat" : @"mittens", @"coffee" : @"stumptown" };
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"information" : info };
+    
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        return nil;
+    };
+    User *user = [converter composeModelFromObject:sourceDict];
+    STAssertEqualObjects(user.information, info, @"The converter composes objects with dictionaries.");
+}
+
+- (void) testToJSONDictWithDictRecursive {
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+
+    User *jack = [[User alloc] init];
+    jack.firstName = @"Jack";
+    jack.age = 12;
+
+    Address *oldHome = [[Address alloc] init];
+    oldHome.street = @"44 Old Lane";
+    oldHome.city = @"Smith City";
+    
+    Address *reallyOldHome = [[Address alloc] init];
+    reallyOldHome.street = @"6 Ancient Way";
+    reallyOldHome.city = @"Farmtown";
+    
+    NSArray *formerAddresses = @[ oldHome, reallyOldHome ];
+    
+    NSDictionary *info = @{ @"cat" : @"mittens", @"son" : jack, @"formerAddresses" : formerAddresses };
+    user.information = info;
+    
+    NSDictionary *jackDict = @{ @"firstName" : @"Jack", @"age" : @12 };
+    NSDictionary *oldHomeDict = @{ @"street" : @"44 Old Lane", @"city" : @"Smith City" };
+    NSDictionary *reallyOldHomeDict = @{ @"street" : @"6 Ancient Way", @"city" : @"Farmtown" };
+    NSArray *formerAddressesDecomposed = @[ oldHomeDict, reallyOldHomeDict ];
+    NSDictionary *infoDict = @{ @"cat" : @"mittens", @"son" : jackDict, @"formerAddresses" : formerAddressesDecomposed };
+
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"information" : infoDict };
+    converter.classesToConvert = [NSSet setWithObjects:[User class], [Address class], nil];
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"The converter decomposes objects with dictionaries recursively.");
+}
+
+- (void) testFromJSONDictWithDictRecursive {
+    NSDictionary *jackDict = @{ @"firstName" : @"Jack", @"age" : @12 };
+    NSDictionary *oldHomeDict = @{ @"street" : @"44 Old Lane", @"city" : @"Smith City" };
+    NSDictionary *reallyOldHomeDict = @{ @"street" : @"6 Ancient Way", @"city" : @"Farmtown" };
+    NSArray *formerAddressesDecomposed = @[ oldHomeDict, reallyOldHomeDict ];
+    NSDictionary *infoDict = @{ @"cat" : @"mittens", @"son" : jackDict, @"formerAddresses" : formerAddressesDecomposed };
+    
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
+    @"information" : infoDict };
+    
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        //Need both User and Address, because the converter will need to sniff out both.
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        if ([dict objectForKey:@"street"] || [dict objectForKey:@"city"]) {
+            return [Address class];
+        }
+        return nil;
+    };
+    User *user = [converter composeModelFromObject:sourceDict];
+    id jack = [user.information objectForKey:@"son"];
+    STAssertTrue([jack isKindOfClass:[User class]], @"The converter composes objects recursively, and sniffs out buried Models.");
+    STAssertEqualObjects([jack firstName], @"Jack", @"It finds their properties too!");
+    STAssertEquals([jack age], 12, @"Numeric properties are converted, many levels deep.");
+    
+    NSArray *formerAddresses = [user.information objectForKey:@"formerAddresses"];
+    Address *oldHome = [formerAddresses objectAtIndex:0];
+    STAssertEquals(oldHome.street, @"44 Old Lane", @"The converter finds models in arrays in dictionaries...");
+    STAssertEquals(oldHome.city, @"Smith City", @"The converter finds their properties, no problem.");
+    Address *reallyOldHome = [formerAddresses objectAtIndex:1];
+    STAssertEquals(reallyOldHome.street, @"6 Ancient Way", @"The converter finds models in arrays in dictionaries...");
+    STAssertEquals(reallyOldHome.city, @"Farmtown", @"The converter finds their properties, no problem.");
+    
 }
 
 - (void) testDifferentOutputTypes {
