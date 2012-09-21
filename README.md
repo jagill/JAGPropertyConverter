@@ -86,7 +86,7 @@ JAGPropertyConverter converts arrays to sets and vice-versa, as needed.
     }
     MyModel *model = [converter composeModelFromObject:jsonDictionary];
     
-The converter can also handle NSArray, NSSet, and NSDictionary inputs as well.
+The converter can also handle NSArray, NSSet, and NSDictionary inputs as well.  To see an extensive set of code samples, look at JAGPropertyConverterTests/ExampleTest.m .
 
 ## Things to do
 
@@ -97,6 +97,8 @@ While Key-Value coding handles struct (and similar) scalars decently well, we ha
 ## Requirements
 
 JAGPropertyConverter requires iOS 4.0 or higher, and uses ARC.  In theory it should also work with OS X 10.6 or higher, but so far it has only been tested for iOS development.
+
+ExampleTest.m uses the literal expressions introduced in Xcode 4.4.  Building that particular test requires Xcode 4.4, but all other files (including all files in the library proper) should work for any version of Xcode >4.0.
 
 ## Credits
 
