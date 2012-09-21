@@ -106,36 +106,137 @@ JAGPropertyConverter *converter;
 }
 
 - (void) testFromJSONDictRecursive {
-    //TODO: Not yet implemented
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        //Need both User and Address, because the converter will need to sniff out both.
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        if ([dict objectForKey:@"street"] || [dict objectForKey:@"city"]) {
+            return [Address class];
+        }
+        return nil;
+    };
+    NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
+    NSDictionary *sourceDict = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"address" : addressDict };
+    User *user = [converter composeModelFromObject:sourceDict];
+    STAssertTrue([user.address isKindOfClass:[Address class]], @"The identify block identifies both User and Address.");
+    STAssertEqualObjects(user.address.street, @"123 Main St", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.address.city, @"Springfield", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.address.country, @"USA", @"Converter finds nested properties.");
+    
+    /* 
+     * Note: If identifyDict block doesn't identify a class, you'll get a log message like:
+     *   Unable to set value of class __NSCFDictionary into property address of typeEncoding @"Address"
+     * This is because the dictionary isn't identified as a class, so it left as an NSDictionary,
+     * which can't be (safely) set as a property of a different class.  JAGPropertyConverter chooses
+     * to leave the property null rather than set a dangerous value.  Future versions might
+     * check classesToConvert and try to coerce a dictionary into a property of a known Model class.
+     */
 }
 
 - (void) testToJSONDictWithArray {
-    //TODO: Not yet implemented
+    //TODO: Write test
 }
 
 - (void) testFromJSONDictWithArray {
-    //TODO: Not yet implemented
+    //TODO: Write test
 }
 
 - (void) testToJSONDictWithDict {
-    //TODO: Not yet implemented
+    //TODO: Write test
 }
 
 - (void) testFromJSONDictWithDict {
-    //TODO: Not yet implemented
+    //TODO: Write test
 }
 
 - (void) testDifferentOutputTypes {
-    //TODO: Not yet implemented
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    NSDate *dob = [NSDate dateWithTimeIntervalSince1970:0];
+    user.dob = dob;
+    
+    converter.outputType = kJAGJSONOutput;
+    NSDictionary *jsonTargetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs" };
+    NSDictionary *jsonUserDict = [converter decomposeObject:user];
+    STAssertEqualObjects(jsonUserDict, jsonTargetDict, @"NSDate is not a valid JSON value type.");
+
+    converter.outputType = kJAGPropertyListOutput;
+    NSDictionary *proplistTargetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"dob" : dob };
+    NSDictionary *proplistUserDict = [converter decomposeObject:user];
+    STAssertEqualObjects(proplistUserDict, proplistTargetDict, @"NSDate is a valid PropertyList value type.");
+
+    //TODO: Finish writing test.  Finish FullOutput type.
+//    converter.outputType = kJAGFullOutput;
+//    NSDictionary *fullTargetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"dob" : dob };
+//    NSDictionary *fullUserDict = [converter decomposeObject:user];
+//    STAssertEqualObjects(fullUserDict, fullTargetDict, @"NSDate is a valid Full value type.");
+    
+    
+
+
 }
 
 - (void) testNumberFormatter {
-    //TODO: Not yet implemented
+    NSDictionary *sourceDict = @{ @"age" : @"55", @"firstName" : @"John", @"lastName" : @"Jacobs" };
+    User *user = [[User alloc] init];
+    [converter setPropertiesOf:user fromDictionary:sourceDict];
+    STAssertEquals(user.age, 0, @"The converter doesn't want to set the int property age to the NSString value @\"55\".");
+    
+    user = [[User alloc] init];
+    converter.numberFormatter = [[NSNumberFormatter alloc] init];
+    [converter setPropertiesOf:user fromDictionary:sourceDict];
+    STAssertEquals(user.age, 55, @"Setting numberFormatter lets the converter know it should convert strings to numeric types, and how it should do so.");
+    
+    /*
+     * Note that numberFormatter is NOT used decomposing a model into a dictionary.
+     * Numeric types are always decomposed to NSNumber.
+     */
 }
 
-- (void) testConvertToFromDate {
-    //TODO: Not yet implemented
+- (void) testConvertFromDate {
+    
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    NSDate *dob = [NSDate dateWithTimeIntervalSince1970:0];
+    user.dob = dob;
+    
+    converter.outputType = kJAGJSONOutput;
+    converter.convertFromDate = ^id (id date) {
+        if ([date isKindOfClass:[NSDate class]]) {
+            return @( [date timeIntervalSince1970] );
+        }
+        return nil;
+    };
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"dob" : @( [dob timeIntervalSince1970] ) };
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"NSDate objects are converted with convertFromDate block for kJAGJSONOutputType.");
 }
+
+- (void) testConvertToDate {
+    
+    NSDate *dob = [NSDate dateWithTimeIntervalSince1970:0];
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"dob" : @( [dob timeIntervalSince1970] ) };
+    
+    converter.outputType = kJAGJSONOutput;
+    converter.convertToDate = ^id (id dateValue) {
+        if ([dateValue isKindOfClass: [NSDate class]]) {
+            return dateValue;
+        } else if ([dateValue isKindOfClass: [NSNumber class]]) {
+            //We assume it's an epoc integer
+            return [NSDate dateWithTimeIntervalSince1970:[dateValue integerValue]];
+        }
+        return nil;
+    };
+    User *user = [[User alloc] init];
+    [converter setPropertiesOf:user fromDictionary:sourceDict];
+    STAssertEqualObjects(user.dob, dob, @"Objects set to NSDate properties are converted with convertToDate block.");
+}
+
 
 
 

@@ -19,12 +19,17 @@
 @property (copy)    NSString    *lastName;
 @property (assign)  int         age;
 @property (strong)  Address     *address;
+@property (strong)  NSDate      *dob;
 @end
 
 /**
  * ExampleTest is a class providing code samples.
  *
- * Examples of serialization and deserialization are given, that can be examined with breakpoints/etc.
+ * Examples of serialization and deserialization are given in the implementation file, 
+ * 
+ 
+ 
+ that can be examined with breakpoints/etc.
  */
 @interface ExampleTest : SenTestCase
 
