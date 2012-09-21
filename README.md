@@ -94,6 +94,12 @@ Since JAGPropertyConverter uses Key-Value coding to get/set values, it doesn't r
 
 While Key-Value coding handles struct (and similar) scalars decently well, we have not yet enabled JAGPropertyConverter to parse them into a JSON-value format.
 
+## Known Bugs
+
+JAGPropertyConverter doesn't handle `NSOrderedSet`, `NSCountedSet` or custom subclasses of `NSArray`/`NSDictionary` very well.  You may find them composed into a vanilla `NSSet`/`NSArray`/`NSDictionary`.  Support for the less-common Apple-supplied classes can be implemented when it's needed, but custom subclasses would require a bit more work.
+
+Decomposed `BOOL` properies will serialize under JSONKit to 0s and 1s.  This is actually due to a bug in Apple's Key-Value coding.  The documentation claims that it converts `aBool` into `[NSNumber numberWithBool:aBool]`, but in fact it looks like it uses `[NSNumber numberWithInt:aBool]` or similar.  JSONKit (correctly) views this as an integer, not a boolean.
+
 ## Requirements
 
 JAGPropertyConverter requires iOS 4.0 or higher, and uses ARC.  In theory it should also work with OS X 10.6 or higher, but so far it has only been tested for iOS development.
