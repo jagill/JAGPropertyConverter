@@ -397,6 +397,26 @@ JAGPropertyConverter *converter;
     STAssertEqualObjects(user.dob, dob, @"Objects set to NSDate properties are converted with convertToDate block.");
 }
 
+- (void) testToArrayOfObjects {
+    NSDictionary *user1Dict = @{ @"firstName":@"Jack", @"lastName":@"Johnson" };
+    NSDictionary *user2Dict = @{ @"firstName":@"Joe", @"lastName":@"Smith" };
+    NSArray *userArray = [NSArray arrayWithObjects:user1Dict, user2Dict, nil];
+    
+    converter.identifyDict = ^Class (NSDictionary *dict) {
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        return nil;
+    };
+    NSArray *users = [converter composeModelFromObject:userArray];
+    
+    User *user1 = [users objectAtIndex:0];
+    User *user2 = [users objectAtIndex:1];
+    STAssertEquals(user1.firstName, @"Jack", @"user1 should firstName Jack");
+    STAssertEquals(user1.lastName, @"Johnson", @"user1 should lastName Johnson");
+    STAssertEquals(user2.firstName, @"Joe", @"user2 should firstName Joe");
+    STAssertEquals(user2.lastName, @"Smith", @"user2 should lastName Smith");
+}
 
 
 
