@@ -87,6 +87,8 @@ typedef id (^ConvertBlock)(id obj);
  */
 @interface JAGPropertyConverter : NSObject
 
+@property (nonatomic, strong) NSDictionary *propertyNameMapping;
+
 /**
  * The outputType property determines how an object is
  * converted to an NSDictionary.  

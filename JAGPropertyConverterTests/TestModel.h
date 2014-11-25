@@ -46,6 +46,7 @@
 @property (unsafe_unretained)            TestModel       *weakProperty;
 @property (copy)            void(^blockProperty)(id);
 @property (strong)          id              idProperty;
+@property (copy)            NSString        *differentNameProperty;
 
 + (TestModel*) testModel;
 

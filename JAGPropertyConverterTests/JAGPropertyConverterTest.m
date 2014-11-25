@@ -50,6 +50,7 @@
         return nil;
 
     };
+    converter.propertyNameMapping = @{@"someProperty" : @"differentNameProperty"};
 }
 
 - (void) assert: (TestModel*) testModel isEqualTo: (NSDictionary*) dict {
@@ -115,6 +116,19 @@
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
     [self assert:testModel isEqualTo:dict];
+}
+
+- (void) testToModelWithDifferntPropertyName {
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"M123122", @"testModelID",
+                          [NSNumber numberWithInt:5], @"intProperty",
+                          [NSNumber numberWithBool:YES], @"boolProperty",
+                          @"new name" , @"someProperty",
+                          nil];
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    
+    STAssertEqualObjects(testModel.differentNameProperty, dict[@"someProperty"], @"");
 }
 
 - (void) testIdentifyModel {

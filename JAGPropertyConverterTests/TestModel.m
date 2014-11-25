@@ -109,6 +109,7 @@
     self.cfProperty = center;
     self.boolProperty = YES;
     self.urlProperty = [NSURL URLWithString:@"http://www.gooogle.com"];
+    self.differentNameProperty = @"Some New Property this is";
 }
 
 + (TestModel*) testModel {

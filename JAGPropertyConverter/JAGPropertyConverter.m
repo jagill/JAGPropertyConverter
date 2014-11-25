@@ -329,10 +329,17 @@
 
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
     JAGProperty *property;
-    for (NSString *key in dictionary) {
+    for (NSString *dictKey in dictionary) {
+        
+        // 2014-11-25 yel: TODO: get real key
+        NSString *key = dictKey;
+        if (self.propertyNameMapping[dictKey]) {
+            key = self.propertyNameMapping[dictKey];
+        }
+        
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
         if (!property || [property isReadOnly]) continue;
-        id value = [dictionary valueForKey:key];
+        id value = [dictionary valueForKey:dictKey];
         //See if we should convert an NSString to an NSNumber
         if (self.numberFormatter && property.isNumber && [value isKindOfClass:[NSString class]])
         {

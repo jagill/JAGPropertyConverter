@@ -26,8 +26,11 @@ JAGPropertyConverter *converter;
 {
     model = [[NumberTestModel alloc] init];
     converter = [[JAGPropertyConverter alloc] init];
-    converter.numberFormatter = [[NSNumberFormatter alloc] init];
     converter.classesToConvert = [NSSet setWithObject:[NumberTestModel class]];
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
+    converter.numberFormatter = formatter;
 }
 
 - (void) testNSStringToInt
@@ -39,7 +42,7 @@ JAGPropertyConverter *converter;
 
 - (void) testNSStringToFloat
 {
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"6.8" forKey:@"floatProperty"];
+    NSDictionary *dict = @{@"floatProperty" : @"6.8"};
     [converter setPropertiesOf:model fromDictionary:dict];
     float myFloat = 6.8;
     STAssertEqualsWithAccuracy(myFloat, model.floatProperty, 0.01, @"floatProperty %f should be %f.", model.floatProperty, myFloat);
@@ -67,6 +70,5 @@ JAGPropertyConverter *converter;
     [converter setPropertiesOf:model fromDictionary:dict];
     STAssertEqualObjects(@"4", model.stringProperty, @"stringProperty should not be converted.");
 }
-
 
 @end
