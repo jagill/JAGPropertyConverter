@@ -194,6 +194,13 @@
     return class;
 }
 
+- (BOOL) isBoolean {
+    NSString *typeEncoding = [self typeEncoding];
+    return ([typeEncoding isEqualToString: @"c"]
+            || [typeEncoding isEqualToString: @"B"]
+            );
+}
+
 - (BOOL) isNumber
 {
     NSString *typeEncoding = [self typeEncoding];

@@ -309,7 +309,7 @@
                && [targetClass isSubclassOfClass:[NSNumber class]]
                && [object isKindOfClass:[NSString class]])
     {
-        return [self.numberFormatter numberFromString:object];
+        return [self _numberFromString:object];
     } else if ([object  isKindOfClass: [NSNull class]]
                || [object isKindOfClass: [NSString class]]
                || [object isKindOfClass: [NSNumber class]]
@@ -341,10 +341,14 @@
         if (!property || [property isReadOnly]) continue;
         id value = [dictionary valueForKey:dictKey];
         //See if we should convert an NSString to an NSNumber
-        if (self.numberFormatter && property.isNumber && [value isKindOfClass:[NSString class]])
+        if (self.numberFormatter && [value isKindOfClass:[NSString class]])
         {
             //Handle NSNumber propertyClasses in the compose function
-            value = [self.numberFormatter numberFromString:value];
+            if (property.isBoolean) {
+                value = @([dictionary[dictKey] boolValue]);
+            } else if (property.isNumber) {
+                value = [self _numberFromString:value];
+            }
         }
         if ([property isObject]) {
             Class propertyClass = [property propertyClass];
@@ -357,6 +361,17 @@
                   [value class], [property name], [property typeEncoding]);
         }
     }
+}
+
+- (NSNumber *)_numberFromString:(NSString *)value {
+    NSNumber *number = [self.numberFormatter numberFromString:value];
+    
+    // when this method is invoked, it is garanteed that target value is of primitive or NSNumber data type:
+    // but because "true" can't be converted by -[NSNumberFormatter numberFromString:] we are converting BOOL ourselfs again
+    if (!number) {
+        number = @([value boolValue]);
+    }
+    return number;
 }
 
 @end
