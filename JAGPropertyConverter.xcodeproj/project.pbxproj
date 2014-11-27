@@ -28,6 +28,7 @@
 		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
 		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
 		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		11E60F58160B96FE000BD25F /* ExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTest.m; sourceTree = "<group>"; };
 		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
 		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
+		89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeCaseTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				11E60F54160A7436000BD25F /* NumberFormatterTest.m */,
 				11E60F57160B96FE000BD25F /* ExampleTest.h */,
 				11E60F58160B96FE000BD25F /* ExampleTest.m */,
+				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
 			);
 			path = JAGPropertyConverterTests;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
 				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
+				89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */,
 				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,
 				11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */,
 			);
