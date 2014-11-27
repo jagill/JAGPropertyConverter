@@ -215,4 +215,36 @@
     STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
 }
 
+- (void)testIgnoringNSNullValues {
+    converter.shouldIgnoreNullValues = YES;
+    
+    NSDictionary *dict = @{ @"stringProperty" : [NSNull null] };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertNil(testModel.stringProperty, @"");
+}
+
+- (void)testSnakeCaseSupport1 {
+    converter.shouldConvertSnakeCaseToCamelCase = YES;
+    
+    NSDictionary *dict = @{ @"int_property" : @12345,
+                            @"stringProperty" : @"same" };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertEquals(testModel.intProperty, 12345, @"camel case property should be set to 12345");
+    STAssertEqualObjects(testModel.stringProperty, @"same", @"normal property should also work normally");
+}
+
+- (void)testSnakeCaseSupport2 {
+    converter.shouldConvertSnakeCaseToCamelCase = YES;
+    
+    NSDictionary *dict = @{ @"String_Property" : @"same" };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
+}
+
 @end

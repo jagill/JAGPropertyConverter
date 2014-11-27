@@ -195,6 +195,24 @@ typedef id (^ConvertBlock)(id obj);
  */
 @property (nonatomic, assign) BOOL shouldConvertWeakProperties;
 
+/**
+ * Wether NSNull values will be set as object value or not.
+ *
+ * When flag is set to YES, all NSNull values will be ignored and not be handled.
+ *
+ * Default is YES.
+ */
+@property (nonatomic, assign) BOOL shouldIgnoreNullValues;
+
+/**
+ * Wether JSON keys in snake case format should be converted to camelcase property names.
+ *
+ * Default is NO.
+ * 
+ * Example: created_at --> createdAt
+ */
+@property (nonatomic, assign) BOOL shouldConvertSnakeCaseToCamelCase;
+
 #pragma mark - Lifecycle
 
 + (JAGPropertyConverter *) converterWithOutputType: (JAGOutputType) outputType;

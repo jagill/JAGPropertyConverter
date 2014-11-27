@@ -27,6 +27,7 @@
 #import "JAGPropertyConverter.h"
 #import "JAGPropertyFinder.h"
 #import "JAGProperty.h"
+#import "NSString+JAGSnakeCaseSupport.h"
 
 @interface JAGPropertyConverter () 
 
@@ -76,6 +77,8 @@
         self.convertFromDate = nil;
         self.classesToConvert = [NSMutableSet set];
         self.shouldConvertWeakProperties = NO;
+        self.shouldIgnoreNullValues = YES;
+        self.shouldConvertSnakeCaseToCamelCase = NO;
     }
     return self;
 }
@@ -331,18 +334,29 @@
     JAGProperty *property;
     for (NSString *dictKey in dictionary) {
         
-        // 2014-11-25 yel: TODO: get real key
         NSString *key = dictKey;
         if (self.propertyNameMapping[dictKey]) {
             key = self.propertyNameMapping[dictKey];
         }
         
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
-        if (!property || [property isReadOnly]) continue;
+        if (!property) {
+            // when enabled, convert to camelcase and try again fetching property
+            if (self.shouldConvertSnakeCaseToCamelCase) {
+                key = [key asCamelCaseFromUnderscore];
+                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+            }
+            if (!property || [property isReadOnly]) continue;
+        }
         id value = [dictionary valueForKey:dictKey];
+        
+        // ignore NSNull values
+        if (self.shouldIgnoreNullValues && [value isKindOfClass:[NSNull class]]) {
+            continue;
+        }
+        
         //See if we should convert an NSString to an NSNumber
-        if (self.numberFormatter && [value isKindOfClass:[NSString class]])
-        {
+        if (self.numberFormatter && [value isKindOfClass:[NSString class]]) {
             //Handle NSNumber propertyClasses in the compose function
             if (property.isBoolean) {
                 value = @([dictionary[dictKey] boolValue]);

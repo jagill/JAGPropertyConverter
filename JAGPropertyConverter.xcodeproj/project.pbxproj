@@ -25,6 +25,9 @@
 		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
 		11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F54160A7436000BD25F /* NumberFormatterTest.m */; };
 		11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F58160B96FE000BD25F /* ExampleTest.m */; };
+		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
+		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,8 @@
 		11E60F54160A7436000BD25F /* NumberFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormatterTest.m; sourceTree = "<group>"; };
 		11E60F57160B96FE000BD25F /* ExampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTest.h; sourceTree = "<group>"; };
 		11E60F58160B96FE000BD25F /* ExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTest.m; sourceTree = "<group>"; };
+		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
+		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +134,8 @@
 				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
 				11275B5314E9D56200C4707C /* JAGPropertyConverter.h */,
 				11275B5414E9D56200C4707C /* JAGPropertyConverter.m */,
+				89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */,
+				89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */,
 				11275B5114E9D56200C4707C /* Supporting Files */,
 			);
 			path = JAGPropertyConverter;
@@ -182,6 +189,7 @@
 			files = (
 				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
 				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
+				89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +230,7 @@
 			name = JAGPropertyConverterTests;
 			productName = JAGPropertyConverterTests;
 			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -283,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
+				89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
 				11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */,
 			);
@@ -293,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
+				89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
