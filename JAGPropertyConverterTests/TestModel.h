@@ -25,10 +25,11 @@
 // THE SOFTWARE.
 
 #import <MapKit/MapKit.h>
+#import "JAGPropertyMappingProtocol.h"
 
 @class JAGPropertyConverter;
 
-@interface TestModel : NSObject 
+@interface TestModel : NSObject <JAGPropertyMappingProtocol>
 
 @property (copy)            NSString        *testModelID;
 @property (assign)          int             intProperty;

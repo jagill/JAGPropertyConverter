@@ -29,7 +29,7 @@
 #import "JAGProperty.h"
 #import "NSString+JAGSnakeCaseSupport.h"
 
-@interface JAGPropertyConverter () 
+@interface JAGPropertyConverter ()
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass;
 
@@ -52,15 +52,6 @@
 @end
 
 @implementation JAGPropertyConverter
-
-
-@synthesize outputType = _outputType;
-@synthesize identifyDict = _identifyDict;
-@synthesize classesToConvert = _classesToConvert;
-@synthesize convertToDate = _convertToDate;
-@synthesize convertFromDate = _convertFromDate;
-@synthesize numberFormatter = _numberFormatter;
-@synthesize shouldConvertWeakProperties = _shouldConvertWeakProperties;
 
 #pragma mark - Lifecycle
 
@@ -331,19 +322,27 @@
 }
 
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
+    // see if target object has defined custom mappings
+    NSDictionary *customMapping = nil;
+    if ([object respondsToSelector:@selector(composingCustomPropertyMapping)]) {
+        customMapping = [(id<JAGPropertyMappingProtocol>)object composingCustomPropertyMapping];
+    }
+    
     JAGProperty *property;
     for (NSString *dictKey in dictionary) {
         
         NSString *key = dictKey;
-        if (self.propertyNameMapping[dictKey]) {
-            key = self.propertyNameMapping[dictKey];
-        }
         
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
         if (!property) {
             // when enabled, convert to camelcase and try again fetching property
             if (self.shouldConvertSnakeCaseToCamelCase) {
                 key = [key asCamelCaseFromUnderscore];
+                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+            }
+            // try custom mapping after snake case converting
+            if (!property && customMapping[key]) {
+                key = customMapping[key];
                 property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
             }
             if (!property || [property isReadOnly]) continue;

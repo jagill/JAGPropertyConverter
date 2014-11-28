@@ -26,6 +26,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JAGPropertyMappingProtocol.h"
+
 /**
  * The type of output the objects will be converted to.
  * @see outputType for more detailed description.
@@ -86,8 +88,6 @@ typedef id (^ConvertBlock)(id obj);
  
  */
 @interface JAGPropertyConverter : NSObject
-
-@property (nonatomic, strong) NSDictionary *propertyNameMapping;
 
 /**
  * The outputType property determines how an object is

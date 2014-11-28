@@ -50,7 +50,6 @@
         return nil;
 
     };
-    converter.propertyNameMapping = @{@"someProperty" : @"differentNameProperty"};
 }
 
 - (void) assert: (TestModel*) testModel isEqualTo: (NSDictionary*) dict {
@@ -119,6 +118,7 @@
 }
 
 - (void) testToModelWithDifferntPropertyName {
+    // custom mapping is directly implemented by TestModel with <JAGPropertyMappingProtocol>
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"M123122", @"testModelID",
                           [NSNumber numberWithInt:5], @"intProperty",
@@ -128,7 +128,8 @@
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
     
-    STAssertEqualObjects(testModel.differentNameProperty, dict[@"someProperty"], @"");
+    STAssertNotNil(testModel.differentNameProperty, @"");
+    STAssertEqualObjects(testModel.differentNameProperty, @"new name", @"");
 }
 
 - (void) testIdentifyModel {

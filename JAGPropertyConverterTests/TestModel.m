@@ -140,6 +140,15 @@
     _active = active;
 }
 
+#pragma mark - JAGPropertyMappingProtocol
+
+- (NSDictionary *)composingCustomPropertyMapping {
+    return @{@"someProperty" : @"differentNameProperty"};
+}
+
+- (NSDictionary *)decomposingCustomPropertyMapping {
+    return @{@"differentNameProperty" : @"someProperty"};
+}
 
 @end
 
