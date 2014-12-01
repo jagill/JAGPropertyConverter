@@ -227,7 +227,7 @@
 }
 
 - (void)testSnakeCaseSupport1 {
-    converter.shouldConvertSnakeCaseToCamelCase = YES;
+    converter.enableSnakeCaseSupport = YES;
     
     NSDictionary *dict = @{ @"int_property" : @12345,
                             @"stringProperty" : @"same" };
@@ -239,7 +239,7 @@
 }
 
 - (void)testSnakeCaseSupport2 {
-    converter.shouldConvertSnakeCaseToCamelCase = YES;
+    converter.enableSnakeCaseSupport = YES;
     
     NSDictionary *dict = @{ @"String_Property" : @"same" };
     

@@ -12,10 +12,16 @@
 
 @optional
 
-/** Mapping for JSON --> Object */
-- (NSDictionary *)composingCustomPropertyMapping;
+/** Mapping from JSON to Model (JSON --> Model).
+ *
+ * @return A dictionary with JSON name as key and property name as value: Dict <JSON name, property name>
+ */
+- (NSDictionary *)customPropertyMappingConvertingFromJSON;
 
-/** Mapping for Object --> JSON */
-- (NSDictionary *)decomposingCustomPropertyMapping;
+/** Mapping from Model to JSON (Model --> JSON).
+ *
+ * @return A dictionary with property name as key and JSON name as value: Dict <property name, JSON name>
+ */
+- (NSDictionary *)customPropertyMappingConvertingToJSON;
 
 @end

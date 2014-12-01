@@ -8,6 +8,8 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
+#import "JAGPropertyMappingProtocol.h"
+
 @interface Address : NSObject
 @property (copy)    NSString        *street;
 @property (copy)    NSString        *city;
@@ -22,6 +24,10 @@
 @property (strong)  NSDate          *dob;
 @property (strong)  NSArray         *favorites;
 @property (strong)  NSDictionary    *information;
+@end
+
+@interface CustomAddress : Address <JAGPropertyMappingProtocol>
+
 @end
 
 /**

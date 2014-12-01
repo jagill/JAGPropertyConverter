@@ -39,7 +39,17 @@
     NSMutableArray* propertyArray = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i < count ; i++)
     {
-        [propertyArray addObject: [JAGProperty propertyWithObjCProperty: list[i]]];
+        JAGProperty *property = [JAGProperty propertyWithObjCProperty: list[i]];
+        
+        // iOS 8 those 4 methods are promoted to read-only properties defined in NSObject and therefore will show up in class_copyPropertyList array --> don't add them to array
+        // Source: http://stackoverflow.com/q/24873062/1146019
+        // Source: http://www.redwindsoftware.com/blog/post/2014/08/20/NSObject-has-some-new-properties-in-iOS-8.aspx
+        if (property.isReadOnly &&
+            ([property.name isEqualToString:@"hash"] || [property.name isEqualToString:@"superclass"] || [property.name isEqualToString:@"description"] || [property.name isEqualToString:@"debugDescription"])) {
+            continue;
+        }
+        
+        [propertyArray addObject: property];
     }
     free(list);
     return propertyArray;

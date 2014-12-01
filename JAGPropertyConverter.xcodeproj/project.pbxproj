@@ -1,1230 +1,497 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>11275B4014E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B5014E9D56200C4707C</string>
-				<string>11275B6414E9D56200C4707C</string>
-				<string>11275B4D14E9D56200C4707C</string>
-				<string>11275B4C14E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B4214E9D56200C4707C</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0610</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>11275B4514E9D56200C4707C</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>11275B4014E9D56200C4707C</string>
-			<key>productRefGroup</key>
-			<string>11275B4C14E9D56200C4707C</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>11275B4A14E9D56200C4707C</string>
-				<string>11275B5A14E9D56200C4707C</string>
-			</array>
-		</dict>
-		<key>11275B4514E9D56200C4707C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>11275B6D14E9D56200C4707C</string>
-				<string>11275B6E14E9D56200C4707C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>11275B4714E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B5514E9D56200C4707C</string>
-				<string>89C0B7981A275E84007AA954</string>
-				<string>11275B7E14E9D89500C4707C</string>
-				<string>11275B8014E9D89500C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B4814E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B4F14E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B4914E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B7D14E9D89500C4707C</string>
-				<string>11275B7F14E9D89500C4707C</string>
-				<string>89C0B7971A275E84007AA954</string>
-				<string>89C0B7B21A28AF2B007AA954</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B4A14E9D56200C4707C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>11275B6F14E9D56200C4707C</string>
-			<key>buildPhases</key>
-			<array>
-				<string>11275B4714E9D56200C4707C</string>
-				<string>11275B4814E9D56200C4707C</string>
-				<string>11275B4914E9D56200C4707C</string>
-				<string>992FA06C8DCDC82F1AF6248F</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>JAGPropertyConverter</string>
-			<key>productName</key>
-			<string>JAGPropertyConverter</string>
-			<key>productReference</key>
-			<string>11275B4B14E9D56200C4707C</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>11275B4B14E9D56200C4707C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libJAGPropertyConverter.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>11275B4C14E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B4B14E9D56200C4707C</string>
-				<string>11275B5B14E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B4D14E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B4E14E9D56200C4707C</string>
-				<string>11275B5C14E9D56200C4707C</string>
-				<string>11275B5E14E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B4E14E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>11275B4F14E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B4E14E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B5014E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B7714E9D89500C4707C</string>
-				<string>11275B7814E9D89500C4707C</string>
-				<string>11275B7914E9D89500C4707C</string>
-				<string>11275B7A14E9D89500C4707C</string>
-				<string>11275B5314E9D56200C4707C</string>
-				<string>11275B5414E9D56200C4707C</string>
-				<string>89C0B7B11A28AF2B007AA954</string>
-				<string>89C0B7951A275E84007AA954</string>
-				<string>89C0B7961A275E84007AA954</string>
-				<string>11275B5114E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>JAGPropertyConverter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B5114E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B5214E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B5214E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyConverter-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B5314E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyConverter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B5414E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGPropertyConverter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B5514E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B5414E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B5614E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B8B14E9D8BD00C4707C</string>
-				<string>89C0B7991A275E84007AA954</string>
-				<string>11275B8C14E9D8BD00C4707C</string>
-				<string>11275B8D14E9D8BD00C4707C</string>
-				<string>11275B8E14E9D8BD00C4707C</string>
-				<string>11275B8F14E9D8BD00C4707C</string>
-				<string>89C0B7A11A278D3D007AA954</string>
-				<string>11E60F55160A7436000BD25F</string>
-				<string>11E60F59160B96FE000BD25F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B5714E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B5D14E9D56200C4707C</string>
-				<string>11275B5F14E9D56200C4707C</string>
-				<string>11275B6014E9D56200C4707C</string>
-				<string>11275B6314E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B5814E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>11275B6914E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>11275B5914E9D56200C4707C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string># Run the unit tests in this test bundle.
-"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests"
-</string>
-		</dict>
-		<key>11275B5A14E9D56200C4707C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>11275B7214E9D56200C4707C</string>
-			<key>buildPhases</key>
-			<array>
-				<string>11275B5614E9D56200C4707C</string>
-				<string>11275B5714E9D56200C4707C</string>
-				<string>11275B5814E9D56200C4707C</string>
-				<string>11275B5914E9D56200C4707C</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>11275B6214E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>JAGPropertyConverterTests</string>
-			<key>productName</key>
-			<string>JAGPropertyConverterTests</string>
-			<key>productReference</key>
-			<string>11275B5B14E9D56200C4707C</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.ocunit-test</string>
-		</dict>
-		<key>11275B5B14E9D56200C4707C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>JAGPropertyConverterTests.octest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>11275B5C14E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>SenTestingKit.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/SenTestingKit.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>11275B5D14E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B5C14E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B5E14E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>11275B5F14E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B5E14E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B6014E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B4E14E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B6114E9D56200C4707C</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>11275B4214E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>11275B4A14E9D56200C4707C</string>
-			<key>remoteInfo</key>
-			<string>JAGPropertyConverter</string>
-		</dict>
-		<key>11275B6214E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>11275B4A14E9D56200C4707C</string>
-			<key>targetProxy</key>
-			<string>11275B6114E9D56200C4707C</string>
-		</dict>
-		<key>11275B6314E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B4B14E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B6414E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B8114E9D8BD00C4707C</string>
-				<string>11275B8214E9D8BD00C4707C</string>
-				<string>11275B8314E9D8BD00C4707C</string>
-				<string>11275B8414E9D8BD00C4707C</string>
-				<string>11275B8514E9D8BD00C4707C</string>
-				<string>11275B8614E9D8BD00C4707C</string>
-				<string>11275B8714E9D8BD00C4707C</string>
-				<string>11275B8814E9D8BD00C4707C</string>
-				<string>11275B8914E9D8BD00C4707C</string>
-				<string>11275B8A14E9D8BD00C4707C</string>
-				<string>11275B6514E9D56200C4707C</string>
-				<string>11E60F53160A7436000BD25F</string>
-				<string>11E60F54160A7436000BD25F</string>
-				<string>11E60F57160B96FE000BD25F</string>
-				<string>11E60F58160B96FE000BD25F</string>
-				<string>89C0B7A01A278D3D007AA954</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>JAGPropertyConverterTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B6514E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B6614E9D56200C4707C</string>
-				<string>11275B6714E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B6614E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>JAGPropertyConverterTests-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B6714E9D56200C4707C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>11275B6814E9D56200C4707C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B6814E9D56200C4707C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B6914E9D56200C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B6714E9D56200C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B6D14E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_MISSING_PROTOTYPES</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>11275B6E14E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_MISSING_PROTOTYPES</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>11275B6F14E9D56200C4707C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>11275B7014E9D56200C4707C</string>
-				<string>11275B7114E9D56200C4707C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>11275B7014E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>DSTROOT</key>
-				<string>/tmp/JAGPropertyConverter.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JAGPropertyConverter/JAGPropertyConverter-Prefix.pch</string>
-				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>11275B7114E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>DSTROOT</key>
-				<string>/tmp/JAGPropertyConverter.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JAGPropertyConverter/JAGPropertyConverter-Prefix.pch</string>
-				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>11275B7214E9D56200C4707C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>11275B7314E9D56200C4707C</string>
-				<string>11275B7414E9D56200C4707C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>11275B7314E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(DEVELOPER_LIBRARY_DIR)/Frameworks</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JAGPropertyConverter/JAGPropertyConverter-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>octest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>11275B7414E9D56200C4707C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(DEVELOPER_LIBRARY_DIR)/Frameworks</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JAGPropertyConverter/JAGPropertyConverter-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>octest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>11275B7714E9D89500C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGProperty.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B7814E9D89500C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGProperty.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B7914E9D89500C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyFinder.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B7A14E9D89500C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGPropertyFinder.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B7D14E9D89500C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B7714E9D89500C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B7E14E9D89500C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B7814E9D89500C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B7F14E9D89500C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B7914E9D89500C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8014E9D89500C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B7A14E9D89500C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8114E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyConverterTest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8214E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGPropertyConverterTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8314E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyFinderTest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8414E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGPropertyFinderTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8514E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyTest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8614E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JAGPropertyTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8714E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PropertyModelTests.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8814E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PropertyModelTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8914E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TestModel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8A14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TestModel.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11275B8B14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B8214E9D8BD00C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8C14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B8414E9D8BD00C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8D14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B8614E9D8BD00C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8E14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B8814E9D8BD00C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11275B8F14E9D8BD00C4707C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11275B8A14E9D8BD00C4707C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11E60F53160A7436000BD25F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>NumberFormatterTest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11E60F54160A7436000BD25F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>NumberFormatterTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11E60F55160A7436000BD25F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11E60F54160A7436000BD25F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11E60F57160B96FE000BD25F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ExampleTest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11E60F58160B96FE000BD25F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>ExampleTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11E60F59160B96FE000BD25F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11E60F58160B96FE000BD25F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>89C0B7951A275E84007AA954</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>NSString+JAGSnakeCaseSupport.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>89C0B7961A275E84007AA954</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>NSString+JAGSnakeCaseSupport.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>89C0B7971A275E84007AA954</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89C0B7951A275E84007AA954</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>89C0B7981A275E84007AA954</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89C0B7961A275E84007AA954</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>89C0B7991A275E84007AA954</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89C0B7961A275E84007AA954</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>89C0B7A01A278D3D007AA954</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>SnakeCaseTest.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>89C0B7A11A278D3D007AA954</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89C0B7A01A278D3D007AA954</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>89C0B7B11A28AF2B007AA954</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JAGPropertyMappingProtocol.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>89C0B7B21A28AF2B007AA954</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89C0B7B11A28AF2B007AA954</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>992FA06C8DCDC82F1AF6248F</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Find unused imports</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>/bin/sh "/Users/runtastic102/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh" "/Users/runtastic102/Documents/dev/mobile/iPhone/GitHub/JAGPropertyConverter"</string>
-			<key>showEnvVarsInLog</key>
-			<string>1</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>11275B4214E9D56200C4707C</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11275B4F14E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
+		11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B5414E9D56200C4707C /* JAGPropertyConverter.m */; };
+		11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5C14E9D56200C4707C /* SenTestingKit.framework */; };
+		11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5E14E9D56200C4707C /* UIKit.framework */; };
+		11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
+		11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */; };
+		11275B6914E9D56200C4707C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11275B6714E9D56200C4707C /* InfoPlist.strings */; };
+		11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 11275B7714E9D89500C4707C /* JAGProperty.h */; };
+		11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B7814E9D89500C4707C /* JAGProperty.m */; };
+		11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 11275B7914E9D89500C4707C /* JAGPropertyFinder.h */; };
+		11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */; };
+		11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */; };
+		11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */; };
+		11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */; };
+		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
+		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
+		11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F54160A7436000BD25F /* NumberFormatterTest.m */; };
+		11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F58160B96FE000BD25F /* ExampleTest.m */; };
+		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
+		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */; };
+		89C0B7B21A28AF2B007AA954 /* JAGPropertyMappingProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7B11A28AF2B007AA954 /* JAGPropertyMappingProtocol.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11275B6114E9D56200C4707C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11275B4214E9D56200C4707C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11275B4A14E9D56200C4707C;
+			remoteInfo = JAGPropertyConverter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJAGPropertyConverter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		11275B4E14E9D56200C4707C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter-Prefix.pch"; sourceTree = "<group>"; };
+		11275B5314E9D56200C4707C /* JAGPropertyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverter.h; sourceTree = "<group>"; };
+		11275B5414E9D56200C4707C /* JAGPropertyConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverter.m; sourceTree = "<group>"; };
+		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11275B5C14E9D56200C4707C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		11275B5E14E9D56200C4707C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JAGPropertyConverterTests-Info.plist"; sourceTree = "<group>"; };
+		11275B6814E9D56200C4707C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		11275B7714E9D89500C4707C /* JAGProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGProperty.h; sourceTree = "<group>"; };
+		11275B7814E9D89500C4707C /* JAGProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGProperty.m; sourceTree = "<group>"; };
+		11275B7914E9D89500C4707C /* JAGPropertyFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyFinder.h; sourceTree = "<group>"; };
+		11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyFinder.m; sourceTree = "<group>"; };
+		11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverterTest.h; sourceTree = "<group>"; };
+		11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverterTest.m; sourceTree = "<group>"; };
+		11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyFinderTest.h; sourceTree = "<group>"; };
+		11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyFinderTest.m; sourceTree = "<group>"; };
+		11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyTest.h; sourceTree = "<group>"; };
+		11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyTest.m; sourceTree = "<group>"; };
+		11275B8714E9D8BD00C4707C /* PropertyModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyModelTests.h; sourceTree = "<group>"; };
+		11275B8814E9D8BD00C4707C /* PropertyModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyModelTests.m; sourceTree = "<group>"; };
+		11275B8914E9D8BD00C4707C /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		11E60F53160A7436000BD25F /* NumberFormatterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormatterTest.h; sourceTree = "<group>"; };
+		11E60F54160A7436000BD25F /* NumberFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormatterTest.m; sourceTree = "<group>"; };
+		11E60F57160B96FE000BD25F /* ExampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTest.h; sourceTree = "<group>"; };
+		11E60F58160B96FE000BD25F /* ExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTest.m; sourceTree = "<group>"; };
+		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
+		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
+		89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeCaseTest.m; sourceTree = "<group>"; };
+		89C0B7B11A28AF2B007AA954 /* JAGPropertyMappingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyMappingProtocol.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11275B4814E9D56200C4707C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B4F14E9D56200C4707C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11275B5714E9D56200C4707C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */,
+				11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */,
+				11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */,
+				11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11275B4014E9D56200C4707C = {
+			isa = PBXGroup;
+			children = (
+				11275B5014E9D56200C4707C /* JAGPropertyConverter */,
+				11275B6414E9D56200C4707C /* JAGPropertyConverterTests */,
+				11275B4D14E9D56200C4707C /* Frameworks */,
+				11275B4C14E9D56200C4707C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		11275B4C14E9D56200C4707C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */,
+				11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		11275B4D14E9D56200C4707C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11275B4E14E9D56200C4707C /* Foundation.framework */,
+				11275B5C14E9D56200C4707C /* SenTestingKit.framework */,
+				11275B5E14E9D56200C4707C /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		11275B5014E9D56200C4707C /* JAGPropertyConverter */ = {
+			isa = PBXGroup;
+			children = (
+				11275B7714E9D89500C4707C /* JAGProperty.h */,
+				11275B7814E9D89500C4707C /* JAGProperty.m */,
+				11275B7914E9D89500C4707C /* JAGPropertyFinder.h */,
+				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
+				11275B5314E9D56200C4707C /* JAGPropertyConverter.h */,
+				11275B5414E9D56200C4707C /* JAGPropertyConverter.m */,
+				89C0B7B11A28AF2B007AA954 /* JAGPropertyMappingProtocol.h */,
+				89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */,
+				89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */,
+				11275B5114E9D56200C4707C /* Supporting Files */,
+			);
+			path = JAGPropertyConverter;
+			sourceTree = "<group>";
+		};
+		11275B5114E9D56200C4707C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		11275B6414E9D56200C4707C /* JAGPropertyConverterTests */ = {
+			isa = PBXGroup;
+			children = (
+				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
+				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
+				11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */,
+				11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */,
+				11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */,
+				11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */,
+				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
+				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
+				11275B8914E9D8BD00C4707C /* TestModel.h */,
+				11275B8A14E9D8BD00C4707C /* TestModel.m */,
+				11275B6514E9D56200C4707C /* Supporting Files */,
+				11E60F53160A7436000BD25F /* NumberFormatterTest.h */,
+				11E60F54160A7436000BD25F /* NumberFormatterTest.m */,
+				11E60F57160B96FE000BD25F /* ExampleTest.h */,
+				11E60F58160B96FE000BD25F /* ExampleTest.m */,
+				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
+			);
+			path = JAGPropertyConverterTests;
+			sourceTree = "<group>";
+		};
+		11275B6514E9D56200C4707C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */,
+				11275B6714E9D56200C4707C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		11275B4914E9D56200C4707C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
+				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
+				89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */,
+				89C0B7B21A28AF2B007AA954 /* JAGPropertyMappingProtocol.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		11275B4A14E9D56200C4707C /* JAGPropertyConverter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11275B6F14E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverter" */;
+			buildPhases = (
+				11275B4714E9D56200C4707C /* Sources */,
+				11275B4814E9D56200C4707C /* Frameworks */,
+				11275B4914E9D56200C4707C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JAGPropertyConverter;
+			productName = JAGPropertyConverter;
+			productReference = 11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		11275B5A14E9D56200C4707C /* JAGPropertyConverterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11275B7214E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverterTests" */;
+			buildPhases = (
+				11275B5614E9D56200C4707C /* Sources */,
+				11275B5714E9D56200C4707C /* Frameworks */,
+				11275B5814E9D56200C4707C /* Resources */,
+				11275B5914E9D56200C4707C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11275B6214E9D56200C4707C /* PBXTargetDependency */,
+			);
+			name = JAGPropertyConverterTests;
+			productName = JAGPropertyConverterTests;
+			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */;
+			productType = "com.apple.product-type.bundle.ocunit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		11275B4214E9D56200C4707C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 11275B4014E9D56200C4707C;
+			productRefGroup = 11275B4C14E9D56200C4707C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				11275B4A14E9D56200C4707C /* JAGPropertyConverter */,
+				11275B5A14E9D56200C4707C /* JAGPropertyConverterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11275B5814E9D56200C4707C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B6914E9D56200C4707C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11275B5914E9D56200C4707C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11275B4714E9D56200C4707C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
+				89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
+				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
+				11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11275B5614E9D56200C4707C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
+				89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
+				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
+				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
+				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
+				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
+				89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */,
+				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,
+				11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11275B6214E9D56200C4707C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11275B4A14E9D56200C4707C /* JAGPropertyConverter */;
+			targetProxy = 11275B6114E9D56200C4707C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		11275B6714E9D56200C4707C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11275B6814E9D56200C4707C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		11275B6D14E9D56200C4707C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		11275B6E14E9D56200C4707C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		11275B7014E9D56200C4707C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JAGPropertyConverter.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		11275B7114E9D56200C4707C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JAGPropertyConverter.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		11275B7314E9D56200C4707C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
+				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		11275B7414E9D56200C4707C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
+				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11275B6D14E9D56200C4707C /* Debug */,
+				11275B6E14E9D56200C4707C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11275B6F14E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11275B7014E9D56200C4707C /* Debug */,
+				11275B7114E9D56200C4707C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11275B7214E9D56200C4707C /* Build configuration list for PBXNativeTarget "JAGPropertyConverterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11275B7314E9D56200C4707C /* Debug */,
+				11275B7414E9D56200C4707C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 11275B4214E9D56200C4707C /* Project object */;
+}

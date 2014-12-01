@@ -69,7 +69,7 @@
         self.classesToConvert = [NSMutableSet set];
         self.shouldConvertWeakProperties = NO;
         self.shouldIgnoreNullValues = YES;
-        self.shouldConvertSnakeCaseToCamelCase = NO;
+        self.enableSnakeCaseSupport = NO;
     }
     return self;
 }
@@ -202,11 +202,17 @@
 
 - (NSDictionary*) convertToDictionary: (id) model {
     if (!model) return nil;
+
+    // see if target object has defined custom mappings
+    NSDictionary *customMapping = nil;
+    if ([model respondsToSelector:@selector(customPropertyMappingConvertingToJSON)]) {
+        customMapping = [(id<JAGPropertyMappingProtocol>)model customPropertyMappingConvertingToJSON];
+    }
+
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
     NSString* propertyName;
     for (JAGProperty *property in properties) {
-        propertyName = [property name];
         if (!self.shouldConvertWeakProperties && [property isWeak]) {
             continue;
         }
@@ -215,8 +221,21 @@
             //Found property without a valid getter. Skipping.
             continue;
         }
+        propertyName = [property name];
         //TODO: Should use the getter for this?  Harder to handle non-objects.
         id object = [model valueForKey:propertyName];
+
+        // custom property mapping
+        if (customMapping[propertyName]) {
+            propertyName = [customMapping[propertyName] copy]; // copy the new name, will crash otherwise
+        }
+
+        // convert to snake case?
+        if (self.enableSnakeCaseSupport) {
+            propertyName = [propertyName asUnderscoreFromCamelCase];
+        }
+        
+        // set value in dictionary
         [values setValue:[self decomposeObject: object] forKey:propertyName];
     }
     return values;
@@ -324,8 +343,8 @@
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
     // see if target object has defined custom mappings
     NSDictionary *customMapping = nil;
-    if ([object respondsToSelector:@selector(composingCustomPropertyMapping)]) {
-        customMapping = [(id<JAGPropertyMappingProtocol>)object composingCustomPropertyMapping];
+    if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
+        customMapping = [(id<JAGPropertyMappingProtocol>)object customPropertyMappingConvertingFromJSON];
     }
     
     JAGProperty *property;
@@ -336,7 +355,7 @@
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
         if (!property) {
             // when enabled, convert to camelcase and try again fetching property
-            if (self.shouldConvertSnakeCaseToCamelCase) {
+            if (self.enableSnakeCaseSupport) {
                 key = [key asCamelCaseFromUnderscore];
                 property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
             }

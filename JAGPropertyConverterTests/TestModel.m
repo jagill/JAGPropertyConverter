@@ -142,11 +142,11 @@
 
 #pragma mark - JAGPropertyMappingProtocol
 
-- (NSDictionary *)composingCustomPropertyMapping {
+- (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{@"someProperty" : @"differentNameProperty"};
 }
 
-- (NSDictionary *)decomposingCustomPropertyMapping {
+- (NSDictionary *)customPropertyMappingConvertingToJSON {
     return @{@"differentNameProperty" : @"someProperty"};
 }
 

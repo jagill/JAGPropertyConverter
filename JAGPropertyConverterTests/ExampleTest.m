@@ -15,6 +15,18 @@
 @implementation User
 @end
 
+@implementation CustomAddress
+
+- (NSDictionary *)customPropertyMappingConvertingFromJSON {
+    return @{ @"newCustomProperty" : @"street" };
+}
+
+- (NSDictionary *)customPropertyMappingConvertingToJSON {
+    return @{ @"street" : @"newCustomProperty" };
+}
+
+@end
+
 /**
  * Some code examples in test form.
  *
@@ -418,8 +430,81 @@ JAGPropertyConverter *converter;
     STAssertEquals(user2.lastName, @"Smith", @"user2 should lastName Smith");
 }
 
+#pragma mark - Snake Case Support
 
+- (void)testToJSONWithSnakeCase {
+    converter.enableSnakeCaseSupport = YES;
+    
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    
+    NSDictionary *targetDict = @{ @"age" : @55, @"first_name" : @"John", @"last_name" : @"Jacobs" };
+    NSDictionary *userJsonDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
 
+}
 
+- (void)testFromJSONDictWithSnakeCase {
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *sourceDict = @{ @"age" : @55, @"first_name" : @"John", @"last_name" : @"Jacobs" };
+    User *user = [[User alloc] init];
+    [converter setPropertiesOf:user fromDictionary:sourceDict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEqualObjects(user.lastName, @"Jacobs", @"lastName should be Jacobs.");
+    STAssertEquals(user.age, 55, @"age should be 55");
+}
+
+#pragma mark - Ignore NSNull values
+
+- (void)testFromJSONDictIgnoringNSNull {
+    // simulating a null value from JSON
+    NSData *data = [@"{\"age\":55,\"firstName\":\"John\",\"lastName\":null}" dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    STAssertEquals([dict[@"lastName"] class], [NSNull class], @"lastName should be converted to NSNull");
+    
+    converter.shouldIgnoreNullValues = YES; // no more log output saying can't set null value
+    
+    User *user = [[User alloc] init];
+    [converter setPropertiesOf:user fromDictionary:dict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEquals(user.age, 55, @"age should be 55");
+    
+    STAssertNil(user.lastName, @"lastName should be nil but not NSNull");
+    STAssertFalse([user.lastName isKindOfClass:[NSNull class]], @"not NSNull");
+}
+
+#pragma mark - Custom Property Name Mapping
+
+- (void)testToJSONWithCustomName {
+    converter.classesToConvert = [NSSet setWithArray:@[[CustomAddress class]]];
+
+    // street --> newCustomProperty
+    CustomAddress *address = [[CustomAddress alloc] init];   // custom address has implemented JAGPropertyMappingProtocol
+    address.street = @"Infinite Loop 1";
+    address.city = @"Cuppertino";
+    address.country = @"USA";
+    
+    NSDictionary *targetDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"newCustomProperty" : @"Infinite Loop 1" };
+    NSDictionary *userJsonDict = [converter decomposeObject:address];
+    STAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
+    
+}
+
+- (void)testFromJSONDictWithCustomName {
+    // newCustomProperty --> street
+    NSDictionary *sourceDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"newCustomProperty" : @"Infinite Loop 1" };
+    CustomAddress *address = [[CustomAddress alloc] init];
+    [converter setPropertiesOf:address fromDictionary:sourceDict];
+    
+    STAssertEqualObjects(address.street, @"Infinite Loop 1", @"firstName should be John.");
+    STAssertEqualObjects(address.city, @"Cuppertino", @"lastName should be Jacobs.");
+    STAssertEquals(address.country, @"USA", @"age should be 55");
+}
 
 @end

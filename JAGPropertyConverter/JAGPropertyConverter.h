@@ -211,7 +211,7 @@ typedef id (^ConvertBlock)(id obj);
  * 
  * Example: created_at --> createdAt
  */
-@property (nonatomic, assign) BOOL shouldConvertSnakeCaseToCamelCase;
+@property (nonatomic, assign) BOOL enableSnakeCaseSupport;
 
 #pragma mark - Lifecycle
 
