@@ -45,7 +45,7 @@
  * returned either unmodified, or if there is a 'convertable'
  * targetClass, converted to that.
  */
-- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass;
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass propertyName: (NSString *) propertyName;
 
 - (BOOL) shouldConvertClass: (Class) aClass;
 
@@ -65,7 +65,9 @@
         self.outputType = outputType;
         self.identifyDict = nil;
         self.convertToDate = nil;
+        self.convertToData = nil;
         self.convertFromDate = nil;
+        self.convertFromData = nil;
         self.classesToConvert = [NSMutableSet set];
         self.shouldConvertWeakProperties = NO;
         self.shouldIgnoreNullValues = YES;
@@ -123,6 +125,8 @@
         if ( self.outputType == kJAGFullOutput
             || self.outputType == kJAGPropertyListOutput ) {
             return object;
+        } else if (self.convertFromData) {
+            return self.convertFromData(object);
         } else {
             //Object is not safe for JSON.  Removing.
             return nil;
@@ -270,10 +274,10 @@
     return mutableCollection;
 }
 - (id) composeModelFromObject: (id) object {
-    return [self composeModelFromObject:object withTargetClass: nil];
+    return [self composeModelFromObject:object withTargetClass: nil propertyName: nil];
 }
 
-- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass {
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass propertyName: (NSString *) propertyName {
     if (!object) {
         return nil;
     } else if ([object isKindOfClass: [NSArray class]]
@@ -283,7 +287,7 @@
         //Is this a PropertyModel in disguise?
         Class modelClass = nil;
         if (self.identifyDict) {
-            modelClass = self.identifyDict(object);
+            modelClass = self.identifyDict(propertyName, object);
         }
         if (modelClass) {
             id model = [[modelClass alloc] init];
@@ -311,7 +315,12 @@
                && self.convertToDate) {
         //        NSLog(@"Found prop %@ for NSDate targetClass.  Converting.", prop);
         return self.convertToDate(object);
-    } else if ( targetClass 
+    } else if (targetClass
+               && [targetClass isSubclassOfClass:[NSData class]]
+               && self.convertToData) {
+        //        NSLog(@"Found prop %@ for NSData targetClass.  Converting.", prop);
+        return self.convertToData(object);
+    } else if ( targetClass
                && [targetClass isSubclassOfClass:[NSURL class]]
                && [object isKindOfClass:[NSString class]]
                )
@@ -384,7 +393,9 @@
         }
         if ([property isObject]) {
             Class propertyClass = [property propertyClass];
-            value = [self composeModelFromObject: value withTargetClass:propertyClass];
+            
+            NSString *propertyName = self.enableSnakeCaseSupport ? [dictKey asCamelCaseFromUnderscore] : dictKey;
+            value = [self composeModelFromObject: value withTargetClass:propertyClass propertyName:propertyName];
         }
         if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];

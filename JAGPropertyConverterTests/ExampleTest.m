@@ -64,35 +64,6 @@ JAGPropertyConverter *converter;
     STAssertEquals(user.age, 55, @"age should be 55");
 }
 
-- (void) testFromJSONDictWithIdentifyBlock {
-    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs" };
-    id output = [converter composeModelFromObject:sourceDict];
-    STAssertTrue([output isKindOfClass:[NSDictionary class]], @"Without identify block, converter thinks sourceDict is just a dictionary.");
-    
-    converter.identifyDict = ^Class (NSDictionary *dict) {
-        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
-            return [User class];
-        }
-        return nil;
-    };
-    output = [converter composeModelFromObject:sourceDict];
-    STAssertTrue([output isKindOfClass:[User class]], @"With identifyDict block, the converter can sniff out the target class.");
-    STAssertEqualObjects([output firstName], @"John", @"firstName should be John.");
-    STAssertEqualObjects([output lastName], @"Jacobs", @"lastName should be Jacobs.");
-    STAssertEquals([output age], 55, @"age should be 55");
-    
-    NSDictionary *notUserDict = @{ @"age":@55 };
-    output = [converter composeModelFromObject:notUserDict];
-    STAssertTrue([output isKindOfClass:[NSDictionary class]], @"When the identify block returns nil, converter thinks the dictionary is just a dictionary.");
-    
-    /*
-     * Note that [JAGPropertyConverter setPropertiesOf:fromDictionary:] will set the properties
-     * of the model from the dictionary regardless of whether the model is in classesToConvert.
-     * [JAGProperyConverter composeModelFromObject:] requires the classesToConvert property.
-     */
-    
-}
-
 - (void) testToJSONDictRecursive {
     Address *address = [[Address alloc] init];
     address.street = @"123 Main St";
@@ -103,21 +74,22 @@ JAGPropertyConverter *converter;
     user.firstName = @"John";
     user.lastName = @"Jacobs";
     user.age = 55;
-    user.address = address;
+    user.addressInformation = address;
     
     NSDictionary *targetDictWithoutAddress = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55 };
     NSDictionary *userDictWithoutAddress = [converter decomposeObject:user];
-    STAssertEqualObjects(userDictWithoutAddress, targetDictWithoutAddress, @"Without [Address class] in converter.classesToConvert, the converter ignores user.address.");
+    STAssertEqualObjects(userDictWithoutAddress, targetDictWithoutAddress, @"Without [Address class] in converter.classesToConvert, the converter ignores user.addressInformation.");
     
     converter.classesToConvert = [NSSet setWithObjects:[User class], [Address class], nil];
     NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
-    NSDictionary *targetDictWithAddress = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"address" : addressDict };
+    NSDictionary *targetDictWithAddress = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"addressInformation" : addressDict };
+    
     NSDictionary *userDictWithAddress = [converter decomposeObject:user];
-    STAssertEqualObjects(userDictWithAddress, targetDictWithAddress, @"With [Address class] in converter.classesToConvert, the converter converts user.address.");
+    STAssertEqualObjects(userDictWithAddress, targetDictWithAddress, @"With [Address class] in converter.classesToConvert, the converter converts user.addressInformation.");
 }
 
 - (void) testFromJSONDictRecursive {
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         //Need both User and Address, because the converter will need to sniff out both.
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
@@ -128,12 +100,12 @@ JAGPropertyConverter *converter;
         return nil;
     };
     NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
-    NSDictionary *sourceDict = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"address" : addressDict };
+    NSDictionary *sourceDict = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"addressInformation" : addressDict };
     User *user = [converter composeModelFromObject:sourceDict];
-    STAssertTrue([user.address isKindOfClass:[Address class]], @"The identify block identifies both User and Address.");
-    STAssertEqualObjects(user.address.street, @"123 Main St", @"Converter finds nested properties.");
-    STAssertEqualObjects(user.address.city, @"Springfield", @"Converter finds nested properties.");
-    STAssertEqualObjects(user.address.country, @"USA", @"Converter finds nested properties.");
+    STAssertTrue([user.addressInformation isKindOfClass:[Address class]], @"The identify block identifies both User and Address.");
+    STAssertEqualObjects(user.addressInformation.street, @"123 Main St", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.city, @"Springfield", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.country, @"USA", @"Converter finds nested properties.");
     
     /* 
      * Note: If identifyDict block doesn't identify a class, you'll get a log message like:
@@ -164,7 +136,7 @@ JAGPropertyConverter *converter;
     NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
     @"favorites" : favorites };
 
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
         }
@@ -203,7 +175,7 @@ JAGPropertyConverter *converter;
     NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
     @"favorites" : favorites };
     
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
         }
@@ -240,7 +212,7 @@ JAGPropertyConverter *converter;
     NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
     @"information" : info };
     
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
         }
@@ -296,7 +268,7 @@ JAGPropertyConverter *converter;
     NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs",
     @"information" : infoDict };
     
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         //Need both User and Address, because the converter will need to sniff out both.
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
@@ -409,12 +381,53 @@ JAGPropertyConverter *converter;
     STAssertEqualObjects(user.dob, dob, @"Objects set to NSDate properties are converted with convertToDate block.");
 }
 
+- (void) testConvertFromData {
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    NSData *eInformation = [[NSData alloc] initWithBase64EncodedString:@"bWFycmllZA==" options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    user.encodedInformation = eInformation;
+    
+    converter.outputType = kJAGJSONOutput;
+    converter.convertFromData = ^id (id data) {
+        if ([data isKindOfClass:[NSData class]]) {
+            return [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed];
+        }
+        return nil;
+    };
+    
+    NSDictionary *targetDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"encodedInformation" : [eInformation base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength
+                                                                                                                          | NSDataBase64EncodingEndLineWithLineFeed] };
+    NSDictionary *userDict = [converter decomposeObject:user];
+    STAssertEqualObjects(userDict, targetDict, @"NSData objects are converted with convertFromData block for kJAGJSONOutputType.");
+}
+
+- (void) testConvertToData {
+    NSData *eInformation = [[NSData alloc] initWithBase64EncodedString:@"bWFycmllZA==" options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs", @"encodedInformation" : [eInformation base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength
+                                                                                                                          | NSDataBase64EncodingEndLineWithLineFeed] };
+    converter.outputType = kJAGJSONOutput;
+    converter.convertToData = ^id (id dataValue) {
+        if ([dataValue isKindOfClass: [NSData class]]) {
+            return dataValue;
+        } else if ([dataValue isKindOfClass: [NSString class]]) {
+            //We assume it's an base64 encoded string
+            return [[NSData alloc] initWithBase64EncodedString:dataValue options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        }
+        return nil;
+    };
+    User *user = [[User alloc] init];
+    [converter setPropertiesOf:user fromDictionary:sourceDict];
+    STAssertEqualObjects(user.encodedInformation, eInformation, @"Objects set to NSDate properties are converted with convertToDate block.");
+}
+
 - (void) testToArrayOfObjects {
     NSDictionary *user1Dict = @{ @"firstName":@"Jack", @"lastName":@"Johnson" };
     NSDictionary *user2Dict = @{ @"firstName":@"Joe", @"lastName":@"Smith" };
     NSArray *userArray = [NSArray arrayWithObjects:user1Dict, user2Dict, nil];
     
-    converter.identifyDict = ^Class (NSDictionary *dict) {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
         if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
             return [User class];
         }
@@ -428,6 +441,113 @@ JAGPropertyConverter *converter;
     STAssertEquals(user1.lastName, @"Johnson", @"user1 should lastName Johnson");
     STAssertEquals(user2.firstName, @"Joe", @"user2 should firstName Joe");
     STAssertEquals(user2.lastName, @"Smith", @"user2 should lastName Smith");
+}
+
+#pragma mark - Identify Dict
+
+- (void) testFromJSONDictWithIdentifyBlock {
+    NSDictionary *sourceDict = @{ @"age" : @55, @"firstName" : @"John", @"lastName" : @"Jacobs" };
+    id output = [converter composeModelFromObject:sourceDict];
+    STAssertTrue([output isKindOfClass:[NSDictionary class]], @"Without identify block, converter thinks sourceDict is just a dictionary.");
+    
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
+        if ([dict objectForKey:@"firstName"] || [dict objectForKey:@"lastName"]) {
+            return [User class];
+        }
+        return nil;
+    };
+    output = [converter composeModelFromObject:sourceDict];
+    STAssertTrue([output isKindOfClass:[User class]], @"With identifyDict block, the converter can sniff out the target class.");
+    STAssertEqualObjects([output firstName], @"John", @"firstName should be John.");
+    STAssertEqualObjects([output lastName], @"Jacobs", @"lastName should be Jacobs.");
+    STAssertEquals([output age], 55, @"age should be 55");
+    
+    NSDictionary *notUserDict = @{ @"age":@55 };
+    output = [converter composeModelFromObject:notUserDict];
+    STAssertTrue([output isKindOfClass:[NSDictionary class]], @"When the identify block returns nil, converter thinks the dictionary is just a dictionary.");
+    
+    /*
+     * Note that [JAGPropertyConverter setPropertiesOf:fromDictionary:] will set the properties
+     * of the model from the dictionary regardless of whether the model is in classesToConvert.
+     * [JAGProperyConverter composeModelFromObject:] requires the classesToConvert property.
+     */
+    
+}
+
+- (void)testFromJSONWithIdentifyDictName {
+    NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
+    NSDictionary *sourceDict = @{ @"firstName" : @"John", @"lastName" : @"Jacobs", @"age" : @55, @"addressInformation" : addressDict };
+    
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
+        //Need both User and Address, because the converter will need to sniff out both.
+        if (dictName == nil) { // 1st level object --> user (you can also check on the content of the dict if you have more objects on first level)
+            return [User class];
+        }
+        
+        if ([dictName isEqualToString:@"addressInformation"]) {
+            return [Address class];
+        }
+        
+        return nil;
+    };
+    
+    User *user = [converter composeModelFromObject:sourceDict];
+    STAssertTrue([user.addressInformation isKindOfClass:[Address class]], @"The identify block identifies both User and Address.");
+    STAssertEqualObjects(user.addressInformation.street, @"123 Main St", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.city, @"Springfield", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.country, @"USA", @"Converter finds nested properties.");
+}
+
+- (void)testFromJSONWithIdentifyDictNameWithSnakeCase {
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
+    NSDictionary *sourceDict = @{ @"first_name" : @"John", @"last_name" : @"Jacobs", @"age" : @55, @"address_information" : addressDict };
+    
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dict) {
+        //Need both User and Address, because the converter will need to sniff out both.
+        if (dictName == nil) { // 1st level object --> user (you can also check on the content of the dict if you have more objects on first level)
+            return [User class];
+        }
+        
+        if ([dictName isEqualToString:@"addressInformation"]) {
+            return [Address class];
+        }
+        
+        return nil;
+    };
+    
+    User *user = [converter composeModelFromObject:sourceDict];
+    STAssertTrue([user.addressInformation isKindOfClass:[Address class]], @"The identify block identifies both User and Address.");
+    STAssertEqualObjects(user.addressInformation.street, @"123 Main St", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.city, @"Springfield", @"Converter finds nested properties.");
+    STAssertEqualObjects(user.addressInformation.country, @"USA", @"Converter finds nested properties.");
+}
+
+- (void)testToJSONDictWithIdentifyDictNameWithSnakeCase {
+    converter.enableSnakeCaseSupport = YES;
+    
+    Address *address = [[Address alloc] init];
+    address.street = @"123 Main St";
+    address.city = @"Springfield";
+    address.country = @"USA";
+    
+    User *user = [[User alloc] init];
+    user.firstName = @"John";
+    user.lastName = @"Jacobs";
+    user.age = 55;
+    user.addressInformation = address;
+    
+    NSDictionary *targetDictWithoutAddress = @{ @"first_name" : @"John", @"last_name" : @"Jacobs", @"age" : @55 };
+    NSDictionary *userDictWithoutAddress = [converter decomposeObject:user];
+    STAssertEqualObjects(userDictWithoutAddress, targetDictWithoutAddress, @"Without [Address class] in converter.classesToConvert, the converter ignores user.addressInformation.");
+    
+    converter.classesToConvert = [NSSet setWithObjects:[User class], [Address class], nil];
+    NSDictionary *addressDict = @{ @"street":@"123 Main St", @"city":@"Springfield", @"country":@"USA" };
+    NSDictionary *targetDictWithAddress = @{ @"first_name" : @"John", @"last_name" : @"Jacobs", @"age" : @55, @"address_information" : addressDict };
+    
+    NSDictionary *userDictWithAddress = [converter decomposeObject:user];
+    STAssertEqualObjects(userDictWithAddress, targetDictWithAddress, @"With [Address class] in converter.classesToConvert, the converter converts user.addressInformation.");
 }
 
 #pragma mark - Snake Case Support

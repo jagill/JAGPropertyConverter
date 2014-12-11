@@ -39,7 +39,7 @@ typedef enum {
 } JAGOutputType;
 
 ///A Block to identify what class a dictionary represents.
-typedef Class (^IdentifyBlock)(NSDictionary *dictionary);
+typedef Class (^IdentifyBlock)(NSString *dictName, NSDictionary *dictionary);
 
 ///A Block to convert one object to another, for converting to/from JSON
 typedef id (^ConvertBlock)(id obj);
@@ -173,6 +173,38 @@ typedef id (^ConvertBlock)(id obj);
  * TODO: Generalize converters to other classes?
  */
 @property (nonatomic, copy) ConvertBlock convertFromDate;
+
+/**
+ * A Block to convert a (JSON) property to an NSData.
+ *
+ * This block is called when trying to set an object's NSData property
+ * with a dictionary's non-NSData value.  If this block is nil,
+ * the NSData property will be set to nil.
+ *
+ * The issue (see [JAGPropertyConverter convertFromData]) is that there
+ * are many ways to convert an NSData into a JSON-compatible format
+ * (base64 encoded, etc), and instead of guessing
+ * JAGPropertyConverter relies on this block to handle the conversion.
+ *
+ * TODO: Generalize converters to other classes?
+ */
+@property (nonatomic, copy) ConvertBlock convertToData;
+
+/**
+ * A Block to convert an NSData property to JSON property.
+ *
+ * Called when trying to convert an object's NSData property
+ * to a JSON dictionary value.  If this block is nil, the
+ * value will not be set.
+ *
+ * The issue (see [JAGPropertyConverter convertToData]) is that there
+ * are many ways to convert an NSData into a JSON-compatible format
+ * (base64 encoded, etc), and instead of guessing
+ * JAGPropertyConverter relies on this block to handle the conversion.
+ *
+ * TODO: Generalize converters to other classes?
+ */
+@property (nonatomic, copy) ConvertBlock convertFromData;
 
 /**
  * A NumberFormatter to convert NSStrings to number of NSNumber properties.

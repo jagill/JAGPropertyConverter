@@ -52,7 +52,7 @@
 
 + (JAGPropertyConverter *) testConverter {
     JAGPropertyConverter *converter = [JAGPropertyConverter converterWithOutputType:kJAGPropertyListOutput];
-    converter.identifyDict = ^ Class (NSDictionary *dict) {
+    converter.identifyDict = ^ Class (NSString *propertyName, NSDictionary *dict) {
         if ([dict valueForKey:@"testModelID"])
             return [TestModel class];
         return nil;
