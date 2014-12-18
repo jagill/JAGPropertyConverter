@@ -249,6 +249,10 @@
 #pragma mark - Convert From Dictionary
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass {
+    [self composeCollection: collection withTargetClass: targetClass propertyName: nil];
+}
+
+- (id) composeCollection: (id) collection withTargetClass: (Class) targetClass propertyName:(NSString *)propertyName {
     if (!targetClass) {
         targetClass = [collection class];
     }
@@ -264,7 +268,7 @@
         return nil;
     }
     for (id elt in collection) {
-        id value = [self composeModelFromObject:elt];
+        id value = [self composeModelFromObject:elt propertyName:propertyName];
         if (value) {
             [mutableCollection addObject: value];
         } else {
@@ -273,8 +277,13 @@
     }
     return mutableCollection;
 }
-- (id) composeModelFromObject: (id) object {
-    return [self composeModelFromObject:object withTargetClass: nil propertyName: nil];
+
+- (id) composeModelFromObject:(id)object {
+    return [self composeModelFromObject:object propertyName: nil];
+}
+
+- (id) composeModelFromObject: (id) object propertyName: (NSString *)properyName {
+    return [self composeModelFromObject: object withTargetClass: nil propertyName: properyName];
 }
 
 - (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass propertyName: (NSString *) propertyName {
@@ -282,7 +291,7 @@
         return nil;
     } else if ([object isKindOfClass: [NSArray class]]
                || [object isKindOfClass: [NSSet class]]) {
-        return [self composeCollection:object withTargetClass:targetClass];
+        return [self composeCollection:object withTargetClass:targetClass propertyName:propertyName];
     } else if ([object isKindOfClass: [NSDictionary class]]) {
         //Is this a PropertyModel in disguise?
         Class modelClass = nil;
@@ -301,7 +310,7 @@
         } else {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             for (id key in object) {
-                [dict setValue: [self composeModelFromObject: [object valueForKey: key]]
+                [dict setValue: [self composeModelFromObject: [object valueForKey: key] propertyName:key]
                         forKey: key];
             }
             return dict;
