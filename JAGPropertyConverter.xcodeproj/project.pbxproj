@@ -22,7 +22,6 @@
 		11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */; };
 		11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */; };
 		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
-		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
 		11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F54160A7436000BD25F /* NumberFormatterTest.m */; };
 		11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F58160B96FE000BD25F /* ExampleTest.m */; };
 		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
@@ -30,6 +29,9 @@
 		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
 		89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */; };
 		89C0B7B21A28AF2B007AA954 /* JAGPropertyMappingProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7B11A28AF2B007AA954 /* JAGPropertyMappingProtocol.h */; };
+		89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0581A7AAEDD009BF46F /* NullValuesTest.m */; };
+		89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0601A7AB2C5009BF46F /* NumberTestModel.m */; };
+		89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0621A7AB2C5009BF46F /* TestModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +67,6 @@
 		11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyTest.m; sourceTree = "<group>"; };
 		11275B8714E9D8BD00C4707C /* PropertyModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyModelTests.h; sourceTree = "<group>"; };
 		11275B8814E9D8BD00C4707C /* PropertyModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyModelTests.m; sourceTree = "<group>"; };
-		11275B8914E9D8BD00C4707C /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
-		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 		11E60F53160A7436000BD25F /* NumberFormatterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormatterTest.h; sourceTree = "<group>"; };
 		11E60F54160A7436000BD25F /* NumberFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormatterTest.m; sourceTree = "<group>"; };
 		11E60F57160B96FE000BD25F /* ExampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTest.h; sourceTree = "<group>"; };
@@ -75,6 +75,11 @@
 		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
 		89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeCaseTest.m; sourceTree = "<group>"; };
 		89C0B7B11A28AF2B007AA954 /* JAGPropertyMappingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyMappingProtocol.h; sourceTree = "<group>"; };
+		89DED0581A7AAEDD009BF46F /* NullValuesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullValuesTest.m; sourceTree = "<group>"; };
+		89DED05F1A7AB2C5009BF46F /* NumberTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberTestModel.h; sourceTree = "<group>"; };
+		89DED0601A7AB2C5009BF46F /* NumberTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberTestModel.m; sourceTree = "<group>"; };
+		89DED0611A7AB2C5009BF46F /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		89DED0621A7AB2C5009BF46F /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,22 +162,22 @@
 		11275B6414E9D56200C4707C /* JAGPropertyConverterTests */ = {
 			isa = PBXGroup;
 			children = (
+				11E60F57160B96FE000BD25F /* ExampleTest.h */,
+				11E60F58160B96FE000BD25F /* ExampleTest.m */,
 				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
 				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
 				11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */,
 				11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */,
 				11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */,
 				11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */,
-				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
-				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
-				11275B8914E9D8BD00C4707C /* TestModel.h */,
-				11275B8A14E9D8BD00C4707C /* TestModel.m */,
-				11275B6514E9D56200C4707C /* Supporting Files */,
+				89DED05E1A7AB2C5009BF46F /* Models */,
+				89DED0581A7AAEDD009BF46F /* NullValuesTest.m */,
 				11E60F53160A7436000BD25F /* NumberFormatterTest.h */,
 				11E60F54160A7436000BD25F /* NumberFormatterTest.m */,
-				11E60F57160B96FE000BD25F /* ExampleTest.h */,
-				11E60F58160B96FE000BD25F /* ExampleTest.m */,
+				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
+				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
 				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
+				11275B6514E9D56200C4707C /* Supporting Files */,
 			);
 			path = JAGPropertyConverterTests;
 			sourceTree = "<group>";
@@ -184,6 +189,17 @@
 				11275B6714E9D56200C4707C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89DED05E1A7AB2C5009BF46F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89DED05F1A7AB2C5009BF46F /* NumberTestModel.h */,
+				89DED0601A7AB2C5009BF46F /* NumberTestModel.m */,
+				89DED0611A7AB2C5009BF46F /* TestModel.h */,
+				89DED0621A7AB2C5009BF46F /* TestModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,12 +324,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */,
+				89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */,
+				89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */,
 				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
 				89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
-				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
 				89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */,
 				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,
 				11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */,

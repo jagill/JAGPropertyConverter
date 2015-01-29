@@ -179,14 +179,16 @@
 }
 
 - (void) testWeakProperty {
-    model.weakProperty = [TestModel testModel];
+    TestModel *strongReference = [TestModel testModel];
+    model.weakProperty = strongReference;
     converter.outputType = kJAGFullOutput;
     NSDictionary *dict = [converter decomposeObject:model];
     STAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
 - (void) testWeakProperty2 {
-    model.weakProperty = [TestModel testModel];
+    TestModel *strongReference = [TestModel testModel];
+    model.weakProperty = strongReference;
     converter.outputType = kJAGFullOutput;
     converter.shouldConvertWeakProperties = YES;
     NSDictionary *dict = [converter decomposeObject:model];

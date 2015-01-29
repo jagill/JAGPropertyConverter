@@ -249,7 +249,7 @@
 #pragma mark - Convert From Dictionary
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass {
-    [self composeCollection: collection withTargetClass: targetClass propertyName: nil];
+    return [self composeCollection: collection withTargetClass: targetClass propertyName: nil];
 }
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass propertyName:(NSString *)propertyName {
@@ -386,9 +386,20 @@
         }
         id value = [dictionary valueForKey:dictKey];
         
-        // ignore NSNull values
-        if (self.shouldIgnoreNullValues && [value isKindOfClass:[NSNull class]]) {
-            continue;
+        // NSNull handling
+        if ([value isKindOfClass:[NSNull class]]) {
+            if (self.shouldIgnoreNullValues) {
+                // ignore NSNull values (leave property value as is)
+                continue;
+            } else {
+                // clear property value (set property to nil)
+                if ([property isNumber]) {
+                    [object setValue:@(0) forKey:key]; // for primitive data types we still need an object
+                } else {
+                    [object setValue:nil forKey:key];
+                }
+                continue;
+            }
         }
         
         //See if we should convert an NSString to an NSNumber

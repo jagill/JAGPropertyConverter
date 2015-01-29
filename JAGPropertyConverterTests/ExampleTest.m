@@ -587,9 +587,11 @@ JAGPropertyConverter *converter;
     
     STAssertEquals([dict[@"lastName"] class], [NSNull class], @"lastName should be converted to NSNull");
     
-    converter.shouldIgnoreNullValues = YES; // no more log output saying can't set null value
+    converter.shouldIgnoreNullValues = YES;
     
     User *user = [[User alloc] init];
+    user.firstName = nil;
+    user.lastName = nil;
     [converter setPropertiesOf:user fromDictionary:dict];
     
     STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
@@ -597,6 +599,91 @@ JAGPropertyConverter *converter;
     
     STAssertNil(user.lastName, @"lastName should be nil but not NSNull");
     STAssertFalse([user.lastName isKindOfClass:[NSNull class]], @"not NSNull");
+}
+
+- (void)testFromJSONDictIgnoringNSNullUntouchedProperty {
+    // simulating a null value from JSON
+    NSData *data = [@"{\"age\":55,\"firstName\":\"John\",\"lastName\":null}" dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    STAssertEquals([dict[@"lastName"] class], [NSNull class], @"lastName should be converted to NSNull");
+    
+    converter.shouldIgnoreNullValues = YES;
+    
+    User *user = [[User alloc] init];
+    user.firstName = @"Bob";
+    user.lastName = @"Wick";
+    [converter setPropertiesOf:user fromDictionary:dict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEquals(user.age, 55, @"age should be 55");
+    
+    STAssertNotNil(user.lastName, @"lastName should still be 'Wick'");
+    STAssertEqualObjects(user.lastName, @"Wick", @"should be untouched");
+}
+
+- (void)testFromJSONDictClearPropertyUsingNSNull {
+    // simulating a null value from JSON
+    NSData *data = [@"{\"age\":55,\"firstName\":\"John\",\"lastName\":null}" dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    STAssertEquals([dict[@"lastName"] class], [NSNull class], @"lastName should be converted to NSNull");
+    
+    converter.shouldIgnoreNullValues = NO; // NSNull values should clear the property
+    
+    User *user = [[User alloc] init];
+    user.firstName = nil;
+    user.lastName = nil;
+    [converter setPropertiesOf:user fromDictionary:dict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEquals(user.age, 55, @"age should be 55");
+    
+    STAssertNil(user.lastName, @"lastName should be nil but not NSNull");
+    STAssertFalse([user.lastName isKindOfClass:[NSNull class]], @"not NSNull");
+}
+
+- (void)testFromJSONDictClearPropertyUsingNSNull2 {
+    // simulating a null value from JSON
+    NSData *data = [@"{\"age\":55,\"firstName\":\"John\",\"lastName\":null}" dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    STAssertEquals([dict[@"lastName"] class], [NSNull class], @"lastName should be converted to NSNull");
+    
+    converter.shouldIgnoreNullValues = NO; // NSNull values should clear the property
+    
+    User *user = [[User alloc] init];
+    user.firstName = @"Bob";
+    user.lastName = @"Wick";
+    [converter setPropertiesOf:user fromDictionary:dict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEquals(user.age, 55, @"age should be 55");
+    
+    STAssertNil(user.lastName, @"lastName should be nil but not NSNull");
+    STAssertFalse([user.lastName isKindOfClass:[NSNull class]], @"not NSNull");
+}
+
+- (void)testFromJSONDictClearPropertyUsingNSNull3 {
+    // simulating a null value from JSON
+    NSData *data = [@"{\"age\":null,\"firstName\":\"John\",\"lastName\":\"Wick\"}" dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    STAssertEquals([dict[@"age"] class], [NSNull class], @"age should be converted to NSNull");
+    
+    converter.shouldIgnoreNullValues = NO; // NSNull values should clear the property
+    
+    User *user = [[User alloc] init];
+    user.age = 60;
+    user.firstName = @"Bob";
+    user.lastName = @"Wick";
+    [converter setPropertiesOf:user fromDictionary:dict];
+    
+    STAssertEqualObjects(user.firstName, @"John", @"firstName should be John.");
+    STAssertEquals(user.age, 0, @"age should be cleared");
+    
+    STAssertNotNil(user.lastName, @"lastName should still be 'Wick'");
+    STAssertEqualObjects(user.lastName, @"Wick", @"should be untouched");
 }
 
 #pragma mark - Custom Property Name Mapping

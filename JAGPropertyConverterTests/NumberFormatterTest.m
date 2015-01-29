@@ -8,14 +8,14 @@
 
 #import "NumberFormatterTest.h"
 #import "JAGPropertyConverter.h"
+#import "NumberTestModel.h"
 
-@implementation NumberTestModel
-
-NumberTestModel *model;
-JAGPropertyConverter *converter;
+@interface NumberFormatterTest () {
+    NumberTestModel *model;
+    JAGPropertyConverter *converter;
+}
 
 @end
-
 
 @implementation NumberFormatterTest
 
