@@ -212,6 +212,18 @@
     if ([model respondsToSelector:@selector(customPropertyMappingConvertingToJSON)]) {
         customMapping = [(id<JAGPropertyMappingProtocol>)model customPropertyMappingConvertingToJSON];
     }
+    
+    // see if we have to convert enums to strings
+    NSArray *enumMapping = nil;
+    if ([model respondsToSelector:@selector(enumPropertiesToConvertToJSON)]) {
+        enumMapping = [(id<JAGPropertyMappingProtocol>)model enumPropertiesToConvertToJSON];
+    }
+    
+    // get all properties which should be ignored
+    NSArray *ignoreProperties = nil;
+    if ([model respondsToSelector:@selector(ignorePropertiesToJSON)]) {
+        ignoreProperties = [(id<JAGPropertyMappingProtocol>)model ignorePropertiesToJSON];
+    }
 
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
@@ -226,6 +238,7 @@
             continue;
         }
         propertyName = [property name];
+        
         //TODO: Should use the getter for this?  Harder to handle non-objects.
         id object = [model valueForKey:propertyName];
 
@@ -233,7 +246,37 @@
         if (customMapping[propertyName]) {
             propertyName = [customMapping[propertyName] copy]; // copy the new name, will crash otherwise
         }
+        
+        // check if we should ignore this property
+        BOOL shouldIgnoreValue = NO;
+        if (ignoreProperties.count > 0) {
+            for (NSString *propertyToIgnore in ignoreProperties) {
+                if ([property.name isEqualToString:propertyToIgnore]) {
+                    shouldIgnoreValue = YES;
+                    continue;
+                }
+            }
+        }
+        
+        if (shouldIgnoreValue) {
+            continue;
+        }
 
+        // check if this property must be converted from enum
+        if (enumMapping && self.convertFromEnum && [property isNumber]) {
+            for (NSString *enumProperty in enumMapping) {
+                if ([enumProperty isEqualToString:property.name]) {
+                    [values setValue:self.convertFromEnum(property.name, object, [model class]) forKey:propertyName];
+                    continue;
+                }
+            }
+        }
+        
+        if (values[propertyName] != nil) {
+            // enum-mapping already set a value
+            continue;
+        }
+        
         // convert to snake case?
         if (self.enableSnakeCaseSupport) {
             propertyName = [propertyName asUnderscoreFromCamelCase];
@@ -365,12 +408,25 @@
         customMapping = [(id<JAGPropertyMappingProtocol>)object customPropertyMappingConvertingFromJSON];
     }
     
+    // see if target object has some enums to convert
+    NSArray *enumMapping = nil;
+    if ([object respondsToSelector:@selector(enumPropertiesToConvertFromJSON)]) {
+        enumMapping = [(id<JAGPropertyMappingProtocol>)object enumPropertiesToConvertFromJSON];
+    }
+    
+    // get all properties which should be ignored
+    NSArray *ignoreProperties = nil;
+    if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
+        ignoreProperties = [(id<JAGPropertyMappingProtocol>)object ignorePropertiesFromJSON];
+    }
+    
     JAGProperty *property;
     for (NSString *dictKey in dictionary) {
         
         NSString *key = dictKey;
         
         property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+        
         if (!property) {
             // when enabled, convert to camelcase and try again fetching property
             if (self.enableSnakeCaseSupport) {
@@ -384,6 +440,22 @@
             }
             if (!property || [property isReadOnly]) continue;
         }
+        
+        // check if we should ignore this property
+        BOOL shouldIgnoreValue = NO;
+        if (ignoreProperties.count > 0) {
+            for (NSString *propertyToIgnore in ignoreProperties) {
+                if ([dictKey isEqualToString:propertyToIgnore]) {
+                    shouldIgnoreValue = YES;
+                    continue;
+                }
+            }
+        }
+        
+        if (shouldIgnoreValue) {
+            continue;
+        }
+        
         id value = [dictionary valueForKey:dictKey];
         
         // NSNull handling
@@ -400,6 +472,23 @@
                 }
                 continue;
             }
+        }
+        
+        // check if the property should be converted to an enum
+        BOOL propertyValueAlreadySet = NO;
+        if (enumMapping && self.convertToEnum && [property isNumber]) {
+            for (NSString *enumProperty in enumMapping) {
+                if ([enumProperty isEqualToString:dictKey]) {
+                    [object setValue:@(self.convertToEnum(dictKey, value, [object class])) forKey:property.name];
+                    propertyValueAlreadySet = YES;
+                    continue;
+                }
+            }
+        }
+        
+        if (propertyValueAlreadySet) {
+            // value is already set by the enum-mapping
+            continue;
         }
         
         //See if we should convert an NSString to an NSNumber

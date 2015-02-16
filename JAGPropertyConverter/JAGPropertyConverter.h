@@ -41,6 +41,9 @@ typedef enum {
 ///A Block to identify what class a dictionary represents.
 typedef Class (^IdentifyBlock)(NSString *dictName, NSDictionary *dictionary);
 
+typedef NSInteger (^ConvertToEnumBlock)(NSString *propertyName, id propertyValue, Class parentClass);
+typedef id (^ConvertFromEnumBlock)(NSString *propertyName, id propertyValue, Class parentClass);
+
 ///A Block to convert one object to another, for converting to/from JSON
 typedef id (^ConvertBlock)(id obj);
 
@@ -205,6 +208,12 @@ typedef id (^ConvertBlock)(id obj);
  * TODO: Generalize converters to other classes?
  */
 @property (nonatomic, copy) ConvertBlock convertFromData;
+
+/**  A Block to convert a (JSON) property to an enum. */
+@property (nonatomic, copy) ConvertToEnumBlock convertToEnum;
+
+/**  A Block to convert an enum to a JSON property. */
+@property (nonatomic, copy) ConvertFromEnumBlock convertFromEnum;
 
 /**
  * A NumberFormatter to convert NSStrings to number of NSNumber properties.

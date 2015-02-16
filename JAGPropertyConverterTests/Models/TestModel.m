@@ -143,11 +143,31 @@
 #pragma mark - JAGPropertyMappingProtocol
 
 - (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return @{@"someProperty" : @"differentNameProperty"};
+    return @{@"someProperty" : @"differentNameProperty",
+             @"enumProperty2" : @"customMappedProperty",
+             @"ignoreProperty2" : @"customMappedIgnoreProperty",};
 }
 
 - (NSDictionary *)customPropertyMappingConvertingToJSON {
-    return @{@"differentNameProperty" : @"someProperty"};
+    return @{@"differentNameProperty" : @"someProperty",
+             @"customMappedProperty" : @"enumProperty2",
+             @"customMappedIgnoreProperty" : @"ignoreProperty2"};
+}
+
+- (NSArray *)enumPropertiesToConvertFromJSON {
+    return @[@"enumProperty", @"enumProperty2"];
+}
+
+- (NSArray *)enumPropertiesToConvertToJSON {
+    return @[@"enumProperty", @"customMappedProperty"];
+}
+
+- (NSArray *)ignorePropertiesFromJSON {
+    return @[@"ignoreProperty", @"ignoreProperty2"];
+}
+
+- (NSArray *)ignorePropertiesToJSON {
+    return @[@"ignoreProperty", @"customMappedIgnoreProperty"];
 }
 
 @end

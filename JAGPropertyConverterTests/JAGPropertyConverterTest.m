@@ -250,4 +250,136 @@
     STAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
 }
 
+- (void)testConvertPropertyToEnum {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    
+    NSDictionary *dict = @{ @"enumProperty" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.enumProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnum {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"enumProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.enumProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"enumProperty"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+}
+
+- (void)testConvertPropertyToEnumWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    
+    NSDictionary *dict = @{ @"enumProperty2" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.customMappedProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnumWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"customMappedProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.customMappedProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"enumProperty2"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+}
+
+- (void)testIgnorePropertiesFromJSON {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.ignoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"ignoreProperty"], @"");
+}
+
+- (void)testIgnorePropertiesToJSON {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    NSDictionary *dict = @{ @"ignoreProperty" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.ignoreProperty, @"");
+}
+
+- (void)testIgnorePropertiesFromJSONWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.customMappedIgnoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"ignoreProperty2"], @"");
+}
+
+- (void)testIgnorePropertiesToJSONWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    NSDictionary *dict = @{ @"ignoreProperty2" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.customMappedIgnoreProperty, @"");
+}
+
 @end

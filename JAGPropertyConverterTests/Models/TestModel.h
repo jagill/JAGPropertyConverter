@@ -27,6 +27,11 @@
 #import <MapKit/MapKit.h>
 #import "JAGPropertyMappingProtocol.h"
 
+typedef NS_ENUM(NSInteger, TestModelEnum) {
+    TestModelEnumTypeA,
+    TestModelEnumTypeB
+};
+
 @class JAGPropertyConverter;
 
 @interface TestModel : NSObject <JAGPropertyMappingProtocol>
@@ -48,6 +53,10 @@
 @property (copy)            void(^blockProperty)(id);
 @property (strong)          id              idProperty;
 @property (copy)            NSString        *differentNameProperty;
+@property (nonatomic, assign) TestModelEnum enumProperty;
+@property (nonatomic, assign) TestModelEnum customMappedProperty;
+@property (nonatomic, copy) NSString *ignoreProperty;
+@property (nonatomic, copy) NSString *customMappedIgnoreProperty;
 
 + (TestModel*) testModel;
 
