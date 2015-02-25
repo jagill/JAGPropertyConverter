@@ -28,6 +28,17 @@
 @end
 
 @interface CustomAddress : Address <JAGPropertyMappingProtocol>
+@end
+
+@interface Tenant : User <JAGPropertyMappingProtocol>
+
+@property (strong) Address *permanentAddress;
+
+@end
+
+@interface LivingAddress : CustomAddress
+
+@property (strong) Tenant *tenant;
 
 @end
 

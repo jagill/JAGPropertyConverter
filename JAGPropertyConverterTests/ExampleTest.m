@@ -27,6 +27,23 @@
 
 @end
 
+@implementation Tenant
+@end
+
+@implementation LivingAddress
+
+- (NSDictionary *)customPropertyMappingConvertingFromJSON {
+    return @{ @"tenantName" : @"tenant.firstName",
+              @"tenantPermanentAddressStreet" : @"tenant.permanentAddress.street"};
+}
+
+- (NSDictionary *)customPropertyMappingConvertingToJSON {
+    return @{ @"tenant.firstName" : @"tenantName",
+              @"tenant.permanentAddress.street" : @"tenantPermanentAddressStreet"};
+}
+
+@end
+
 /**
  * Some code examples in test form.
  *
@@ -712,6 +729,45 @@ JAGPropertyConverter *converter;
     STAssertEqualObjects(address.street, @"Infinite Loop 1", @"firstName should be John.");
     STAssertEqualObjects(address.city, @"Cuppertino", @"lastName should be Jacobs.");
     STAssertEquals(address.country, @"USA", @"age should be 55");
+}
+
+- (void)testFromJSONDictWithKeypathCustomName {
+    converter.classesToConvert = [NSSet setWithArray:@[[LivingAddress class]]];
+
+    LivingAddress *address = [[LivingAddress alloc] init];   // custom address has implemented JAGPropertyMappingProtocol
+    address.street = @"Infinite Loop 1";
+    address.city = @"Cuppertino";
+    address.country = @"USA";
+
+    Tenant *tenant1 = [[Tenant alloc] init];
+    tenant1.firstName = @"John";
+    tenant1.addressInformation = address;
+
+    Address *permanentAddress = [[Address alloc] init];
+    permanentAddress.street = @"Nowhere Road 2";
+    permanentAddress.city = @"Anywhere City";
+    permanentAddress.country = @"USA";
+    tenant1.permanentAddress = permanentAddress;
+
+    address.tenant = tenant1;
+
+    NSDictionary *targetDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"street" : @"Infinite Loop 1", @"tenantName" : @"John", @"tenantPermanentAddressStreet": @"Nowhere Road 2" };
+    NSDictionary *userJsonDict = [converter decomposeObject:address];
+    STAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
+}
+
+- (void)testToJSONWIthKeypathCustomName {
+    // newCustomProperty --> street
+    NSDictionary *sourceDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"street" : @"Infinite Loop 1", @"tenantName" : @"John", @"tenantPermanentAddressStreet": @"Nowhere Road 2" };
+
+    LivingAddress *address = [[LivingAddress alloc] init];
+    [converter setPropertiesOf:address fromDictionary:sourceDict];
+
+    STAssertEqualObjects(address.street, @"Infinite Loop 1", @"firstName should be John.");
+    STAssertEqualObjects(address.city, @"Cuppertino", @"lastName should be Jacobs.");
+    STAssertEquals(address.country, @"USA", @"age should be 55");
+    STAssertEquals(address.tenant.firstName, @"John", @"Tenant's firstName should be John.");
+    STAssertEquals(address.tenant.permanentAddress.street, @"Nowhere Road 2", @"Tenant's permanent address' street should be 'Nowhere Road 2'.");
 }
 
 @end

@@ -285,6 +285,17 @@
         // set value in dictionary
         [values setValue:[self decomposeObject: object] forKey:propertyName];
     }
+
+    // Add all custom keypaths defined for the model.
+    if (customMapping) {
+        for (NSString *customKey in customMapping) {
+            BOOL isKeyPath = [customKey rangeOfString:@"."].location != NSNotFound;
+            if (isKeyPath) {
+                [values setValue:[self decomposeObject:[model valueForKeyPath:customKey]] forKey:customMapping[customKey]];
+            }
+        }
+    }
+
     return values;
 }
 
@@ -424,20 +435,39 @@
     for (NSString *dictKey in dictionary) {
         
         NSString *key = dictKey;
-        
-        property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+        BOOL isKeyPath;
+        NSString *remainingKeyPath = @"";
+
+        property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
         
         if (!property) {
             // when enabled, convert to camelcase and try again fetching property
             if (self.enableSnakeCaseSupport) {
                 key = [key asCamelCaseFromUnderscore];
-                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+                property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
             }
             // try custom mapping after snake case converting
-            if (!property && customMapping[key]) {
-                key = customMapping[key];
-                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+            if (!property) {
+                if (customMapping[key]) {
+                    key = customMapping[key];
+
+                    property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+                }
+
+                // Check if it is a keypath and get the first segment
+                if (!property) {
+                    NSRange rangeOfFirstDot = [key rangeOfString:@"."];
+                    isKeyPath = rangeOfFirstDot.location != NSNotFound;
+
+                    if (isKeyPath) {
+                        remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
+                        key = [key substringToIndex:rangeOfFirstDot.location];
+
+                        property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+                    }
+                }
             }
+
             if (!property || [property isReadOnly]) continue;
         }
         
@@ -506,7 +536,23 @@
             NSString *propertyName = self.enableSnakeCaseSupport ? [dictKey asCamelCaseFromUnderscore] : dictKey;
             value = [self composeModelFromObject: value withTargetClass:propertyClass propertyName:propertyName];
         }
-        if ([property canAcceptValue:value]) {
+
+        if (isKeyPath && ![remainingKeyPath isEqualToString:@""]) {
+            id ownedObject;
+
+            if ( ! [object valueForKey:key]) {
+                [object setValue:[[property.propertyClass alloc] init] forKey:key];
+            }
+
+            ownedObject = [object valueForKey:key];
+            isKeyPath = [remainingKeyPath rangeOfString:@"."].location != NSNotFound;
+
+            if (!isKeyPath) {
+                [ownedObject setValue:value forKey:remainingKeyPath];
+            } else {
+                [self setPropertiesOf:ownedObject fromDictionary:@{remainingKeyPath: value}];
+            }
+        } else if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];
         } else {
             NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@", 
