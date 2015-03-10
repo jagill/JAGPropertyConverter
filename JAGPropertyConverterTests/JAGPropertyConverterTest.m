@@ -57,8 +57,6 @@
                          @"Model and Dictionary should have same testModelID");
     STAssertEqualObjects(testModel.stringProperty, [dict valueForKey:@"stringProperty"], 
                          @"Model and Dictionary should have same stringProperty");
-    STAssertEqualObjects(testModel.modelProperty.testModelID, [dict valueForKeyPath:@"modelProperty.testModelID"], 
-                         @"Model and Dictionary should have same modelProperty");
     STAssertEqualObjects(testModel.arrayProperty, [dict valueForKey:@"arrayProperty"], 
                          @"Model and Dictionary should have same arrayProperty");
     STAssertEqualObjects(testModel.dictionaryProperty, [dict valueForKey:@"dictionaryProperty"], 
@@ -68,16 +66,6 @@
 }
 
 - (void) testToDictionaryJSON {
-    converter.outputType = kJAGJSONOutput;
-    NSDictionary *dict = [converter convertToDictionary:model];
-    NSLog(@"Converted to dictionary.");
-    [self assert:model isEqualTo:dict];
-
-    STAssertEquals(dict[@"keypathProperty1"], model.modelProperty.testModelID, @"JSON Dictionary should have set the keypath property properly.");
-    STAssertEquals(dict[@"keypathProperty2"], model.modelProperty.modelProperty.testModelID, @"JSON Dictionary should have set the keypath property properly.");
-}
-
-- (void) testKeypathPropertiesToDictionaryJSON {
     converter.outputType = kJAGJSONOutput;
     NSDictionary *dict = [converter convertToDictionary:model];
     NSLog(@"Converted to dictionary.");
@@ -142,24 +130,6 @@
     STAssertEqualObjects(testModel.differentNameProperty, @"new name", @"");
 }
 
-- (void)testToModelWithKeypathCustomMapping {
-    // custom mapping is directly implemented by TestModel with <JAGPropertyMappingProtocol>
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"M123122", @"testModelID",
-                          [NSNumber numberWithInt:5], @"intProperty",
-                          [NSNumber numberWithBool:YES], @"boolProperty",
-                          @"new name" , @"someProperty",
-                          @"MPID001", @"keypathProperty1",
-                          @"MPID002", @"keypathProperty2",
-
-                          nil];
-    TestModel *testModel = [TestModel testModel];
-    [converter setPropertiesOf:testModel fromDictionary:dict];
-
-    STAssertEquals(testModel.modelProperty.testModelID, @"MPID001", @"Converted property not the same.");
-    STAssertEquals(testModel.modelProperty.modelProperty.testModelID, @"MPID002", @"Converted property not the same.");
-}
-
 - (void) testIdentifyModel {
     NSDictionary *auxTestModelDict = [NSDictionary dictionaryWithObject:@"D524234" forKey:@"testModelID"];
     NSDictionary *testModelDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -170,34 +140,6 @@
     
     TestModel *testModel = [converter composeModelFromObject:testModelDict];
     [self assert:testModel isEqualTo:testModelDict];
-}
-
-- (void) testComposeModelWithKeypathCustomMapping {
-    NSDictionary *testModelDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"G653", @"testModelID",
-                                   @"Happy", @"stringProperty",
-                                   @"MPID001", @"keypathProperty1",
-                                   @"MPID002", @"keypathProperty2",
-                                   nil];
-
-    TestModel *testModel = [converter composeModelFromObject:testModelDict];
-
-    STAssertEquals(testModel.modelProperty.testModelID, @"MPID001", @"Converted property not the same.");
-    STAssertEquals(testModel.modelProperty.modelProperty.testModelID, @"MPID002", @"Converted property not the same.");
-}
-
-- (void) testKeypathJSON {
-    converter.outputType = kJAGJSONOutput;
-    NSDictionary *dict = [converter decomposeObject:model];
-
-    id setValue = [dict valueForKey:@"setProperty"];
-    STAssertNotNil(setValue, @"Converted setProperty should not be nil.");
-    STAssertTrue([setValue isKindOfClass:[NSArray class]],
-                 @"setProperty %@ should be converted to an NSArray for JSON.", setValue);
-    NSSet *setFromArray = [NSSet setWithArray:setValue];
-    STAssertEqualObjects(model.setProperty, setFromArray, @"Converted setProperty should have same objects.");
-    TestModel *returnedModel = [[TestModel alloc] initWithPropertiesFromDictionary:dict];
-    STAssertEqualObjects(model.setProperty, returnedModel.setProperty,  @"setProperty should be unchanged over serialization/deserialization.");
 }
 
 - (void) testSetPropertyJSON {

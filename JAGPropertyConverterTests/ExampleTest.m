@@ -731,7 +731,7 @@ JAGPropertyConverter *converter;
     STAssertEquals(address.country, @"USA", @"age should be 55");
 }
 
-- (void)testFromJSONDictWithKeypathCustomName {
+- (void)testТоJSONDictWithKeypathCustomName {
     converter.classesToConvert = [NSSet setWithArray:@[[LivingAddress class]]];
 
     LivingAddress *address = [[LivingAddress alloc] init];   // custom address has implemented JAGPropertyMappingProtocol
@@ -756,7 +756,7 @@ JAGPropertyConverter *converter;
     STAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
 }
 
-- (void)testToJSONWIthKeypathCustomName {
+- (void)testFromJSONWIthKeypathCustomName {
     // newCustomProperty --> street
     NSDictionary *sourceDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"street" : @"Infinite Loop 1", @"tenantName" : @"John", @"tenantPermanentAddressStreet": @"Nowhere Road 2" };
 

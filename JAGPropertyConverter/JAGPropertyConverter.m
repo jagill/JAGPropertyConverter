@@ -289,7 +289,7 @@
     // Add all custom keypaths defined for the model.
     if (customMapping) {
         for (NSString *customKey in customMapping) {
-            BOOL isKeyPath = [customKey rangeOfString:@"."].location != NSNotFound;
+            BOOL isKeyPath = [self _isKeyPathKey:customKey];
             if (isKeyPath) {
                 [values setValue:[self decomposeObject:[model valueForKeyPath:customKey]] forKey:customMapping[customKey]];
             }
@@ -435,8 +435,8 @@
     for (NSString *dictKey in dictionary) {
         
         NSString *key = dictKey;
-        BOOL isKeyPath;
-        NSString *remainingKeyPath = @"";
+        BOOL isKeyPath = NO;
+        NSString *remainingKeyPath = nil;
 
         property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
         
@@ -454,12 +454,12 @@
                     property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
                 }
 
-                // Check if it is a keypath and get the first segment
+                // Check if the key is a keypath (e.g. "someProperty.somePropertyOfSomeProperty") and get the first segment (e.g. "someProperty")
                 if (!property) {
-                    NSRange rangeOfFirstDot = [key rangeOfString:@"."];
-                    isKeyPath = rangeOfFirstDot.location != NSNotFound;
+                    isKeyPath = [self _isKeyPathKey:key];
 
                     if (isKeyPath) {
+                        NSRange rangeOfFirstDot = [key rangeOfString:@"."];
                         remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
                         key = [key substringToIndex:rangeOfFirstDot.location];
 
@@ -537,25 +537,22 @@
             value = [self composeModelFromObject: value withTargetClass:propertyClass propertyName:propertyName];
         }
 
-        if (isKeyPath && ![remainingKeyPath isEqualToString:@""]) {
+        // If the key is a keypath set the value of the property by recursively going through the keypath segments
+        if (isKeyPath && remainingKeyPath != nil) {
             id ownedObject;
 
-            if ( ! [object valueForKey:key]) {
+            if (![object valueForKey:key]) {
                 [object setValue:[[property.propertyClass alloc] init] forKey:key];
             }
 
             ownedObject = [object valueForKey:key];
-            isKeyPath = [remainingKeyPath rangeOfString:@"."].location != NSNotFound;
 
-            if (!isKeyPath) {
-                [ownedObject setValue:value forKey:remainingKeyPath];
-            } else {
-                [self setPropertiesOf:ownedObject fromDictionary:@{remainingKeyPath: value}];
-            }
+            // Continue recursively
+            [self setPropertiesOf:ownedObject fromDictionary:@{remainingKeyPath: value}];
         } else if ([property canAcceptValue:value]) {
             [object setValue:value forKey:key];
         } else {
-            NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@", 
+            NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@",
                   [value class], [property name], [property typeEncoding]);
         }
     }
@@ -570,6 +567,10 @@
         number = @([value boolValue]);
     }
     return number;
+}
+
+- (BOOL)_isKeyPathKey:(NSString *)key {
+    return [key rangeOfString:@"."].location != NSNotFound;
 }
 
 @end
