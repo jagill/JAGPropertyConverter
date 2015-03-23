@@ -57,8 +57,6 @@
                          @"Model and Dictionary should have same testModelID");
     STAssertEqualObjects(testModel.stringProperty, [dict valueForKey:@"stringProperty"], 
                          @"Model and Dictionary should have same stringProperty");
-    STAssertEqualObjects(testModel.modelProperty.testModelID, [dict valueForKeyPath:@"modelProperty.testModelID"], 
-                         @"Model and Dictionary should have same modelProperty");
     STAssertEqualObjects(testModel.arrayProperty, [dict valueForKey:@"arrayProperty"], 
                          @"Model and Dictionary should have same arrayProperty");
     STAssertEqualObjects(testModel.dictionaryProperty, [dict valueForKey:@"dictionaryProperty"], 
@@ -72,9 +70,9 @@
     NSDictionary *dict = [converter convertToDictionary:model];
     NSLog(@"Converted to dictionary.");
     [self assert:model isEqualTo:dict];
+
     STAssertNil([dict valueForKey:@"dateProperty"], @"JSON Dictionary should not have a date value.");
     STAssertNil([dict valueForKey:@"cfProperty"], @"JSON Dictionary should not have a CF value.");
-    
 }
 
 - (void) testToDictionaryPropertyList {

@@ -95,6 +95,8 @@
     self.stringProperty = @"Hello Kitty!";
     self.modelProperty = [TestModel testModel];
     self.modelProperty.testModelID = @"KOPES56";
+    self.modelProperty.modelProperty = [TestModel testModel];
+    self.modelProperty.modelProperty.testModelID = @"KPATH101";
     self.arrayProperty = [NSArray arrayWithObjects:@"red", @"green", @"blue", nil];
     self.setProperty = [NSSet setWithObjects:@"alpha", @"beta", @"gamma", nil];
     self.dictionaryProperty = [NSDictionary dictionaryWithObjectsAndKeys: 
@@ -145,13 +147,17 @@
 - (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{@"someProperty" : @"differentNameProperty",
              @"enumProperty2" : @"customMappedProperty",
-             @"ignoreProperty2" : @"customMappedIgnoreProperty",};
+             @"ignoreProperty2" : @"customMappedIgnoreProperty",
+             @"keypathProperty1" : @"modelProperty.testModelID",
+             @"keypathProperty2" : @"modelProperty.modelProperty.testModelID"};
 }
 
 - (NSDictionary *)customPropertyMappingConvertingToJSON {
     return @{@"differentNameProperty" : @"someProperty",
              @"customMappedProperty" : @"enumProperty2",
-             @"customMappedIgnoreProperty" : @"ignoreProperty2"};
+             @"customMappedIgnoreProperty" : @"ignoreProperty2",
+             @"modelProperty.testModelID" : @"keypathProperty1",
+             @"modelProperty.modelProperty.testModelID" : @"keypathProperty2"};
 }
 
 - (NSArray *)enumPropertiesToConvertFromJSON {
