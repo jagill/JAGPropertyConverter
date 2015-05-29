@@ -62,7 +62,7 @@
 
 
 - (void)testToModelWithKeypathCustomMapping {
-    // custom mapping is directly implemented by TestModel with <JAGPropertyMappingProtocol>
+    // custom mapping is directly implemented by TestModel with <JAGPropertyMapping>
     NSDictionary *dict = @{@"testModelID": @"M123122",
                            @"keypathProperty1": @"MPID001",
                            @"keypathProperty2": @"MPID002"};

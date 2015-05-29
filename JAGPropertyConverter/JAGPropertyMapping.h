@@ -1,5 +1,5 @@
 //
-//  JAGPropertyMappingProtocol.h
+//  JAGPropertyMapping.h
 //  JAGPropertyConverter
 //
 //  Created by Yen-Chia Lin on 28.11.14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol JAGPropertyMappingProtocol <NSObject>
+@protocol JAGPropertyMapping <NSObject>
 
 @optional
 

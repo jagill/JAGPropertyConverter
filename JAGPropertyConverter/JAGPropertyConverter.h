@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "JAGPropertyMappingProtocol.h"
+#import "JAGPropertyMapping.h"
 
 /**
  * The type of output the objects will be converted to.

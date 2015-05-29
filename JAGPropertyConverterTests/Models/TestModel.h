@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 #import <MapKit/MapKit.h>
-#import "JAGPropertyMappingProtocol.h"
+#import "JAGPropertyMapping.h"
 
 typedef NS_ENUM(NSInteger, TestModelEnum) {
     TestModelEnumTypeA,
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, TestModelEnum) {
 
 @class JAGPropertyConverter;
 
-@interface TestModel : NSObject <JAGPropertyMappingProtocol>
+@interface TestModel : NSObject <JAGPropertyMapping>
 
 @property (copy)            NSString        *testModelID;
 @property (assign)          int             intProperty;

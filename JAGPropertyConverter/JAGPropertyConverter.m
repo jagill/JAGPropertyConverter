@@ -210,19 +210,19 @@
     // see if target object has defined custom mappings
     NSDictionary *customMapping = nil;
     if ([model respondsToSelector:@selector(customPropertyMappingConvertingToJSON)]) {
-        customMapping = [(id<JAGPropertyMappingProtocol>)model customPropertyMappingConvertingToJSON];
+        customMapping = [(id<JAGPropertyMapping>)model customPropertyMappingConvertingToJSON];
     }
     
     // see if we have to convert enums to strings
     NSArray *enumMapping = nil;
     if ([model respondsToSelector:@selector(enumPropertiesToConvertToJSON)]) {
-        enumMapping = [(id<JAGPropertyMappingProtocol>)model enumPropertiesToConvertToJSON];
+        enumMapping = [(id<JAGPropertyMapping>)model enumPropertiesToConvertToJSON];
     }
     
     // get all properties which should be ignored
     NSArray *ignoreProperties = nil;
     if ([model respondsToSelector:@selector(ignorePropertiesToJSON)]) {
-        ignoreProperties = [(id<JAGPropertyMappingProtocol>)model ignorePropertiesToJSON];
+        ignoreProperties = [(id<JAGPropertyMapping>)model ignorePropertiesToJSON];
     }
 
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
@@ -416,19 +416,19 @@
     // see if target object has defined custom mappings
     NSDictionary *customMapping = nil;
     if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
-        customMapping = [(id<JAGPropertyMappingProtocol>)object customPropertyMappingConvertingFromJSON];
+        customMapping = [(id<JAGPropertyMapping>)object customPropertyMappingConvertingFromJSON];
     }
     
     // see if target object has some enums to convert
     NSArray *enumMapping = nil;
     if ([object respondsToSelector:@selector(enumPropertiesToConvertFromJSON)]) {
-        enumMapping = [(id<JAGPropertyMappingProtocol>)object enumPropertiesToConvertFromJSON];
+        enumMapping = [(id<JAGPropertyMapping>)object enumPropertiesToConvertFromJSON];
     }
     
     // get all properties which should be ignored
     NSArray *ignoreProperties = nil;
     if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
-        ignoreProperties = [(id<JAGPropertyMappingProtocol>)object ignorePropertiesFromJSON];
+        ignoreProperties = [(id<JAGPropertyMapping>)object ignorePropertiesFromJSON];
     }
     
     JAGProperty *property;
