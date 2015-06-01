@@ -438,6 +438,11 @@
         BOOL isKeyPath = NO;
         NSString *remainingKeyPath = nil;
 
+        // first try custom mapping
+        if (customMapping[key]) {
+            key = customMapping[key];
+        }
+        
         property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
         
         if (!property) {
@@ -446,7 +451,7 @@
                 key = [key asCamelCaseFromUnderscore];
                 property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
             }
-            // try custom mapping after snake case converting
+            // try custom mapping after snake case converting (again)
             if (!property) {
                 if (customMapping[key]) {
                     key = customMapping[key];
