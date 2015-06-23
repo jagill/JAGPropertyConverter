@@ -709,7 +709,7 @@ JAGPropertyConverter *converter;
     converter.classesToConvert = [NSSet setWithArray:@[[CustomAddress class]]];
 
     // street --> newCustomProperty
-    CustomAddress *address = [[CustomAddress alloc] init];   // custom address has implemented JAGPropertyMappingProtocol
+    CustomAddress *address = [[CustomAddress alloc] init];   // custom address has implemented JAGPropertyMapping
     address.street = @"Infinite Loop 1";
     address.city = @"Cuppertino";
     address.country = @"USA";
@@ -734,7 +734,7 @@ JAGPropertyConverter *converter;
 - (void)testТоJSONDictWithKeypathCustomName {
     converter.classesToConvert = [NSSet setWithArray:@[[LivingAddress class]]];
 
-    LivingAddress *address = [[LivingAddress alloc] init];   // custom address has implemented JAGPropertyMappingProtocol
+    LivingAddress *address = [[LivingAddress alloc] init];   // custom address has implemented JAGPropertyMapping
     address.street = @"Infinite Loop 1";
     address.city = @"Cuppertino";
     address.country = @"USA";

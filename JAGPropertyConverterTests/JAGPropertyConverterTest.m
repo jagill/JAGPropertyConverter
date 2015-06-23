@@ -116,7 +116,7 @@
 }
 
 - (void) testToModelWithDifferntPropertyName {
-    // custom mapping is directly implemented by TestModel with <JAGPropertyMappingProtocol>
+    // custom mapping is directly implemented by TestModel with <JAGPropertyMapping>
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"M123122", @"testModelID",
                           [NSNumber numberWithInt:5], @"intProperty",

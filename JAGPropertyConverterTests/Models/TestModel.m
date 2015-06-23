@@ -142,7 +142,7 @@
     _active = active;
 }
 
-#pragma mark - JAGPropertyMappingProtocol
+#pragma mark - JAGPropertyMapping
 
 - (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{@"someProperty" : @"differentNameProperty",
