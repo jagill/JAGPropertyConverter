@@ -92,6 +92,11 @@
 }
 
 - (id) decomposeObject: (id) object {
+    return [self recursiveDecomposeObject:object];
+}
+
+// created a private recursive method so subclasses of JAGPropertyConverter can simply override the public method (decomposeObject:) to do additional pre- and/or post-processing.
+- (id) recursiveDecomposeObject: (id) object {
     if (!object) {
         return nil;
     } else if ([object isKindOfClass: [NSNull class]]
@@ -151,7 +156,7 @@
     } else if ([object isKindOfClass: [NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (id obj in object) {
-            id value = [self decomposeObject:obj];
+            id value = [self recursiveDecomposeObject:obj];
             if (value) {
                 [array addObject: value];
             } else {
@@ -168,7 +173,7 @@
             collection = [NSMutableSet set];
         }
         for (id obj in object) {
-            id value = [self decomposeObject:obj];
+            id value = [self recursiveDecomposeObject:obj];
             if (value) {
                 [collection addObject: value];
             } else {
@@ -183,9 +188,9 @@
                 NSLog(@"JSON dictionaries must have string keys, skipping key %@", key);
                 continue;
             }
-            id value = [self decomposeObject:[object objectForKey: key]];
+            id value = [self recursiveDecomposeObject:[object objectForKey: key]];
             if (value) {
-                [dict setObject: [self decomposeObject: value] forKey: key];
+                [dict setObject: [self recursiveDecomposeObject: value] forKey: key];
             } else {
                 NSLog(@"Unable to convert %@ to properties.", [object objectForKey: key]);
             }
@@ -283,7 +288,7 @@
         }
         
         // set value in dictionary
-        [values setValue:[self decomposeObject: object] forKey:propertyName];
+        [values setValue:[self recursiveDecomposeObject: object] forKey:propertyName];
     }
 
     // Add all custom keypaths defined for the model.
@@ -291,7 +296,7 @@
         for (NSString *customKey in customMapping) {
             BOOL isKeyPath = [self _isKeyPathKey:customKey];
             if (isKeyPath) {
-                [values setValue:[self decomposeObject:[model valueForKeyPath:customKey]] forKey:customMapping[customKey]];
+                [values setValue:[self recursiveDecomposeObject:[model valueForKeyPath:customKey]] forKey:customMapping[customKey]];
             }
         }
     }
