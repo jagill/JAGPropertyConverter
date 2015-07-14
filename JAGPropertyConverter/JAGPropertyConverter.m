@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 #import "JAGPropertyConverter.h"
+#import "JAGPropertyConverter+Subclass.h"
 #import "JAGPropertyFinder.h"
 #import "JAGProperty.h"
 #import "NSString+JAGSnakeCaseSupport.h"
@@ -417,80 +418,19 @@
     
 }
 
-- (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
-    // see if target object has defined custom mappings
-    NSDictionary *customMapping = nil;
-    if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
-        customMapping = [(id<JAGPropertyMapping>)object customPropertyMappingConvertingFromJSON];
-    }
-    
+- (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {    
     // see if target object has some enums to convert
     NSArray *enumMapping = nil;
     if ([object respondsToSelector:@selector(enumPropertiesToConvertFromJSON)]) {
         enumMapping = [(id<JAGPropertyMapping>)object enumPropertiesToConvertFromJSON];
     }
     
-    // get all properties which should be ignored
-    NSArray *ignoreProperties = nil;
-    if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
-        ignoreProperties = [(id<JAGPropertyMapping>)object ignorePropertiesFromJSON];
-    }
-    
-    JAGProperty *property;
     for (NSString *dictKey in dictionary) {
-        
-        NSString *key = dictKey;
         BOOL isKeyPath = NO;
         NSString *remainingKeyPath = nil;
-
-        // first try custom mapping
-        if (customMapping[key]) {
-            key = customMapping[key];
-        }
+        JAGProperty *property = [self findPropertyOfObject:object forKey:dictKey isKeyPath:&isKeyPath remainingKeyPath:&remainingKeyPath];
         
-        property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
-        
-        if (!property) {
-            // when enabled, convert to camelcase and try again fetching property
-            if (self.enableSnakeCaseSupport) {
-                key = [key asCamelCaseFromUnderscore];
-                property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
-            }
-            // try custom mapping after snake case converting (again)
-            if (!property) {
-                if (customMapping[key]) {
-                    key = customMapping[key];
-
-                    property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
-                }
-
-                // Check if the key is a keypath (e.g. "someProperty.somePropertyOfSomeProperty") and get the first segment (e.g. "someProperty")
-                if (!property) {
-                    isKeyPath = [self _isKeyPathKey:key];
-
-                    if (isKeyPath) {
-                        NSRange rangeOfFirstDot = [key rangeOfString:@"."];
-                        remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
-                        key = [key substringToIndex:rangeOfFirstDot.location];
-
-                        property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
-                    }
-                }
-            }
-
-            if (!property || [property isReadOnly]) continue;
-        }
-        
-        // check if we should ignore this property
-        BOOL shouldIgnoreValue = NO;
-        for (NSString *propertyToIgnore in ignoreProperties) {
-            if ([dictKey isEqualToString:propertyToIgnore]) {
-                shouldIgnoreValue = YES;
-                break;
-            }
-        }
-        
-        if (shouldIgnoreValue) {
+        if (!property || [property isReadOnly]) {
             continue;
         }
         
@@ -504,9 +444,9 @@
             } else {
                 // clear property value (set property to nil)
                 if ([property isNumber]) {
-                    [object setValue:@(0) forKey:key]; // for primitive data types we still need an object
+                    [object setValue:@(0) forKey:property.name]; // for primitive data types we still need an object
                 } else {
-                    [object setValue:nil forKey:key];
+                    [object setValue:nil forKey:property.name];
                 }
                 continue;
             }
@@ -549,16 +489,16 @@
         if (isKeyPath && remainingKeyPath != nil) {
             id ownedObject;
 
-            if (![object valueForKey:key]) {
-                [object setValue:[[property.propertyClass alloc] init] forKey:key];
+            if (![object valueForKey:property.name]) {
+                [object setValue:[[property.propertyClass alloc] init] forKey:property.name];
             }
 
-            ownedObject = [object valueForKey:key];
+            ownedObject = [object valueForKey:property.name];
 
             // Continue recursively
             [self setPropertiesOf:ownedObject fromDictionary:@{remainingKeyPath: value}];
         } else if ([property canAcceptValue:value]) {
-            [object setValue:value forKey:key];
+            [object setValue:value forKey:property.name];
         } else {
             NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@",
                   [value class], [property name], [property typeEncoding]);
@@ -579,6 +519,77 @@
 
 - (BOOL)_isKeyPathKey:(NSString *)key {
     return [key rangeOfString:@"."].location != NSNotFound;
+}
+
+- (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey {
+    return [self findPropertyOfObject:object forKey:dictKey isKeyPath:nil remainingKeyPath:nil];
+}
+
+- (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey isKeyPath:(BOOL *)isKeyPath remainingKeyPath:(NSString **)remainingKeyPath {
+    // get all properties which should be ignored
+    if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
+        NSArray *ignoreProperties = [(id<JAGPropertyMapping>)object ignorePropertiesFromJSON];
+        
+        // check if we should ignore this property
+        for (NSString *propertyToIgnore in ignoreProperties) {
+            if ([dictKey isEqualToString:propertyToIgnore]) {
+                // ignoring property
+                return nil;
+            }
+        }
+    }
+
+    // see if target object has defined custom mappings
+    NSDictionary *customMapping = nil;
+    if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
+        customMapping = [(id<JAGPropertyMapping>)object customPropertyMappingConvertingFromJSON];
+    }
+    
+    JAGProperty *property = nil;
+    NSString *key = dictKey;
+    
+    // first try custom mapping
+    if (customMapping[key]) {
+        key = customMapping[key];
+    }
+    
+    property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+    
+    if (!property) {
+        // when enabled, convert to camelCase and try again fetching property
+        if (self.enableSnakeCaseSupport) {
+            key = [key asCamelCaseFromUnderscore];
+            property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+        }
+        // try custom mapping after snake case converting (again)
+        if (!property) {
+            if (customMapping[key]) {
+                key = customMapping[key];
+                
+                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+            }
+            
+            // Check if the key is a keypath (e.g. "someProperty.somePropertyOfSomeProperty") and get the first segment (e.g. "someProperty")
+            if (!property) {
+                *isKeyPath = [self _isKeyPathKey:key];
+                
+                if (*isKeyPath) {
+                    NSRange rangeOfFirstDot = [key rangeOfString:@"."];
+                    *remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
+                    key = [key substringToIndex:rangeOfFirstDot.location];
+                    
+                    property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+                }
+            }
+        }
+        
+        // after many tries, still couldn't find the property
+        if (!property) {
+            return nil;
+        }
+    }
+    
+    return property;
 }
 
 @end
