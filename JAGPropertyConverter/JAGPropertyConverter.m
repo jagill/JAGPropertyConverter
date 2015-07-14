@@ -483,12 +483,10 @@
         
         // check if we should ignore this property
         BOOL shouldIgnoreValue = NO;
-        if (ignoreProperties.count > 0) {
-            for (NSString *propertyToIgnore in ignoreProperties) {
-                if ([dictKey isEqualToString:propertyToIgnore]) {
-                    shouldIgnoreValue = YES;
-                    continue;
-                }
+        for (NSString *propertyToIgnore in ignoreProperties) {
+            if ([dictKey isEqualToString:propertyToIgnore]) {
+                shouldIgnoreValue = YES;
+                break;
             }
         }
         
