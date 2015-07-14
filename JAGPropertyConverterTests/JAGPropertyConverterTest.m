@@ -216,6 +216,8 @@
     STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
 }
 
+#pragma mark - Null Values
+
 - (void)testIgnoringNSNullValues {
     converter.shouldIgnoreNullValues = YES;
     
@@ -225,6 +227,8 @@
     [converter setPropertiesOf:testModel fromDictionary:dict];
     STAssertNil(testModel.stringProperty, @"");
 }
+
+#pragma mark - Snake Case
 
 - (void)testSnakeCaseSupport1 {
     converter.enableSnakeCaseSupport = YES;
@@ -247,6 +251,8 @@
     [converter setPropertiesOf:testModel fromDictionary:dict];
     STAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
 }
+
+#pragma mark - Enums
 
 - (void)testConvertPropertyToEnum {
     converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
@@ -340,6 +346,59 @@
     STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
 }
 
+- (void)testConvertPropertyToEnumWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"snake_case_enum_property" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.snakeCaseEnumProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnumWithCustomMapping2 {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"snakeCaseEnumProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    converter.enableSnakeCaseSupport = YES;
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.snakeCaseEnumProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"snake_case_enum_property"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+    
+    NSString *wrongKeyEnum = resultDict[@"snakeCaseEnumProperty"];
+    STAssertNil(wrongKeyEnum, @"result shouldn't contain this key!");
+}
+
+#pragma mark - Ignore
+
 - (void)testIgnorePropertiesFromJSON {
     converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
     
@@ -378,6 +437,29 @@
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
     STAssertNil(resultModel.customMappedIgnoreProperty, @"");
+}
+
+- (void)testIgnorePropertiesFromJSONWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    converter.enableSnakeCaseSupport = YES;
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.snakeCaseIgnoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"snake_case_ignore_property"], @"");
+    STAssertNil(resultDict[@"snakeCaseIgnoreProperty"], @"");
+}
+
+- (void)testIgnorePropertiesToJSONWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"snake_case_ignore_property" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.snakeCaseIgnoreProperty, @"");
 }
 
 @end

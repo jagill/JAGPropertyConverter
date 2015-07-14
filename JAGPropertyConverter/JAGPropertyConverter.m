@@ -235,9 +235,11 @@
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
     NSString* propertyName;
     for (JAGProperty *property in properties) {
+        // ignore weak properties
         if (!self.shouldConvertWeakProperties && [property isWeak]) {
             continue;
         }
+        
         SEL getter = [property getter];
         if (![model respondsToSelector:getter]) {
             //Found property without a valid getter. Skipping.
@@ -255,12 +257,10 @@
         
         // check if we should ignore this property
         BOOL shouldIgnoreValue = NO;
-        if (ignoreProperties.count > 0) {
-            for (NSString *propertyToIgnore in ignoreProperties) {
-                if ([property.name isEqualToString:propertyToIgnore]) {
-                    shouldIgnoreValue = YES;
-                    continue;
-                }
+        for (NSString *propertyToIgnore in ignoreProperties) {
+            if ([property.name isEqualToString:propertyToIgnore]) {
+                shouldIgnoreValue = YES;
+                break;
             }
         }
         
@@ -272,15 +272,10 @@
         if (enumMapping && self.convertFromEnum && [property isNumber]) {
             for (NSString *enumProperty in enumMapping) {
                 if ([enumProperty isEqualToString:property.name]) {
-                    [values setValue:self.convertFromEnum(property.name, object, [model class]) forKey:propertyName];
-                    continue;
+                    object = self.convertFromEnum(property.name, object, [model class]);    // eg. converts enum (int) into string
+                    break;
                 }
             }
-        }
-        
-        if (values[propertyName] != nil) {
-            // enum-mapping already set a value
-            continue;
         }
         
         // convert to snake case?
@@ -428,6 +423,8 @@
     for (NSString *dictKey in dictionary) {
         BOOL isKeyPath = NO;
         NSString *remainingKeyPath = nil;
+        
+        // find correct property for given key
         JAGProperty *property = [self findPropertyOfObject:object forKey:dictKey isKeyPath:&isKeyPath remainingKeyPath:&remainingKeyPath];
         
         if (!property || [property isReadOnly]) {
@@ -456,7 +453,7 @@
         BOOL propertyValueAlreadySet = NO;
         if (enumMapping && self.convertToEnum && [property isNumber]) {
             for (NSString *enumProperty in enumMapping) {
-                if ([enumProperty isEqualToString:dictKey]) {
+                if ([enumProperty isEqualToString:dictKey] || [[enumProperty asUnderscoreFromCamelCase] isEqualToString:dictKey]) {
                     [object setValue:@(self.convertToEnum(dictKey, value, [object class])) forKey:property.name];
                     propertyValueAlreadySet = YES;
                     continue;

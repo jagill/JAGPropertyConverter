@@ -15,16 +15,6 @@
 
 @implementation SnakeCaseTest
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 - (void)testConvertToCamelCase {
     STAssertEqualObjects([@"hello" asCamelCaseFromUnderscore], @"hello", @"no change");
     STAssertEqualObjects([@"Hello" asCamelCaseFromUnderscore], @"Hello", @"no change");
@@ -33,7 +23,11 @@
     STAssertEqualObjects([@"stay awhile and listen" asCamelCaseFromUnderscore], @"stay awhile and listen", @"no change");
     STAssertEqualObjects([@"stay_awhile_and_listen" asCamelCaseFromUnderscore], @"stayAwhileAndListen", @"convert");
     STAssertEqualObjects([@"created_at" asCamelCaseFromUnderscore], @"createdAt", @"convert");
+    STAssertEqualObjects([@"created_at_1234" asCamelCaseFromUnderscore], @"createdAt1234", @"convert");
 }
 
+- (void)testConvertToSnakeCase {
+    STAssertEqualObjects([@"createdAt1234" asUnderscoreFromCamelCase], @"created_at1234", @"convert");
+}
 
 @end

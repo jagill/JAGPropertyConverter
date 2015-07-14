@@ -161,19 +161,19 @@
 }
 
 - (NSArray *)enumPropertiesToConvertFromJSON {
-    return @[@"enumProperty", @"enumProperty2"];
+    return @[@"enumProperty", @"enumProperty2", @"snake_case_enum_property"];
 }
 
 - (NSArray *)enumPropertiesToConvertToJSON {
-    return @[@"enumProperty", @"customMappedProperty"];
+    return @[@"enumProperty", @"customMappedProperty", @"snakeCaseEnumProperty"];
 }
 
 - (NSArray *)ignorePropertiesFromJSON {
-    return @[@"ignoreProperty", @"ignoreProperty2"];
+    return @[@"ignoreProperty", @"ignoreProperty2", @"snake_case_ignore_property"];
 }
 
 - (NSArray *)ignorePropertiesToJSON {
-    return @[@"ignoreProperty", @"customMappedIgnoreProperty"];
+    return @[@"ignoreProperty", @"customMappedIgnoreProperty", @"snakeCaseIgnoreProperty"];
 }
 
 @end

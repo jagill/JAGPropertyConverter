@@ -55,8 +55,10 @@ typedef NS_ENUM(NSInteger, TestModelEnum) {
 @property (copy)            NSString        *differentNameProperty;
 @property (nonatomic, assign) TestModelEnum enumProperty;
 @property (nonatomic, assign) TestModelEnum customMappedProperty;
+@property (nonatomic, assign) TestModelEnum snakeCaseEnumProperty;
 @property (nonatomic, copy) NSString *ignoreProperty;
 @property (nonatomic, copy) NSString *customMappedIgnoreProperty;
+@property (nonatomic, copy) NSString *snakeCaseIgnoreProperty;
 
 + (TestModel*) testModel;
 
