@@ -6,7 +6,7 @@
 //
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "JAGPropertyMapping.h"
 
@@ -48,6 +48,6 @@
  * Examples of serialization and deserialization are given in the implementation file, 
  * that can be examined with breakpoints/etc.
  */
-@interface ExampleTest : SenTestCase
+@interface ExampleTest : XCTestCase
 
 @end

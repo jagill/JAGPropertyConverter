@@ -24,9 +24,9 @@
 // THE SOFTWARE.
 
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <UIKit/UIKit.h>
 
-@interface JAGPropertyTest : SenTestCase
+@interface JAGPropertyTest : XCTestCase
 
 @end

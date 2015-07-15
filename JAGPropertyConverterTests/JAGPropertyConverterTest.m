@@ -53,15 +53,15 @@
 }
 
 - (void) assert: (TestModel*) testModel isEqualTo: (NSDictionary*) dict {
-    STAssertEqualObjects(testModel.testModelID, [dict valueForKey:@"testModelID"], 
+    XCTAssertEqualObjects(testModel.testModelID, [dict valueForKey:@"testModelID"], 
                          @"Model and Dictionary should have same testModelID");
-    STAssertEqualObjects(testModel.stringProperty, [dict valueForKey:@"stringProperty"], 
+    XCTAssertEqualObjects(testModel.stringProperty, [dict valueForKey:@"stringProperty"], 
                          @"Model and Dictionary should have same stringProperty");
-    STAssertEqualObjects(testModel.arrayProperty, [dict valueForKey:@"arrayProperty"], 
+    XCTAssertEqualObjects(testModel.arrayProperty, [dict valueForKey:@"arrayProperty"], 
                          @"Model and Dictionary should have same arrayProperty");
-    STAssertEqualObjects(testModel.dictionaryProperty, [dict valueForKey:@"dictionaryProperty"], 
+    XCTAssertEqualObjects(testModel.dictionaryProperty, [dict valueForKey:@"dictionaryProperty"], 
                          @"Model and Dictionary should have same dictionaryProperty");
-    STAssertEquals(testModel.intProperty, [[dict valueForKey:@"intProperty"] intValue], 
+    XCTAssertEqual(testModel.intProperty, [[dict valueForKey:@"intProperty"] intValue], 
                          @"Model and Dictionary should have same intProperty");    
 }
 
@@ -71,16 +71,16 @@
     NSLog(@"Converted to dictionary.");
     [self assert:model isEqualTo:dict];
 
-    STAssertNil([dict valueForKey:@"dateProperty"], @"JSON Dictionary should not have a date value.");
-    STAssertNil([dict valueForKey:@"cfProperty"], @"JSON Dictionary should not have a CF value.");
+    XCTAssertNil([dict valueForKey:@"dateProperty"], @"JSON Dictionary should not have a date value.");
+    XCTAssertNil([dict valueForKey:@"cfProperty"], @"JSON Dictionary should not have a CF value.");
 }
 
 - (void) testToDictionaryPropertyList {
     converter.outputType = kJAGPropertyListOutput;
     NSDictionary *dict = [converter convertToDictionary:model];
     [self assert:model isEqualTo:dict];
-    STAssertEqualObjects(model.dateProperty, [dict valueForKey:@"dateProperty"], @"PropertyList Dictionary should have a date value.");
-    STAssertNil([dict valueForKey:@"cfProperty"], @"PropertyList Dictionary should not have a CF value.");
+    XCTAssertEqualObjects(model.dateProperty, [dict valueForKey:@"dateProperty"], @"PropertyList Dictionary should have a date value.");
+    XCTAssertNil([dict valueForKey:@"cfProperty"], @"PropertyList Dictionary should not have a CF value.");
     
 }
 
@@ -88,9 +88,9 @@
     converter.outputType = kJAGFullOutput;
     NSDictionary *dict = [converter convertToDictionary:model];
     [self assert:model isEqualTo:dict];
-    STAssertEqualObjects(model.dateProperty, [dict valueForKey:@"dateProperty"], @"Full Dictionary should have a date value.");
+    XCTAssertEqualObjects(model.dateProperty, [dict valueForKey:@"dateProperty"], @"Full Dictionary should have a date value.");
     NSValue *cfValue = [dict valueForKey:@"cfProperty"];
-    STAssertNotNil(cfValue, @"Full Dictionary should have a CF value.");
+    XCTAssertNotNil(cfValue, @"Full Dictionary should have a CF value.");
     
     
 }
@@ -126,8 +126,8 @@
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
     
-    STAssertNotNil(testModel.differentNameProperty, @"");
-    STAssertEqualObjects(testModel.differentNameProperty, @"new name", @"");
+    XCTAssertNotNil(testModel.differentNameProperty, @"");
+    XCTAssertEqualObjects(testModel.differentNameProperty, @"new name", @"");
 }
 
 - (void) testIdentifyModel {
@@ -146,24 +146,24 @@
     converter.outputType = kJAGJSONOutput;
     NSDictionary *dict = [converter decomposeObject:model];
     id setValue = [dict valueForKey:@"setProperty"];
-    STAssertNotNil(setValue, @"Converted setProperty should not be nil.");
-    STAssertTrue([setValue isKindOfClass:[NSArray class]], 
+    XCTAssertNotNil(setValue, @"Converted setProperty should not be nil.");
+    XCTAssertTrue([setValue isKindOfClass:[NSArray class]], 
                  @"setProperty %@ should be converted to an NSArray for JSON.", setValue);
     NSSet *setFromArray = [NSSet setWithArray:setValue];
-    STAssertEqualObjects(model.setProperty, setFromArray, @"Converted setProperty should have same objects.");
+    XCTAssertEqualObjects(model.setProperty, setFromArray, @"Converted setProperty should have same objects.");
     TestModel *returnedModel = [[TestModel alloc] initWithPropertiesFromDictionary:dict];
-    STAssertEqualObjects(model.setProperty, returnedModel.setProperty,  @"setProperty should be unchanged over serialization/deserialization.");
+    XCTAssertEqualObjects(model.setProperty, returnedModel.setProperty,  @"setProperty should be unchanged over serialization/deserialization.");
 }
 
 - (void) testURLPropertyJSON {
     converter.outputType = kJAGJSONOutput;
     NSDictionary *dict = [converter decomposeObject:model];
     id urlValue = [dict valueForKey:@"urlProperty"];
-    STAssertNotNil(urlValue, @"Converted urlProperty should not be nil.");
-    STAssertTrue([urlValue isKindOfClass:[NSString class]], 
+    XCTAssertNotNil(urlValue, @"Converted urlProperty should not be nil.");
+    XCTAssertTrue([urlValue isKindOfClass:[NSString class]], 
                  @"urlValue %@ should be converted to an NSString for JSON.", urlValue);
     NSURL *urlFromArray = [NSURL URLWithString:urlValue];
-    STAssertEqualObjects(urlFromArray, model.urlProperty, @"URL property should have same absolute string.");
+    XCTAssertEqualObjects(urlFromArray, model.urlProperty, @"URL property should have same absolute string.");
 }
 
 - (void) testURLPropertyJSONDeserialize {
@@ -171,9 +171,9 @@
     NSDictionary *dict = [converter decomposeObject:model];
     TestModel *model2 = [TestModel testModel];
     [model2 setPropertiesFromDictionary:dict];
-    STAssertNotNil(model2.urlProperty, @"urlProperty should not be nil.");
-    STAssertTrue([model2.urlProperty isKindOfClass: [NSURL class]], @"urlProperty should be an NSURL.");
-    STAssertEqualObjects(model2.urlProperty, model.urlProperty, @"urlProperties should be equal.");
+    XCTAssertNotNil(model2.urlProperty, @"urlProperty should not be nil.");
+    XCTAssertTrue([model2.urlProperty isKindOfClass: [NSURL class]], @"urlProperty should be an NSURL.");
+    XCTAssertEqualObjects(model2.urlProperty, model.urlProperty, @"urlProperties should be equal.");
 }
 
 - (void) testWeakProperty {
@@ -181,7 +181,7 @@
     model.weakProperty = strongReference;
     converter.outputType = kJAGFullOutput;
     NSDictionary *dict = [converter decomposeObject:model];
-    STAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
+    XCTAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
 - (void) testWeakProperty2 {
@@ -190,7 +190,7 @@
     converter.outputType = kJAGFullOutput;
     converter.shouldConvertWeakProperties = YES;
     NSDictionary *dict = [converter decomposeObject:model];
-    STAssertNotNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
+    XCTAssertNotNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
 - (void) testNSArrayWithNSNumberWithBoolFalse {
@@ -198,9 +198,9 @@
     NSNumber *zeroNum = [NSNumber numberWithInt:0];
     NSArray *array = [NSArray arrayWithObjects:falseNum, zeroNum, nil];
     id decomposed = [converter decomposeObject:array];
-    STAssertTrue([decomposed count] == 2, @"Array should have two elements after decomposing.");
+    XCTAssertTrue([decomposed count] == 2, @"Array should have two elements after decomposing.");
     id composed = [converter composeModelFromObject:array];
-    STAssertTrue([composed count] == 2, @"Array should have two elements after composing.");
+    XCTAssertTrue([composed count] == 2, @"Array should have two elements after composing.");
 }
 
 - (void) testNSDictWithNSNumberWithBoolFalse {
@@ -211,9 +211,9 @@
                           zeroNum, @"two",
                           nil];
     id decomposed = [converter decomposeObject:dict];
-    STAssertTrue([decomposed count] == 2, @"Dict should have two elements after decomposing.");
+    XCTAssertTrue([decomposed count] == 2, @"Dict should have two elements after decomposing.");
     id composed = [converter composeModelFromObject:dict];
-    STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
+    XCTAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
 }
 
 #pragma mark - Null Values
@@ -225,7 +225,7 @@
     
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
-    STAssertNil(testModel.stringProperty, @"");
+    XCTAssertNil(testModel.stringProperty, @"");
 }
 
 #pragma mark - Snake Case
@@ -238,8 +238,8 @@
     
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
-    STAssertEquals(testModel.intProperty, 12345, @"camel case property should be set to 12345");
-    STAssertEqualObjects(testModel.stringProperty, @"same", @"normal property should also work normally");
+    XCTAssertEqual(testModel.intProperty, 12345, @"camel case property should be set to 12345");
+    XCTAssertEqualObjects(testModel.stringProperty, @"same", @"normal property should also work normally");
 }
 
 - (void)testSnakeCaseSupport2 {
@@ -249,7 +249,7 @@
     
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
-    STAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
+    XCTAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
 }
 
 #pragma mark - Enums
@@ -270,7 +270,7 @@
     NSDictionary *dict = @{ @"enumProperty" : @"juhu" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertEquals(resultModel.enumProperty, TestModelEnumTypeB, @"");
+    XCTAssertEqual(resultModel.enumProperty, TestModelEnumTypeB, @"");
 }
 
 - (void)testConvertPropertyFromEnum {
@@ -296,8 +296,8 @@
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
     NSString *resultEnum = resultDict[@"enumProperty"];
-    STAssertNotNil(resultEnum, @"");
-    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+    XCTAssertNotNil(resultEnum, @"");
+    XCTAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
 }
 
 - (void)testConvertPropertyToEnumWithCustomMapping {
@@ -316,7 +316,7 @@
     NSDictionary *dict = @{ @"enumProperty2" : @"juhu" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertEquals(resultModel.customMappedProperty, TestModelEnumTypeB, @"");
+    XCTAssertEqual(resultModel.customMappedProperty, TestModelEnumTypeB, @"");
 }
 
 - (void)testConvertPropertyFromEnumWithCustomMapping {
@@ -342,8 +342,8 @@
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
     NSString *resultEnum = resultDict[@"enumProperty2"];
-    STAssertNotNil(resultEnum, @"");
-    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+    XCTAssertNotNil(resultEnum, @"");
+    XCTAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
 }
 
 - (void)testConvertPropertyToEnumWithSnakeCase {
@@ -363,7 +363,7 @@
     NSDictionary *dict = @{ @"snake_case_enum_property" : @"juhu" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertEquals(resultModel.snakeCaseEnumProperty, TestModelEnumTypeB, @"");
+    XCTAssertEqual(resultModel.snakeCaseEnumProperty, TestModelEnumTypeB, @"");
 }
 
 - (void)testConvertPropertyFromEnumWithCustomMapping2 {
@@ -390,11 +390,11 @@
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
     NSString *resultEnum = resultDict[@"snake_case_enum_property"];
-    STAssertNotNil(resultEnum, @"");
-    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+    XCTAssertNotNil(resultEnum, @"");
+    XCTAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
     
     NSString *wrongKeyEnum = resultDict[@"snakeCaseEnumProperty"];
-    STAssertNil(wrongKeyEnum, @"result shouldn't contain this key!");
+    XCTAssertNil(wrongKeyEnum, @"result shouldn't contain this key!");
 }
 
 #pragma mark - Ignore
@@ -407,7 +407,7 @@
     
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
-    STAssertNil(resultDict[@"ignoreProperty"], @"");
+    XCTAssertNil(resultDict[@"ignoreProperty"], @"");
 }
 
 - (void)testIgnorePropertiesToJSON {
@@ -416,7 +416,7 @@
     NSDictionary *dict = @{ @"ignoreProperty" : @"ignore me" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertNil(resultModel.ignoreProperty, @"");
+    XCTAssertNil(resultModel.ignoreProperty, @"");
 }
 
 - (void)testIgnorePropertiesFromJSONWithCustomMapping {
@@ -427,7 +427,7 @@
     
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
-    STAssertNil(resultDict[@"ignoreProperty2"], @"");
+    XCTAssertNil(resultDict[@"ignoreProperty2"], @"");
 }
 
 - (void)testIgnorePropertiesToJSONWithCustomMapping {
@@ -436,7 +436,7 @@
     NSDictionary *dict = @{ @"ignoreProperty2" : @"ignore me" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertNil(resultModel.customMappedIgnoreProperty, @"");
+    XCTAssertNil(resultModel.customMappedIgnoreProperty, @"");
 }
 
 - (void)testIgnorePropertiesFromJSONWithSnakeCase {
@@ -448,8 +448,8 @@
     
     NSDictionary *resultDict = [converter convertToDictionary:testModel];
     
-    STAssertNil(resultDict[@"snake_case_ignore_property"], @"");
-    STAssertNil(resultDict[@"snakeCaseIgnoreProperty"], @"");
+    XCTAssertNil(resultDict[@"snake_case_ignore_property"], @"");
+    XCTAssertNil(resultDict[@"snakeCaseIgnoreProperty"], @"");
 }
 
 - (void)testIgnorePropertiesToJSONWithSnakeCase {
@@ -459,7 +459,7 @@
     NSDictionary *dict = @{ @"snake_case_ignore_property" : @"ignore me" };
     
     TestModel *resultModel = [converter composeModelFromObject:dict];
-    STAssertNil(resultModel.snakeCaseIgnoreProperty, @"");
+    XCTAssertNil(resultModel.snakeCaseIgnoreProperty, @"");
 }
 
 @end

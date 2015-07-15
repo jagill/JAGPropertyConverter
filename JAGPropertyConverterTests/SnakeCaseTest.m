@@ -6,28 +6,28 @@
 //
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NSString+JAGSnakeCaseSupport.h"
 
-@interface SnakeCaseTest : SenTestCase
+@interface SnakeCaseTest : XCTestCase
 
 @end
 
 @implementation SnakeCaseTest
 
 - (void)testConvertToCamelCase {
-    STAssertEqualObjects([@"hello" asCamelCaseFromUnderscore], @"hello", @"no change");
-    STAssertEqualObjects([@"Hello" asCamelCaseFromUnderscore], @"Hello", @"no change");
-    STAssertEqualObjects([@"hello there" asCamelCaseFromUnderscore], @"hello there", @"no change");
-    STAssertEqualObjects([@"hello_there" asCamelCaseFromUnderscore], @"helloThere", @"convert");
-    STAssertEqualObjects([@"stay awhile and listen" asCamelCaseFromUnderscore], @"stay awhile and listen", @"no change");
-    STAssertEqualObjects([@"stay_awhile_and_listen" asCamelCaseFromUnderscore], @"stayAwhileAndListen", @"convert");
-    STAssertEqualObjects([@"created_at" asCamelCaseFromUnderscore], @"createdAt", @"convert");
-    STAssertEqualObjects([@"created_at_1234" asCamelCaseFromUnderscore], @"createdAt1234", @"convert");
+    XCTAssertEqualObjects([@"hello" asCamelCaseFromUnderscore], @"hello", @"no change");
+    XCTAssertEqualObjects([@"Hello" asCamelCaseFromUnderscore], @"Hello", @"no change");
+    XCTAssertEqualObjects([@"hello there" asCamelCaseFromUnderscore], @"hello there", @"no change");
+    XCTAssertEqualObjects([@"hello_there" asCamelCaseFromUnderscore], @"helloThere", @"convert");
+    XCTAssertEqualObjects([@"stay awhile and listen" asCamelCaseFromUnderscore], @"stay awhile and listen", @"no change");
+    XCTAssertEqualObjects([@"stay_awhile_and_listen" asCamelCaseFromUnderscore], @"stayAwhileAndListen", @"convert");
+    XCTAssertEqualObjects([@"created_at" asCamelCaseFromUnderscore], @"createdAt", @"convert");
+    XCTAssertEqualObjects([@"created_at_1234" asCamelCaseFromUnderscore], @"createdAt1234", @"convert");
 }
 
 - (void)testConvertToSnakeCase {
-    STAssertEqualObjects([@"createdAt1234" asUnderscoreFromCamelCase], @"created_at1234", @"convert");
+    XCTAssertEqualObjects([@"createdAt1234" asUnderscoreFromCamelCase], @"created_at1234", @"convert");
 }
 
 @end

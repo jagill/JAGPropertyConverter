@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		11275B4F14E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
 		11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B5414E9D56200C4707C /* JAGPropertyConverter.m */; };
-		11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5C14E9D56200C4707C /* SenTestingKit.framework */; };
 		11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5E14E9D56200C4707C /* UIKit.framework */; };
 		11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
 		11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */; };
@@ -52,8 +51,7 @@
 		11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter-Prefix.pch"; sourceTree = "<group>"; };
 		11275B5314E9D56200C4707C /* JAGPropertyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverter.h; sourceTree = "<group>"; };
 		11275B5414E9D56200C4707C /* JAGPropertyConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverter.m; sourceTree = "<group>"; };
-		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11275B5C14E9D56200C4707C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11275B5E14E9D56200C4707C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JAGPropertyConverterTests-Info.plist"; sourceTree = "<group>"; };
 		11275B6814E9D56200C4707C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */,
 				11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */,
 				11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */,
 				11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */,
@@ -123,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */,
-				11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */,
+				11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				11275B4E14E9D56200C4707C /* Foundation.framework */,
-				11275B5C14E9D56200C4707C /* SenTestingKit.framework */,
 				11275B5E14E9D56200C4707C /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -259,8 +255,8 @@
 			);
 			name = JAGPropertyConverterTests;
 			productName = JAGPropertyConverterTests;
-			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -268,7 +264,8 @@
 		11275B4214E9D56200C4707C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastTestingUpgradeCheck = 0640;
+				LastUpgradeCheck = 0640;
 			};
 			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -384,6 +381,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -419,6 +417,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -462,13 +461,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -477,13 +475,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

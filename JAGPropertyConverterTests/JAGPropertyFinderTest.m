@@ -33,18 +33,18 @@
 
 - (void) testPropertiesForSubclass {
     NSArray *properties = [JAGPropertyFinder propertiesForSubclass:[TestModelSubclass class]];
-    STAssertTrue([properties count] == 1, 
-                 @"There should be 1 property in TestModelSubclass, but there are %d", [properties count]);
+    XCTAssertTrue([properties count] == 1, 
+                 @"There should be 1 property in TestModelSubclass, but there are %tu", [properties count]);
     JAGProperty *property = [properties objectAtIndex:0];
-    STAssertEqualObjects(property.name, @"subclassStringProperty", @"Property should have right name");
+    XCTAssertEqualObjects(property.name, @"subclassStringProperty", @"Property should have right name");
     
     
 }
 
 - (void) testPropertiesForClass {
     NSArray *properties = [JAGPropertyFinder propertiesForClass:[TestModelSubclass class]];
-    STAssertTrue([properties count] > 1, 
-                 @"There should be more than 1 properties in TestModelSubclass, but there are %d", [properties count]);
+    XCTAssertTrue([properties count] > 1, 
+                 @"There should be more than 1 properties in TestModelSubclass, but there are %tu", [properties count]);
 //    JAGProperty *property = [properties objectAtIndex:0];
 //    STAssertEqualObjects(property.name, @"subclassStringProperty", @"Property should have right name");
 }
@@ -52,13 +52,13 @@
 - (void) testPropertyForNameSubclass {
     JAGProperty* subclassStringProp = [JAGPropertyFinder propertyForName:@"subclassStringProperty" 
                                                                inClass:[TestModelSubclass class]];
-    STAssertNotNil(subclassStringProp, @"SubclassStringProp should be found.");
+    XCTAssertNotNil(subclassStringProp, @"SubclassStringProp should be found.");
 }
 
 - (void) testPropertyForNameSuperclass {
     JAGProperty* stringProp = [JAGPropertyFinder propertyForName:@"stringProperty" 
                                                                inClass:[TestModelSubclass class]];
-    STAssertNotNil(stringProp, @"StringProp should be found.");
+    XCTAssertNotNil(stringProp, @"StringProp should be found.");
 }
 
 @end
