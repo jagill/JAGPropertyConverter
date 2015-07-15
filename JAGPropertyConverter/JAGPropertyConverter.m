@@ -25,10 +25,12 @@
 // THE SOFTWARE.
 
 #import "JAGPropertyConverter.h"
+#import "JAGPropertyConverter+Subclass.h"
 #import "JAGPropertyFinder.h"
 #import "JAGProperty.h"
+#import "NSString+JAGSnakeCaseSupport.h"
 
-@interface JAGPropertyConverter () 
+@interface JAGPropertyConverter ()
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass;
 
@@ -44,22 +46,13 @@
  * returned either unmodified, or if there is a 'convertable'
  * targetClass, converted to that.
  */
-- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass;
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass propertyName: (NSString *) propertyName;
 
 - (BOOL) shouldConvertClass: (Class) aClass;
 
 @end
 
 @implementation JAGPropertyConverter
-
-
-@synthesize outputType = _outputType;
-@synthesize identifyDict = _identifyDict;
-@synthesize classesToConvert = _classesToConvert;
-@synthesize convertToDate = _convertToDate;
-@synthesize convertFromDate = _convertFromDate;
-@synthesize numberFormatter = _numberFormatter;
-@synthesize shouldConvertWeakProperties = _shouldConvertWeakProperties;
 
 #pragma mark - Lifecycle
 
@@ -73,9 +66,13 @@
         self.outputType = outputType;
         self.identifyDict = nil;
         self.convertToDate = nil;
+        self.convertToData = nil;
         self.convertFromDate = nil;
+        self.convertFromData = nil;
         self.classesToConvert = [NSMutableSet set];
         self.shouldConvertWeakProperties = NO;
+        self.shouldIgnoreNullValues = YES;
+        self.enableSnakeCaseSupport = NO;
     }
     return self;
 }
@@ -96,6 +93,11 @@
 }
 
 - (id) decomposeObject: (id) object {
+    return [self recursiveDecomposeObject:object];
+}
+
+// created a private recursive method so subclasses of JAGPropertyConverter can simply override the public method (decomposeObject:) to do additional pre- and/or post-processing.
+- (id) recursiveDecomposeObject: (id) object {
     if (!object) {
         return nil;
     } else if ([object isKindOfClass: [NSNull class]]
@@ -129,6 +131,8 @@
         if ( self.outputType == kJAGFullOutput
             || self.outputType == kJAGPropertyListOutput ) {
             return object;
+        } else if (self.convertFromData) {
+            return self.convertFromData(object);
         } else {
             //Object is not safe for JSON.  Removing.
             return nil;
@@ -153,7 +157,7 @@
     } else if ([object isKindOfClass: [NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (id obj in object) {
-            id value = [self decomposeObject:obj];
+            id value = [self recursiveDecomposeObject:obj];
             if (value) {
                 [array addObject: value];
             } else {
@@ -170,7 +174,7 @@
             collection = [NSMutableSet set];
         }
         for (id obj in object) {
-            id value = [self decomposeObject:obj];
+            id value = [self recursiveDecomposeObject:obj];
             if (value) {
                 [collection addObject: value];
             } else {
@@ -185,9 +189,9 @@
                 NSLog(@"JSON dictionaries must have string keys, skipping key %@", key);
                 continue;
             }
-            id value = [self decomposeObject:[object objectForKey: key]];
+            id value = [self recursiveDecomposeObject:[object objectForKey: key]];
             if (value) {
-                [dict setObject: [self decomposeObject: value] forKey: key];
+                [dict setObject: [self recursiveDecomposeObject: value] forKey: key];
             } else {
                 NSLog(@"Unable to convert %@ to properties.", [object objectForKey: key]);
             }
@@ -208,23 +212,91 @@
 
 - (NSDictionary*) convertToDictionary: (id) model {
     if (!model) return nil;
+
+    // see if target object has defined custom mappings
+    NSDictionary *customMapping = nil;
+    if ([model respondsToSelector:@selector(customPropertyMappingConvertingToJSON)]) {
+        customMapping = [(id<JAGPropertyMapping>)model customPropertyMappingConvertingToJSON];
+    }
+    
+    // see if we have to convert enums to strings
+    NSArray *enumMapping = nil;
+    if ([model respondsToSelector:@selector(enumPropertiesToConvertToJSON)]) {
+        enumMapping = [(id<JAGPropertyMapping>)model enumPropertiesToConvertToJSON];
+    }
+    
+    // get all properties which should be ignored
+    NSArray *ignoreProperties = nil;
+    if ([model respondsToSelector:@selector(ignorePropertiesToJSON)]) {
+        ignoreProperties = [(id<JAGPropertyMapping>)model ignorePropertiesToJSON];
+    }
+
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
     NSString* propertyName;
     for (JAGProperty *property in properties) {
-        propertyName = [property name];
+        // ignore weak properties
         if (!self.shouldConvertWeakProperties && [property isWeak]) {
             continue;
         }
+        
         SEL getter = [property getter];
         if (![model respondsToSelector:getter]) {
             //Found property without a valid getter. Skipping.
             continue;
         }
+        propertyName = [property name];
+        
         //TODO: Should use the getter for this?  Harder to handle non-objects.
         id object = [model valueForKey:propertyName];
-        [values setValue:[self decomposeObject: object] forKey:propertyName];
+
+        // custom property mapping
+        if (customMapping[propertyName]) {
+            propertyName = [customMapping[propertyName] copy]; // copy the new name, will crash otherwise
+        }
+        
+        // check if we should ignore this property
+        BOOL shouldIgnoreValue = NO;
+        for (NSString *propertyToIgnore in ignoreProperties) {
+            if ([property.name isEqualToString:propertyToIgnore]) {
+                shouldIgnoreValue = YES;
+                break;
+            }
+        }
+        
+        if (shouldIgnoreValue) {
+            continue;
+        }
+
+        // check if this property must be converted from enum
+        if (enumMapping && self.convertFromEnum && [property isNumber]) {
+            for (NSString *enumProperty in enumMapping) {
+                if ([enumProperty isEqualToString:property.name]) {
+                    object = self.convertFromEnum(property.name, object, [model class]);    // eg. converts enum (int) into string
+                    break;
+                }
+            }
+        }
+        
+        // convert to snake case?
+        if (self.enableSnakeCaseSupport) {
+            propertyName = [propertyName asUnderscoreFromCamelCase];
+        }
+        
+        // set value in dictionary
+        [values setValue:[self recursiveDecomposeObject: object] forKey:propertyName];
     }
+
+    // Add all custom keypaths defined for the model.
+    if (customMapping) {
+        for (NSString *customKey in customMapping) {
+            BOOL isKeyPath = [self _isKeyPathKey:customKey];
+            if (isKeyPath) {
+                [values setValue:[self recursiveDecomposeObject:[model valueForKeyPath:customKey]] forKey:customMapping[customKey]];
+            }
+        }
+    }
+
     return values;
 }
 
@@ -232,6 +304,10 @@
 #pragma mark - Convert From Dictionary
 
 - (id) composeCollection: (id) collection withTargetClass: (Class) targetClass {
+    return [self composeCollection: collection withTargetClass: targetClass propertyName: nil];
+}
+
+- (id) composeCollection: (id) collection withTargetClass: (Class) targetClass propertyName:(NSString *)propertyName {
     if (!targetClass) {
         targetClass = [collection class];
     }
@@ -247,7 +323,7 @@
         return nil;
     }
     for (id elt in collection) {
-        id value = [self composeModelFromObject:elt];
+        id value = [self composeModelFromObject:elt propertyName:propertyName];
         if (value) {
             [mutableCollection addObject: value];
         } else {
@@ -256,21 +332,26 @@
     }
     return mutableCollection;
 }
-- (id) composeModelFromObject: (id) object {
-    return [self composeModelFromObject:object withTargetClass: nil];
+
+- (id) composeModelFromObject:(id)object {
+    return [self composeModelFromObject:object propertyName: nil];
 }
 
-- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass {
+- (id) composeModelFromObject: (id) object propertyName: (NSString *)properyName {
+    return [self composeModelFromObject: object withTargetClass: nil propertyName: properyName];
+}
+
+- (id) composeModelFromObject: (id) object withTargetClass: (Class) targetClass propertyName: (NSString *) propertyName {
     if (!object) {
         return nil;
     } else if ([object isKindOfClass: [NSArray class]]
                || [object isKindOfClass: [NSSet class]]) {
-        return [self composeCollection:object withTargetClass:targetClass];
+        return [self composeCollection:object withTargetClass:targetClass propertyName:propertyName];
     } else if ([object isKindOfClass: [NSDictionary class]]) {
         //Is this a PropertyModel in disguise?
         Class modelClass = nil;
         if (self.identifyDict) {
-            modelClass = self.identifyDict(object);
+            modelClass = self.identifyDict(propertyName, object);
         }
         if (modelClass) {
             id model = [[modelClass alloc] init];
@@ -284,7 +365,7 @@
         } else {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             for (id key in object) {
-                [dict setValue: [self composeModelFromObject: [object valueForKey: key]]
+                [dict setValue: [self composeModelFromObject: [object valueForKey: key] propertyName:key]
                         forKey: key];
             }
             return dict;
@@ -298,7 +379,12 @@
                && self.convertToDate) {
         //        NSLog(@"Found prop %@ for NSDate targetClass.  Converting.", prop);
         return self.convertToDate(object);
-    } else if ( targetClass 
+    } else if (targetClass
+               && [targetClass isSubclassOfClass:[NSData class]]
+               && self.convertToData) {
+        //        NSLog(@"Found prop %@ for NSData targetClass.  Converting.", prop);
+        return self.convertToData(object);
+    } else if ( targetClass
                && [targetClass isSubclassOfClass:[NSURL class]]
                && [object isKindOfClass:[NSString class]]
                )
@@ -309,7 +395,7 @@
                && [targetClass isSubclassOfClass:[NSNumber class]]
                && [object isKindOfClass:[NSString class]])
     {
-        return [self.numberFormatter numberFromString:object];
+        return [self _numberFromString:object];
     } else if ([object  isKindOfClass: [NSNull class]]
                || [object isKindOfClass: [NSString class]]
                || [object isKindOfClass: [NSNumber class]]
@@ -327,29 +413,180 @@
     
 }
 
-- (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {
-    JAGProperty *property;
-    for (NSString *key in dictionary) {
-        property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
-        if (!property || [property isReadOnly]) continue;
-        id value = [dictionary valueForKey:key];
+- (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {    
+    // see if target object has some enums to convert
+    NSArray *enumMapping = nil;
+    if ([object respondsToSelector:@selector(enumPropertiesToConvertFromJSON)]) {
+        enumMapping = [(id<JAGPropertyMapping>)object enumPropertiesToConvertFromJSON];
+    }
+    
+    for (NSString *dictKey in dictionary) {
+        BOOL isKeyPath = NO;
+        NSString *remainingKeyPath = nil;
+        
+        // find correct property for given key
+        JAGProperty *property = [self findPropertyOfObject:object forKey:dictKey isKeyPath:&isKeyPath remainingKeyPath:&remainingKeyPath];
+        
+        if (!property || [property isReadOnly]) {
+            continue;
+        }
+        
+        id value = [dictionary valueForKey:dictKey];
+        
+        // NSNull handling
+        if ([value isKindOfClass:[NSNull class]]) {
+            if (self.shouldIgnoreNullValues) {
+                // ignore NSNull values (leave property value as is)
+                continue;
+            } else {
+                // clear property value (set property to nil)
+                if ([property isNumber]) {
+                    [object setValue:@(0) forKey:property.name]; // for primitive data types we still need an object
+                } else {
+                    [object setValue:nil forKey:property.name];
+                }
+                continue;
+            }
+        }
+        
+        // check if the property should be converted to an enum
+        BOOL propertyValueAlreadySet = NO;
+        if (enumMapping && self.convertToEnum && [property isNumber]) {
+            for (NSString *enumProperty in enumMapping) {
+                if ([enumProperty isEqualToString:dictKey] || [[enumProperty asUnderscoreFromCamelCase] isEqualToString:dictKey]) {
+                    [object setValue:@(self.convertToEnum(dictKey, value, [object class])) forKey:property.name];
+                    propertyValueAlreadySet = YES;
+                    continue;
+                }
+            }
+        }
+        
+        if (propertyValueAlreadySet) {
+            // value is already set by the enum-mapping
+            continue;
+        }
+        
         //See if we should convert an NSString to an NSNumber
-        if (self.numberFormatter && property.isNumber && [value isKindOfClass:[NSString class]])
-        {
+        if (self.numberFormatter && [value isKindOfClass:[NSString class]]) {
             //Handle NSNumber propertyClasses in the compose function
-            value = [self.numberFormatter numberFromString:value];
+            if (property.isBoolean) {
+                value = @([dictionary[dictKey] boolValue]);
+            } else if (property.isNumber) {
+                value = [self _numberFromString:value];
+            }
         }
         if ([property isObject]) {
             Class propertyClass = [property propertyClass];
-            value = [self composeModelFromObject: value withTargetClass:propertyClass];
+            
+            NSString *propertyName = self.enableSnakeCaseSupport ? [dictKey asCamelCaseFromUnderscore] : dictKey;
+            value = [self composeModelFromObject: value withTargetClass:propertyClass propertyName:propertyName];
         }
-        if ([property canAcceptValue:value]) {
-            [object setValue:value forKey:key];
+
+        // If the key is a keypath set the value of the property by recursively going through the keypath segments
+        if (isKeyPath && remainingKeyPath != nil) {
+            id ownedObject;
+
+            if (![object valueForKey:property.name]) {
+                [object setValue:[[property.propertyClass alloc] init] forKey:property.name];
+            }
+
+            ownedObject = [object valueForKey:property.name];
+
+            // Continue recursively
+            [self setPropertiesOf:ownedObject fromDictionary:@{remainingKeyPath: value}];
+        } else if ([property canAcceptValue:value]) {
+            [object setValue:value forKey:property.name];
         } else {
-            NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@", 
+            NSLog(@"Unable to set value of class %@ into property %@ of typeEncoding %@",
                   [value class], [property name], [property typeEncoding]);
         }
     }
+}
+
+- (NSNumber *)_numberFromString:(NSString *)value {
+    NSNumber *number = [self.numberFormatter numberFromString:value];
+    
+    // when this method is invoked, it is garanteed that target value is of primitive or NSNumber data type:
+    // but because "true" can't be converted by -[NSNumberFormatter numberFromString:] we are converting BOOL ourselfs again
+    if (!number) {
+        number = @([value boolValue]);
+    }
+    return number;
+}
+
+- (BOOL)_isKeyPathKey:(NSString *)key {
+    return [key rangeOfString:@"."].location != NSNotFound;
+}
+
+- (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey {
+    return [self findPropertyOfObject:object forKey:dictKey isKeyPath:nil remainingKeyPath:nil];
+}
+
+- (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey isKeyPath:(BOOL *)isKeyPath remainingKeyPath:(NSString **)remainingKeyPath {
+    // get all properties which should be ignored
+    if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
+        NSArray *ignoreProperties = [(id<JAGPropertyMapping>)object ignorePropertiesFromJSON];
+        
+        // check if we should ignore this property
+        for (NSString *propertyToIgnore in ignoreProperties) {
+            if ([dictKey isEqualToString:propertyToIgnore]) {
+                // ignoring property
+                return nil;
+            }
+        }
+    }
+
+    // see if target object has defined custom mappings
+    NSDictionary *customMapping = nil;
+    if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
+        customMapping = [(id<JAGPropertyMapping>)object customPropertyMappingConvertingFromJSON];
+    }
+    
+    JAGProperty *property = nil;
+    NSString *key = dictKey;
+    
+    // first try custom mapping
+    if (customMapping[key]) {
+        key = customMapping[key];
+    }
+    
+    property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+    
+    if (!property) {
+        // when enabled, convert to camelCase and try again fetching property
+        if (self.enableSnakeCaseSupport) {
+            key = [key asCamelCaseFromUnderscore];
+            property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+        }
+        // try custom mapping after snake case converting (again)
+        if (!property) {
+            if (customMapping[key]) {
+                key = customMapping[key];
+                
+                property = [JAGPropertyFinder propertyForName: key inClass:[object class] ];
+            }
+            
+            // Check if the key is a keypath (e.g. "someProperty.somePropertyOfSomeProperty") and get the first segment (e.g. "someProperty")
+            if (!property) {
+                *isKeyPath = [self _isKeyPathKey:key];
+                
+                if (*isKeyPath) {
+                    NSRange rangeOfFirstDot = [key rangeOfString:@"."];
+                    *remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
+                    key = [key substringToIndex:rangeOfFirstDot.location];
+                    
+                    property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
+                }
+            }
+        }
+        
+        // after many tries, still couldn't find the property
+        if (!property) {
+            return nil;
+        }
+    }
+    
+    return property;
 }
 
 @end

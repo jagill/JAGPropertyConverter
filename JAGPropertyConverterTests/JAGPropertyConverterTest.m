@@ -43,7 +43,7 @@
     
     converter = [[JAGPropertyConverter alloc] init];
     converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
-    converter.identifyDict = ^ Class (NSDictionary *dict)  {
+    converter.identifyDict = ^ Class (NSString *dictName, NSDictionary *dict)  {
         if ([dict valueForKey:@"testModelID"]) {
             return [TestModel class];
         }
@@ -57,8 +57,6 @@
                          @"Model and Dictionary should have same testModelID");
     STAssertEqualObjects(testModel.stringProperty, [dict valueForKey:@"stringProperty"], 
                          @"Model and Dictionary should have same stringProperty");
-    STAssertEqualObjects(testModel.modelProperty.testModelID, [dict valueForKeyPath:@"modelProperty.testModelID"], 
-                         @"Model and Dictionary should have same modelProperty");
     STAssertEqualObjects(testModel.arrayProperty, [dict valueForKey:@"arrayProperty"], 
                          @"Model and Dictionary should have same arrayProperty");
     STAssertEqualObjects(testModel.dictionaryProperty, [dict valueForKey:@"dictionaryProperty"], 
@@ -72,9 +70,9 @@
     NSDictionary *dict = [converter convertToDictionary:model];
     NSLog(@"Converted to dictionary.");
     [self assert:model isEqualTo:dict];
+
     STAssertNil([dict valueForKey:@"dateProperty"], @"JSON Dictionary should not have a date value.");
     STAssertNil([dict valueForKey:@"cfProperty"], @"JSON Dictionary should not have a CF value.");
-    
 }
 
 - (void) testToDictionaryPropertyList {
@@ -115,6 +113,21 @@
     TestModel *testModel = [TestModel testModel];
     [converter setPropertiesOf:testModel fromDictionary:dict];
     [self assert:testModel isEqualTo:dict];
+}
+
+- (void) testToModelWithDifferntPropertyName {
+    // custom mapping is directly implemented by TestModel with <JAGPropertyMapping>
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"M123122", @"testModelID",
+                          [NSNumber numberWithInt:5], @"intProperty",
+                          [NSNumber numberWithBool:YES], @"boolProperty",
+                          @"new name" , @"someProperty",
+                          nil];
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    
+    STAssertNotNil(testModel.differentNameProperty, @"");
+    STAssertEqualObjects(testModel.differentNameProperty, @"new name", @"");
 }
 
 - (void) testIdentifyModel {
@@ -164,14 +177,16 @@
 }
 
 - (void) testWeakProperty {
-    model.weakProperty = [TestModel testModel];
+    TestModel *strongReference = [TestModel testModel];
+    model.weakProperty = strongReference;
     converter.outputType = kJAGFullOutput;
     NSDictionary *dict = [converter decomposeObject:model];
     STAssertNil([dict valueForKey:@"weakProperty"], @"By default, converter should not convert weak properties");
 }
 
 - (void) testWeakProperty2 {
-    model.weakProperty = [TestModel testModel];
+    TestModel *strongReference = [TestModel testModel];
+    model.weakProperty = strongReference;
     converter.outputType = kJAGFullOutput;
     converter.shouldConvertWeakProperties = YES;
     NSDictionary *dict = [converter decomposeObject:model];
@@ -199,6 +214,252 @@
     STAssertTrue([decomposed count] == 2, @"Dict should have two elements after decomposing.");
     id composed = [converter composeModelFromObject:dict];
     STAssertTrue([composed count] == 2, @"Dict should have two elements after composing.");
+}
+
+#pragma mark - Null Values
+
+- (void)testIgnoringNSNullValues {
+    converter.shouldIgnoreNullValues = YES;
+    
+    NSDictionary *dict = @{ @"stringProperty" : [NSNull null] };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertNil(testModel.stringProperty, @"");
+}
+
+#pragma mark - Snake Case
+
+- (void)testSnakeCaseSupport1 {
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"int_property" : @12345,
+                            @"stringProperty" : @"same" };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertEquals(testModel.intProperty, 12345, @"camel case property should be set to 12345");
+    STAssertEqualObjects(testModel.stringProperty, @"same", @"normal property should also work normally");
+}
+
+- (void)testSnakeCaseSupport2 {
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"String_Property" : @"same" };
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    STAssertNil(testModel.stringProperty, @"not correct snake case --> nil");
+}
+
+#pragma mark - Enums
+
+- (void)testConvertPropertyToEnum {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    
+    NSDictionary *dict = @{ @"enumProperty" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.enumProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnum {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"enumProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.enumProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"enumProperty"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+}
+
+- (void)testConvertPropertyToEnumWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    
+    NSDictionary *dict = @{ @"enumProperty2" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.customMappedProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnumWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"customMappedProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.customMappedProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"enumProperty2"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+}
+
+- (void)testConvertPropertyToEnumWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertToEnum = ^NSInteger (NSString *propertyName, id propertyValue, Class parentClass) {
+        NSString *str = (NSString *)propertyValue;
+        
+        if ([str isEqualToString:@"juhu"] && parentClass == TestModel.class) {
+            return TestModelEnumTypeB;
+        }
+        
+        return TestModelEnumTypeA;
+    };
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"snake_case_enum_property" : @"juhu" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertEquals(resultModel.snakeCaseEnumProperty, TestModelEnumTypeB, @"");
+}
+
+- (void)testConvertPropertyFromEnumWithCustomMapping2 {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
+        if ([propertyName isEqualToString:@"snakeCaseEnumProperty"]) {
+            NSNumber *value = (NSNumber *) propertyValue;
+            
+            switch (value.integerValue) {
+                case TestModelEnumTypeA: return @"no";
+                case TestModelEnumTypeB: return @"juhu";
+                default: return nil;
+            }
+        }
+        
+        return nil;
+    };
+    converter.enableSnakeCaseSupport = YES;
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.snakeCaseEnumProperty = TestModelEnumTypeB;
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    NSString *resultEnum = resultDict[@"snake_case_enum_property"];
+    STAssertNotNil(resultEnum, @"");
+    STAssertTrue([resultEnum isEqualToString:@"juhu"], @"");
+    
+    NSString *wrongKeyEnum = resultDict[@"snakeCaseEnumProperty"];
+    STAssertNil(wrongKeyEnum, @"result shouldn't contain this key!");
+}
+
+#pragma mark - Ignore
+
+- (void)testIgnorePropertiesFromJSON {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.ignoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"ignoreProperty"], @"");
+}
+
+- (void)testIgnorePropertiesToJSON {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    NSDictionary *dict = @{ @"ignoreProperty" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.ignoreProperty, @"");
+}
+
+- (void)testIgnorePropertiesFromJSONWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.customMappedIgnoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"ignoreProperty2"], @"");
+}
+
+- (void)testIgnorePropertiesToJSONWithCustomMapping {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    
+    NSDictionary *dict = @{ @"ignoreProperty2" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.customMappedIgnoreProperty, @"");
+}
+
+- (void)testIgnorePropertiesFromJSONWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    converter.enableSnakeCaseSupport = YES;
+    
+    TestModel *testModel = [[TestModel alloc] init];
+    testModel.snakeCaseIgnoreProperty = @"ignore me";
+    
+    NSDictionary *resultDict = [converter convertToDictionary:testModel];
+    
+    STAssertNil(resultDict[@"snake_case_ignore_property"], @"");
+    STAssertNil(resultDict[@"snakeCaseIgnoreProperty"], @"");
+}
+
+- (void)testIgnorePropertiesToJSONWithSnakeCase {
+    converter.identifyDict = ^Class (NSString *dictName, NSDictionary *dictionary) { return TestModel.class; };
+    converter.enableSnakeCaseSupport = YES;
+    
+    NSDictionary *dict = @{ @"snake_case_ignore_property" : @"ignore me" };
+    
+    TestModel *resultModel = [converter composeModelFromObject:dict];
+    STAssertNil(resultModel.snakeCaseIgnoreProperty, @"");
 }
 
 @end
