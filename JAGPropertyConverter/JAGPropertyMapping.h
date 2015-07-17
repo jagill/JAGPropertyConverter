@@ -16,13 +16,13 @@
  *
  * @return A dictionary with JSON name as key and property name as value: Dict <JSON name, property name>
  */
-- (NSDictionary *)customPropertyMappingConvertingFromJSON;
++ (NSDictionary *)customPropertyMappingConvertingFromJSON;
 
 /** Mapping from Model to JSON (Model --> JSON).
  *
  * @return A dictionary with property name as key and JSON name as value: Dict <property name, JSON name>
  */
-- (NSDictionary *)customPropertyMappingConvertingToJSON;
++ (NSDictionary *)customPropertyMappingConvertingToJSON;
 
 /** Asks the receiver if there are any enum values which should be converted.
  *
@@ -32,7 +32,7 @@
  * @return A array with NSString property names which are indicating the properties for the model which are enums and should be converted to something else.
  *         Implement convertToEnum and convertFromEnum to handle this.
  */
-- (NSArray *)enumPropertiesToConvertFromJSON;
++ (NSArray *)enumPropertiesToConvertFromJSON;
 
 /** Asks the receiver if there are any enum values which should be converted.
  *
@@ -42,12 +42,12 @@
  * @return A array with NSString property names which are indicating the properties for the model which are enums and should be converted to something else.
  *         Implement convertToEnum and convertFromEnum to handle this.
  */
-- (NSArray *)enumPropertiesToConvertToJSON;
++ (NSArray *)enumPropertiesToConvertToJSON;
 
 /** Asks the receiver if there are properties to ignore when converting from JSON. */
-- (NSArray *)ignorePropertiesFromJSON;
++ (NSArray *)ignorePropertiesFromJSON;
 
 /** Asks the receiver if there are properties to ignore when converting to JSON. */
-- (NSArray *)ignorePropertiesToJSON;
++ (NSArray *)ignorePropertiesToJSON;
 
 @end

@@ -144,7 +144,7 @@
 
 #pragma mark - JAGPropertyMapping
 
-- (NSDictionary *)customPropertyMappingConvertingFromJSON {
++ (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{@"someProperty" : @"differentNameProperty",
              @"enumProperty2" : @"customMappedProperty",
              @"ignoreProperty2" : @"customMappedIgnoreProperty",
@@ -152,7 +152,7 @@
              @"keypathProperty2" : @"modelProperty.modelProperty.testModelID"};
 }
 
-- (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyMappingConvertingToJSON {
     return @{@"differentNameProperty" : @"someProperty",
              @"customMappedProperty" : @"enumProperty2",
              @"customMappedIgnoreProperty" : @"ignoreProperty2",
@@ -160,19 +160,19 @@
              @"modelProperty.modelProperty.testModelID" : @"keypathProperty2"};
 }
 
-- (NSArray *)enumPropertiesToConvertFromJSON {
++ (NSArray *)enumPropertiesToConvertFromJSON {
     return @[@"enumProperty", @"enumProperty2", @"snake_case_enum_property"];
 }
 
-- (NSArray *)enumPropertiesToConvertToJSON {
++ (NSArray *)enumPropertiesToConvertToJSON {
     return @[@"enumProperty", @"customMappedProperty", @"snakeCaseEnumProperty"];
 }
 
-- (NSArray *)ignorePropertiesFromJSON {
++ (NSArray *)ignorePropertiesFromJSON {
     return @[@"ignoreProperty", @"ignoreProperty2", @"snake_case_ignore_property"];
 }
 
-- (NSArray *)ignorePropertiesToJSON {
++ (NSArray *)ignorePropertiesToJSON {
     return @[@"ignoreProperty", @"customMappedIgnoreProperty", @"snakeCaseIgnoreProperty"];
 }
 

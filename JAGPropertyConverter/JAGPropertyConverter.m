@@ -214,22 +214,13 @@
     if (!model) return nil;
 
     // see if target object has defined custom mappings
-    NSDictionary *customMapping = nil;
-    if ([model respondsToSelector:@selector(customPropertyMappingConvertingToJSON)]) {
-        customMapping = [(id<JAGPropertyMapping>)model customPropertyMappingConvertingToJSON];
-    }
+    NSDictionary *customMapping = [self _getCombinedDictionaryFromAllInheritanceForObject:model classSelector:@selector(customPropertyMappingConvertingToJSON)];
     
     // see if we have to convert enums to strings
-    NSArray *enumMapping = nil;
-    if ([model respondsToSelector:@selector(enumPropertiesToConvertToJSON)]) {
-        enumMapping = [(id<JAGPropertyMapping>)model enumPropertiesToConvertToJSON];
-    }
+    NSArray *enumMapping = [self _getCombinedArrayFromAllInheritanceForObject:model classSelector:@selector(enumPropertiesToConvertToJSON)];
     
     // get all properties which should be ignored
-    NSArray *ignoreProperties = nil;
-    if ([model respondsToSelector:@selector(ignorePropertiesToJSON)]) {
-        ignoreProperties = [(id<JAGPropertyMapping>)model ignorePropertiesToJSON];
-    }
+    NSArray *ignoreProperties = [self _getCombinedArrayFromAllInheritanceForObject:model classSelector:@selector(ignorePropertiesToJSON)];
 
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     NSArray* properties = [JAGPropertyFinder propertiesForClass:[model class]];
@@ -415,10 +406,7 @@
 
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {    
     // see if target object has some enums to convert
-    NSArray *enumMapping = nil;
-    if ([object respondsToSelector:@selector(enumPropertiesToConvertFromJSON)]) {
-        enumMapping = [(id<JAGPropertyMapping>)object enumPropertiesToConvertFromJSON];
-    }
+    NSArray *enumMapping = [self _getCombinedArrayFromAllInheritanceForObject:object classSelector:@selector(enumPropertiesToConvertFromJSON)];
     
     for (NSString *dictKey in dictionary) {
         BOOL isKeyPath = NO;
@@ -503,44 +491,24 @@
     }
 }
 
-- (NSNumber *)_numberFromString:(NSString *)value {
-    NSNumber *number = [self.numberFormatter numberFromString:value];
-    
-    // when this method is invoked, it is garanteed that target value is of primitive or NSNumber data type:
-    // but because "true" can't be converted by -[NSNumberFormatter numberFromString:] we are converting BOOL ourselfs again
-    if (!number) {
-        number = @([value boolValue]);
-    }
-    return number;
-}
-
-- (BOOL)_isKeyPathKey:(NSString *)key {
-    return [key rangeOfString:@"."].location != NSNotFound;
-}
-
 - (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey {
     return [self findPropertyOfObject:object forKey:dictKey isKeyPath:nil remainingKeyPath:nil];
 }
 
 - (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey isKeyPath:(BOOL *)isKeyPath remainingKeyPath:(NSString **)remainingKeyPath {
     // get all properties which should be ignored
-    if ([object respondsToSelector:@selector(ignorePropertiesFromJSON)]) {
-        NSArray *ignoreProperties = [(id<JAGPropertyMapping>)object ignorePropertiesFromJSON];
-        
-        // check if we should ignore this property
-        for (NSString *propertyToIgnore in ignoreProperties) {
-            if ([dictKey isEqualToString:propertyToIgnore]) {
-                // ignoring property
-                return nil;
-            }
+    NSArray *ignoreProperties = [self _getCombinedArrayFromAllInheritanceForObject:object classSelector:@selector(ignorePropertiesFromJSON)];
+
+    // check if we should ignore this property
+    for (NSString *propertyToIgnore in ignoreProperties) {
+        if ([dictKey isEqualToString:propertyToIgnore]) {
+            // ignoring property
+            return nil;
         }
     }
 
     // see if target object has defined custom mappings
-    NSDictionary *customMapping = nil;
-    if ([object respondsToSelector:@selector(customPropertyMappingConvertingFromJSON)]) {
-        customMapping = [(id<JAGPropertyMapping>)object customPropertyMappingConvertingFromJSON];
-    }
+    NSDictionary *customMapping = [self _getCombinedDictionaryFromAllInheritanceForObject:object classSelector:@selector(customPropertyMappingConvertingFromJSON)];
     
     JAGProperty *property = nil;
     NSString *key = dictKey;
@@ -587,6 +555,99 @@
     }
     
     return property;
+}
+
+#pragma mark - Private Methods
+
+- (NSNumber *)_numberFromString:(NSString *)value {
+    NSNumber *number = [self.numberFormatter numberFromString:value];
+    
+    // when this method is invoked, it is garanteed that target value is of primitive or NSNumber data type:
+    // but because "true" can't be converted by -[NSNumberFormatter numberFromString:] we are converting BOOL ourselfs again
+    if (!number) {
+        number = @([value boolValue]);
+    }
+    return number;
+}
+
+- (BOOL)_isKeyPathKey:(NSString *)key {
+    return [key rangeOfString:@"."].location != NSNotFound;
+}
+
+/** Loop through the inheritance hierarchy of given object and invokes given selector (which is a class method). And adds all array entries into one single array.
+ 
+ Eg. getting all properties to ignore from the object class itself and all its super classes.
+ 
+ @param object   Object to search for
+ @param selector Class method SEL
+ 
+ @return Array with all array entries from the object class and all super classes.
+ */
+- (NSArray *)_getCombinedArrayFromAllInheritanceForObject:(id<NSObject>)object classSelector:(SEL)classSelector {
+    if (!object) {
+        return nil;
+    }
+    
+    NSMutableArray *array = [NSMutableArray array];
+    Class class = object.class;
+    while (class) {
+        if ([class respondsToSelector:classSelector]) {
+            // the following produces warning: "performSelector may cause a leak because its selector is unknown"
+            // [array addObjectsFromArray:[class performSelector:classSelector]];
+            
+            // Workaround how-to suppress this warning: http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+            // IMP imp = class_getMethodImplementation(class, classSelector);    // this only works for instance methods. for class methods (which JAGPropertyMapping are) we need to use method_getImplementation(method)
+            Method method = class_getClassMethod(class, classSelector);
+            IMP imp = method_getImplementation(method);
+            NSArray *(*func)(id, SEL) = (void *)imp;
+            
+            NSArray *superclassArray = func(class, classSelector);
+            [array addObjectsFromArray:superclassArray];
+        }
+        
+        // go up the inheritance hierarchy
+        class = class_getSuperclass(class);
+    }
+    
+    return array.count == 0 ? nil : array;
+}
+
+/** Loop through the inheritance hierarchy of given object and invokes given selector (which is a class method). And adds all dictionary entries into one single dictionary.
+ 
+ Eg. getting all custom property mappings from the object class itself and all its super classes.
+ 
+ @param object   Object to search for
+ @param selector Class method SEL
+ 
+ @return Dictionary with all dictionary entries from the object class and all super classes.
+ */
+- (NSDictionary *)_getCombinedDictionaryFromAllInheritanceForObject:(id<NSObject>)object classSelector:(SEL)classSelector {
+    if (!object) {
+        return nil;
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    Class class = object.class;
+    while (class) {
+        if ([class respondsToSelector:classSelector]) {
+            // The following produces warning: "performSelector may cause a leak because its selector is unknown"
+            // [dict addEntriesFromDictionary:[class performSelector:classSelector]];
+            
+            // How-to suppress this warning: http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+            // IMP imp = class_getMethodImplementation(class, classSelector);         // this only works for instance methods. for class methods (which JAGPropertyMapping are) we need to use method_getImplementation(method)
+            Method method = class_getClassMethod(class, classSelector);
+            IMP imp = method_getImplementation(method);
+            NSDictionary *(*func)(id, SEL) = (void *)imp;
+            
+            NSDictionary *superclassDictionary = func(class, classSelector);
+            [dict addEntriesFromDictionary:superclassDictionary];
+        }
+        
+        // go up the inheritance hierarchy
+        class = class_getSuperclass(class);
+    }
+    
+    return dict.count == 0 ? nil : dict;
 }
 
 @end

@@ -17,11 +17,11 @@
 
 @implementation CustomAddress
 
-- (NSDictionary *)customPropertyMappingConvertingFromJSON {
++ (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{ @"newCustomProperty" : @"street" };
 }
 
-- (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyMappingConvertingToJSON {
     return @{ @"street" : @"newCustomProperty" };
 }
 
@@ -32,12 +32,12 @@
 
 @implementation LivingAddress
 
-- (NSDictionary *)customPropertyMappingConvertingFromJSON {
++ (NSDictionary *)customPropertyMappingConvertingFromJSON {
     return @{ @"tenantName" : @"tenant.firstName",
               @"tenantPermanentAddressStreet" : @"tenant.permanentAddress.street"};
 }
 
-- (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyMappingConvertingToJSON {
     return @{ @"tenant.firstName" : @"tenantName",
               @"tenant.permanentAddress.street" : @"tenantPermanentAddressStreet"};
 }
@@ -735,7 +735,7 @@ JAGPropertyConverter *converter;
     converter.classesToConvert = [NSSet setWithArray:@[[LivingAddress class]]];
 
     LivingAddress *address = [[LivingAddress alloc] init];   // custom address has implemented JAGPropertyMapping
-    address.street = @"Infinite Loop 1";
+    address.street = @"Infinite Loop 1";                     // 'street' will be converted to 'newCustomProperty'
     address.city = @"Cuppertino";
     address.country = @"USA";
 
@@ -751,7 +751,7 @@ JAGPropertyConverter *converter;
 
     address.tenant = tenant1;
 
-    NSDictionary *targetDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"street" : @"Infinite Loop 1", @"tenantName" : @"John", @"tenantPermanentAddressStreet": @"Nowhere Road 2" };
+    NSDictionary *targetDict = @{ @"country" : @"USA", @"city" : @"Cuppertino", @"newCustomProperty" : @"Infinite Loop 1", @"tenantName" : @"John", @"tenantPermanentAddressStreet": @"Nowhere Road 2" };
     NSDictionary *userJsonDict = [converter decomposeObject:address];
     XCTAssertEqualObjects(userJsonDict, targetDict, @"Converter decomposes model objects to JSON-compliant dictionaries.");
 }
