@@ -43,4 +43,26 @@
  */
 - (JAGProperty *)findPropertyOfObject:(id)object forKey:(NSString *)dictKey isKeyPath:(BOOL *)isKeyPath remainingKeyPath:(NSString **)remainingKeyPath;
 
+/** Loop through the inheritance hierarchy of given object and invokes given selector (which is a class method). And adds all array entries into one single array.
+ 
+ Eg. getting all properties to ignore from the object class itself and all its super classes.
+ 
+ @param object   Object to search for
+ @param selector Class method SEL
+ 
+ @return Array with all array entries from the object class and all super classes.
+ */
+- (NSArray *)getCombinedArrayFromAllInheritanceForObject:(id<NSObject>)object classSelector:(SEL)classSelector;
+
+/** Loop through the inheritance hierarchy of given object and invokes given selector (which is a class method). And adds all dictionary entries into one single dictionary.
+ 
+ Eg. getting all custom property mappings from the object class itself and all its super classes.
+ 
+ @param object   Object to search for
+ @param selector Class method SEL
+ 
+ @return Dictionary with all dictionary entries from the object class and all super classes.
+ */
+- (NSDictionary *)getCombinedDictionaryFromAllInheritanceForObject:(id<NSObject>)object classSelector:(SEL)classSelector;
+
 @end
