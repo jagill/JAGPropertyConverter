@@ -25,6 +25,10 @@
 		11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F58160B96FE000BD25F /* ExampleTest.m */; };
 		890F5D3E1B5903D000246901 /* TestModelCustomSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */; };
 		890F5D401B59054100246901 /* SubclassCustomPropertyMappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */; };
+		890F5D431B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */; };
+		890F5D441B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
+		890F5D451B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
+		890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D461B594A4F00246901 /* DictionarySwappingTest.m */; };
 		891B9BCD1B554CE000DF255E /* JAGPropertyConverter+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */; };
 		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
 		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
@@ -76,6 +80,9 @@
 		890F5D3C1B5903D000246901 /* TestModelCustomSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModelCustomSubclass.h; sourceTree = "<group>"; };
 		890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModelCustomSubclass.m; sourceTree = "<group>"; };
 		890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubclassCustomPropertyMappingTest.m; sourceTree = "<group>"; };
+		890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JAGKeyValueSwapping.h"; sourceTree = "<group>"; };
+		890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JAGKeyValueSwapping.m"; sourceTree = "<group>"; };
+		890F5D461B594A4F00246901 /* DictionarySwappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionarySwappingTest.m; sourceTree = "<group>"; };
 		891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter+Subclass.h"; sourceTree = "<group>"; };
 		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
 		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
@@ -150,6 +157,8 @@
 				11275B7914E9D89500C4707C /* JAGPropertyFinder.h */,
 				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
 				89C0B7B11A28AF2B007AA954 /* JAGPropertyMapping.h */,
+				890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */,
+				890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */,
 				89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */,
 				89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */,
 				11275B5114E9D56200C4707C /* Supporting Files */,
@@ -186,6 +195,7 @@
 				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
 				890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */,
 				11275B6514E9D56200C4707C /* Supporting Files */,
+				890F5D461B594A4F00246901 /* DictionarySwappingTest.m */,
 			);
 			path = JAGPropertyConverterTests;
 			sourceTree = "<group>";
@@ -222,6 +232,7 @@
 				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
 				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
 				89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */,
+				890F5D431B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h in Headers */,
 				89C0B7B21A28AF2B007AA954 /* JAGPropertyMapping.h in Headers */,
 				891B9BCD1B554CE000DF255E /* JAGPropertyConverter+Subclass.h in Headers */,
 			);
@@ -325,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890F5D441B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */,
 				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
 				89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
@@ -338,6 +350,7 @@
 			files = (
 				890F5D401B59054100246901 /* SubclassCustomPropertyMappingTest.m in Sources */,
 				89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */,
+				890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */,
 				89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */,
 				89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */,
 				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
@@ -346,6 +359,7 @@
 				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
+				890F5D451B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */,
 				89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */,
 				890F5D3E1B5903D000246901 /* TestModelCustomSubclass.m in Sources */,
 				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,

@@ -12,17 +12,13 @@
 
 @optional
 
-/** Mapping from JSON to Model (JSON --> Model).
+/** Custom property names mapping for converting Model <> JSON.
  *
- * @return A dictionary with JSON name as key and property name as value: Dict <JSON name, property name>
- */
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON;
-
-/** Mapping from Model to JSON (Model --> JSON).
+ * This dictionary will automatically be swapped and used when decomposing (JSON --> Model). Key and value will be swapped: Dict <JSON name, property name>
  *
  * @return A dictionary with property name as key and JSON name as value: Dict <property name, JSON name>
  */
-+ (NSDictionary *)customPropertyMappingConvertingToJSON;
++ (NSDictionary *)customPropertyNamesMapping;
 
 /** Asks the receiver if there are any enum values which should be converted.
  *

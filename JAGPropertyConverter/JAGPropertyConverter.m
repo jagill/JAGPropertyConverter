@@ -214,7 +214,7 @@
     if (!model) return nil;
 
     // see if target object has defined custom mappings
-    NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:model classSelector:@selector(customPropertyMappingConvertingToJSON)];
+    NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:model classSelector:@selector(customPropertyNamesMapping)];
     
     // see if we have to convert enums to strings
     NSArray *enumMapping = [self getCombinedArrayFromAllInheritanceForObject:model classSelector:@selector(enumPropertiesToConvertToJSON)];
@@ -509,8 +509,9 @@
         }
     }
 
-    // see if target object has defined custom mappings
-    NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:object classSelector:@selector(customPropertyMappingConvertingFromJSON)];
+    // see if target object has defined custom mappings. swap dict (JSON --> Model)
+    NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:object classSelector:@selector(customPropertyNamesMapping)];
+    customMapping = [customMapping swapKeysWithValues];
     
     JAGProperty *property = nil;
     NSString *key = dictKey;

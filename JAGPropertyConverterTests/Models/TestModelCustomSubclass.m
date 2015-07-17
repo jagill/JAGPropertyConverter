@@ -13,11 +13,7 @@
 
 #pragma mark - JAGPropertyMapping
 
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return nil;
-}
-
-+ (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyNamesMapping {
     return nil;
 }
 
@@ -43,11 +39,7 @@
 
 #pragma mark - JAGPropertyMapping
 
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return @{@"differentSubclassCustomMapped" : @"subclassCustomMapped"};
-}
-
-+ (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyNamesMapping {
     return @{@"subclassCustomMapped" : @"differentSubclassCustomMapped"};
 }
 

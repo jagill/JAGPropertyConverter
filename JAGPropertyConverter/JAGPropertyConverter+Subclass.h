@@ -8,6 +8,7 @@
 
 #import "JAGPropertyConverter.h"
 #import "JAGProperty.h"
+#import "NSDictionary+JAGKeyValueSwapping.h"
 
 @interface JAGPropertyConverter (Subclass)
 

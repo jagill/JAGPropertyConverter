@@ -17,11 +17,7 @@
 
 @implementation CustomAddress
 
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return @{ @"newCustomProperty" : @"street" };
-}
-
-+ (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyNamesMapping {
     return @{ @"street" : @"newCustomProperty" };
 }
 
@@ -32,12 +28,7 @@
 
 @implementation LivingAddress
 
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return @{ @"tenantName" : @"tenant.firstName",
-              @"tenantPermanentAddressStreet" : @"tenant.permanentAddress.street"};
-}
-
-+ (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyNamesMapping {
     return @{ @"tenant.firstName" : @"tenantName",
               @"tenant.permanentAddress.street" : @"tenantPermanentAddressStreet"};
 }

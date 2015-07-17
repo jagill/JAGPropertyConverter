@@ -144,15 +144,7 @@
 
 #pragma mark - JAGPropertyMapping
 
-+ (NSDictionary *)customPropertyMappingConvertingFromJSON {
-    return @{@"someProperty" : @"differentNameProperty",
-             @"enumProperty2" : @"customMappedProperty",
-             @"ignoreProperty2" : @"customMappedIgnoreProperty",
-             @"keypathProperty1" : @"modelProperty.testModelID",
-             @"keypathProperty2" : @"modelProperty.modelProperty.testModelID"};
-}
-
-+ (NSDictionary *)customPropertyMappingConvertingToJSON {
++ (NSDictionary *)customPropertyNamesMapping {
     return @{@"differentNameProperty" : @"someProperty",
              @"customMappedProperty" : @"enumProperty2",
              @"customMappedIgnoreProperty" : @"ignoreProperty2",
