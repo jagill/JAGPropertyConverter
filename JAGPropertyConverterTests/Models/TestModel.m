@@ -152,12 +152,11 @@
              @"modelProperty.modelProperty.testModelID" : @"keypathProperty2"};
 }
 
-+ (NSArray *)enumPropertiesToConvertFromJSON {
-    return @[@"enumProperty", @"enumProperty2", @"snake_case_enum_property"];
-}
-
-+ (NSArray *)enumPropertiesToConvertToJSON {
-    return @[@"enumProperty", @"customMappedProperty", @"snakeCaseEnumProperty"];
++ (NSDictionary *)enumPropertiesToConvert {
+    return @{@"enumProperty" : @"enumProperty",
+             @"customMappedProperty" : @"enumProperty2",
+             @"snakeCaseEnumProperty" : @"snake_case_enum_property",
+             };
 }
 
 + (NSArray *)ignorePropertiesFromJSON {

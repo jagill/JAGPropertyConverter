@@ -17,11 +17,7 @@
     return nil;
 }
 
-+ (NSArray *)enumPropertiesToConvertFromJSON {
-    return nil;
-}
-
-+ (NSArray *)enumPropertiesToConvertToJSON {
++ (NSDictionary *)enumPropertiesToConvert {
     return nil;
 }
 
@@ -43,12 +39,8 @@
     return @{@"subclassCustomMapped" : @"differentSubclassCustomMapped"};
 }
 
-+ (NSArray *)enumPropertiesToConvertFromJSON {
-    return @[@"subclassEnumProperty"];
-}
-
-+ (NSArray *)enumPropertiesToConvertToJSON {
-    return @[@"subclassEnumProperty"];
++ (NSDictionary *)enumPropertiesToConvert {
+    return @{@"subclassEnumProperty" : @"subclassEnumProperty"};
 }
 
 + (NSArray *)ignorePropertiesFromJSON {

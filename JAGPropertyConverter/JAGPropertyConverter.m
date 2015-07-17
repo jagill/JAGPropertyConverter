@@ -217,7 +217,7 @@
     NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:model classSelector:@selector(customPropertyNamesMapping)];
     
     // see if we have to convert enums to strings
-    NSArray *enumMapping = [self getCombinedArrayFromAllInheritanceForObject:model classSelector:@selector(enumPropertiesToConvertToJSON)];
+    NSDictionary *enumMapping = [self getCombinedDictionaryFromAllInheritanceForObject:model classSelector:@selector(enumPropertiesToConvert)];
     
     // get all properties which should be ignored
     NSArray *ignoreProperties = [self getCombinedArrayFromAllInheritanceForObject:model classSelector:@selector(ignorePropertiesToJSON)];
@@ -261,11 +261,8 @@
 
         // check if this property must be converted from enum
         if (enumMapping && self.convertFromEnum && [property isNumber]) {
-            for (NSString *enumProperty in enumMapping) {
-                if ([enumProperty isEqualToString:property.name]) {
-                    object = self.convertFromEnum(property.name, object, [model class]);    // eg. converts enum (int) into string
-                    break;
-                }
+            if (enumMapping[property.name]) {
+                object = self.convertFromEnum(property.name, object, [model class]);    // eg. converts enum (NSInteger) into string
             }
         }
         
@@ -405,8 +402,9 @@
 }
 
 - (void) setPropertiesOf: (id) object fromDictionary: (NSDictionary*) dictionary {    
-    // see if target object has some enums to convert
-    NSArray *enumMapping = [self getCombinedArrayFromAllInheritanceForObject:object classSelector:@selector(enumPropertiesToConvertFromJSON)];
+    // see if target object has some enums to convert (JSON --> Model, swap dict)
+    NSDictionary *enumMapping = [self getCombinedDictionaryFromAllInheritanceForObject:object classSelector:@selector(enumPropertiesToConvert)];
+    enumMapping = [enumMapping swapKeysWithValues];
     
     for (NSString *dictKey in dictionary) {
         BOOL isKeyPath = NO;
@@ -438,20 +436,11 @@
         }
         
         // check if the property should be converted to an enum
-        BOOL propertyValueAlreadySet = NO;
         if (enumMapping && self.convertToEnum && [property isNumber]) {
-            for (NSString *enumProperty in enumMapping) {
-                if ([enumProperty isEqualToString:dictKey] || [[enumProperty asUnderscoreFromCamelCase] isEqualToString:dictKey]) {
-                    [object setValue:@(self.convertToEnum(dictKey, value, [object class])) forKey:property.name];
-                    propertyValueAlreadySet = YES;
-                    continue;
-                }
+            if (enumMapping[dictKey] || enumMapping[[dictKey asUnderscoreFromCamelCase]]) {
+                [object setValue:@(self.convertToEnum(dictKey, value, [object class])) forKey:property.name];
+                continue;                
             }
-        }
-        
-        if (propertyValueAlreadySet) {
-            // value is already set by the enum-mapping
-            continue;
         }
         
         //See if we should convert an NSString to an NSNumber
@@ -509,7 +498,7 @@
         }
     }
 
-    // see if target object has defined custom mappings. swap dict (JSON --> Model)
+    // see if target object has defined custom mappings. (JSON --> Model, swap dict)
     NSDictionary *customMapping = [self getCombinedDictionaryFromAllInheritanceForObject:object classSelector:@selector(customPropertyNamesMapping)];
     customMapping = [customMapping swapKeysWithValues];
     
