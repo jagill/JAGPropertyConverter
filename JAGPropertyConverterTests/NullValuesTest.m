@@ -106,4 +106,20 @@
     XCTAssertNil(model.stringProperty, @"should be nil");
 }
 
+- (void) testNullStringToJSON {
+    model.stringProperty = nil;
+    XCTAssertNil(model.stringProperty);
+    
+    NSDictionary *result = [converter decomposeObject:model];
+    XCTAssertEqualObjects(result[@"stringProperty"], [NSNull null]);
+}
+
+- (void) testNullNumberToJSON {
+    model.numberProperty = nil;
+    XCTAssertNil(model.numberProperty);
+    
+    NSDictionary *result = [converter decomposeObject:model];
+    XCTAssertEqualObjects(result[@"numberProperty"], [NSNull null]);
+}
+
 @end
