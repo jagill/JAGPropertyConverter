@@ -26,6 +26,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JAGPropertyMapping.h"
+
 /**
  * The type of output the objects will be converted to.
  * @see outputType for more detailed description.
@@ -37,7 +39,10 @@ typedef enum {
 } JAGOutputType;
 
 ///A Block to identify what class a dictionary represents.
-typedef Class (^IdentifyBlock)(NSDictionary *dictionary);
+typedef Class (^IdentifyBlock)(NSString *dictName, NSDictionary *dictionary);
+
+typedef NSInteger (^ConvertToEnumBlock)(NSString *propertyName, id propertyValue, Class parentClass);
+typedef id (^ConvertFromEnumBlock)(NSString *propertyName, id propertyValue, Class parentClass);
 
 ///A Block to convert one object to another, for converting to/from JSON
 typedef id (^ConvertBlock)(id obj);
@@ -173,6 +178,44 @@ typedef id (^ConvertBlock)(id obj);
 @property (nonatomic, copy) ConvertBlock convertFromDate;
 
 /**
+ * A Block to convert a (JSON) property to an NSData.
+ *
+ * This block is called when trying to set an object's NSData property
+ * with a dictionary's non-NSData value.  If this block is nil,
+ * the NSData property will be set to nil.
+ *
+ * The issue (see [JAGPropertyConverter convertFromData]) is that there
+ * are many ways to convert an NSData into a JSON-compatible format
+ * (base64 encoded, etc), and instead of guessing
+ * JAGPropertyConverter relies on this block to handle the conversion.
+ *
+ * TODO: Generalize converters to other classes?
+ */
+@property (nonatomic, copy) ConvertBlock convertToData;
+
+/**
+ * A Block to convert an NSData property to JSON property.
+ *
+ * Called when trying to convert an object's NSData property
+ * to a JSON dictionary value.  If this block is nil, the
+ * value will not be set.
+ *
+ * The issue (see [JAGPropertyConverter convertToData]) is that there
+ * are many ways to convert an NSData into a JSON-compatible format
+ * (base64 encoded, etc), and instead of guessing
+ * JAGPropertyConverter relies on this block to handle the conversion.
+ *
+ * TODO: Generalize converters to other classes?
+ */
+@property (nonatomic, copy) ConvertBlock convertFromData;
+
+/**  A Block to convert a (JSON) property to an enum. */
+@property (nonatomic, copy) ConvertToEnumBlock convertToEnum;
+
+/**  A Block to convert an enum to a JSON property. */
+@property (nonatomic, copy) ConvertFromEnumBlock convertFromEnum;
+
+/**
  * A NumberFormatter to convert NSStrings to number of NSNumber properties.
  *
  * Called when composing an NSDictionary into an object, or
@@ -192,6 +235,24 @@ typedef id (^ConvertBlock)(id obj);
  * does not handle.
  */
 @property (nonatomic, assign) BOOL shouldConvertWeakProperties;
+
+/**
+ * Wether NSNull values will be set as object value or not.
+ *
+ * When flag is set to YES, all NSNull values will be ignored and not be handled.
+ *
+ * Default is YES.
+ */
+@property (nonatomic, assign) BOOL shouldIgnoreNullValues;
+
+/**
+ * Wether JSON keys in snake case format should be converted to camelcase property names.
+ *
+ * Default is NO.
+ * 
+ * Example: created_at --> createdAt
+ */
+@property (nonatomic, assign) BOOL enableSnakeCaseSupport;
 
 #pragma mark - Lifecycle
 

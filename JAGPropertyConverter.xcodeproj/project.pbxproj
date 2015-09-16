@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		11275B4F14E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
 		11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B5414E9D56200C4707C /* JAGPropertyConverter.m */; };
-		11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5C14E9D56200C4707C /* SenTestingKit.framework */; };
 		11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B5E14E9D56200C4707C /* UIKit.framework */; };
 		11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4E14E9D56200C4707C /* Foundation.framework */; };
 		11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */; };
@@ -22,9 +21,24 @@
 		11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */; };
 		11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */; };
 		11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8814E9D8BD00C4707C /* PropertyModelTests.m */; };
-		11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11275B8A14E9D8BD00C4707C /* TestModel.m */; };
 		11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F54160A7436000BD25F /* NumberFormatterTest.m */; };
 		11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E60F58160B96FE000BD25F /* ExampleTest.m */; };
+		890F5D3E1B5903D000246901 /* TestModelCustomSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */; };
+		890F5D401B59054100246901 /* SubclassCustomPropertyMappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */; };
+		890F5D431B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */; };
+		890F5D441B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
+		890F5D451B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
+		890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D461B594A4F00246901 /* DictionarySwappingTest.m */; };
+		891B9BCD1B554CE000DF255E /* JAGPropertyConverter+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */; };
+		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
+		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
+		89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */; };
+		89C0B7B21A28AF2B007AA954 /* JAGPropertyMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7B11A28AF2B007AA954 /* JAGPropertyMapping.h */; };
+		89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0581A7AAEDD009BF46F /* NullValuesTest.m */; };
+		89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0601A7AB2C5009BF46F /* NumberTestModel.m */; };
+		89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0621A7AB2C5009BF46F /* TestModel.m */; };
+		8C2232ED1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2232EC1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +57,7 @@
 		11275B5214E9D56200C4707C /* JAGPropertyConverter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter-Prefix.pch"; sourceTree = "<group>"; };
 		11275B5314E9D56200C4707C /* JAGPropertyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAGPropertyConverter.h; sourceTree = "<group>"; };
 		11275B5414E9D56200C4707C /* JAGPropertyConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverter.m; sourceTree = "<group>"; };
-		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11275B5C14E9D56200C4707C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAGPropertyConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11275B5E14E9D56200C4707C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JAGPropertyConverterTests-Info.plist"; sourceTree = "<group>"; };
 		11275B6814E9D56200C4707C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -60,12 +73,27 @@
 		11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyTest.m; sourceTree = "<group>"; };
 		11275B8714E9D8BD00C4707C /* PropertyModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyModelTests.h; sourceTree = "<group>"; };
 		11275B8814E9D8BD00C4707C /* PropertyModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyModelTests.m; sourceTree = "<group>"; };
-		11275B8914E9D8BD00C4707C /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
-		11275B8A14E9D8BD00C4707C /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 		11E60F53160A7436000BD25F /* NumberFormatterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormatterTest.h; sourceTree = "<group>"; };
 		11E60F54160A7436000BD25F /* NumberFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormatterTest.m; sourceTree = "<group>"; };
 		11E60F57160B96FE000BD25F /* ExampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTest.h; sourceTree = "<group>"; };
 		11E60F58160B96FE000BD25F /* ExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTest.m; sourceTree = "<group>"; };
+		890F5D3C1B5903D000246901 /* TestModelCustomSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModelCustomSubclass.h; sourceTree = "<group>"; };
+		890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModelCustomSubclass.m; sourceTree = "<group>"; };
+		890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubclassCustomPropertyMappingTest.m; sourceTree = "<group>"; };
+		890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JAGKeyValueSwapping.h"; sourceTree = "<group>"; };
+		890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JAGKeyValueSwapping.m"; sourceTree = "<group>"; };
+		890F5D461B594A4F00246901 /* DictionarySwappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionarySwappingTest.m; sourceTree = "<group>"; };
+		891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter+Subclass.h"; sourceTree = "<group>"; };
+		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
+		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
+		89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeCaseTest.m; sourceTree = "<group>"; };
+		89C0B7B11A28AF2B007AA954 /* JAGPropertyMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAGPropertyMapping.h; sourceTree = "<group>"; };
+		89DED0581A7AAEDD009BF46F /* NullValuesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullValuesTest.m; sourceTree = "<group>"; };
+		89DED05F1A7AB2C5009BF46F /* NumberTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberTestModel.h; sourceTree = "<group>"; };
+		89DED0601A7AB2C5009BF46F /* NumberTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberTestModel.m; sourceTree = "<group>"; };
+		89DED0611A7AB2C5009BF46F /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		89DED0621A7AB2C5009BF46F /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		8C2232EC1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAGPropertyConverterWithKeypathMappingTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +109,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11275B5D14E9D56200C4707C /* SenTestingKit.framework in Frameworks */,
 				11275B5F14E9D56200C4707C /* UIKit.framework in Frameworks */,
 				11275B6014E9D56200C4707C /* Foundation.framework in Frameworks */,
 				11275B6314E9D56200C4707C /* libJAGPropertyConverter.a in Frameworks */,
@@ -105,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				11275B4B14E9D56200C4707C /* libJAGPropertyConverter.a */,
-				11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */,
+				11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				11275B4E14E9D56200C4707C /* Foundation.framework */,
-				11275B5C14E9D56200C4707C /* SenTestingKit.framework */,
 				11275B5E14E9D56200C4707C /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -125,10 +151,16 @@
 			children = (
 				11275B7714E9D89500C4707C /* JAGProperty.h */,
 				11275B7814E9D89500C4707C /* JAGProperty.m */,
-				11275B7914E9D89500C4707C /* JAGPropertyFinder.h */,
-				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
 				11275B5314E9D56200C4707C /* JAGPropertyConverter.h */,
 				11275B5414E9D56200C4707C /* JAGPropertyConverter.m */,
+				891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */,
+				11275B7914E9D89500C4707C /* JAGPropertyFinder.h */,
+				11275B7A14E9D89500C4707C /* JAGPropertyFinder.m */,
+				89C0B7B11A28AF2B007AA954 /* JAGPropertyMapping.h */,
+				890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */,
+				890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */,
+				89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */,
+				89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */,
 				11275B5114E9D56200C4707C /* Supporting Files */,
 			);
 			path = JAGPropertyConverter;
@@ -145,21 +177,25 @@
 		11275B6414E9D56200C4707C /* JAGPropertyConverterTests */ = {
 			isa = PBXGroup;
 			children = (
+				11E60F57160B96FE000BD25F /* ExampleTest.h */,
+				11E60F58160B96FE000BD25F /* ExampleTest.m */,
 				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
 				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
+				8C2232EC1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m */,
 				11275B8314E9D8BD00C4707C /* JAGPropertyFinderTest.h */,
 				11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */,
 				11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */,
 				11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */,
-				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
-				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
-				11275B8914E9D8BD00C4707C /* TestModel.h */,
-				11275B8A14E9D8BD00C4707C /* TestModel.m */,
-				11275B6514E9D56200C4707C /* Supporting Files */,
+				89DED05E1A7AB2C5009BF46F /* Models */,
+				89DED0581A7AAEDD009BF46F /* NullValuesTest.m */,
 				11E60F53160A7436000BD25F /* NumberFormatterTest.h */,
 				11E60F54160A7436000BD25F /* NumberFormatterTest.m */,
-				11E60F57160B96FE000BD25F /* ExampleTest.h */,
-				11E60F58160B96FE000BD25F /* ExampleTest.m */,
+				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
+				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
+				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
+				890F5D3F1B59054100246901 /* SubclassCustomPropertyMappingTest.m */,
+				11275B6514E9D56200C4707C /* Supporting Files */,
+				890F5D461B594A4F00246901 /* DictionarySwappingTest.m */,
 			);
 			path = JAGPropertyConverterTests;
 			sourceTree = "<group>";
@@ -173,6 +209,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		89DED05E1A7AB2C5009BF46F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89DED05F1A7AB2C5009BF46F /* NumberTestModel.h */,
+				89DED0601A7AB2C5009BF46F /* NumberTestModel.m */,
+				89DED0611A7AB2C5009BF46F /* TestModel.h */,
+				89DED0621A7AB2C5009BF46F /* TestModel.m */,
+				890F5D3C1B5903D000246901 /* TestModelCustomSubclass.h */,
+				890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -182,6 +231,10 @@
 			files = (
 				11275B7D14E9D89500C4707C /* JAGProperty.h in Headers */,
 				11275B7F14E9D89500C4707C /* JAGPropertyFinder.h in Headers */,
+				89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */,
+				890F5D431B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h in Headers */,
+				89C0B7B21A28AF2B007AA954 /* JAGPropertyMapping.h in Headers */,
+				891B9BCD1B554CE000DF255E /* JAGPropertyConverter+Subclass.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,8 +274,8 @@
 			);
 			name = JAGPropertyConverterTests;
 			productName = JAGPropertyConverterTests;
-			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 11275B5B14E9D56200C4707C /* JAGPropertyConverterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -230,7 +283,8 @@
 		11275B4214E9D56200C4707C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastTestingUpgradeCheck = 0640;
+				LastUpgradeCheck = 0640;
 			};
 			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -282,7 +336,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890F5D441B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */,
 				11275B5514E9D56200C4707C /* JAGPropertyConverter.m in Sources */,
+				89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B7E14E9D89500C4707C /* JAGProperty.m in Sources */,
 				11275B8014E9D89500C4707C /* JAGPropertyFinder.m in Sources */,
 			);
@@ -292,11 +348,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890F5D401B59054100246901 /* SubclassCustomPropertyMappingTest.m in Sources */,
+				89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */,
+				890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */,
+				89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */,
+				89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */,
 				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
+				8C2232ED1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m in Sources */,
+				89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
 				11275B8D14E9D8BD00C4707C /* JAGPropertyTest.m in Sources */,
 				11275B8E14E9D8BD00C4707C /* PropertyModelTests.m in Sources */,
-				11275B8F14E9D8BD00C4707C /* TestModel.m in Sources */,
+				890F5D451B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */,
+				89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */,
+				890F5D3E1B5903D000246901 /* TestModelCustomSubclass.m in Sources */,
 				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,
 				11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */,
 			);
@@ -328,11 +393,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -340,10 +413,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -352,13 +430,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
@@ -395,13 +485,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -410,13 +499,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

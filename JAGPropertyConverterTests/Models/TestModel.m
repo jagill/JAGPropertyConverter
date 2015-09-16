@@ -52,7 +52,7 @@
 
 + (JAGPropertyConverter *) testConverter {
     JAGPropertyConverter *converter = [JAGPropertyConverter converterWithOutputType:kJAGPropertyListOutput];
-    converter.identifyDict = ^ Class (NSDictionary *dict) {
+    converter.identifyDict = ^ Class (NSString *propertyName, NSDictionary *dict) {
         if ([dict valueForKey:@"testModelID"])
             return [TestModel class];
         return nil;
@@ -95,6 +95,8 @@
     self.stringProperty = @"Hello Kitty!";
     self.modelProperty = [TestModel testModel];
     self.modelProperty.testModelID = @"KOPES56";
+    self.modelProperty.modelProperty = [TestModel testModel];
+    self.modelProperty.modelProperty.testModelID = @"KPATH101";
     self.arrayProperty = [NSArray arrayWithObjects:@"red", @"green", @"blue", nil];
     self.setProperty = [NSSet setWithObjects:@"alpha", @"beta", @"gamma", nil];
     self.dictionaryProperty = [NSDictionary dictionaryWithObjectsAndKeys: 
@@ -109,6 +111,7 @@
     self.cfProperty = center;
     self.boolProperty = YES;
     self.urlProperty = [NSURL URLWithString:@"http://www.gooogle.com"];
+    self.differentNameProperty = @"Some New Property this is";
 }
 
 + (TestModel*) testModel {
@@ -139,6 +142,30 @@
     _active = active;
 }
 
+#pragma mark - JAGPropertyMapping
+
++ (NSDictionary *)customPropertyNamesMapping {
+    return @{@"differentNameProperty" : @"someProperty",
+             @"customMappedProperty" : @"enumProperty2",
+             @"customMappedIgnoreProperty" : @"ignoreProperty2",
+             @"modelProperty.testModelID" : @"keypathProperty1",
+             @"modelProperty.modelProperty.testModelID" : @"keypathProperty2"};
+}
+
++ (NSDictionary *)enumPropertiesToConvert {
+    return @{@"enumProperty" : @"enumProperty",
+             @"customMappedProperty" : @"enumProperty2",
+             @"snakeCaseEnumProperty" : @"snake_case_enum_property",
+             };
+}
+
++ (NSArray *)ignorePropertiesFromJSON {
+    return @[@"ignoreProperty", @"ignoreProperty2", @"snake_case_ignore_property"];
+}
+
++ (NSArray *)ignorePropertiesToJSON {
+    return @[@"ignoreProperty", @"customMappedIgnoreProperty", @"snakeCaseIgnoreProperty"];
+}
 
 @end
 
