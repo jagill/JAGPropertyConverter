@@ -99,8 +99,14 @@
 // created a private recursive method so subclasses of JAGPropertyConverter can simply override the public method (decomposeObject:) to do additional pre- and/or post-processing.
 - (id) recursiveDecomposeObject: (id) object {
     if (!object) {
-        return nil;
-    } else if ([object isKindOfClass: [NSNull class]]
+        if (self.shouldIgnoreNullValues) {
+            return nil;
+        }
+        
+        object = [NSNull null];
+    }
+    
+    if ([object isKindOfClass: [NSNull class]]
                || [object isKindOfClass: [NSString class]]) {
         //These objects are fine for all output types
         return object;    
