@@ -122,4 +122,13 @@
     XCTAssertEqualObjects(result[@"numberProperty"], [NSNull null]);
 }
 
+- (void) testIgnoreNullStringToJSON {
+    model.stringProperty = nil;
+    XCTAssertNil(model.stringProperty);
+    
+    converter.shouldIgnoreNullValues = YES;
+    NSDictionary *result = [converter decomposeObject:model];
+    XCTAssertNil(result[@"stringProperty"]);
+}
+
 @end
