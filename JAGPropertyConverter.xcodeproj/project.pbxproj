@@ -265,7 +265,6 @@
 				11275B5614E9D56200C4707C /* Sources */,
 				11275B5714E9D56200C4707C /* Frameworks */,
 				11275B5814E9D56200C4707C /* Resources */,
-				11275B5914E9D56200C4707C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -284,7 +283,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0640;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -314,22 +313,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		11275B5914E9D56200C4707C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		11275B4714E9D56200C4707C /* Sources */ = {
@@ -403,6 +386,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -483,13 +467,10 @@
 		11275B7314E9D56200C4707C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.threedeadmonks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -497,13 +478,10 @@
 		11275B7414E9D56200C4707C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.threedeadmonks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
