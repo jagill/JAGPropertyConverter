@@ -509,7 +509,7 @@
     customMapping = [customMapping swapKeysWithValues];
     
     JAGProperty *property = nil;
-    NSString *key = dictKey;
+    NSString *key = [dictKey copy];
     
     // first try custom mapping
     if (customMapping[key]) {
@@ -534,11 +534,19 @@
             
             // Check if the key is a keypath (e.g. "someProperty.somePropertyOfSomeProperty") and get the first segment (e.g. "someProperty")
             if (!property) {
-                *isKeyPath = [self _isKeyPathKey:key];
+                BOOL isKP = [self _isKeyPathKey:key];
                 
-                if (*isKeyPath) {
+                // only set output parameter if memory was allocated
+                if (isKeyPath != nil) {
+                    *isKeyPath = isKP;
+                }
+                
+                if (isKP) {
                     NSRange rangeOfFirstDot = [key rangeOfString:@"."];
-                    *remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
+                    // only set output parameter if memory was allocated
+                    if (remainingKeyPath != nil) {
+                        *remainingKeyPath = [key substringFromIndex:rangeOfFirstDot.location + 1];
+                    }
                     key = [key substringToIndex:rangeOfFirstDot.location];
                     
                     property = [JAGPropertyFinder propertyForName: key inClass:[object class]];
