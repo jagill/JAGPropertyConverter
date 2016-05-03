@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "JAGPropertyConverter.h"
+//#import "NSDictionary+JsonString.h"
 #import "TestModelCustomSubclass.h"
 
 /** Tests of inherited custom property mapping is working correctly. Even if some subclass in between returns nil for the mappings (TestModelCustomNilSubclass)
@@ -38,8 +39,11 @@
     [self populate];
     
     self.converter = [[JAGPropertyConverter alloc] init];
-    self.converter.classesToConvert = [NSSet setWithObject:[TestModelCustomSubclass class]];
+    self.converter.classesToConvert = [NSSet setWithObject:[TestModel class]];
     self.converter.identifyDict = ^ Class (NSString *dictName, NSDictionary *dict)  {
+        if ([dictName isEqualToString:@"dictionaryProperty"]) {
+            return nil; // leave NSDictionary as is
+        }
         return [TestModelCustomSubclass class];
     };
     self.converter.convertFromEnum = ^NSString *(NSString *propertyName, id propertyValue, Class parentClass) {
@@ -76,7 +80,7 @@
 - (void)testInheritedCustomMappingToJSON {
     self.converter.outputType = kJAGJSONOutput;
     NSDictionary *dict = [self.converter convertToDictionary:self.model];
-    NSLog(@"Converted to dictionary.");
+    
     [self assert:self.model isEqualTo:dict];
     
     // mapping from superclass
@@ -115,6 +119,57 @@
     XCTAssertNil(resultModel.subclassIgnoreProperty, @"should be ignored");
 }
 
+#pragma mark - Benchmarks
+
+- (void)testBenchmarkModelToJson {
+    self.converter.outputType = kJAGJSONOutput;
+    
+    [self measureBlock:^{
+        NSDictionary *dict = [self.converter convertToDictionary:self.model];
+        
+        //NSLog(@"json: \n%@", dict.jsonDescription);
+        
+        [self assert:self.model isEqualTo:dict];
+        
+        // mapping from superclass
+        XCTAssertEqualObjects(dict[@"someProperty"], @"very different");
+        XCTAssertEqualObjects(dict[@"enumProperty2"], @"juhu");
+        XCTAssertNil(dict[@"ignoreProperty2"]);
+        
+        // mapping from subclass
+        XCTAssertNil(dict[@"subclassIgnoreProperty"], @"this value should be ignored");
+        XCTAssertEqualObjects(dict[@"differentSubclassCustomMapped"], @"custom mapped");
+        XCTAssertEqualObjects(dict[@"subclassEnumProperty"], @"no");
+    }];
+}
+
+- (void)testBenchmarkJsonToModel {
+    NSDictionary *dict = [self dictForJsonFile:@"SubclassModelTestData.json"];
+    
+    XCTAssertNotNil(dict);
+    XCTAssertEqual(dict.count, 16u);
+    
+    [self measureBlock:^{
+        TestModelCustomSubclass *resultModel = [self.converter composeModelFromObject:dict];
+        
+        XCTAssertNotNil(resultModel);
+        XCTAssertTrue(resultModel.active);
+        XCTAssertTrue(resultModel.boolProperty);
+        
+        TestModel *model = resultModel.modelProperty;
+        XCTAssertNotNil(model);
+        XCTAssertTrue(model.active);
+        XCTAssertTrue(model.boolProperty);
+        
+        TestModel *submodel = model.modelProperty;
+        XCTAssertNotNil(submodel);
+        XCTAssertTrue(submodel.active);
+        XCTAssertTrue(submodel.boolProperty);
+        
+        // no need to assert further properties. already done by other tests.
+    }];
+}
+
 #pragma mark - Private
 
 - (void)assert:(TestModel *)testModel isEqualTo:(NSDictionary *)dict {
@@ -142,6 +197,21 @@
     self.model.subclassEnumProperty = TestModelEnumTypeA;
     self.model.subclassIgnoreProperty = @"pls ignore me :(";
     self.model.subclassCustomMapped = @"custom mapped";
+}
+
+// helper methods to load .json files from bundle
+- (NSDictionary *)dictForJsonFile:(NSString *)filename {
+    NSData *data = [self dataForFile:filename];
+    return [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+}
+
+- (NSData *)dataForFile:(NSString *)filename {
+    NSString *filePath = [self pathForFile:filename inBundle:[NSBundle bundleForClass:self.class]];
+    return [NSData dataWithContentsOfFile:filePath options:0 error:nil];
+}
+
+- (NSString *)pathForFile:(NSString *)filename inBundle:(NSBundle *)bundle {
+    return [bundle.bundlePath stringByAppendingPathComponent:filename];
 }
 
 @end
