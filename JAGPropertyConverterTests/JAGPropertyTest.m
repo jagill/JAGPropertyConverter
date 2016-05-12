@@ -235,4 +235,20 @@
     XCTAssertTrue([modelProp canAcceptValue:value], @"model properties should be able to accept TestModel-valued ids.");
 }
 
+#pragma mark - Tests for NSObject
+
+- (void)testIsEqual {
+    JAGProperty *anotherStringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
+    
+    XCTAssertTrue(stringProp != anotherStringProp, @"should be different instances.");
+    XCTAssertTrue([stringProp isEqual:anotherStringProp], @"but `isEqual:` is overridden");
+}
+
+- (void)testHash {
+    JAGProperty *anotherStringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
+    
+    XCTAssertTrue(stringProp != anotherStringProp, @"should be different instances.");
+    XCTAssertEqual(stringProp.hash, anotherStringProp.hash);
+}
+
 @end

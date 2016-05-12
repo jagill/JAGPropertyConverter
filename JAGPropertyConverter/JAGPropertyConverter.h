@@ -32,11 +32,11 @@
  * The type of output the objects will be converted to.
  * @see outputType for more detailed description.
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, JAGOutputType) {
     kJAGFullOutput,
     kJAGPropertyListOutput,
     kJAGJSONOutput
-} JAGOutputType;
+};
 
 ///A Block to identify what class a dictionary represents.
 typedef Class (^IdentifyBlock)(NSString *dictName, NSDictionary *dictionary);
@@ -143,7 +143,7 @@ typedef id (^ConvertBlock)(id obj);
  * of these classes, the converter will coerce an unidentified NSDictionary
  * into the property.
  */
-@property (nonatomic, strong) NSSet *classesToConvert;
+@property (nonatomic, strong) NSSet<Class> *classesToConvert;
 
 /**
  * A Block to convert a (JSON) property to an NSDate.

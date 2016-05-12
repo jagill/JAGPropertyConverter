@@ -79,7 +79,7 @@ JAGPropertyConverter also supports conversion of NS_ENUMs to strings and vice-ve
 * Support converting `NSData` (eg. into Base64 strings): `convertToData` and `convertFromData`
 * Support converting enums: `convertToEnum` and `convertFromEnum`
 * Support for auto converting to/from **snake_case**: `enableSnakeCaseSupport`
-* Support for ingoring `nil`/`null` vales: `shouldIngoreNullValues`
+* Support for ingoring `nil`/`null` values: `shouldIngoreNullValues` (exception list using `nilPropertiesNotToIgnore`)
 * Support to ignore `weak` properties for serialization: `shouldConvertWeakProperties`
 * Extracted and restructured some methods so JAGPropertyConverter can be subclassed: `JAGPropertyConverter+Subclass.h`
 * Enhanced `identifyDict`: it will now pass in the dictionary name (breaking change!)
