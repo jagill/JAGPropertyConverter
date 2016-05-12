@@ -94,6 +94,7 @@
 		891AE74E1CD8DE4200206542 /* NSDictionary+JsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JsonString.m"; sourceTree = "<group>"; };
 		891AE7531CD8E0BD00206542 /* JsonDescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonDescriptionTests.m; sourceTree = "<group>"; };
 		891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter+Subclass.h"; sourceTree = "<group>"; };
+		8964C5671CE4C5460078481A /* JAGPropertyConverter.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = JAGPropertyConverter.podspec; sourceTree = "<group>"; };
 		898EB2641CD11BCA00F2A9BA /* JAGPropertyConverterTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverterTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		898EB2651CD11BCB00F2A9BA /* OptInNullValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptInNullValues.swift; sourceTree = "<group>"; };
 		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				891AE7461CD8C55800206542 /* README.md */,
+				8964C5671CE4C5460078481A /* JAGPropertyConverter.podspec */,
 				11275B5014E9D56200C4707C /* JAGPropertyConverter */,
 				11275B6414E9D56200C4707C /* JAGPropertyConverterTests */,
 				11275B4D14E9D56200C4707C /* Frameworks */,
