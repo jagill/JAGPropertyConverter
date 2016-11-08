@@ -35,13 +35,13 @@ class OptInNullValues: XCTestCase {
         model = OptInNullValueTestModel()
         
         converter = JAGPropertyConverter()
-        converter.outputType = .JAGJSONOutput
+        converter.outputType = .jagjsonOutput
         converter.classesToConvert = NSSet(array: [OptInNullValueTestModel.self]) as Set<NSObject>
         converter.shouldIgnoreNullValues = true
         converter.enableSnakeCaseSupport = true
         
-        let formatter = NSNumberFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en")
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en")
         converter.numberFormatter = formatter
     }
     
@@ -59,7 +59,7 @@ class OptInNullValues: XCTestCase {
         
         let dict = [ "intProperty" : NSNull(), "strProperty" : NSNull(), "arrayProperty" : NSNull() ]    // leave out numberProperty; we don't want to touch it
         
-        converter.setPropertiesOf(model, fromDictionary: dict)
+        converter.setPropertiesOf(model, from: dict)
         
         XCTAssertEqual(model.intProperty, 1337, "NSNull values should be ignored")
         XCTAssertNil(model.stringProperty, "stringProperty should be nil, because it was optIn for deletion")
@@ -79,7 +79,7 @@ class OptInNullValues: XCTestCase {
         XCTAssertNil(model.arrayProperty)
         
         let dict = converter.decomposeObject(model) as! NSDictionary
-        let expectedDict = [ "int_property" : 42, "str_property" : NSNull(), "array_property" : NSNull() ] // only stringProperty is optIn; so numberProperty will be ignored (= not in dict)
+        let expectedDict = [ "int_property" : 42, "str_property" : NSNull(), "array_property" : NSNull() ] as NSDictionary // only stringProperty is optIn; so numberProperty will be ignored (= not in dict)
         
         XCTAssertEqual(dict, expectedDict)
     }
