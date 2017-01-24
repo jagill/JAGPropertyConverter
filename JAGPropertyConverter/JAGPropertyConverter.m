@@ -319,6 +319,10 @@
     for (id elt in collection) {
         id value = [self composeModelFromObject:elt propertyName:propertyName];
         if (value) {
+            // NSNull handling
+            if (self.shouldIgnoreNullValues && [value isKindOfClass:[NSNull class]]) {
+                continue;
+            }
             [mutableCollection addObject: value];
         } else {
             NSLog(@"Object %@ can't be converted to properties.", [elt class]);
@@ -359,7 +363,12 @@
         } else {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             for (id key in object) {
-                [dict setValue: [self composeModelFromObject: [object valueForKey: key] propertyName:key]
+                id value = [self composeModelFromObject: [object valueForKey: key] propertyName:key];
+                // NSNull handling
+                if (self.shouldIgnoreNullValues && [value isKindOfClass:[NSNull class]]) {
+                    continue;
+                }
+                [dict setValue: value
                         forKey: key];
             }
             return dict;
