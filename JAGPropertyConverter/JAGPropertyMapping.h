@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol JAGPropertyMapping <NSObject>
 
 @optional
@@ -18,7 +20,7 @@
  *
  * @return A dictionary with property name as key and JSON name as value: Dict <property name, JSON name>
  */
-+ (NSDictionary *)customPropertyNamesMapping;
++ (NSDictionary<NSString *, NSString *> *)customPropertyNamesMapping;
 
 /** Asks the receiver if there are any enum values which should be converted (Model <> JSON). Implement convertToEnum and convertFromEnum to handle this.
  *
@@ -28,12 +30,24 @@
  *
  * @return A dictionary with property name as key and JSON name as value: Dict <property name, JSON name>
  */
-+ (NSDictionary *)enumPropertiesToConvert;
++ (NSDictionary<NSString *, NSString *> *)enumPropertiesToConvert;
 
 /** Asks the receiver if there are properties to ignore when converting from JSON. */
-+ (NSArray *)ignorePropertiesFromJSON;
++ (NSArray<NSString *> *)ignorePropertiesFromJSON;
 
 /** Asks the receiver if there are properties to ignore when converting to JSON. */
-+ (NSArray *)ignorePropertiesToJSON;
++ (NSArray<NSString *> *)ignorePropertiesToJSON;
+
+/** Tells the property converter to not ignore specified properties when property value is nil (= opt-In to not be ignored).
+ 
+ It will either convert the property to NSNull (model ➡️ json) or set property to nil (json ➡️ model).
+ 
+ @note This method is only used if `converter.shouldIgnoreNullValues == YES`
+ 
+ @return Array of original model property names to not be ignored when serializing nil values.
+ */
++ (NSArray<NSString *> *)nilPropertiesNotToIgnore;
 
 @end
+
+NS_ASSUME_NONNULL_END

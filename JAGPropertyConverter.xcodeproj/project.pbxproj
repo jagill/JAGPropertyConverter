@@ -29,13 +29,17 @@
 		890F5D441B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
 		890F5D451B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */; };
 		890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 890F5D461B594A4F00246901 /* DictionarySwappingTest.m */; };
+		891AE7481CD8D71700206542 /* SubclassModelTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 891AE7471CD8D71700206542 /* SubclassModelTestData.json */; };
+		891AE74F1CD8DE4200206542 /* NSDictionary+JsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 891AE74E1CD8DE4200206542 /* NSDictionary+JsonString.m */; };
+		891AE7541CD8E0BD00206542 /* JsonDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 891AE7531CD8E0BD00206542 /* JsonDescriptionTests.m */; };
 		891B9BCD1B554CE000DF255E /* JAGPropertyConverter+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */; };
+		898EB2661CD11BCB00F2A9BA /* OptInNullValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898EB2651CD11BCB00F2A9BA /* OptInNullValues.swift */; };
 		89C0B7971A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */; };
 		89C0B7981A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
 		89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */; };
 		89C0B7A11A278D3D007AA954 /* SnakeCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */; };
 		89C0B7B21A28AF2B007AA954 /* JAGPropertyMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C0B7B11A28AF2B007AA954 /* JAGPropertyMapping.h */; };
-		89C7085C1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7085B1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m */; settings = {ASSET_TAGS = (); }; };
+		89C7085C1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7085B1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m */; };
 		89DED0591A7AAEDD009BF46F /* NullValuesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0581A7AAEDD009BF46F /* NullValuesTest.m */; };
 		89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0601A7AB2C5009BF46F /* NumberTestModel.m */; };
 		89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DED0621A7AB2C5009BF46F /* TestModel.m */; };
@@ -84,7 +88,15 @@
 		890F5D411B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JAGKeyValueSwapping.h"; sourceTree = "<group>"; };
 		890F5D421B5948A400246901 /* NSDictionary+JAGKeyValueSwapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JAGKeyValueSwapping.m"; sourceTree = "<group>"; };
 		890F5D461B594A4F00246901 /* DictionarySwappingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionarySwappingTest.m; sourceTree = "<group>"; };
+		891AE7461CD8C55800206542 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		891AE7471CD8D71700206542 /* SubclassModelTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SubclassModelTestData.json; path = JAGPropertyConverterTests/SubclassModelTestData.json; sourceTree = SOURCE_ROOT; };
+		891AE74D1CD8DE4200206542 /* NSDictionary+JsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JsonString.h"; sourceTree = "<group>"; };
+		891AE74E1CD8DE4200206542 /* NSDictionary+JsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JsonString.m"; sourceTree = "<group>"; };
+		891AE7531CD8E0BD00206542 /* JsonDescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonDescriptionTests.m; sourceTree = "<group>"; };
 		891B9BCB1B554CE000DF255E /* JAGPropertyConverter+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverter+Subclass.h"; sourceTree = "<group>"; };
+		8964C5671CE4C5460078481A /* JAGPropertyConverter.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = JAGPropertyConverter.podspec; sourceTree = "<group>"; };
+		898EB2641CD11BCA00F2A9BA /* JAGPropertyConverterTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JAGPropertyConverterTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		898EB2651CD11BCB00F2A9BA /* OptInNullValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptInNullValues.swift; sourceTree = "<group>"; };
 		89C0B7951A275E84007AA954 /* NSString+JAGSnakeCaseSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JAGSnakeCaseSupport.h"; sourceTree = "<group>"; };
 		89C0B7961A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JAGSnakeCaseSupport.m"; sourceTree = "<group>"; };
 		89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeCaseTest.m; sourceTree = "<group>"; };
@@ -123,6 +135,8 @@
 		11275B4014E9D56200C4707C = {
 			isa = PBXGroup;
 			children = (
+				891AE7461CD8C55800206542 /* README.md */,
+				8964C5671CE4C5460078481A /* JAGPropertyConverter.podspec */,
 				11275B5014E9D56200C4707C /* JAGPropertyConverter */,
 				11275B6414E9D56200C4707C /* JAGPropertyConverterTests */,
 				11275B4D14E9D56200C4707C /* Frameworks */,
@@ -181,6 +195,7 @@
 			children = (
 				11E60F57160B96FE000BD25F /* ExampleTest.h */,
 				11E60F58160B96FE000BD25F /* ExampleTest.m */,
+				891AE7491CD8DE0000206542 /* Helpers */,
 				11275B8114E9D8BD00C4707C /* JAGPropertyConverterTest.h */,
 				11275B8214E9D8BD00C4707C /* JAGPropertyConverterTest.m */,
 				89C7085B1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m */,
@@ -189,10 +204,12 @@
 				11275B8414E9D8BD00C4707C /* JAGPropertyFinderTest.m */,
 				11275B8514E9D8BD00C4707C /* JAGPropertyTest.h */,
 				11275B8614E9D8BD00C4707C /* JAGPropertyTest.m */,
+				891AE7531CD8E0BD00206542 /* JsonDescriptionTests.m */,
 				89DED05E1A7AB2C5009BF46F /* Models */,
 				89DED0581A7AAEDD009BF46F /* NullValuesTest.m */,
 				11E60F53160A7436000BD25F /* NumberFormatterTest.h */,
 				11E60F54160A7436000BD25F /* NumberFormatterTest.m */,
+				898EB2651CD11BCB00F2A9BA /* OptInNullValues.swift */,
 				11275B8714E9D8BD00C4707C /* PropertyModelTests.h */,
 				11275B8814E9D8BD00C4707C /* PropertyModelTests.m */,
 				89C0B7A01A278D3D007AA954 /* SnakeCaseTest.m */,
@@ -206,10 +223,20 @@
 		11275B6514E9D56200C4707C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				898EB2641CD11BCA00F2A9BA /* JAGPropertyConverterTests-Bridging-Header.h */,
 				11275B6614E9D56200C4707C /* JAGPropertyConverterTests-Info.plist */,
 				11275B6714E9D56200C4707C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		891AE7491CD8DE0000206542 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				891AE74D1CD8DE4200206542 /* NSDictionary+JsonString.h */,
+				891AE74E1CD8DE4200206542 /* NSDictionary+JsonString.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		89DED05E1A7AB2C5009BF46F /* Models */ = {
@@ -221,6 +248,7 @@
 				89DED0621A7AB2C5009BF46F /* TestModel.m */,
 				890F5D3C1B5903D000246901 /* TestModelCustomSubclass.h */,
 				890F5D3D1B5903D000246901 /* TestModelCustomSubclass.m */,
+				891AE7471CD8D71700206542 /* SubclassModelTestData.json */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -285,8 +313,17 @@
 		11275B4214E9D56200C4707C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastTestingUpgradeCheck = 0640;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
+				TargetAttributes = {
+					11275B4A14E9D56200C4707C = {
+						LastSwiftMigration = 0810;
+					};
+					11275B5A14E9D56200C4707C = {
+						LastSwiftMigration = 0810;
+					};
+				};
 			};
 			buildConfigurationList = 11275B4514E9D56200C4707C /* Build configuration list for PBXProject "JAGPropertyConverter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -312,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11275B6914E9D56200C4707C /* InfoPlist.strings in Resources */,
+				891AE7481CD8D71700206542 /* SubclassModelTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891AE7541CD8E0BD00206542 /* JsonDescriptionTests.m in Sources */,
 				890F5D401B59054100246901 /* SubclassCustomPropertyMappingTest.m in Sources */,
 				89DED0631A7AB2C5009BF46F /* NumberTestModel.m in Sources */,
 				890F5D471B594A4F00246901 /* DictionarySwappingTest.m in Sources */,
@@ -341,6 +380,7 @@
 				89DED0641A7AB2C5009BF46F /* TestModel.m in Sources */,
 				11275B8B14E9D8BD00C4707C /* JAGPropertyConverterTest.m in Sources */,
 				89C7085C1BDAF3FB00749C93 /* JAGPropertyConverterSubclassTest.m in Sources */,
+				898EB2661CD11BCB00F2A9BA /* OptInNullValues.swift in Sources */,
 				8C2232ED1AA9CBB40079D7C4 /* JAGPropertyConverterWithKeypathMappingTest.m in Sources */,
 				89C0B7991A275E84007AA954 /* NSString+JAGSnakeCaseSupport.m in Sources */,
 				11275B8C14E9D8BD00C4707C /* JAGPropertyFinderTest.m in Sources */,
@@ -351,6 +391,7 @@
 				890F5D3E1B5903D000246901 /* TestModelCustomSubclass.m in Sources */,
 				11E60F55160A7436000BD25F /* NumberFormatterTest.m in Sources */,
 				11E60F59160B96FE000BD25F /* ExampleTest.m in Sources */,
+				891AE74F1CD8DE4200206542 /* NSDictionary+JsonString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +426,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -408,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -423,7 +466,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -438,8 +483,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -453,6 +499,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -465,28 +512,38 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		11275B7314E9D56200C4707C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.threedeadmonks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JAGPropertyConverterTests/JAGPropertyConverterTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		11275B7414E9D56200C4707C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JAGPropertyConverter/JAGPropertyConverter-Prefix.pch";
 				INFOPLIST_FILE = "JAGPropertyConverterTests/JAGPropertyConverterTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.threedeadmonks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JAGPropertyConverterTests/JAGPropertyConverterTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
