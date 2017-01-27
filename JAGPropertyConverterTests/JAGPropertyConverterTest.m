@@ -228,6 +228,29 @@
     XCTAssertNil(testModel.stringProperty, @"");
 }
 
+- (void) testIgnoringNSNullValuesInDictionaryFromJson {
+    converter.shouldIgnoreNullValues = YES;
+    
+    NSDictionary *dict = @{ @"dictionaryProperty" : @{ @"nullValue" : [NSNull null],
+                                                       @"nonNullValue" : @42 }};
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    
+    XCTAssertEqualObjects(testModel.dictionaryProperty, @{ @"nonNullValue" : @42 }, @"The converter ignores NSNull values in arrays when composing objects.");
+}
+
+- (void) testIgnoringNSNullValuesInArrayFromJson {
+    converter.shouldIgnoreNullValues = YES;
+    
+    NSDictionary *dict = @{ @"arrayProperty" : @[ [NSNull null], @42 ]};
+    
+    TestModel *testModel = [TestModel testModel];
+    [converter setPropertiesOf:testModel fromDictionary:dict];
+    
+    XCTAssertEqualObjects(testModel.arrayProperty, @[ @42 ], @"The converter ignores NSNull values in arrays when composing objects.");
+}
+
 #pragma mark - Snake Case
 
 - (void)testSnakeCaseSupport1 {
