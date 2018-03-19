@@ -48,8 +48,8 @@
  
  Eg. getting all properties to ignore from the object class itself and all its super classes.
  
- @param object   Object to search for
- @param selector Class method SEL
+ @param object          Object to search for
+ @param classSelector   Class method SEL
  
  @return Array with all array entries from the object class and all super classes.
  */
@@ -59,8 +59,8 @@
  
  Eg. getting all custom property mappings from the object class itself and all its super classes.
  
- @param object   Object to search for
- @param selector Class method SEL
+ @param object          Object to search for
+ @param classSelector   Class method SEL
  
  @return Dictionary with all dictionary entries from the object class and all super classes.
  */
