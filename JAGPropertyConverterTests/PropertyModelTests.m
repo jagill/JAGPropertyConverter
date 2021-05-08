@@ -54,20 +54,20 @@
     model.modelProperty = otherModel;
     
     NSDictionary *props = [model propertiesAsDictionary];
-    STAssertEquals([[props valueForKey:@"intProperty"] intValue], intProp, 
+    XCTAssertEqual([[props valueForKey:@"intProperty"] intValue], intProp, 
                    @"props should have interProperty %d, but is %d", intProp,
                    [[props valueForKey:@"intProperty"] intValue]);
-    STAssertEquals([props valueForKey:@"stringProperty"], stringProp, 
+    XCTAssertEqual([props valueForKey:@"stringProperty"], stringProp, 
                    @"props should have stringProperty %@, but is %@", stringProp,
                    [props valueForKey:@"stringProperty"]);
     
     id foundOtherModel = [props valueForKey:@"modelProperty"];
-    STAssertTrue([foundOtherModel isKindOfClass: [NSDictionary class]], 
+    XCTAssertTrue([foundOtherModel isKindOfClass: [NSDictionary class]], 
                    @"modelProperty should be NSDictionary after parsing, but is %@.", [foundOtherModel class]);
-    STAssertEquals([[foundOtherModel valueForKey:@"intProperty"] intValue], otherIntProp, 
+    XCTAssertEqual([[foundOtherModel valueForKey:@"intProperty"] intValue], otherIntProp, 
                    @"foundOtherModel should have interProperty %d, but is %d", intProp,
                    [[foundOtherModel valueForKey:@"intProperty"] intValue]);
-    STAssertEquals([foundOtherModel valueForKey:@"stringProperty"], otherStringProp, 
+    XCTAssertEqual([foundOtherModel valueForKey:@"stringProperty"], otherStringProp, 
                    @"props should have stringProperty %@, but is %@", otherStringProp,
                    [foundOtherModel valueForKey:@"stringProperty"]);
     
@@ -94,20 +94,20 @@
     
     [model setPropertiesFromDictionary:props];
     
-    STAssertEquals(model.intProperty, intProp, 
+    XCTAssertEqual(model.intProperty, intProp, 
                    @"model should have interProperty %d, but is %d", intProp,
                    model.intProperty);
-    STAssertEquals(model.stringProperty, stringProp, 
+    XCTAssertEqual(model.stringProperty, stringProp, 
                    @"model should have stringProperty %@, but is %@", stringProp,
                    model.stringProperty);
     
     TestModel *foundOtherModel = model.modelProperty;
-    STAssertTrue([foundOtherModel isMemberOfClass: [TestModel class]], 
+    XCTAssertTrue([foundOtherModel isMemberOfClass: [TestModel class]], 
                  @"modelProperty should return a TestModel, but returned %@.", [foundOtherModel class]);
-    STAssertEquals(foundOtherModel.intProperty, otherIntProp, 
+    XCTAssertEqual(foundOtherModel.intProperty, otherIntProp, 
                    @"other model should have intProperty %d, but is %d", otherIntProp,
                    foundOtherModel.intProperty);
-    STAssertEquals(foundOtherModel.stringProperty, otherStringProp, 
+    XCTAssertEqual(foundOtherModel.stringProperty, otherStringProp, 
                    @"other model should have stringProperty %@, but is %@", otherStringProp,
                    foundOtherModel.stringProperty);
     

@@ -69,57 +69,57 @@
 #pragma mark - Broad tests
 
 - (void) testIntProperty {
-    STAssertTrue([[intProp typeEncoding] isEqualToString:@"i"], @"Type encoding should be i, is %@", [intProp typeEncoding]);
-    STAssertTrue([intProp isNumber], @"Property should be Number.");
-    STAssertFalse([intProp isObject], @"Property should not be object.");
-    STAssertEqualObjects([intProp ivarName], @"_intProperty", @"ivarName should be correct.");
-    STAssertEquals([intProp setterSemantics], JAGPropertySetterSemanticsAssign, @"Setter semantics should be assign.");
-    STAssertEqualObjects([intProp name], @"intProperty", @"Name should be correct.");
-    STAssertFalse([intProp isReadOnly], @"intProperty should not be read-only.");
-    STAssertNil([intProp propertyClass], @"intProperty should not have a propertyClass.");
+    XCTAssertTrue([[intProp typeEncoding] isEqualToString:@"i"], @"Type encoding should be i, is %@", [intProp typeEncoding]);
+    XCTAssertTrue([intProp isNumber], @"Property should be Number.");
+    XCTAssertFalse([intProp isObject], @"Property should not be object.");
+    XCTAssertEqualObjects([intProp ivarName], @"_intProperty", @"ivarName should be correct.");
+    XCTAssertEqual([intProp setterSemantics], JAGPropertySetterSemanticsAssign, @"Setter semantics should be assign.");
+    XCTAssertEqualObjects([intProp name], @"intProperty", @"Name should be correct.");
+    XCTAssertFalse([intProp isReadOnly], @"intProperty should not be read-only.");
+    XCTAssertNil([intProp propertyClass], @"intProperty should not have a propertyClass.");
 }
 
 - (void) testModelProperty {
-    STAssertTrue([modelProp isObject], @"Property should be Object.");
-    STAssertEquals([modelProp propertyClass], [TestModel class], 
+    XCTAssertTrue([modelProp isObject], @"Property should be Object.");
+    XCTAssertEqual([modelProp propertyClass], [TestModel class], 
                    @"Return object class is %@, should be %@", [modelProp propertyClass], [TestModel class]);
 
-    STAssertTrue([[modelProp typeEncoding] isEqualToString:@"@\"TestModel\""], 
+    XCTAssertTrue([[modelProp typeEncoding] isEqualToString:@"@\"TestModel\""], 
                  @"Type encoding should be @\"TestModel\", is %@", [modelProp typeEncoding]);
-    STAssertFalse([modelProp isNumber], @"Property should not be Number.");
-    STAssertEqualObjects([modelProp ivarName], @"_modelProperty", @"ivarName should be correct.");
-    STAssertEquals([modelProp setterSemantics], JAGPropertySetterSemanticsRetain, @"Setter semantics should be retain.");
-    STAssertEqualObjects([modelProp name], @"modelProperty", @"Name should be correct.");
-    STAssertFalse([modelProp isReadOnly], @"Property should not be read-only.");
-    STAssertFalse([modelProp isId], @"ModelProeprty should not be isId");
+    XCTAssertFalse([modelProp isNumber], @"Property should not be Number.");
+    XCTAssertEqualObjects([modelProp ivarName], @"_modelProperty", @"ivarName should be correct.");
+    XCTAssertEqual([modelProp setterSemantics], JAGPropertySetterSemanticsRetain, @"Setter semantics should be retain.");
+    XCTAssertEqualObjects([modelProp name], @"modelProperty", @"Name should be correct.");
+    XCTAssertFalse([modelProp isReadOnly], @"Property should not be read-only.");
+    XCTAssertFalse([modelProp isId], @"ModelProeprty should not be isId");
 }
 
 #pragma mark - Tests for propertyClass
 
 - (void) testStringProperty {
-    STAssertTrue([stringProp isObject], @"Property should be Object.");
-    STAssertEquals([stringProp propertyClass], [NSString class], 
+    XCTAssertTrue([stringProp isObject], @"Property should be Object.");
+    XCTAssertEqual([stringProp propertyClass], [NSString class], 
                    @"Return object class is %@, should be %@", [stringProp propertyClass], [NSString class]);
     
 }
 
 - (void) testArrayProperty {
-    STAssertTrue([arrayProp isObject], @"Property should be Object.");
-    STAssertEquals([arrayProp propertyClass], [NSArray class], 
+    XCTAssertTrue([arrayProp isObject], @"Property should be Object.");
+    XCTAssertEqual([arrayProp propertyClass], [NSArray class], 
                    @"Return object class is %@, should be %@", [arrayProp propertyClass], [NSArray class]);
     
 }
 
 - (void) testSetProperty {
-    STAssertTrue([setProp isObject], @"Property should be Object.");
-    STAssertEquals([setProp propertyClass], [NSSet class], 
+    XCTAssertTrue([setProp isObject], @"Property should be Object.");
+    XCTAssertEqual([setProp propertyClass], [NSSet class], 
                    @"Return object class is %@, should be %@", [setProp propertyClass], [NSSet class]);
     
 }
 
 - (void) testDictionaryProperty {
-    STAssertTrue([dictProp isObject], @"Property should be Object.");
-    STAssertEquals([dictProp propertyClass], [NSDictionary class], 
+    XCTAssertTrue([dictProp isObject], @"Property should be Object.");
+    XCTAssertEqual([dictProp propertyClass], [NSDictionary class], 
                    @"Return object class is %@, should be %@", [dictProp propertyClass], [NSDictionary class]);
     
 }
@@ -128,36 +128,36 @@
 
 - (void) testGetter {
     SEL getter = [stringProp getter];
-    STAssertEqualObjects(NSStringFromSelector(getter), @"stringProperty", 
+    XCTAssertEqualObjects(NSStringFromSelector(getter), @"stringProperty", 
                          @"Property should have stringProperty getter, but has %@",
                          NSStringFromSelector(getter));
 }
 
 - (void) testSetter {
     SEL setter = [stringProp setter];
-    STAssertEqualObjects(NSStringFromSelector(setter), @"setStringProperty:", 
+    XCTAssertEqualObjects(NSStringFromSelector(setter), @"setStringProperty:", 
                          @"Property should have setStringProperty: setter, but has %@",
                          NSStringFromSelector(setter));
 }
 
 - (void) testCustomGetter {
     SEL customGetter = [activeProp customGetter];
-    STAssertEqualObjects(NSStringFromSelector(customGetter), @"isActive", 
+    XCTAssertEqualObjects(NSStringFromSelector(customGetter), @"isActive", 
                          @"Property should have isActive custom getter, but has %@",
                          NSStringFromSelector(customGetter));
     SEL getter = [activeProp getter];
-    STAssertEqualObjects(NSStringFromSelector(getter), @"isActive", 
+    XCTAssertEqualObjects(NSStringFromSelector(getter), @"isActive", 
                          @"Property should have isActive getter, but has %@",
                          NSStringFromSelector(getter));
 }
 
 - (void) testCustomSetter {
     SEL customSetter = [activeProp customSetter];
-    STAssertEqualObjects(NSStringFromSelector(customSetter), @"makeActive:",
+    XCTAssertEqualObjects(NSStringFromSelector(customSetter), @"makeActive:",
                          @"Property should have makeActive: custom setter, but has %@",
                          NSStringFromSelector(customSetter));
     SEL setter = [activeProp setter];
-    STAssertEqualObjects(NSStringFromSelector(setter), @"makeActive:", 
+    XCTAssertEqualObjects(NSStringFromSelector(setter), @"makeActive:", 
                          @"Property should have makeActive: setter, but has %@",
                          NSStringFromSelector(setter));
 }
@@ -165,74 +165,90 @@
 #pragma mark - YES/NO methods
 
 - (void) testIsCollection {
-    STAssertFalse([stringProp isCollection], @"String property should not be a collection.");
-    STAssertFalse([intProp isCollection], @"Int property should not be a collection.");
-    STAssertTrue([setProp isCollection], @"Set property should be a collection.");
-    STAssertTrue([arrayProp isCollection], @"Array property should be a collection.");
-    STAssertFalse([dictProp isCollection], @"Dict property should not be a collection.");
-    STAssertFalse([modelProp isCollection], @"Model property should not be a collection.");
+    XCTAssertFalse([stringProp isCollection], @"String property should not be a collection.");
+    XCTAssertFalse([intProp isCollection], @"Int property should not be a collection.");
+    XCTAssertTrue([setProp isCollection], @"Set property should be a collection.");
+    XCTAssertTrue([arrayProp isCollection], @"Array property should be a collection.");
+    XCTAssertFalse([dictProp isCollection], @"Dict property should not be a collection.");
+    XCTAssertFalse([modelProp isCollection], @"Model property should not be a collection.");
 }
 
 - (void) testWeakProperty {
     NSLog(@"weakProperty attributeEncodings: %@", [weakProperty attributeEncodings]);
-    STAssertTrue([weakProperty isWeak], @"Weak property should have isWeake true.");
+    XCTAssertTrue([weakProperty isWeak], @"Weak property should have isWeake true.");
 }
 
 - (void) testBlockProperty {
     NSLog(@"blockProperty attributeEncodings: %@", [blockProperty attributeEncodings]);
-    STAssertEqualObjects([blockProperty typeEncoding], @"@?", @"Block property should have type encoding @?");
-    STAssertTrue([blockProperty isBlock], @"Block property should have isBlock == true");   
-    STAssertNil([blockProperty propertyClass], @"Block properties should return nill properties.");
+    XCTAssertEqualObjects([blockProperty typeEncoding], @"@?", @"Block property should have type encoding @?");
+    XCTAssertTrue([blockProperty isBlock], @"Block property should have isBlock == true");   
+    XCTAssertNil([blockProperty propertyClass], @"Block properties should return nill properties.");
 }
 
 - (void) testIdPropertyIsObject {
-    STAssertTrue([idProperty isObject], @"idProperty should be object.");
+    XCTAssertTrue([idProperty isObject], @"idProperty should be object.");
 }
 
 - (void) testIdProperyIsId {
-    STAssertTrue([idProperty isId], @"idProperty should have isId == true.");
+    XCTAssertTrue([idProperty isId], @"idProperty should have isId == true.");
 }
 
 #pragma mark - Tests for canAcceptValue:
 
 - (void) testIntCanAcceptNSNumber {
     NSNumber *num = [NSNumber numberWithInt:8];
-    STAssertTrue([intProp canAcceptValue:num], @"int properties should be able to accept NSNumber.");
+    XCTAssertTrue([intProp canAcceptValue:num], @"int properties should be able to accept NSNumber.");
 }
 
 - (void) testBoolCanAcceptNSNumber {
     NSNumber *num = [NSNumber numberWithInt:1];
-    STAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber.");
+    XCTAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber.");
 }
 
 - (void) testBoolCanAcceptNSNumberWithBool {
     NSNumber *num = [NSNumber numberWithBool:YES];
-    STAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber numberWithBool:.");
+    XCTAssertTrue([boolProperty canAcceptValue:num], @"BOOL properties should be able to accept NSNumber numberWithBool:.");
 }
 
 - (void) testModelCanAcceptSubmodel {
-    STAssertTrue([modelProp canAcceptValue:[[TestModelSubclass alloc] init] ], @"TestModel properties should be able to accept TestModelSubclass.");
+    XCTAssertTrue([modelProp canAcceptValue:[[TestModelSubclass alloc] init] ], @"TestModel properties should be able to accept TestModelSubclass.");
 }
 
 - (void) testStringCanAcceptString {
-    STAssertTrue([stringProp canAcceptValue:[[NSString alloc] init] ], @"NSString properties should be able to accept NSString.");    
+    XCTAssertTrue([stringProp canAcceptValue:[[NSString alloc] init] ], @"NSString properties should be able to accept NSString.");    
 }
 
 - (void) testStringCannotAcceptNumber {
-    STAssertFalse([stringProp canAcceptValue:[NSNumber numberWithInt:8] ], @"NSString properties should not be able to accept NSNumber.");    
+    XCTAssertFalse([stringProp canAcceptValue:[NSNumber numberWithInt:8] ], @"NSString properties should not be able to accept NSNumber.");    
 }
 
 - (void) testIntCannotAcceptString {
-    STAssertFalse([intProp canAcceptValue:[[NSString alloc] init] ], @"int properties should not be able to accept NSString.");    
+    XCTAssertFalse([intProp canAcceptValue:[[NSString alloc] init] ], @"int properties should not be able to accept NSString.");    
 }
 
 - (void) testIdCanAcceptModel {
-    STAssertTrue([idProperty canAcceptValue:[[TestModel alloc] init] ], @"id properties should be able to accept TestModels.");
+    XCTAssertTrue([idProperty canAcceptValue:[[TestModel alloc] init] ], @"id properties should be able to accept TestModels.");
 }
 
 - (void) testModelCanAcceptId {
     id value = [[TestModel alloc] init];
-    STAssertTrue([modelProp canAcceptValue:value], @"model properties should be able to accept TestModel-valued ids.");
+    XCTAssertTrue([modelProp canAcceptValue:value], @"model properties should be able to accept TestModel-valued ids.");
+}
+
+#pragma mark - Tests for NSObject
+
+- (void)testIsEqual {
+    JAGProperty *anotherStringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
+    
+    XCTAssertTrue(stringProp != anotherStringProp, @"should be different instances.");
+    XCTAssertTrue([stringProp isEqual:anotherStringProp], @"but `isEqual:` is overridden");
+}
+
+- (void)testHash {
+    JAGProperty *anotherStringProp = [JAGPropertyFinder propertyForName:@"stringProperty" inClass:[TestModel class]];
+    
+    XCTAssertTrue(stringProp != anotherStringProp, @"should be different instances.");
+    XCTAssertEqual(stringProp.hash, anotherStringProp.hash);
 }
 
 @end

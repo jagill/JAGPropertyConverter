@@ -224,6 +224,9 @@ JAGPropertySetterSemantics;
  */
 - (BOOL)isEligibleForGarbageCollection;
 
+/// @return YES if the property is any sort bool or BOOL
+- (BOOL) isBoolean;
+
 /// @return YES if the property is any sort of integer, float, char, or BOOL
 - (BOOL) isNumber;
 

@@ -57,6 +57,10 @@ NSURL properties are not technically valid for JSON or ProperyLists, so JAGPrope
 
 NSDate properties are not valid for JSON, and different use cases will call for different serialization methods.  We allow for this by the convertToDate and convertFromDate block properties.  They are called when converting to/from NSDate properties with JSON output type.
 
+### NSData
+
+JAGPropertyConverter converts NSData into for example Base 64 string and vice-versa as needed.
+
 ### NSObject properties
 
 NSObject itself has some properties.  JAGPropertyFinder ignores these.  If there is need in the future, JAGPropertyFinder could take a setting determining whether it ignores or finds those properties.
@@ -64,6 +68,21 @@ NSObject itself has some properties.  JAGPropertyFinder ignores these.  If there
 ### NSSet
 
 JAGPropertyConverter converts arrays to sets and vice-versa, as needed.
+
+### Enums
+
+JAGPropertyConverter also supports conversion of NS_ENUMs to strings and vice-versa.
+
+## New Features Since 0.2.0
+
+* Custom property name mapping: `JAGPropertyMapping`
+* Support converting `NSData` (eg. into Base64 strings): `convertToData` and `convertFromData`
+* Support converting enums: `convertToEnum` and `convertFromEnum`
+* Support for auto converting to/from **snake_case**: `enableSnakeCaseSupport`
+* Support for ingoring `nil`/`null` values: `shouldIngoreNullValues` (exception list using `nilPropertiesNotToIgnore`)
+* Support to ignore `weak` properties for serialization: `shouldConvertWeakProperties`
+* Extracted and restructured some methods so JAGPropertyConverter can be subclassed: `JAGPropertyConverter+Subclass.h`
+* Enhanced `identifyDict`: it will now pass in the dictionary name (breaking change!)
 
 ## Example Usage
 

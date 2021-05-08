@@ -1,0 +1,44 @@
+{
+  "active" : true,
+  "arrayProperty" : [
+    "red",
+    "green",
+    "blue"
+  ],
+  "boolProperty" : true,
+  "dictionaryProperty" : {
+    "one" : 1,
+    "true" : true,
+    "Potter" : "Harry"
+  },
+  "enumProperty2" : "juhu",
+  "differentSubclassCustomMapped" : "custom mapped",
+  "intProperty" : 5,
+  "keypathProperty1" : "KOPES56",
+  "keypathProperty2" : "KPATH101",
+  "modelProperty" : {
+    "active" : true,
+    "boolProperty" : true,
+    "enumProperty2" : "no",
+    "intProperty" : 0,
+    "keypathProperty1" : "KPATH101",
+    "modelProperty" : {
+      "enumProperty2" : "no",
+      "boolProperty" : true,
+      "testModelID" : "KPATH101",
+      "active" : true,
+      "intProperty" : 0
+    },
+    "testModelID" : "KOPES56"
+  },
+  "setProperty" : [
+    "alpha",
+    "beta",
+    "gamma"
+  ],
+  "someProperty" : "very different",
+  "stringProperty" : "Hello Kitty!",
+  "subclassEnumProperty" : "no",
+  "testModelID" : "XYZZ1",
+  "urlProperty" : "http://www.gooogle.com"
+}
